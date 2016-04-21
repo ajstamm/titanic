@@ -9,7 +9,7 @@ permalink:           pretty
 
 # Setup
 title:               A Titanic Introduction to R
-tagline:             'Just a 3 hour tour'
+tagline:             '(Just a 3 hour tour)'
 description:         ''
 url:                 'http://choens.github.io'
 baseurl:             '/titanic'
