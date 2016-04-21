@@ -1,0 +1,37 @@
+---
+layout: page
+title: ""
+---
+
+<div class="pic-right" style="text-align:center;">
+    <img src="{{site.baseurl}}/public/img/titanic-bow.jpg" width="100%" alt="Photo of the bow of the Titanic">
+    <div>
+        Titanic bow
+    </div>
+</div>
+
+<p>
+    In the span of only a few years, R has become the lingua franca of
+    statistics. The Titanic Introduction To R Workshops are a series
+    of three hour cruises designed to introduce new users to
+    R. Participants are not expected to have prior programming
+    experience, but they are expected to have a basic understanding of
+    the statistical concepts discussed during the workshop they are
+    taking.
+</p>
+
+<p>
+    To learn more about specific workshops, go to the <a href="workshops/">Workshops page</a>.
+</p>
+
+<h2>Workshop News</h2>
+
+<article>
+    {% for post in paginator.posts %}
+    <h5><a href="{{post.url}}">{{post.title}}</a></h5>
+
+    <p>{{ post.date | date_to_string }} <br /> {{ post.excerpt }} . . . <small><a href="{{post.url}}">Read More</a></small></p>
+    {% endfor %}
+    {% if paginator.next_page %} Older {% else %} Older {% endif %} {% if paginator.previous_page %} {% if paginator.page == 2 %} Newer {% else %} Newer {% endif %} {% else %} Newer {% endif %}
+</article>
+    

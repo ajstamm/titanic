@@ -1,0 +1,375 @@
+---
+layout: presentation
+title: Vectors
+---
+
+<section>
+    <h2>Vectors</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Code: <a href="{{site.baseurl}}/workshops/titanic-introduction/vectors.R"vectors.R">vectors.R</a> script</li>
+                <li>Run code, learn more</li>
+                <li>Duration: ~45 Minutes</li>
+                <li>Followed by: A 5 Minute Break</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Vectors Are Important!</li>
+        <li>How To Make One</li>
+        <li>How To Delete One</li>
+        <li>Vector Indexing (Subsetting)</li>
+        <li>Work With Two Vectors</li>        
+    </ul>
+</section>
+
+<section>
+    <h2>Vectors Are Important</h2>
+    <ul>
+        <li>Congrats, you have already worked with Vectors</li>
+        <li>Understanding them is CRITICAL to becoming a useR</li>
+    </ul>
+    
+    <pre><code>
+## This is a vector, length == 1.
+captain <- "John Smith"
+
+## This is a vector too, length == 5.
+age <- c(22, 38, 26, 35, 35)
+    </code></pre>
+</section>
+
+<section>
+    <h2>Combine</h2>
+    <ul>
+        <li>Use <code>c()</code> to <em>combine</em> things</li>
+        <li>Works for numerics, characters, booleans, dates, etc.</li>
+        <li>If they aren't the same type of data, R will reduce to the lowest common denominator.</li>
+        <li>In practice, this is usually a character vector</li>
+        <li>You can treat vectors as an object and do things to it</li>
+    </ul>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <pre><code>
+## Going forward, you will want these two vecors.
+age <- c(22,38,26,35,35,NA,54,2,27,14)
+gender <- c("male","female","female","female","male",
+            "male","male","male","female","female")
+
+## Check that you have them with this code:
+length(age)
+length(gender)
+    </code></pre>
+    <p>The answer to both <code>length()</code> commands should be 10</p>
+</section>
+
+<section>
+    <h2>STOP!</h2>
+    <img src="{{site.baseurl}}/public/img/titanic-iceberg.jpg" width="75%">
+    <p>If you didn't succeed with the last slide, SAY SOMETHING!</p>
+    <img src="">
+</section>
+
+<section>
+    <h2>Visualize A Vector</h2>
+    <p>A vector is like a column in Excel</p>
+    <small>
+        <table>
+            <tr><th>age</th></tr>
+            <tr><td>22</td></tr>
+            <tr><td>38</td></tr>
+            <tr><td>26</td></tr>
+            <tr><td>35</td></tr>
+            <tr><td>35</td></tr>
+            <tr><td>NA</td></tr>
+            <tr><td>54</td></tr>
+            <tr><td>2</td></tr>
+            <tr><td>27</td></tr>
+            <tr><td>14</td></tr>
+        </table>
+    </small>
+
+    <p>NA isn't a string, it is NA</p>
+</section>
+<section>
+    <h2>Functions On A Vector</h2>
+    <ul>
+        <li>Some functions act on each element in the vector</li>
+        <li>Some functions act on the vector in total</li>
+    </ul>
+
+    <div class="container">
+        <div class="left">
+            <pre><code>
+## Per Item
+age + 1
+            </code></pre>
+            <pre><code class="fragment">
+[1] 23 39 27 36 36 NA 55  3 28 15
+            </code></pre>
+        </div>
+        <div class="right">
+            <pre><code>
+## In Total
+table(gender)
+            </code></pre>
+            <pre><code class="fragment">
+gender
+female   male 
+     5      5 
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>NA</h2>
+    <ul>
+        <li>NA is the bane of our existence</li>
+        <li><code>na.rm=TRUE</code> is our friend</li>
+        <li>Example: <code>mean()</code>
+    </ul>
+    <br />
+    <div class="container">
+        <div class="left">
+            <h5>Bad</h5>
+            <pre><code>
+## This will not work.
+mean(age)
+            </code></pre>
+            <pre><code class="fragment">
+[1] NA
+
+## Yeah, that's not right.
+            </code></pre>
+        </div>
+        <div class="right">
+            <h5>Good</h5>
+            <pre><code>
+## This works just fine.
+mean(age, na.rm=TRUE)
+            </code></pre>
+            <pre><code class="fragment">
+[1] 28.11111
+
+## That's more like it.
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>HELP!</h2>
+    <p>(You might need a tugboat)</p>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li><code>?foo</code></li>
+                <li>Code Completion</li>
+                <li>RStudio help window</li>
+                <li><a href="http://stackoverflow.com/questions/tagged/r" target="_blank">Stack Overflow</a></li>
+                <li>Google, etc.</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rms_titanic_2.jpg" width="100%">
+            <p>Note the lack of smoke coming from stack #4</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Useful Functions</h2>
+    <div class="container">
+        <div class="left">
+            <h5>Mathematical</h5>
+            <ul>
+                <li><code>mean()</code>: Average</li>
+                <li><code>sd()</code>: Standard Deviation</li>
+                <li><code>var()</code>: Variance</li>
+                <li><code>min()</code>: Smallest</li>
+                <li><code>max()</code>: Biggest</li>
+            </ul>
+        </div>
+        <div class="right">
+            <h5>Useful</h5>
+            <ul>
+                <li><code>length()</code>: # of items</li>
+                <li><code>table()</code>: # distinct values</li>
+                <li><code>summary()</code>: You tell me</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <pre><code>
+## Take a few minutes and spend some
+## time using a few of these functions.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Index[1]</h2>
+    <ul>
+        <li>AKA Subsetting / Filtering</li>
+        <li>Welcome to the world of square brackets</li>
+        <li>This part is tricky. Run this as I talk</li>
+    </ul>
+    <pre><code>
+## There are 10 entries in age and gender
+
+## But maybe we only want one of them.
+gender[10]
+
+## Or maybe we only want some of them.
+age[3:5]
+    </code></pre>
+</section>
+
+<section>
+    <h2>Index[2]</h2>
+    <pre><code>
+## There are 10 entries in age and gender
+
+## But maybe we only want to see the males.
+gender[gender == "male"]
+
+## And you can do this across vectors.
+age[gender == "male"]
+    </code></pre>
+</section>
+
+<section>
+    <h2>Visualize A Vector</h2>
+    <p>In this case, these vectors are in the same order . . . </p>
+    <div class="container">
+        <div class="left">
+            <small>
+                <table>
+                    <tr><th>age</th></tr>
+                    <tr><td>22</td></tr>
+                    <tr><td>38</td></tr>
+                    <tr><td>26</td></tr>
+                    <tr><td>35</td></tr>
+                    <tr><td>35</td></tr>
+                    <tr><td></td></tr>
+                    <tr><td>54</td></tr>
+                    <tr><td>2</td></tr>
+                    <tr><td>27</td></tr>
+                    <tr><td>14</td></tr>
+                </table>
+            </small>
+        </div>
+        <div class="right">
+            <small>
+                <table>
+                    <tr><th>gender</th></tr>
+                    <tr><td>male</td></tr>
+                    <tr><td>female</td></tr>
+                    <tr><td>female</td></tr>
+                    <tr><td>female</td></tr>
+                    <tr><td>male</td></tr>
+                    <tr><td>male</td></tr>
+                    <tr><td>male</td></tr>
+                    <tr><td>male</td></tr>
+                    <tr><td>female</td></tr>
+                    <tr><td>female</td></tr>
+                </table>
+            </small>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Index[3]</h2>
+    <pre><code>
+## Make a new variable
+age_of_men <- age[gender == "male"]
+
+## Or use it in a function
+mean( age[gender=="female"] )
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+
+    <pre><code>
+## Using the following Boolean Object
+survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
+              FALSE,FALSE,FALSE,TRUE,TRUE)
+
+## How many men survived the sinking of the Titanic?
+## How many women?
+    </code></pre>
+    <p>Answer on the next slide!</p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+
+    <pre><code>
+## How many men survived the sinking of the Titanic?
+survived_men <- survived[gender=="male"]
+table(survived_men)
+
+## Extra credit for anyone who did it this way.
+sum(survived_men)
+
+
+## Try this to better understand.
+survived_men == 1
+    </code></pre>
+</section>
+
+<section>
+    <h1>Oh yeah, those were real passengers</h1>
+    <img src="{{site.baseurl}}/public/img/grand-staircase.jpg" alt="Photo of the Grand Staircase" width="60%">
+</section>
+
+<section>
+    <h2>Statistical Testing</h2>
+    <pre><code>
+t.test(age[gender=="male"], age[gender=="female"])
+    </code></pre>
+    <pre><code class="fragment">
+Welch Two Sample t-test
+
+data:  age[gender == "male"] and age[gender == "female"]
+t = 0.021341, df = 3.8789, p-value = 0.984
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -32.67896  33.17896
+sample estimates:
+mean of x mean of y 
+    28.25     28.00 
+    </code></pre>
+</section>
+
+<section>
+    <h2>5 Minute Break!</h2>
+    <img src="{{base.url}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
+    <p>Titanic in Cobh Harbour, County Cork Ireland</p>
+</section>

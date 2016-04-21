@@ -1,0 +1,445 @@
+---
+layout: presentation
+title: Data Types
+---
+
+<section>
+    <h2>Data Types</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Code: <a href="{{site.baseurl}}/workshops/titanic-introduction/data-types.R">data-types.R</a> script</li>
+                <li>Run code, learn more</li>
+                <li>Duration: ~45 Minutes</li>
+                <li>Followed By: 5 Minute Break</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <div class="container">
+        <div class="left">
+            <p>Data Types:</p>
+            <ul>
+                <li>Numeric</li>
+                <li>Integer</li>
+                <li>Character</li>
+                <li>Boolean></li>
+                <li>Dates</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/titanic-ad.jpg">
+            <p>Titanic Ad For Journey From New York To Europe</p>
+        </div>
+</section>
+
+<section>
+    <h2>Assignment Operator</h2>
+    <ul>
+        <li>Multiple assignment operators</li>
+        <li>History, convention, and some old-school ideas</li>
+    </ul>
+    <pre><code>
+## These are equivalent.
+a <- 1
+a =  1
+
+## In the beginning <- was the only assignment operator.
+## Most R programmers continue to use it as a convention
+    </code></pre>
+</section>
+
+<section>
+    <h2>Why Be Conventional?</h2>
+    <div class="container">
+        <div class="left">'            
+            <ul>
+                <li>All languages have conventions</li>
+                <li>Deviating can be OK</li>
+                <li>You should have a good reason to do so</li>
+                <li><span style="color:green;">KNOW</span> the conventions, so you can read demo code, etc</li>
+                <li>We will use R conventions today, unless otherwise noted</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor" width="50%">
+            <p>John Jacob Astor in 1909. Richest man to die aboard the Titanic</p>
+        </div>
+</section>
+
+<section>
+    <h2>Assignment Conventions</h2>
+    <ul>
+        <li>Both <code><-</code> and <code>=</code> assign variables in the local environment</li>
+        <li>If you see someone using <code><--</code>, be careful</li>
+        <li>Especially if you do not understand concepts such as lexical scoping, global environment, etc</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Assignment Quirks</h2>
+    <ul>
+        <li>R is a quirky language</li>
+        <li>Assignment in a function uses <code>=</code> EXCLUSIVELY</li>
+    </ul>
+
+    <pre><code>
+## This is dummy code. Don't run this code.
+
+## These are NOT equivalent.
+
+## This is correct.
+a <- foo(x = 1, y = 2)
+
+## This will _NOT_ work.
+a <- foo(x <- 1, y <- 2)
+
+    </code></pre>
+</section>
+
+<section>
+    <h2>Data Types</h2>
+    <p><em>We are only covering a subset of available data types today</em></p>
+    <div class="container">
+        <div class="left">
+            <h5>Atomic Data Types</h5>
+            <ul>
+                <li>Numeric</li>
+                <li>Integer (briefly)</li>
+                <li>Character</li>
+                <li>Boolean</li>
+            </ul>
+        </div>
+        <div class="right">
+            <h5>Additional</h5>
+            <ul>
+                <li>Dates</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Numeric</h2>
+
+    <pre><code>
+## Use the assignment operator (<-) to assign a value
+## to a variable.
+
+## The passenger capacity of the Titanic
+passenger_capacity <- 2435
+
+## The crew capacity of the Titanic
+crew_capacity <- 892
+    </code></pre>
+    
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li>Can you calculate the total capacity of the Titanic?</li>
+        <li>What percentage of the total capacity were the staff?</li>
+    </ul>
+    
+    <pre><code class="fragment">
+total_capacity <- passenger_capacity + crew_capacity
+
+percent_crew = 100* crew_capacity / total_capacity
+
+percent_crew
+    </code></pre>
+    <pre><code class="fragment">[1] 26.81094</code></pre>    
+</section>
+
+<section>
+    <h2>Is Numeric?</h2>
+    <ul>
+        <li>Is a variable numeric?</li>
+        <li>is.numeric() returns a Boolean</li>
+        <li>These two code snippets make sense</li>
+    </ul>
+
+    <div class="container">
+        <div class="left">
+            <pre><code>is.numeric(total_capacity)</code></pre>
+            <p class="returns">
+                Returns:
+                <pre><code class="fragment">[1] TRUE</code></pre>
+            </p>
+        </div>
+        <div class="right">
+            <pre><code>is.numeric(percent_crew)</code></pre>
+            <p class="returns">
+                Returns:
+                <pre><code class="fragment">[1] TRUE</code></pre>
+            </p>
+    
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <p>Compare the results. Does this make sense?</p>
+    <div class="container">
+        <div class="left">
+            <pre><code>
+total_capacity
+
+typeof(total_capacity)
+    
+is.double(total_capacity)
+
+is.integer(total_capacity)
+            </code></pre>
+        </div>
+        <div class="right">
+            <pre><code>
+percent_crew
+
+typeof(percent_crew)
+    
+is.double(percent_crew)
+
+is.integer(percent_crew)
+            </code></pre>
+        </div>
+    </div>
+    <p>The answers are on the next slide!</p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <div class="container">
+        <div class="left">
+            <pre><code>
+> total_capacity
+[1] 3327
+
+> typeof(total_capacity)
+[1] "double"
+    
+> is.double(total_capacity)
+[1] TRUE
+
+> is.integer(total_capacity)
+[1] FALSE
+
+## Integers must be declared.
+            </code></pre>
+            <pre>
+        </div>
+        <div class="right">
+            <pre><code>
+> percent_crew
+[1] 26.81094
+
+> typeof(percent_crew)
+[1] "double"
+    
+> is.double(percent_crew)
+[1] TRUE
+
+> is.integer(percent_crew)
+[1] FALSE
+
+## OK, that makes sense.
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Integers V Numerics</h2>
+    <ul>
+        <li>Integer is a sub-type of numeric</li>
+        <li>R will ONLY use this data type if you EXPLICITLY tell it to</li>
+        <li>And if you don't understand them, they can behave oddly</li>
+    </ul>
+</section>
+    
+</section>
+
+<section>
+    <h2>Integers Get Floored</h2>
+    <pre><code>
+## What does this code return?
+oops <- as.integer(percent_crew)
+
+oops
+    </code></pre>
+    <pre><code class="fragment">
+[1] 26
+
+## There are FEW reasons to declare an Integer.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Numerical Details</h2>
+    <ul>
+        <li>You can do math with numerics</li>
+        <li>Follows the usual order of operations</li>
+        <li>R is over-kill if all you need is a calculator</li>
+        <li>That said . . . I have used it that way</li>
+    </ul>
+    
+</section>
+
+<section>
+    <h2>Characters</h2>
+    <ul>
+        <li>Like a <code>char()</code> or <code>varchar()</code> in SQL</li>
+        <li>Can be of any arbitrary length</li>
+        <li>Can use either <code>'foo'</code> or <code>"foo"</code>.</li>
+        <li>Double quotes is the convention, mostly</li>
+        <li>Assignment works the same way as numerics</li>
+    </ul>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+
+    <pre><code>
+## Let's make some character vars!
+title <- "Captain"
+name  <- "Smith"
+
+## And do something . . . cool . . .  with them.
+paste(title, name, sep=" ")
+    </code></pre>
+    <pre><code class="fragment">
+[1] "Captain Smith"
+    </code></pre>    
+</section>
+
+<section>
+    <h2>Booleans</h2>
+    <ul>
+        <li><code>TRUE</code></li>
+        <li><code>FALSE</code></li>
+        <li>Assignment works the way you would expect</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Booleans</h2>
+    <pre><code>
+survived <- TRUE
+
+## OR
+
+survived <- FALSE
+
+## Nothing Surprising Here.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Comparisons</h2>
+    <ul>
+        <li>
+            Comparison Operators:
+            <ul>
+                <li><code>==</code> (Cannot use <code>=</code>)</li>
+                <li><code><</code>, <code><=</code></li>
+                <li><code>></code>, <code>>=</code></li>
+            </ul>
+        </li>
+        <li>Return: <code>TRUE</code>, <code>FALSE</code> OR <code>NA</code></li>
+    </ul>
+    
+</section>
+
+<section>
+    <h2>Comparisons</h2>
+    <pre><code>
+# Were there more passengers than crew?
+# Hint: Yes, but let's prove it
+> passenger_capacity > crew_capacity
+[1] TRUE
+
+# Were there exactly 1,000 passengers?
+# Hint: No. Of course not.
+> passenger_capacity == 1000
+[1] FALSE
+
+## You can assign the results to a variable
+answer <- passenger_capacity < 1000
+
+## Doing so returns nothing, unless there is an error.
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <pre><code>
+## Captain Edward Smith was 62 years old when he died.
+## Was he older when he died than you are today?
+answer <- 62 > ?
+
+## Additional Questions
+## Is 'answer' a Numeric?
+## Is 'answer' a Boolean?
+
+    </code></pre>
+</section>
+
+<section>
+    <h2>Dates</h2>
+    <ul>
+        <li><b>Fact of Life:</b> Dates universally suck</li>
+        <li>R is no different</li>
+        <li>Not needed today, just demonstrative</li>
+        <li>Like Integers, must be explicitly declared</li>
+        <li>The command <code>as.Date()</code>, is funky</li>
+        <li>Why the capital <code>D</code>? Dunno</li>
+    </ul>
+    
+</section>
+
+<section>
+    <h2>Dates</h2>
+    <pre><code>
+## POSIX Compatible dates:
+## You can write it as a mm/dd/yyyy, but . . .
+## then you have to tell R how to read the date.
+capt_smith_dob <- as.Date("1850-01-27")
+
+## I won't make you practice these today.
+    </code></pre>
+    
+</section>
+
+<section>
+    <h2>Data Types</h2>
+    <ul>
+        <li>There are other data types in R</li>
+        <li>Developers create new ones all the time</li>
+        <li>But for the sake of simplicity . . .</li>
+        <li>That's all we need for today</li>
+    </ul>
+</section>
+
+<section>
+    <h2>5 Minute Break!</h2>
+    <img src="{{base.url}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
+    <p>Titanic in Cobh Harbour, County Cork Ireland</p>
+</section>

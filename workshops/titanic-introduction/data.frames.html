@@ -1,0 +1,185 @@
+---
+layout: presentation
+title: "Data.Frames"
+---
+
+<section>
+    <h2>Data.Frames</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li><a href="{{site.baseurl}}/workshops/titanic-introduction/data.frames.R" target="_blank">data.frames.R</a></li>
+                <li>Run code, learn more</li>
+                <li>~45 Minutes</li>
+                <li>Some time at the end?</li>
+                <li>Good Bye</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>What is a data.frame?</li>
+                <li>Creation</li>
+                <li>Visualization</li>
+                <li>Import CSV data</li>
+                <li>Indexing</li>
+                <li>Deletion</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/titanic-gymnasium.jpg" alt="Drawing ofthe Titanic gymnasium" width="90%">
+            <p>Drawing of the Titanic gymnasium</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Data.Frame</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>A 2 or more dimensional object</li>
+                <li>Usually 2 dimensions</li>
+                <li>Think table</li>
+                <li>Rows, Columns, Data</li>
+                <li>Columns can have different data types</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/paperboy.jpg" alt="Paperboy with newspaper of Titanic's sinking" width="60%">
+            <p>Paperboy Ned Parfett, Soldier and Paperboy</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Creation</h2>
+    <pre><code>
+## First we need some vectors
+age <- c(22,38,26,35,35,NA,54,2,27,14)
+gender <- c("male","female","female","female","male",
+            "male","male","male","female","female")
+survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
+              FALSE,FALSE,FALSE,TRUE,TRUE)
+    </code></pre>
+</section>
+
+<section>
+    <h2>Creation</h2>
+    <pre><code>
+## Then we put them together
+passengers <- data.frame(age, gender, survived)
+
+## Yeah, the capital V is important. Dunno why.
+View(data.frame)
+    </code></pre>
+    <pre><code>
+   age gender survived
+1   22   male    FALSE
+2   38 female     TRUE
+3   26 female     TRUE
+4   35 female     TRUE
+5   35   male    FALSE
+6   NA   male    FALSE
+7   54   male    FALSE
+8    2   male    FALSE
+9   27 female     TRUE
+10  14 female     TRUE
+
+## Like Excel, but way nerdier
+## Those numbers on the left, row numbers.
+## All R objects have to fit into memory.
+## You want big data.frames, get more RAM.
+## Or a database server.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Import CSV data</h2>
+    <ul>
+        <li>Need to make the data there</li>
+        <li>Code would be a good thing</li>
+    </ul>
+    <pre><code>
+## Demo code
+    </code></pre>
+</section>
+
+<section>
+    <h2>Indexing</h2>
+    <ul>
+        <li></li>
+        <li></li>
+    </ul>
+    <pre><code>
+## Demo code
+    </code></pre>
+</section>
+
+<section>
+    <h2>Deletion</h2>
+    <ul>
+        <li></li>
+        <li></li>
+    </ul>
+    <pre><code>
+## Demo code
+    </code></pre>
+</section>
+
+<section>
+    <h2>Slide</h2>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</section>
+
+<section>
+    <h2>Slide</h2>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</section>
+
+<section>
+    <h2>Slide</h2>
+    <ul>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <pre><code>
+##
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li></li>
+        <li></li>
+    </ul>
+    
+    <pre class="fragment"><code>
+##
+    </code></pre>
+    
+</section>
