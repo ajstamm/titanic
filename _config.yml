@@ -11,8 +11,8 @@ permalink:           pretty
 title:               A Titanic Introduction to R
 tagline:             ''
 description:         ''
-url:                 http://choens.github.io/titanic/
-baseurl:             ''
+url:                 'http://choens.github.io/titanic'
+baseurl:             'http://choens.github.io/titanic'
 
 # About/contact
 author:
