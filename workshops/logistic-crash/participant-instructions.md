@@ -15,9 +15,8 @@ title: "Participant Instructions"
     - DOH Staff: Use the following credentials:
       - **Login:** rtrain16
       - **Password:** R52216**
-- Go to: `https://choens.github.io/titanic-workshop/` <br/> 
-  - Select the course you are taking
-  - Download `Participant Resources` to your computer's Desktop
-  - Feel free to read course-specific materials and other articles on
-    the website
-- Think deep, cold, watery thoughts
+- Go to: `https://choens.github.io/titanic/workshops/` <br/> 
+  - Select the `Women and Children First! A Crash Course in Logistic
+    Regression` workshop
+  - Browse course-specific materials and material on the website
+- Think deep, correlated, watery thoughts

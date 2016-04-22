@@ -1,0 +1,31 @@
+Notes
+
+DON'T FORGET TO BUILD / LINK TO THE PATIENT SURVEY
+
+- Data Import and Exploration
+  - Discuss a session, ls, etc.
+  - Introduce working directory
+  - Import csv and data cleanup
+  - Interactive plotting
+- Example Linear Regression
+  - Does class predict age?
+  - by(), group_by
+  - plot(passengers$pclass, passengers$age)
+  - end with plot on lm
+- Kaggle
+  - What is Kaggle?
+  - Kaggle Titanic Page
+  - Kaggle sign up
+- Your First Predictive Models
+  - Dummy example (everyone lives!)
+  - Dummy example (everyone dies!)
+- Logistic Regression Models
+  - glm / logistic regression does gender predict survival?
+  - summary( lm(passengers$survived~passengers$sex))
+  - plot( glm(passengers$survived~passengers$sex, family=binomial))
+- Let's Add Age!
+  - Hmmm. Missing Data
+  - g = glm(survived~age, family=binomial, passengers)
+  - plot(passengers$survived, passengers$age)
+  - curve(predict(g,data.frame(passengers=x),type="resp"),add=TRUE)
+    - I think my problem is in predict

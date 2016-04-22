@@ -8,7 +8,7 @@ title: "Data.Frames"
     <div class="container">
         <div class="left">
             <ul>
-                <li><a href="{{site.baseurl}}/workshops/titanic-introduction/data.frames.R" target="_blank">data.frames.R</a></li>
+                <li>Code: <a href="{{site.baseurl}}/workshops/titanic-introduction/data.frames.R" target="_blank">data.frames.R</a></li>
                 <li>Run code, learn more</li>
                 <li>~45 Minutes</li>
                 <li>Some time at the end?</li>
@@ -50,9 +50,11 @@ title: "Data.Frames"
             <ul>
                 <li>A 2 or more dimensional object</li>
                 <li>Usually 2 dimensions</li>
-                <li>Think table</li>
-                <li>Rows, Columns, Data</li>
+                <li>All objects in a column must have the same data type</li>                
                 <li>Columns can have different data types</li>
+                <li>Think table</li>
+                <li>Could do the same thing with LOTS of vectors</li>
+                <li>This is easier to manage</li>
             </ul>
         </div>
         <div class="right">
@@ -81,8 +83,9 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 passengers <- data.frame(age, gender, survived)
 
 ## Yeah, the capital V is important. Dunno why.
-View(data.frame)
+View(passengers)
     </code></pre>
+    
     <pre><code>
    age gender survived
 1   22   male    FALSE
@@ -96,76 +99,249 @@ View(data.frame)
 9   27 female     TRUE
 10  14 female     TRUE
 
-## Like Excel, but way nerdier
 ## Those numbers on the left, row numbers.
-## All R objects have to fit into memory.
-## You want big data.frames, get more RAM.
-## Or a database server.
+## All R objects must fit into memory.
     </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+   
+    <pre><code>
+## What does this tell us?
+dim(passengers)
+    </code></pre>
+    <pre><code class="fragment">
+[1] 10  3
+
+## 10 == Number of Rows
+##  3 == Number of Columns
+## This is ALWAYS the order!
+    </code></pre>
+    
 </section>
 
 <section>
     <h2>Import CSV data</h2>
     <ul>
-        <li>Need to make the data there</li>
-        <li>Code would be a good thing</li>
+        <li>We don't have to make everything</li>
+        <li>We can import data, from CSV, Excel, Databases, etc.</li>
+        <li>Today, we only care about CSV</li>
     </ul>
     <pre><code>
-## Demo code
+## Import data from CSV.
+## This WILL overwrite the data.frame we made a few minutes ago!
+url <- "http://choens.github.io/titanic/public/data/passengers.csv"
+passengers <- read.csv(url)
     </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    
+    <pre><code>
+## Spend some quality time with the following commands.
+## ?foo is a great way to read the documentation.
+dim(passengers)
+names(passengers)
+summary(passengers)
+str(passengers)
+View(passengers)
+head(passengers)
+tail(passengers)
+    </code></pre>
+    <p>Let us know if you need help!</p>
 </section>
 
 <section>
     <h2>Indexing</h2>
     <ul>
-        <li></li>
-        <li></li>
+        <li>Back to the land of square brackets</li>
+        <li><span style="color:red;">Critical:</span> <code>passengers[ROW,COLUMN]</code></li>
     </ul>
+    <div class="container">
+        <div class="left">
+            <pre><code>
+## Returns one row by row #.
+passengers[10, ]
+            </code></pre>
+            <pre><code class="fragment">
+   PassengerId Survived Pclass                                Name    Sex Age Embarked
+10          10        1      2 Nasser, Mrs. Nicholas (Adele Achem) female  14        C
+            </code></pre>
+        </div>
+        <div class="right">
+            <pre><code>
+## Returns one column by column name.
+passengers[ ,"age"]
+            </code></pre>
+            <pre><code class="fragment">
+  [1] 22.00 38.00 26.00 35.00 35.00    NA 54.00  2.00 27.00 14.00  4.00 58.00
+ [13] 20.00 39.00 14.00 55.00  2.00    NA 31.00    NA 35.00 34.00 15.00 28.00
+ [25]  8.00 38.00    NA 19.00    NA    NA 40.00    NA    NA 66.00 28.00 42.00
+ [37]    NA 21.00 18.00 14.00 40.00 27.00    NA  3.00 19.00    NA    NA    NA
+ [49]    NA 18.00  7.00 21.00 49.00 29.00 65.00    NA 21.00 28.50  5.00 11.00
+ [61] 22.00 38.00 45.00  4.00    NA    NA 29.00 19.00 17.00 26.00 32.00 16.00
+ [73] 21.00 26.00 32.00 25.00    NA    NA  0.83 30.00 22.00 29.00    NA 28.00
+ [85] 17.00 33.00 16.00    NA 23.00 24.00 29.00 20.00 46.00 26.00 59.00    NA
+ [97] 71.00 23.00 34.00 34.00
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Another Way To Index</h2>
+    
     <pre><code>
-## Demo code
+## There is an easier way to refer to a single column
+## A single column IS a Vector.
+passengers$age
     </code></pre>
+    <pre><code class="fragment">
+passengers$age
+  [1] 22.00 38.00 26.00 35.00 35.00    NA 54.00  2.00 27.00 14.00  4.00 58.00
+ [13] 20.00 39.00 14.00 55.00  2.00    NA 31.00    NA 35.00 34.00 15.00 28.00
+ [25]  8.00 38.00    NA 19.00    NA    NA 40.00    NA    NA 66.00 28.00 42.00
+ [37]    NA 21.00 18.00 14.00 40.00 27.00    NA  3.00 19.00    NA    NA    NA
+ [49]    NA 18.00  7.00 21.00 49.00 29.00 65.00    NA 21.00 28.50  5.00 11.00
+ [61] 22.00 38.00 45.00  4.00    NA    NA 29.00 19.00 17.00 26.00 32.00 16.00
+ [73] 21.00 26.00 32.00 25.00    NA    NA  0.83 30.00 22.00 29.00    NA 28.00
+ [85] 17.00 33.00 16.00    NA 23.00 24.00 29.00 20.00 46.00 26.00 59.00    NA
+ [97] 71.00 23.00 34.00 34.00
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    
+    <pre><code>
+## Create a new data.frame called "children".
+## Children must be younger than 18.
+    </code></pre>
+    <p>Answer on the next slide!</p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    
+    <pre><code>
+## Create a new data.frame called "children".
+## Children must be younger than 18.
+children <- passengers[passengers$age < 18, ]
+summary(children)
+    </code></pre>
+    <small><pre><code class="fragment">
+  passengerid       survived       pclass                                      name        sex          age         embarked 
+ Min.   : 8.00   Min.   :0.0   Min.   :2.000   Andersson, Miss. Erna Alexandra   : 1   female:11   Min.   : 0.830       : 0  
+ 1st Qu.:18.50   1st Qu.:0.0   1st Qu.:2.250   Caldwell, Master. Alden Gates     : 1   male  : 7   1st Qu.: 4.000   C   : 3  
+ Median :47.50   Median :0.5   Median :3.000   Ford, Mr. William Neal            : 1   NA's  :22   Median : 9.500   Q   : 2  
+ Mean   :45.50   Mean   :0.5   Mean   :2.722   Goodwin, Master. William Frederick: 1               Mean   : 9.435   S   :13  
+ 3rd Qu.:67.75   3rd Qu.:1.0   3rd Qu.:3.000   Goodwin, Miss. Lillian Amy        : 1               3rd Qu.:14.750   NA's:22  
+ Max.   :87.00   Max.   :1.0   Max.   :3.000   (Other)                           :13               Max.   :17.000            
+ NA's   :22      NA's   :22    NA's   :22      NA's                              :22               NA's   :22                
+    </code></pre></small>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    
+    <pre><code>
+## What does ls() do?
+ls()
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <p>Were men and women equally likely to survive the Titanic?</p>
+    <pre><code>
+## chisq.test() is the command to run the Chi Squared Test.
+## table() can be used with 2 vectors! Try table(foo$bar, foo$baz).
+## Don't worry about calculating the percents. We'll do that together.
+## You can use a calculator or Excel. I won't tell anyone.
+    </code></pre>
+    <p>Answer on the next slide!</p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    
+    <pre><code>
+table(passengers$sex, passengers$survived)
+chisq.test( passengers$sex, passengers$survived )
+    </code></pre>
+    <pre><code class="fragment">
+
+        
+          0  1
+  female  8 31
+  male   51 10
+
+	Pearson's Chi-squared test with Yates' continuity correction
+
+data:  passengers$sex and passengers$survived
+X-squared = 36.585, df = 1, p-value = 1.461e-09
+## Yes, that was a hard one.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Tabular Margins and Percents</h2>
+    <p>In these commands 1 ALWAYS means "over rows" and 2 ALWAYS means "over columns"</p>
+    <div class="container">
+        <div class="left">
+            <h5>Margins</h5>
+            <pre><code>
+## Margins are what other tools call Totals.
+margin.table( table(passengers$sex, passengers$survived), margin=2)
+            </code></pre>
+            <pre><code class="fragment">
+
+ 0  1 
+59 41 
+            </code></pre>                        
+        </div>
+        <div class="right">
+            <h5>Margins</h5>
+            <pre><code>
+## At least they didn't invent a new term for proportion.
+prop.table( table(passengers$sex, passengers$survived), margin=2)
+            </code></pre>
+            <pre><code class="fragment">
+
+                 0         1
+  female 0.1355932 0.7560976
+  male   0.8644068 0.2439024
+
+## You can use round() with this command.
+            </code></pre>            
+        </div>
+    </div>
 </section>
 
 <section>
     <h2>Deletion</h2>
     <ul>
-        <li></li>
-        <li></li>
+        <li>This is thankfully EASY</li>
     </ul>
     <pre><code>
-## Demo code
-    </code></pre>
-</section>
-
-<section>
-    <h2>Slide</h2>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-</section>
-
-<section>
-    <h2>Slide</h2>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-</section>
-
-<section>
-    <h2>Slide</h2>
-    <ul>
-        <li></li>
-        <li></li>
-    </ul>
-
-    <pre><code>
-##
+## Make it all go away
+rm(children)
     </code></pre>
 </section>
 
@@ -174,12 +350,14 @@ View(data.frame)
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <ul>
-        <li></li>
-        <li></li>
+        <li>It deletes an object</li>
+        <Use with caution</Use>
     </ul>
-    
-    <pre class="fragment"><code>
-##
-    </code></pre>
-    
 </section>
+
+<section>
+    <h1>That's All Folks!</h1>
+    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
+    <p>John Jacob Astor in 1919</p>
+</section>
+    

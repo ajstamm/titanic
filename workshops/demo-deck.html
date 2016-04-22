@@ -39,6 +39,37 @@ title: Demo Deck
     </ul>
 </section>
 
+
+<img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <p>Were children more likely to survive the Titanic?</p>
+    <pre><code>
+## chisq.test() is the command to run the Chi Squared Test
+    </code></pre>
+    <p>Answer on the next slide!</p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    
+    <pre><code>
+passengers$age_group[passengers$age<18] <- "Child"
+passengers$age_group[passengers$age>=18] <- "Adult"
+chisq.test( table(passengers$survived, passengers$age_group) )
+    </code></pre>
+    <pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  table(passengers$age_group, passengers$survived)
+X-squared = 0.5465, df = 1, p-value = 0.4598
+
+## Yes, that was a hard one.
+    </code></pre>
+</section>
+
+
 <section>
     <h2>Slide</h2>
     <ul>
