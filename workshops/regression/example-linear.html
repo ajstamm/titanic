@@ -1,0 +1,334 @@
+---
+layout: presentation
+title: Example Linear Regression
+---
+
+<section>
+    <h2>Example Linear Regression</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Code: <a href="../example-linear.R" target="_blank"> example-linear.R</a></li>
+                <li>Will run this together</li>
+                <li>~20 Minutes</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/restaurant.jpg" width="90%" alt="1st Class Restaurant">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Define Linear Regression</li>
+        <li>Introduce Anscombe's Quarter</li>
+        <li>Brief Description of the Four Sets</li>
+        <li>Use R to characterize Anscombe's data</li>
+        <li>Use R to build a linear model (OLS) of Set 1</li>
+        <li>Demonstrate how to use R to test the model</li>
+        <li>You will then experiment with sets 2,3, and 4</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Linear Regression</h2>
+    <ul>
+        <li>An approach for modeling the relationship between a scalar dependent variable <i>(y)</i> and one or more explanatory variables, also know as independent variable(s) <i>(x)</i>
+        </li>
+        <li>For more information, see <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">Wikipedia</a> (where we get most of our <a href="https://en.wikipedia.org/wiki/Wikipedia:Image_use_policy" target="_blank">graphics</a>)
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Anscombe's Quartet:</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>First introduced in 1973, used to teach regression analysis</li>
+                <li>Four data sets, (nearly) identical statisitcal properties</li>
+                <li>Not identical when graphed</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/francis_anscombe.jpeg" alt="Photo of Francis Anscombe">
+            <p>This is Francis Anscombe (according to <a href="https://en.wikipedia.org/wiki/Francis_Anscombe" target="_blank">Wikipedia</a>)</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Anscombe's Quartet:</h2>
+    <a href="{{site.baseurl}}/public/img/anscombe_quartet_3.png" target="_blank">
+        <img src="{{site.baseurl}}/public/img/anscombe_quartet_3.png" alt="Anscombe's Quartet" width="60%">
+    </a>
+    <p>
+        <smaller>
+            <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">https://en.wikipedia.org/wiki/Anscombe%27s_quartet</a>
+        </smaller>
+    </p>
+</section>
+
+<section>
+    <h2>Interacive / Exploratory</h2>
+    <br />
+    <p>
+        Today, the focus is on interactive/ad-hoc use of R to
+        understand data. We do not have time to discuss
+        creating/formatting a report, etc.
+    </p>
+</section>
+
+<section>
+    <h2>example-linear.R</h2>
+    <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="50%">
+</section>
+
+<section>
+    <h2>Load Data</h2>
+    <p>The Anscombe Quartet is built into R
+    <pre><code>
+data(anscombe)
+anscombe
+    </pre></code>
+
+    <pre><code class="fragment">
+  x1 x2 x3 x4    y1   y2    y3    y4
+1  10 10 10  8  8.04 9.14  7.46  6.58
+2   8  8  8  8  6.95 8.14  6.77  5.76
+3  13 13 13  8  7.58 8.74 12.74  7.71
+4   9  9  9  8  8.81 8.77  7.11  8.84
+5  11 11 11  8  8.33 9.26  7.81  8.47
+6  14 14 14  8  9.96 8.10  8.84  7.04
+7   6  6  6  8  7.24 6.13  6.08  5.25
+8   4  4  4 19  4.26 3.10  5.39 12.50
+9  12 12 12  8 10.84 9.13  8.15  5.56
+10  7  7  7  8  4.82 7.26  6.42  7.91
+11  5  5  5  8  5.68 4.74  5.73  6.89
+    </code></pre>
+</section>
+
+<section>
+    <h2>Many Ways To View An Object</h2>
+    <ul>
+        <li><pre><code>attributes(anscombe)</code></pre></li>
+        <li><pre><code>summary(anscombe)</code></pre></li>
+        <li><pre><code>str(anscombe)</code></pre></li>
+        <li><pre><code>View(anscombe)</code></pre></li>
+        <li><pre><code>head(anscombe)</code></pre></li>
+        <li><pre><code>tail(anscombe)</code></pre></li>
+        <li>
+            R is an object oriented programming language. Functions
+            "know" what type of oject is passed to them. In this case,
+            we are passing a data.frame to these Base-R functions.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Four Sets</h2>
+    <table>
+        <tr>
+            <th style="text-align:center;"></th>
+            <th style="text-align:center;">Independent<br />Variable</th>
+            <th style="text-align:center;">Dependent<br />Variable</th>
+        </tr>
+        <tr>
+            <td style="text-align:center;">Set 1</td>
+            <td style="text-align:center;">x1</td>
+            <td style="text-align:center;">y1</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">Set 2</td>
+            <td style="text-align:center;">x2</td>
+            <td style="text-align:center;">y2</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">Set 3</td>
+            <td style="text-align:center;">x3</td>
+            <td style="text-align:center;">y3</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">Set 4</td>
+            <td style="text-align:center;">x4</td>
+            <td style="text-align:center;">y4</td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h2>Descriptive Statistics</h2>
+    <ul>
+        <li>It is easy to get the average for each column</li>
+        <li><span style="color:green;">Note: The average is (essentially) identical for each column</span></li>
+    </ul>
+    <pre><code>
+colMeans(anscombe)
+    </pre></code>
+    <pre><code class="fragment">
+      x1       x2       x3       x4       y1       y2       y3       y4 
+9.000000 9.000000 9.000000 9.000000 7.500909 7.500909 7.500000 7.500909 
+    </code></pre>
+</section>
+
+<section>
+    <h2>Descriptive Statistics</h2>
+    <ul>
+        <li>It is less easy to get the standard deviation.</li>
+        <li><span style="color:green;">Note: The standard deviation is also (essentially) identical</span></li>
+    </ul>
+    <pre><code>
+cbind(x1 = sd(anscombe$x1),
+      x2 = sd(anscombe$x2),
+      x3 = sd(anscombe$x3),
+      x4 = sd(anscombe$x4)
+      )
+    </pre></code>
+    <pre><code class="fragment">
+          x1       x2       x3       x4
+[1,] 3.316625 3.316625 3.316625 3.316625
+    </code></pre>
+</section>
+
+<section>
+    <h2>Correlation</h2>
+    <ul>
+        <li>To test for correlation, we just have to declare x and y from a single set.</li>
+    </ul>
+    <pre><code>
+cor.test(anscombe$x1, anscombe$y1)
+    </pre></code>
+
+    <pre><code class="fragment">
+	Pearson's product-moment correlation
+
+data:  anscombe$x1 and anscombe$y1
+t = 4.2415, df = 9, p-value = 0.00217
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.4243912 0.9506933
+sample estimates:
+      cor 
+0.8164205 
+    </code></pre>
+</section>
+
+<section>
+    <h2>Visualize!</h2>
+    <pre><code>
+plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1",
+     xlab="x1", ylab="y1"
+)
+    </pre></code>
+    <a href="{{site.baseurl}}/public/img/scatter-anscombe-1.png" target="_blank">
+        <img src="{{site.baseurl}}/public/img/scatter-anscombe-1.png" width="40%" class="fragment">
+    </a>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li>Are the correlations of Sets 2 - 4 the same?</li>
+        <li>What can you learn from: <pre><code>?cor.test</code></pre></li>
+        <li>Can you reproduce the other scatterplots from Wikipedia?</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Linear Regression</h2>
+    <pre><code>
+m1 <- lm(formula=anscombe$y1~anscombe$x1)
+m1
+    </pre></code>
+    <pre><code class="fragment">
+Call:
+lm(formula = anscombe$y1 ~ anscombe$x1)
+
+Coefficients:
+(Intercept)  anscombe$x1  
+     3.0001       0.5001  
+    </code></pre>
+    <p style="color:green;">See ?formula to learn more about the R formula syntax for multiple regression.
+</section>
+
+<section>
+    <h2>Many Ways To View An Object</h2>
+    <ul>
+        <li><pre><code>attributes(m1)</code></pre></li>
+        <li><pre><code>summary(m1)</code></pre></li>
+        <li><pre><code>str(m1)</code></pre></li>
+        <li><pre style="color:red;text-decoration:line-through"><code>View(m1)</code></pre></li>
+        <li><pre><code>head(m1)</code></pre></li>
+        <li><pre><code>tail(m1)</code></pre></li>
+        <li>
+            Some of these are more useful than others. They work
+            because R is an object oriented system. The functions
+            adapt to the type of object passed to them.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Visualize!</h2>
+    <ul>
+        <li>Same scatterplot as before. This adds the linear model, m1.</li>
+    </ul>
+    <pre><code>
+plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
+abline(m1, col="red")
+    </pre></code>
+    <a href="{{site.baseurl}}/public/img/model-anscombe-1.png" target="_blank">
+        <img src="{{site.baseurl}}/public/img/model-anscombe-1.png" width="40%" class="fragment">
+    </a>
+</section>
+
+<section>
+    <h2>Evaluating The Model - QQ PLOT</h2>
+    <ul>
+        <li>It is easy to get a standard QQ Plot of the model</li>
+    </ul>
+    <pre><code>
+qqplot(anscombe$x1,anscombe$y1)
+abline(m1, col="red")
+    </pre></code>
+    <a href="{{site.baseurl}}/public/img/qq-anscombe-1.png" target="_blank">
+        <img src="{{site.baseurl}}/public/img/qq-anscombe-1.png" width="40%" class="fragment">
+    </a>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li>But R can do more than just a QQ plot to explore a model</li>
+    </ul>
+    <pre><code>
+plot(m1)
+    </pre></code>
+    <p>If you made other models, take a moment to explore and compare them now</p>
+    <pre><code>
+plot()
+    </pre></code>
+
+</section>
+
+<section>
+    <h2>Exporting Graphics</h2>
+    <ul>
+        <li>Exports the QQ Plot grapic shown previously for Set 1</li>
+        <li>Exports the file as a PNG file, in the CWD</li>
+    </ul>
+    <pre><code>
+png("qq-anscombe-1.png")
+qqplot(anscombe$x1, anscombe$y1, main="Anscome: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
+abline(m1, col="red")
+dev.off()
+    </pre></code>
+</section>
