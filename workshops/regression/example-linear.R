@@ -55,7 +55,7 @@ cor.test(x = anscombe$x1, y = anscombe$y1)
 
 
 
-## Visualize -------------------------------------------------------------------
+## Scatterplot! Set 1 ----------------------------------------------------------
 plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1", xlab="x1", ylab="y1")
 
 
@@ -98,7 +98,7 @@ tail(m1)
 
 
 
-## Visualize! ------------------------------------------------------------------
+## Visualize! Set 1 ------------------------------------------------------------
 ## Same scatterplot as before. This adds the linear model, m1.
 plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
 abline(m1, col="red")
