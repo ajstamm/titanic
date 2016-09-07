@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Four Freedoms
+title: Free Software and the Four Freedoms
 ---
 
 <div style="text-align:center;">
@@ -11,19 +11,25 @@ title: Four Freedoms
 </div>
 <br />
 
-The underlying goal of this workshop is to enable researchers to
-communicate more effectively, via open source languages such as R. In
-the 21st century, software has become the language of science. A
-language that should not be owned by proprietary tools which limit the
-researcher's ability to communicate and share important work.
+The underlying goal of the TITR workshops is to enable researchers to
+communicate more effectively. In the 21st century, scientific data is
+managed and analyzed by computers and often presented via the
+Internet. Computer software has become the fundamental language of
+science. Proprietary languages such as SAS and SPSS, which are
+historically popular research tools and limit the impact of science by
+reducing the number of people who can run, understand, and leverage
+scientific code.
 
-This logic is based on Richard Stallman's / Free Software Foundations
-Four Freedoms.
+I challenge you to imagine a world in which the code used to write an
+analysis is as accessible and open as the research publication
+itself. The Free Software Foundations' Four Freedoms are a good way to
+understand the need for analytical code that can be understood or run
+by all interested parties.
 
-## Four Freedoms of Free Software
+## Free Software's Four Freedoms
 
 The logic and ideology of the Free and Open Source Software (FOSS)
-movement is predicated upon four software freedoms. These freedoms
+movement is predicated upon four "software freedoms". These freedoms
 are:
 
 - **Freedom 0:** The freedom to run the program for any purpose

@@ -2,6 +2,9 @@
 _gh_pages
 _site
 .ruby-version
+Gemfile.lock
+.Rhistory
+notes.txt
 
 # Numerous always-ignore extensions
 *.diff

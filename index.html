@@ -31,6 +31,9 @@ title: ""
     <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
     <p>{{ post.date | date_to_string }} <br /> {{ post.excerpt }} . . . <small><a href="{{site.baseurl}}/{{post.url}}">Read More</a></small></p>
     {% endfor %}
-    {% if paginator.next_page %} Older {% else %} Older {% endif %} {% if paginator.previous_page %} {% if paginator.page == 2 %} Newer {% else %} Newer {% endif %} {% else %} Newer {% endif %}
+    
+    <div class="pagination">
+        {% if paginator.next_page %} Older {% else %} Older {% endif %} {% if paginator.previous_page %} {% if paginator.page == 2 %} Newer {% else %} Newer {% endif %} {% else %} Newer {% endif %}
 </article>
+    </div>
     

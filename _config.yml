@@ -8,8 +8,8 @@ paginate_path:       'page:num'
 permalink:           pretty
 
 # Setup
-title:               A Titanic Introduction to R
-tagline:             '(Just a 3 hour tour)'
+title:               A Titanic Introduction To R
+tagline:             ''
 description:         ''
 url:                 'http://choens.github.io'
 baseurl:             '/titanic'
@@ -21,9 +21,10 @@ author:
   email:             andy.choens@gmail.com
 
 # Custom vars
-version:             "Spring 2016 (BETA)"
+version:             "Fall - 2016"
 
 markdown: kramdown
+paginate: 5
 
 kramdown:
   input: GFM
