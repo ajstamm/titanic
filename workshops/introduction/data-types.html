@@ -76,7 +76,7 @@ a =  1
     <h2>Assignment Conventions</h2>
     <ul>
         <li>Both <code><-</code> and <code>=</code> assign variables in the local environment</li>
-        <li>If you see someone using <code><--</code>, be careful</li>
+        <li>If you see someone using <code><--</code> <span style="color:red;">be careful!</span></li>
         <li>Especially if you do not understand concepts such as lexical scoping, global environment, etc</li>
     </ul>
 </section>
@@ -85,7 +85,7 @@ a =  1
     <h2>Assignment Quirks</h2>
     <ul>
         <li>R is a quirky language</li>
-        <li>Assignment in a function uses <code>=</code> EXCLUSIVELY</li>
+        <li>Assignment in a function must use <code>=</code></li>
     </ul>
 
     <pre><code>
@@ -126,7 +126,24 @@ a <- foo(x <- 1, y <- 2)
 
 <section>
     <h2>Numeric</h2>
-
+    <div class="container">
+        <div class="left">
+            <h5>R:</h5>
+            <ul>
+                <li>Default format for all numbers</li>
+            </ul>
+        </div>
+        <div class="right">
+            <h5>Analogues:</h5>
+            <ul>
+                <li>SQL: <code>FLOAT</code></li>
+                <li>SAS: <code>NUM</code></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Numeric</h2>
     <pre><code>
 ## Use the assignment operator (<-) to assign a value
 ## to a variable.
@@ -164,7 +181,7 @@ percent_crew
     <ul>
         <li>Is a variable numeric?</li>
         <li>is.numeric() returns a Boolean</li>
-        <li>These two code snippets make sense</li>
+        <li><span style="color:green;">Note:</span> You are using R functions!</li>
     </ul>
 
     <div class="container">
@@ -213,7 +230,7 @@ is.integer(percent_crew)
             </code></pre>
         </div>
     </div>
-    <p>The answers are on the next slide!</p>
+    <p>(The answers are on the next slide!)</p>
 </section>
 
 <section>
@@ -260,18 +277,28 @@ is.integer(percent_crew)
 </section>
 
 <section>
-    <h2>Integers V Numerics</h2>
-    <ul>
-        <li>Integer is a sub-type of numeric</li>
-        <li>R will ONLY use this data type if you EXPLICITLY tell it to</li>
-        <li>And if you don't understand them, they can behave oddly</li>
-    </ul>
+    <h2>Integers v Numerics</h2>
+    <div class="left">
+        <ul>
+            <li>In R, the integer is a sub-type of numeric</li>
+            <li>R will ONLY use this data type if you <span style="color:red;">EXPLICITLY</span> tell it to</li>
+            <li>And if you don't understand them, they can behave oddly</li>
+        </ul>
+    </div>
+    <div class="right">
+        <h4>Integers</h4>
+        <ul>
+            <li>SQL: <code>INT</code></li>
+            <li>SAS: No direct analogue</li>
+        </ul>
+    </div>
 </section>
     
 </section>
 
 <section>
     <h2>Integers Get Floored</h2>
+    <p>This is the same behavior as the SAS <code>INT</code> command</p>
     <pre><code>
 ## What does this code return?
 oops <- as.integer(percent_crew)
@@ -299,11 +326,12 @@ oops
 <section>
     <h2>Characters</h2>
     <ul>
-        <li>Like a <code>char()</code> or <code>varchar()</code> in SQL</li>
-        <li>Can be of any arbitrary length</li>
-        <li>Can use either <code>'foo'</code> or <code>"foo"</code>.</li>
-        <li>Double quotes is the convention, mostly</li>
-        <li>Assignment works the same way as numerics</li>
+        <li>SQL: <code>char()</code>, <code>varchar()</code></li>
+        <li>SAS: <code>CHAR</code></li>
+        <li>In R - characters can be of any arbitrary length <br /><smaller>(until you run out of memory)</smaller></li>
+        <li>Quotes: <code>'foo'</code> or <code>"foo"</code></li>
+        <li>Double quotes are the convention, mostly</li>
+        <li>Assignment works the same way as numerics(<code><-</code>)</li>
     </ul>
 </section>
 
@@ -327,11 +355,20 @@ paste(title, name, sep=" ")
 
 <section>
     <h2>Booleans</h2>
-    <ul>
-        <li><code>TRUE</code></li>
-        <li><code>FALSE</code></li>
-        <li>Assignment works the way you would expect</li>
-    </ul>
+    <div class="left">
+        <h5>In R:</h5>
+        <ul>
+            <li><code>TRUE</code></li>
+            <li><code>FALSE</code></li>
+            <li>Assignment works the way you would expect</li>
+        </ul>
+    </div>
+    <div class="right">
+        <ul>
+            <li>SQL: Either <code>BOOL</code> or <code>INT</code> (There may or may not be an analogue)</li>
+            <li>SAS: 1 = Yes, 0 = No. <br /><smaller>No direct analogue in SAS</smaller></li>
+        </ul>
+    </div>
 </section>
 
 <section>
@@ -348,19 +385,50 @@ survived <- FALSE
 </section>
 
 <section>
-    <h2>Comparisons</h2>
-    <ul>
-        <li>
-            Comparison Operators:
-            <ul>
-                <li><code>==</code> (Cannot use <code>=</code>)</li>
-                <li><code><</code>, <code><=</code></li>
-                <li><code>></code>, <code>>=</code></li>
-            </ul>
-        </li>
-        <li>Return: <code>TRUE</code>, <code>FALSE</code> OR <code>NA</code></li>
-    </ul>
-    
+    <h2>Comparison Operators</h2>
+    <h5>In R:</h5>
+    <div class="left">
+        <ul>
+            <li>Equals: <code>==</code> (Cannot use <code>=</code>)</li>
+            <li>Less Than: <code><</code>, <code><=</code></li>
+            <li>Greater Than:<code>></code>, <code>>=</code></li>
+            <li>Not Equal: !=</li>
+        </ul>
+        <p>Returns: <code>TRUE</code>, <code>FALSE</code> OR <code>NA</code></p>
+    </div>
+    <div class="right">
+        <h5>In SAS:</h5>
+        <table>
+            <tr>
+                <td>Symbol</td>
+                <td>Mnemonic</td>
+            </tr>
+            <tr>
+                <td><code><</code></td>
+                <td><code>Lt</code></td>
+            </tr>
+            <tr>
+                <td><code><=</code></td>
+                <td><code>Le</code></td>
+            </tr>
+            <tr>
+                <td><code>></code></td>
+                <td><code>Gt</code></td>
+            </tr>
+            <tr>
+                <td><code>>=</code></td>
+                <td><code>Ge</code></td>
+            </tr>
+            <tr>
+                <td><code>=</code></td>
+                <td><code>Eq</code></td>
+            </tr>
+            <tr>
+                <td><code>~=</code></td>
+                <td><code>Ne</code></td>
+            </tr>
+        </table>
+    </div>
 </section>
 
 <section>
