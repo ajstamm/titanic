@@ -1,14 +1,14 @@
 ---
 layout: presentation
-title: Example Linear Regression
+title: Linear Regression
 ---
 
 <section>
-    <h2>Example Linear Regression</h2>
+    <h2>Linear Regression</h2>
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="../example-linear.R" target="_blank"> example-linear.R</a></li>
+                <li>Code: <a href="../linear.R" target="_blank"> example-linear.R</a></li>
                 <li>Will run this together</li>
                 <li>~20 Minutes</li>
             </ul>
@@ -31,6 +31,7 @@ title: Example Linear Regression
         <li>Use R to build a linear model (OLS) of Set 1</li>
         <li>Demonstrate how to use R to test the model</li>
         <li>You will then experiment with sets 2,3, and 4</li>
+        <li><span style="color:green;">Next Up: Logistic Regression!</span></li>
     </ul>
 </section>
 
@@ -39,9 +40,22 @@ title: Example Linear Regression
     <ul>
         <li>An approach for modeling the relationship between a scalar dependent variable <i>(y)</i> and one or more explanatory variables, also know as independent variable(s) <i>(x)</i>
         </li>
-        <li>For more information, see <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">Wikipedia</a> (where we get most of our <a href="https://en.wikipedia.org/wiki/Wikipedia:Image_use_policy" target="_blank">graphics</a>)
+        <li>For more information, see <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">Wikipedia</a>
+            <ul>
+                <li style="color:green;">Note: Most of the <a href="https://en.wikipedia.org/wiki/Wikipedia:Image_use_policy" target="_blank">graphics</a> in this workshop come from Wikipedia!</li>
+            </ul>
         </li>
     </ul>
+</section>
+
+<section>
+    <h2>Many Data Sets</h2>
+    <ul>
+        <li>R comes with several classic data sets which are useful for learning how to write R script</li>
+        <li>Most R packages also come with an example data set (or several)</li>
+        <li>Right now, we want to use Anscombe's Quartet</li>
+    </ul>
+    <pre><code>data()</code></pre>
 </section>
 
 <section>
@@ -49,9 +63,10 @@ title: Example Linear Regression
     <div class="container">
         <div class="left">
             <ul>
-                <li>First introduced in 1973, used to teach regression analysis</li>
-                <li>Four data sets, (nearly) identical statisitcal properties</li>
-                <li>Not identical when graphed</li>
+                <li>Taking a short break from the boat jokes</li>
+                <li>First introduced in 1973, used to teach regression</li>
+                <li>Four data sets with (nearly) identical statisitcal properties</li>
+                <li>Not identical when plotted!</li>
             </ul>
         </div>
         <div class="right">
@@ -74,23 +89,8 @@ title: Example Linear Regression
 </section>
 
 <section>
-    <h2>Interacive / Exploratory</h2>
-    <br />
-    <p>
-        Today, the focus is on interactive/ad-hoc use of R to
-        understand data. We do not have time to discuss
-        creating/formatting a report, etc.
-    </p>
-</section>
-
-<section>
-    <h2>example-linear.R</h2>
-    <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="50%">
-</section>
-
-<section>
     <h2>Load Data</h2>
-    <p>The Anscombe Quartet is built into R
+    <p>Anscombe's Quartet is built into R
     <pre><code>
 data(anscombe)
 anscombe
@@ -123,14 +123,13 @@ anscombe
         <li><pre><code>tail(anscombe)</code></pre></li>
         <li>
             R is an object oriented programming language. Functions
-            "know" what type of oject is passed to them. In this case,
-            we are passing a data.frame to these Base-R functions.
+            "know" what type of oject is passed to them (data.frame).
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Four Sets</h2>
+    <h2>Four Distinct Data Sets</h2>
     <table>
         <tr>
             <th style="text-align:center;"></th>
@@ -164,7 +163,9 @@ anscombe
     <h2>Descriptive Statistics</h2>
     <ul>
         <li>It is easy to get the average for each column</li>
-        <li><span style="color:green;">Note: The average is (essentially) identical for each column</span></li>
+        <li><span style="color:green;">Note: The x columns are nearly identical</span>
+        </li>
+        <li><span style="color:green;">Ditto for the y columns</span></li>
     </ul>
     <pre><code>
 colMeans(anscombe)
@@ -179,7 +180,7 @@ colMeans(anscombe)
     <h2>Descriptive Statistics</h2>
     <ul>
         <li>It is less easy to get the standard deviation.</li>
-        <li><span style="color:green;">Note: The standard deviation is also (essentially) identical</span></li>
+        <li><span style="color:green;">Note: It is also (essentially) identical</span></li>
     </ul>
     <pre><code>
 cbind(x1 = sd(anscombe$x1),
@@ -195,12 +196,22 @@ cbind(x1 = sd(anscombe$x1),
 </section>
 
 <section>
-    <h2>Correlation</h2>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
     <ul>
-        <li>To test for correlation, we just have to declare x and y from a single set.</li>
+        <li>Can you calculate the standard deviation for the y columns?</li>
+    </ul>
+</section>
+
+
+<section>
+    <h2>Correlation: Set 1</h2>
+    <ul>
+        <li>To test for correlation, we must use an x and y from a single set</li>
     </ul>
     <pre><code>
-cor.test(anscombe$x1, anscombe$y1)
+cor.test(x=anscombe$x1, y=anscombe$y1)
     </pre></code>
 
     <pre><code class="fragment">
@@ -218,9 +229,9 @@ sample estimates:
 </section>
 
 <section>
-    <h2>Scatterplot! Set 1</h2>
+    <h2>Scatterplot: Set 1</h2>
     <pre><code>
-plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1",
+plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1",
      xlab="x1", ylab="y1"
 )
     </pre></code>
@@ -243,18 +254,24 @@ plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1",
 <section>
     <h2>Linear Regression</h2>
     <pre><code>
-m1 <- lm(formula=anscombe$y1~anscombe$x1)
+m1 <- lm(formula=y1~x1, data=anscombe)
 m1
     </pre></code>
     <pre><code class="fragment">
 Call:
-lm(formula = anscombe$y1 ~ anscombe$x1)
+lm(formula = y1 ~ x1, data = anscombe)
 
 Coefficients:
 (Intercept)  anscombe$x1  
      3.0001       0.5001  
     </code></pre>
-    <p style="color:green;">See ?formula to learn more about the R formula syntax for multiple regression.
+    <ul>
+        <li style="color:green;">
+            To learn more about the R formula syntax for multiple
+            regression:
+            <code><pre>?formula</code></pre>
+        </li>
+        <ul>
 </section>
 
 <section>
@@ -275,17 +292,130 @@ Coefficients:
 </section>
 
 <section>
-    <h2>Visualize! Set 1</h2>
+    <h2>Many Ways To View An Object</h2>
     <ul>
-        <li>Same scatterplot as before. This adds the linear model, m1.</li>
+        <li>How much detail do you need?</li>
+    </ul>
+    <pre><code>summary(m1)</code></pre>
+    <pre class="fragment"><code>
+Call:
+lm(formula = y1 ~ x1, data = anscombe)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.92127 -0.45577 -0.04136  0.70941  1.83882 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)   
+(Intercept)   3.0001     1.1247   2.667  0.02573 * 
+anscombe$x1   0.5001     0.1179   4.241  0.00217 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.237 on 9 degrees of freedom
+Multiple R-squared:  0.6665,	Adjusted R-squared:  0.6295 
+F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217
+    </code></pre>
+</section>
+
+<section>
+    <h2>Many Ways To View An Object</h2>
+    <ul>
+        <li>You can access any part of it!</li>
+    </ul>
+    <pre><code>attributes(m1)</code></pre>
+    <pre class="fragment"><code>
+$names
+ [1] "coefficients"  "residuals"     "effects"       "rank"         
+ [5] "fitted.values" "assign"        "qr"            "df.residual"  
+ [9] "xlevels"       "call"          "terms"         "model"        
+
+$class
+[1] "lm"
+    </code></pre>
+</section>
+
+<section>
+    <h2>Many Ways To View An Object</h2>
+    <ul>
+        <li>It is easier to take directly from the summary</li>
+        <li>
+            A good example of using simple R commands in conjunction
+            to do something complex
+        </li>
+        <li>
+            SAS and SPSS have fewer, more complex, commands
+        </li>
+    </ul>
+    <pre><code>attributes(summary(m1))</code></pre>
+    <pre class="fragment"><code>
+$names
+ [1] "call"          "terms"         "residuals"     "coefficients" 
+ [5] "aliased"       "sigma"         "df"            "r.squared"    
+ [9] "adj.r.squared" "fstatistic"    "cov.unscaled" 
+
+$class
+[1] "summary.lm"
+    </code></pre>
+</section>
+
+<section>
+    <h2>Many Ways To View An Object</h2>
+    <ul>
+        <li>What if we just want the coefficients?</li>
     </ul>
     <pre><code>
-plot(anscombe$x1, anscombe$y1, main="Anscome: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
+summary(m1)$coefficients
+    </code></pre>
+    <pre class="fragment"><code>
+             Estimate Std. Error  t value    Pr(>|t|)
+(Intercept) 3.0000909  1.1247468 2.667348 0.025734051
+anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        Many Ways To View An Object<br />
+        <span style="color:green;">And More Than One Way To Skin The Cat</span>
+    </h2>
+    <ul>
+        <li>There is actually a function to do that!</li>
+    </ul>
+    <pre><code>
+coef(summary(m1))
+    </code></pre>
+    <pre class="fragment"><code>
+             Estimate Std. Error  t value    Pr(>|t|)
+(Intercept) 3.0000909  1.1247468 2.667348 0.025734051
+anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
+    </code></pre>
+</section>
+
+<section>
+    <h2>Visualize: Set 1</h2>
+    <pre><code>
+## Same scatterplot, adds the linear model
+plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
 abline(m1, col="red")
     </pre></code>
     <a href="{{site.baseurl}}/public/img/model-anscombe-1.png" target="_blank">
         <img src="{{site.baseurl}}/public/img/model-anscombe-1.png" width="40%" class="fragment">
     </a>
+</section>
+
+<section>
+    <h2>Exporting Graphics</h2>
+    <ul>
+        <li>Exports the Set 1 regression, shown previously</li>
+        <li>Exports the file as a PNG file, in the CWD</li>
+    </ul>
+    <pre><code>
+png("anscombe-1.png")
+plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
+abline(m1, col="red")
+dev.off()
+    </pre></code>
 </section>
 
 <section>
@@ -307,28 +437,72 @@ abline(m1, col="red")
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <ul>
-        <li>But R can do more than just a QQ plot to explore a model</li>
+        <li>Use a QQ Plot to examine your other models.</li>
+        <li>Base R has other tools to evaluate your model:
+            <pre><code>plot(m1)</pre></code>
+        </li>
+        <li>Today, our time is limited . . .</li>
     </ul>
-    <pre><code>
-plot(m1)
-    </pre></code>
-    <p>If you made other models, take a moment to explore and compare them now</p>
-    <pre><code>
-plot()
-    </pre></code>
-
 </section>
 
 <section>
-    <h2>Exporting Graphics</h2>
+    <h2>Prediction</h2>
+    <pre><code>m1</code></pre>
+    <pre><code class="fragment">
+Call:
+lm(formula = y1 ~ x1, data = anscombe)
+
+Coefficients:
+(Intercept)           x1  
+     3.0001       0.5001  
+    </code></pre>
+</section>
+
+<section>
+    <h2>Prediction</h2>
     <ul>
-        <li>Exports the QQ Plot grapic shown previously for Set 1</li>
-        <li>Exports the file as a PNG file, in the CWD</li>
+        <li>Our model is: <span style="color:red;">y</span> = .5001<span style="color:green;">x</span> + 3.0001</li>
+        <li>Question: <span>How do we calculate <span style="color:red;">y</span> when <span style="color:green;">x is 10</span>?</span></li>
+        <li>
+            Answer: <span class="fragment">We can use R as a calculator!
+            <pre><code> 8.0011 = 10 * .5001 + 3.0001</code></pre></span>
+        </li>
+        <li class="fragment">But is there an easier way?</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Prediction</h2>
+    <ul>
+        <li>It is easy to use predict to automate this and do it quickly</li>
+        <li>Create a new data.frame with the SAME column names</li>
+        <li>The dependent variable must be NA</li>
     </ul>
     <pre><code>
-png("qq-anscombe-1.png")
-qqplot(anscombe$x1, anscombe$y1, main="Anscome: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
+p1 <- data.frame(x1=anscombe$x1+30, y1=NA)
+p1$y1 <- predict(object=m1, newdata=p1)
+    </code></pre>    
+</section>
+
+<section>
+    <h2>Let's Look At Our Predictions</h2>
+    <pre><code>
+plot(rbind(anscombe[,c(1,5)], p1))
 abline(m1, col="red")
-dev.off()
-    </pre></code>
+    </code></pre>    
+    <a href="{{site.baseurl}}/public/img/predict-anscombe-1.png" target="_blank">
+        <img src="{{site.baseurl}}/public/img/predict-anscombe-1.png" width="40%" class="fragment">
+    </a>
+</section>
+
+<section>
+    <h2>Prediction Gotcha</h2>
+    <ul>
+        <li>These produce the "same" model</li>
+        <li>Only the second can be easily used in a prediction</li>
+        <li>Look at the different models produced</li>
+        <li>Do you remember how to view the model?</li>
+    </ul>
+    <pre><code>mGood <- lm(formula=y1~x1, data=anscombe)</code></pre>
+    <pre><code>mBad <- lm(formula=anscombe$y1~anscombe$x1)</code></pre>
 </section>
