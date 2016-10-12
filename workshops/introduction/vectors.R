@@ -13,14 +13,14 @@
 ## - Vectors Are Important!
 ## - How To Make One
 ## - How To Delete One
-## - Vector Indexing (Subsetting)
+## - Vector Indexing (How To Subset)
 ## - Work With Two Vectors
 
 
 
 ## VECTORS ARE IMPORTANT -------------------------------------------------------
 ## - Congrats, you have already worked with Vectors
-## - Understanding them is CRITICAL to becoming a useR
+## - Understanding them is CRITICAL to becoming a useR (sic)
 
 ## This is a vector, length == 1.
 captain <- "John Smith"
@@ -40,7 +40,7 @@ captain <- "John Smith"
 
 ## YOUR TURN! ------------------------------------------------------------------
 
-## Going forward, you will want these two vecors.
+## Going forward, you will want these two vectors.
 age <- c(22,38,26,35,35,NA,54,2,27,14)
 gender <- c("male","female","female","female","male",
             "male","male","male","female","female")

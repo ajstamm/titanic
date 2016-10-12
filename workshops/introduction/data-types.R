@@ -47,14 +47,12 @@ a =  1
 ## R is a quirky language
 ## Assignment in a function uses = EXCLUSIVELY
 
-## This is dummy code. Don't run this code.
-
 ## These are NOT equivalent.
 
-## This is correct.
+## This is correct (and works)
 a <- foo(x = 1, y = 2)
 
-## This will _NOT_ work.
+## This will _NOT_ work. (Feel free to try, it will error out.)
 a <- foo(x <- 1, y <- 2)
 
 
@@ -203,13 +201,11 @@ survived <- FALSE
 
 ## Were there more passengers than crew?
 ## Hint: Yes, but let's prove it
-> passenger_capacity > crew_capacity
-[1] TRUE
+passenger_capacity > crew_capacity
 
 ## Were there exactly 1,000 passengers?
 ## Hint: No. Of course not.
-> passenger_capacity == 1000
-[1] FALSE
+passenger_capacity == 1000
 
 ## You can assign the results to a variable
 answer <- passenger_capacity < 1000
