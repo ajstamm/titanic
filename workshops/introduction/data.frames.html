@@ -66,7 +66,7 @@ title: "Data.Frames"
 
 <section>
     <h2>Creation</h2>
-    <pre><code>
+    <pre><code class="r">
 ## First we need some vectors
 age <- c(22,38,26,35,35,NA,54,2,27,14)
 gender <- c("male","female","female","female","male",
@@ -78,7 +78,7 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 
 <section>
     <h2>Creation</h2>
-    <pre><code>
+    <pre><code class="r">
 ## Then we put them together
 passengers <- data.frame(age, gender, survived)
 
@@ -86,7 +86,7 @@ passengers <- data.frame(age, gender, survived)
 View(passengers)
     </code></pre>
     
-    <pre><code>
+    <pre><code class="r">
    age gender survived
 1   22   male    FALSE
 2   38 female     TRUE
@@ -109,7 +109,7 @@ View(passengers)
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
    
-    <pre><code>
+    <pre><code class="r">
 ## What does this tell us?
 dim(passengers)
     </code></pre>
@@ -130,7 +130,7 @@ dim(passengers)
         <li>We can import data, from CSV, Excel, Databases, etc.</li>
         <li>Today, we only care about CSV</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 ## Import data from CSV.
 ## This WILL overwrite the data.frame we made a few minutes ago!
 url <- "http://choens.github.io/titanic/public/data/passengers.csv"
@@ -143,7 +143,7 @@ passengers <- read.csv(url)
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     
-    <pre><code>
+    <pre><code class="r">
 ## Spend some quality time with the following commands.
 ## ?foo is a great way to read the documentation.
 dim(passengers)
@@ -161,11 +161,11 @@ tail(passengers)
     <h2>Indexing</h2>
     <ul>
         <li>Back to the land of square brackets</li>
-        <li><span style="color:red;">Critical:</span> <code>passengers[ROW,COLUMN]</code></li>
+        <li><span style="color:red;">Critical:</span> <code class="r">passengers[ROW,COLUMN]</code></li>
     </ul>
     <div class="container">
         <div class="left">
-            <pre><code>
+            <pre><code class="r">
 ## Returns one row by row #.
 passengers[10, ]
             </code></pre>
@@ -175,7 +175,7 @@ passengers[10, ]
             </code></pre>
         </div>
         <div class="right">
-            <pre><code>
+            <pre><code class="r">
 ## Returns one column by column name.
 passengers[ ,"age"]
             </code></pre>
@@ -197,7 +197,7 @@ passengers[ ,"age"]
 <section>
     <h2>Another Way To Index</h2>
     
-    <pre><code>
+    <pre><code class="r">
 ## There is an easier way to refer to a single column
 ## A single column IS a Vector.
 passengers$age
@@ -221,7 +221,7 @@ passengers$age
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     
-    <pre><code>
+    <pre><code class="r">
 ## Create a new data.frame called "children".
 ## Children must be younger than 18.
     </code></pre>
@@ -233,7 +233,7 @@ passengers$age
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     
-    <pre><code>
+    <pre><code class="r">
 ## Create a new data.frame called "children".
 ## Children must be younger than 18.
 children <- passengers[passengers$age < 18, ]
@@ -256,7 +256,7 @@ summary(children)
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     
-    <pre><code>
+    <pre><code class="r">
 ## What does ls() do?
 ls()
     </code></pre>
@@ -267,7 +267,7 @@ ls()
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <p>Were men and women equally likely to survive the Titanic?</p>
-    <pre><code>
+    <pre><code class="r">
 ## chisq.test() is the command to run the Chi Squared Test.
 ## table() can be used with 2 vectors! Try table(foo$bar, foo$baz).
 ## Don't worry about calculating the percents. We'll do that together.
@@ -281,7 +281,7 @@ ls()
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     
-    <pre><code>
+    <pre><code class="r">
 table(passengers$sex, passengers$survived)
 chisq.test( passengers$sex, passengers$survived )
     </code></pre>
@@ -306,7 +306,7 @@ X-squared = 36.585, df = 1, p-value = 1.461e-09
     <div class="container">
         <div class="left">
             <h5>Margins</h5>
-            <pre><code>
+            <pre><code class="r">
 ## Margins are what other tools call Totals.
 margin.table( table(passengers$sex, passengers$survived), margin=2)
             </code></pre>
@@ -318,7 +318,7 @@ margin.table( table(passengers$sex, passengers$survived), margin=2)
         </div>
         <div class="right">
             <h5>Margins</h5>
-            <pre><code>
+            <pre><code class="r">
 ## At least they didn't invent a new term for proportion.
 prop.table( table(passengers$sex, passengers$survived), margin=2)
             </code></pre>
@@ -339,7 +339,7 @@ prop.table( table(passengers$sex, passengers$survived), margin=2)
     <ul>
         <li>This is thankfully EASY</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 ## Make it all go away
 rm(children)
     </code></pre>

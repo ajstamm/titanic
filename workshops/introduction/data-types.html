@@ -44,7 +44,7 @@ title: Data Types
         <li>Multiple assignment operators</li>
         <li>History, convention, and some old-school ideas</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 ## These are equivalent.
 a <- 1
 a =  1
@@ -75,8 +75,8 @@ a =  1
 <section>
     <h2>Assignment Conventions</h2>
     <ul>
-        <li>Both <code><-</code> and <code>=</code> assign variables in the local environment</li>
-        <li>If you see someone using <code><--</code> <span style="color:red;">be careful!</span></li>
+        <li>Both <code class="r"><-</code> and <code class="r">=</code> assign variables in the local environment</li>
+        <li>If you see someone using <code class="r"><--</code> <span style="color:red;">be careful!</span></li>
         <li>Especially if you do not understand concepts such as lexical scoping, global environment, etc</li>
     </ul>
 </section>
@@ -85,10 +85,10 @@ a =  1
     <h2>Assignment Quirks</h2>
     <ul>
         <li>R is a quirky language</li>
-        <li>Assignment in a function must use <code>=</code></li>
+        <li>Assignment in a function must use <code class="r">=</code></li>
     </ul>
 
-    <pre><code>
+    <pre><code class="r">
 ## These are NOT equivalent.
 
 ## This is correct.
@@ -134,15 +134,15 @@ a <- foo(x <- 1, y <- 2)
         <div class="right">
             <h5>Analogues:</h5>
             <ul>
-                <li>SQL: <code>FLOAT</code></li>
-                <li>SAS: <code>NUM</code></li>
+                <li>SQL: <code class="r">FLOAT</code></li>
+                <li>SAS: <code class="r">NUM</code></li>
             </ul>
         </div>
     </div>
 </section>
 <section>
     <h2>Numeric</h2>
-    <pre><code>
+    <pre><code class="r">
 ## Use the assignment operator (<-) to assign a value
 ## to a variable.
 
@@ -184,14 +184,14 @@ percent_crew
 
     <div class="container">
         <div class="left">
-            <pre><code>is.numeric(total_capacity)</code></pre>
+            <pre><code class="r">is.numeric(total_capacity)</code></pre>
             <p class="returns">
                 Returns:
                 <pre><code class="fragment">[1] TRUE</code></pre>
             </p>
         </div>
         <div class="right">
-            <pre><code>is.numeric(percent_crew)</code></pre>
+            <pre><code class="r">is.numeric(percent_crew)</code></pre>
             <p class="returns">
                 Returns:
                 <pre><code class="fragment">[1] TRUE</code></pre>
@@ -206,7 +206,7 @@ percent_crew
     <p>Compare the results. Does this make sense?</p>
     <div class="container">
         <div class="left">
-            <pre><code>
+            <pre><code class="r">
 total_capacity
 
 typeof(total_capacity)
@@ -217,7 +217,7 @@ is.integer(total_capacity)
             </code></pre>
         </div>
         <div class="right">
-            <pre><code>
+            <pre><code class="r">
 percent_crew
 
 typeof(percent_crew)
@@ -237,7 +237,7 @@ is.integer(percent_crew)
     </h2>
     <div class="container">
         <div class="left">
-            <pre><code>
+            <pre><code class="r">
 > total_capacity
 [1] 3327
 
@@ -255,7 +255,7 @@ is.integer(percent_crew)
             <pre>
         </div>
         <div class="right">
-            <pre><code>
+            <pre><code class="r">
 > percent_crew
 [1] 26.81094
 
@@ -286,7 +286,7 @@ is.integer(percent_crew)
     <div class="right">
         <h4>Integers</h4>
         <ul>
-            <li>SQL: <code>INT</code></li>
+            <li>SQL: <code class="r">INT</code></li>
             <li>SAS: No direct analogue</li>
         </ul>
     </div>
@@ -296,8 +296,8 @@ is.integer(percent_crew)
 
 <section>
     <h2>Integers Get Floored</h2>
-    <p>This is the same behavior as the SAS <code>INT</code> command</p>
-    <pre><code>
+    <p>This is the same behavior as the SAS <code class="r">INT</code> command</p>
+    <pre><code class="r">
 ## What does this code return?
 oops <- as.integer(percent_crew)
 
@@ -324,12 +324,12 @@ oops
 <section>
     <h2>Characters</h2>
     <ul>
-        <li>SQL: <code>char()</code>, <code>varchar()</code></li>
-        <li>SAS: <code>CHAR</code></li>
+        <li>SQL: <code class="r">char()</code>, <code class="r">varchar()</code></li>
+        <li>SAS: <code class="r">CHAR</code></li>
         <li>In R - characters can be of any arbitrary length <br /><smaller>(until you run out of memory)</smaller></li>
-        <li>Quotes: <code>'foo'</code> or <code>"foo"</code></li>
+        <li>Quotes: <code class="r">'foo'</code> or <code class="r">"foo"</code></li>
         <li>Double quotes are the convention, mostly</li>
-        <li>Assignment works the same way as numerics(<code><-</code>)</li>
+        <li>Assignment works the same way as numerics(<code class="r"><-</code>)</li>
     </ul>
 </section>
 
@@ -338,7 +338,7 @@ oops
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
 
-    <pre><code>
+    <pre><code class="r">
 ## Let's make some character vars!
 title <- "Captain"
 name  <- "Smith"
@@ -356,14 +356,14 @@ paste(title, name, sep=" ")
     <div class="left">
         <h5>In R:</h5>
         <ul>
-            <li><code>TRUE</code></li>
-            <li><code>FALSE</code></li>
+            <li><code class="r">TRUE</code></li>
+            <li><code class="r">FALSE</code></li>
             <li>Assignment works the way you would expect</li>
         </ul>
     </div>
     <div class="right">
         <ul>
-            <li>SQL: Either <code>BOOL</code> or <code>INT</code> (There may or may not be an analogue)</li>
+            <li>SQL: Either <code class="r">BOOL</code> or <code class="r">INT</code> (There may or may not be an analogue)</li>
             <li>SAS: 1 = Yes, 0 = No. <br /><smaller>No direct analogue in SAS</smaller></li>
         </ul>
     </div>
@@ -371,7 +371,7 @@ paste(title, name, sep=" ")
 
 <section>
     <h2>Booleans</h2>
-    <pre><code>
+    <pre><code class="r">
 survived <- TRUE
 
 ## OR
@@ -387,12 +387,12 @@ survived <- FALSE
     <h5>In R:</h5>
     <div class="left">
         <ul>
-            <li>Equals: <code>==</code> (Cannot use <code>=</code>)</li>
-            <li>Less Than: <code><</code>, <code><=</code></li>
-            <li>Greater Than:<code>></code>, <code>>=</code></li>
+            <li>Equals: <code class="r">==</code> (Cannot use <code class="r">=</code>)</li>
+            <li>Less Than: <code class="r"><</code>, <code class="r"><=</code></li>
+            <li>Greater Than:<code class="r">></code>, <code class="r">>=</code></li>
             <li>Not Equal: !=</li>
         </ul>
-        <p>Returns: <code>TRUE</code>, <code>FALSE</code> OR <code>NA</code></p>
+        <p>Returns: <code class="r">TRUE</code>, <code class="r">FALSE</code> OR <code class="r">NA</code></p>
     </div>
     <div class="right">
         <h5>In SAS:</h5>
@@ -402,28 +402,28 @@ survived <- FALSE
                 <td>Mnemonic</td>
             </tr>
             <tr>
-                <td><code><</code></td>
-                <td><code>Lt</code></td>
+                <td><code class="r"><</code></td>
+                <td><code class="r">Lt</code></td>
             </tr>
             <tr>
-                <td><code><=</code></td>
-                <td><code>Le</code></td>
+                <td><code class="r"><=</code></td>
+                <td><code class="r">Le</code></td>
             </tr>
             <tr>
-                <td><code>></code></td>
-                <td><code>Gt</code></td>
+                <td><code class="r">></code></td>
+                <td><code class="r">Gt</code></td>
             </tr>
             <tr>
-                <td><code>>=</code></td>
-                <td><code>Ge</code></td>
+                <td><code class="r">>=</code></td>
+                <td><code class="r">Ge</code></td>
             </tr>
             <tr>
-                <td><code>=</code></td>
-                <td><code>Eq</code></td>
+                <td><code class="r">=</code></td>
+                <td><code class="r">Eq</code></td>
             </tr>
             <tr>
-                <td><code>~=</code></td>
-                <td><code>Ne</code></td>
+                <td><code class="r">~=</code></td>
+                <td><code class="r">Ne</code></td>
             </tr>
         </table>
     </div>
@@ -431,7 +431,7 @@ survived <- FALSE
 
 <section>
     <h2>Comparisons</h2>
-    <pre><code>
+    <pre><code class="r">
 # Were there more passengers than crew?
 # Hint: Yes, but let's prove it
 > passenger_capacity > crew_capacity
@@ -453,7 +453,7 @@ answer <- passenger_capacity < 1000
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
-    <pre><code>
+    <pre><code class="r">
 ## Captain Edward Smith was 62 years old when he died.
 ## Was he older when he died than you are today?
 answer <- 62 > ?
@@ -472,15 +472,15 @@ answer <- 62 > ?
         <li>R is no different</li>
         <li>Not needed today, just demonstrative</li>
         <li>Like Integers, must be explicitly declared</li>
-        <li>The command <code>as.Date()</code>, is funky</li>
-        <li>Why the capital <code>D</code>? Dunno</li>
+        <li>The command <code class="r">as.Date()</code>, is funky</li>
+        <li>Why the capital <code class="r">D</code>? Dunno</li>
     </ul>
     
 </section>
 
 <section>
     <h2>Dates</h2>
-    <pre><code>
+    <pre><code class="r">
 ## POSIX Compatible dates:
 ## You can write it as a mm/dd/yyyy, but . . .
 ## then you have to tell R how to read the date.

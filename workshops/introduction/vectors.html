@@ -40,7 +40,7 @@ title: Vectors
         <li>Understanding them is CRITICAL to becoming a useR</li>
     </ul>
     
-    <pre><code>
+    <pre><code class="r">
 ## This is a vector, length == 1.
 captain <- "John Smith"
 
@@ -52,7 +52,7 @@ age <- c(22, 38, 26, 35, 35)
 <section>
     <h2>Combine</h2>
     <ul>
-        <li>Use <code>c()</code> to <em>combine</em> things</li>
+        <li>Use <code class="r">c()</code> to <em>combine</em> things</li>
         <li>Works for numerics, characters, booleans, dates, etc.</li>
         <li>If they aren't the same type of data, R will reduce to the lowest common denominator.</li>
         <li>In practice, this is usually a character vector</li>
@@ -64,7 +64,7 @@ age <- c(22, 38, 26, 35, 35)
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
-    <pre><code>
+    <pre><code class="r">
 ## Going forward, you will want these two vectors.
 age <- c(22,38,26,35,35,NA,54,2,27,14)
 gender <- c("male","female","female","female","male",
@@ -74,7 +74,7 @@ gender <- c("male","female","female","female","male",
 length(age)
 length(gender)
     </code></pre>
-    <p>The answer to both <code>length()</code> commands should be 10</p>
+    <p>The answer to both <code class="r">length()</code> commands should be 10</p>
 </section>
 
 <section>
@@ -114,7 +114,7 @@ length(gender)
 
     <div class="container">
         <div class="left">
-            <pre><code>
+            <pre><code class="r">
 ## Per Item
 age + 1
             </code></pre>
@@ -123,7 +123,7 @@ age + 1
             </code></pre>
         </div>
         <div class="right">
-            <pre><code>
+            <pre><code class="r">
 ## In Total
 table(gender)
             </code></pre>
@@ -140,14 +140,14 @@ female   male
     <h2>NA</h2>
     <ul>
         <li>NA is the bane of our existence</li>
-        <li><code>na.rm=TRUE</code> is our friend</li>
-        <li>Example: <code>mean()</code>
+        <li><code class="r">na.rm=TRUE</code> is our friend</li>
+        <li>Example: <code class="r">mean()</code>
     </ul>
     <br />
     <div class="container">
         <div class="left">
             <h5>Bad</h5>
-            <pre><code>
+            <pre><code class="r">
 ## This will not work.
 mean(age)
             </code></pre>
@@ -159,7 +159,7 @@ mean(age)
         </div>
         <div class="right">
             <h5>Good</h5>
-            <pre><code>
+            <pre><code class="r">
 ## This works just fine.
 mean(age, na.rm=TRUE)
             </code></pre>
@@ -178,7 +178,7 @@ mean(age, na.rm=TRUE)
     <div class="container">
         <div class="left">
             <ul>
-                <li><code>?foo</code></li>
+                <li><code class="r">?foo</code></li>
                 <li>Code Completion</li>
                 <li>RStudio help window</li>
                 <li><a href="http://stackoverflow.com/questions/tagged/r" target="_blank">Stack Overflow</a></li>
@@ -198,19 +198,19 @@ mean(age, na.rm=TRUE)
         <div class="left">
             <h5>Mathematical</h5>
             <ul>
-                <li><code>mean()</code>: Average</li>
-                <li><code>sd()</code>: Standard Deviation</li>
-                <li><code>var()</code>: Variance</li>
-                <li><code>min()</code>: Smallest</li>
-                <li><code>max()</code>: Biggest</li>
+                <li><code class="r">mean()</code>: Average</li>
+                <li><code class="r">sd()</code>: Standard Deviation</li>
+                <li><code class="r">var()</code>: Variance</li>
+                <li><code class="r">min()</code>: Smallest</li>
+                <li><code class="r">max()</code>: Biggest</li>
             </ul>
         </div>
         <div class="right">
             <h5>Useful</h5>
             <ul>
-                <li><code>length()</code>: # of items</li>
-                <li><code>table()</code>: # distinct values</li>
-                <li><code>summary()</code>: You tell me</li>
+                <li><code class="r">length()</code>: # of items</li>
+                <li><code class="r">table()</code>: # distinct values</li>
+                <li><code class="r">summary()</code>: You tell me</li>
             </ul>
         </div>
     </div>
@@ -220,7 +220,7 @@ mean(age, na.rm=TRUE)
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
-    <pre><code>
+    <pre><code class="r">
 ## Take a few minutes and spend some
 ## time using a few of these functions.
     </code></pre>
@@ -233,7 +233,7 @@ mean(age, na.rm=TRUE)
         <li>Welcome to the world of square brackets</li>
         <li>This part is tricky. Run this as I talk</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 ## There are 10 entries in age and gender
 
 ## But maybe we only want one of them.
@@ -246,7 +246,7 @@ age[3:5]
 
 <section>
     <h2>Index[2]</h2>
-    <pre><code>
+    <pre><code class="r">
 ## There are 10 entries in age and gender
 
 ## But maybe we only want to see the males.
@@ -300,7 +300,7 @@ age[gender == "male"]
 
 <section>
     <h2>Index[3]</h2>
-    <pre><code>
+    <pre><code class="r">
 ## Make a new variable
 age_of_men <- age[gender == "male"]
 
@@ -314,7 +314,7 @@ mean( age[gender=="female"] )
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
 
-    <pre><code>
+    <pre><code class="r">
 ## Using the following Boolean Object
 survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
               FALSE,FALSE,FALSE,TRUE,TRUE)
@@ -330,7 +330,7 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
 
-    <pre><code>
+    <pre><code class="r">
 ## How many men survived the sinking of the Titanic?
 survived_men <- survived[gender=="male"]
 table(survived_men)
@@ -351,7 +351,7 @@ survived_men == 1
 
 <section>
     <h2>Statistical Testing</h2>
-    <pre><code>
+    <pre><code class="r">
 t.test(age[gender=="male"], age[gender=="female"])
     </code></pre>
     <pre><code class="fragment">
