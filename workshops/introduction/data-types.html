@@ -101,6 +101,25 @@ a <- foo(x <- 1, y <- 2)
 </section>
 
 <section>
+    <h2>Capitalization Quirk</h2>
+    <ul>
+        <li>R is a quirky language</li>
+        <li>Have I mentioned this?</li>
+        <li>Unlike some languages (SQL) <br /> CaPiTaLiZaTiOn Matters</li>
+    </ul>
+
+    <pre><code class="r">
+## Using our object, "a" from previous slide.
+
+## This is correct.
+head(a)
+
+## This will _NOT_ work.
+head(A)
+    </code></pre>
+</section>
+
+<section>
     <h2>Data Types</h2>
     <p><em>We are only covering a subset of available data types today</em></p>
     <div class="container">
