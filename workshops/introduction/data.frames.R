@@ -88,6 +88,22 @@ tail(passengers)
 
 
 
+## Reuse What You Know! --------------------------------------------------------
+## R is Object Oriented (OO); functions adapt to the data type.
+## New data types often work with old commands.
+## Both of the following code segments work.
+
+## Here, head() returns the first few items from the vector "survived".
+survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,TRUE)
+head(survived)
+
+## Here, head() returns the first few rows of the data.frame passengers.
+head(passengers)
+
+## One command, but different types of returns, depending on data type.
+
+
+
 ## Indexing --------------------------------------------------------------------
 ## Back to the land of square brackets
 ## Critical: passengers[ROW,COLUMN]

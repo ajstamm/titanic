@@ -158,6 +158,39 @@ tail(passengers)
 </section>
 
 <section>
+    <h2>Reuse What You Know!</h2>
+    <ul>
+        <li>R is Object Oriented (OO); functions adapt to the data type</li>
+        <li>New data types often work with old commands</li>
+        <li>Both of the following code segments work</li>
+    </ul>
+    <div class="container">
+        <div class="left">
+            <pre><code class="r">
+head(survived)
+            </code></pre>
+            <pre><code class="fragment r">
+[1] FALSE  TRUE  TRUE  TRUE FALSE FALSE
+            </code></pre>
+        </div>
+        <div class="right">
+            <pre><code class="r">
+head(passengers)
+            </code></pre>
+            <pre><code class="fragment r">
+  passengerid survived pclass                                                 name    sex age embarked 
+1           1        0      3                              Braund, Mr. Owen Harris   male  22        S 
+2           2        1      1  Cumings, Mrs. John Bradley (Florence Briggs Thayer) female  38        C 
+3           3        1      3                               Heikkinen, Miss. Laina female  26        S 
+4           4        1      1         Futrelle, Mrs. Jacques Heath (Lily May Peel) female  35        S 
+5           5        0      3                             Allen, Mr. William Henry   male  35        S 
+6           6        0      3                                     Moran, Mr. James   male  NA        Q 
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
     <h2>Indexing</h2>
     <ul>
         <li>Back to the land of square brackets</li>
