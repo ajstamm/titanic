@@ -25,7 +25,7 @@ title: Linear Regression
     <h2>Learning Objectives</h2>
     <ul>
         <li>Define Linear Regression</li>
-        <li>Introduce Anscombe's Quarter</li>
+        <li>Introduce Anscombe's Quartet</li>
         <li>Brief Description of the Four Sets</li>
         <li>Use R to characterize Anscombe's data</li>
         <li>Use R to build a linear model (OLS) of Set 1</li>
@@ -91,7 +91,7 @@ data(anscombe)
 anscombe
     </pre></code>
 
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
   x1 x2 x3 x4    y1   y2    y3    y4
 1  10 10 10  8  8.04 9.14  7.46  6.58
 2   8  8  8  8  6.95 8.14  6.77  5.76
@@ -165,7 +165,7 @@ anscombe
     <pre><code>
 colMeans(anscombe)
     </pre></code>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
       x1       x2       x3       x4       y1       y2       y3       y4 
 9.000000 9.000000 9.000000 9.000000 7.500909 7.500909 7.500000 7.500909 
     </code></pre>
@@ -184,7 +184,7 @@ cbind(x1 = sd(anscombe$x1),
       x4 = sd(anscombe$x4)
       )
     </pre></code>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
           x1       x2       x3       x4
 [1,] 3.316625 3.316625 3.316625 3.316625
     </code></pre>
@@ -209,7 +209,7 @@ cbind(x1 = sd(anscombe$x1),
 cor.test(x=anscombe$x1, y=anscombe$y1)
     </pre></code>
 
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 	Pearson's product-moment correlation
 
 data:  anscombe$x1 and anscombe$y1
@@ -252,7 +252,7 @@ plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1",
 m1 <- lm(formula=y1~x1, data=anscombe)
 m1
     </pre></code>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 Call:
 lm(formula = y1 ~ x1, data = anscombe)
 
@@ -446,7 +446,7 @@ abline(m1, col="red")
 <section>
     <h2>Prediction</h2>
     <pre><code>m1</code></pre>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 Call:
 lm(formula = y1 ~ x1, data = anscombe)
 
