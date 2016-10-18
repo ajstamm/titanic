@@ -164,6 +164,26 @@ oops
 
 
 
+## Floating Point "Errors" -----------------------------------------------------
+## How can all three of these be correct?
+
+(3 - 2.9)
+
+(3 - 2.9) == 0.1
+
+
+##Floating Point "Errors" ------------------------------------------------------
+## As a matter of convention, children are taught a Base 10 (denary) number
+## system. Digital computers (must) use a Base 2 (binary) system. In Base 2,
+## numbers such as 0.1 are internally held as a floating-point, introducing
+## rounding error. See:
+## http://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/
+## if you'd like to read more.
+ 
+print(3 - 2.9, digits=20)
+
+
+
 ## Characters ------------------------------------------------------------------
 ## - Like a char() or varchar() in SQL
 ## - Can be of any arbitrary length
