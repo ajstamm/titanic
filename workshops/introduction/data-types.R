@@ -57,6 +57,19 @@ a <- foo(x <- 1, y <- 2)
 
 
 
+## Capitalization Matters ------------------------------------------------------
+##Capitalization does not matter in SQL.
+##It does matter in R (and most other languages).
+## Using our object, "a" from previous slide.
+
+## This works.
+head(a)
+
+## This will _NOT_ work.
+head(A)
+
+
+
 ## Data Types ------------------------------------------------------------------
 ##
 ## Covered Today
