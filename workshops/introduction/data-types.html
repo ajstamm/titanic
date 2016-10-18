@@ -182,14 +182,14 @@ crew_capacity <- 892
         <li>What percentage of the total capacity were the staff?</li>
     </ul>
     
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 total_capacity <- passenger_capacity + crew_capacity
 
 percent_crew = 100* crew_capacity / total_capacity
 
 percent_crew
     </code></pre>
-    <pre><code class="fragment">[1] 26.81094</code></pre>    
+    <pre><code class="fragment r">[1] 26.81094</code></pre>    
 </section>
 
 <section>
@@ -205,14 +205,14 @@ percent_crew
             <pre><code class="r">is.numeric(total_capacity)</code></pre>
             <p class="returns">
                 Returns:
-                <pre><code class="fragment">[1] TRUE</code></pre>
+                <pre><code class="fragment r">[1] TRUE</code></pre>
             </p>
         </div>
         <div class="right">
             <pre><code class="r">is.numeric(percent_crew)</code></pre>
             <p class="returns">
                 Returns:
-                <pre><code class="fragment">[1] TRUE</code></pre>
+                <pre><code class="fragment r">[1] TRUE</code></pre>
             </p>
     
 </section>
@@ -321,7 +321,7 @@ oops <- as.integer(percent_crew)
 
 oops
     </code></pre>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 [1] 26
 
 ## There are FEW reasons to declare an Integer.
@@ -349,7 +349,7 @@ oops
 (3 - 2.9)
             </code></pre>
 
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 [1] 0.1
             </code></pre>
         </div>
@@ -358,7 +358,7 @@ oops
 (3 - 2.9) == 0.1
             </code></pre>
 
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 [1] FALSE
             </code></pre>            
         </div>
@@ -416,7 +416,7 @@ name  <- "Smith"
 ## And do something . . . cool . . .  with them.
 paste(title, name, sep=" ")
     </code></pre>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 [1] "Captain Smith"
     </code></pre>    
 </section>

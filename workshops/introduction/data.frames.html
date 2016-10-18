@@ -169,7 +169,7 @@ tail(passengers)
 ## Returns one row by row #.
 passengers[10, ]
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
    PassengerId Survived Pclass                                Name    Sex Age Embarked
 10          10        1      2 Nasser, Mrs. Nicholas (Adele Achem) female  14        C
             </code></pre>
@@ -179,7 +179,7 @@ passengers[10, ]
 ## Returns one column by column name.
 passengers[ ,"age"]
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
   [1] 22.00 38.00 26.00 35.00 35.00    NA 54.00  2.00 27.00 14.00  4.00 58.00
  [13] 20.00 39.00 14.00 55.00  2.00    NA 31.00    NA 35.00 34.00 15.00 28.00
  [25]  8.00 38.00    NA 19.00    NA    NA 40.00    NA    NA 66.00 28.00 42.00
@@ -202,7 +202,7 @@ passengers[ ,"age"]
 ## A single column IS a Vector.
 passengers$age
     </code></pre>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 passengers$age
   [1] 22.00 38.00 26.00 35.00 35.00    NA 54.00  2.00 27.00 14.00  4.00 58.00
  [13] 20.00 39.00 14.00 55.00  2.00    NA 31.00    NA 35.00 34.00 15.00 28.00
@@ -239,7 +239,7 @@ passengers$age
 children <- passengers[passengers$age < 18, ]
 summary(children)
     </code></pre>
-    <small><pre><code class="fragment">
+    <small><pre><code class="fragment r">
   passengerid       survived       pclass                                      name        sex          age         embarked 
  Min.   : 8.00   Min.   :0.0   Min.   :2.000   Andersson, Miss. Erna Alexandra   : 1   female:11   Min.   : 0.830       : 0  
  1st Qu.:18.50   1st Qu.:0.0   1st Qu.:2.250   Caldwell, Master. Alden Gates     : 1   male  : 7   1st Qu.: 4.000   C   : 3  
@@ -285,7 +285,7 @@ ls()
 table(passengers$sex, passengers$survived)
 chisq.test( passengers$sex, passengers$survived )
     </code></pre>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 
         
           0  1
@@ -310,7 +310,7 @@ X-squared = 36.585, df = 1, p-value = 1.461e-09
 ## Margins are what other tools call Totals.
 margin.table( table(passengers$sex, passengers$survived), margin=2)
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 
  0  1 
 59 41 
@@ -322,7 +322,7 @@ margin.table( table(passengers$sex, passengers$survived), margin=2)
 ## At least they didn't invent a new term for proportion.
 prop.table( table(passengers$sex, passengers$survived), margin=2)
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 
                  0         1
   female 0.1355932 0.7560976

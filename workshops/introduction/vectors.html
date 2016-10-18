@@ -120,7 +120,7 @@ length(gender)
 ## Per Item
 age + 1
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 [1] 23 39 27 36 36 NA 55  3 28 15
             </code></pre>
         </div>
@@ -129,7 +129,7 @@ age + 1
 ## In Total
 table(gender)
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 gender
 female   male 
      5      5 
@@ -153,7 +153,7 @@ female   male
 ## This will not work.
 mean(age)
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 [1] NA
 
 ## Yeah, that's not right.
@@ -165,7 +165,7 @@ mean(age)
 ## This works just fine.
 mean(age, na.rm=TRUE)
             </code></pre>
-            <pre><code class="fragment">
+            <pre><code class="fragment r">
 [1] 28.11111
 
 ## That's more like it.
@@ -356,7 +356,7 @@ survived_men == 1
     <pre><code class="r">
 t.test(age[gender=="male"], age[gender=="female"])
     </code></pre>
-    <pre><code class="fragment">
+    <pre><code class="fragment r">
 Welch Two Sample t-test
 
 data:  age[gender == "male"] and age[gender == "female"]
