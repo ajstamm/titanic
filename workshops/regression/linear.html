@@ -10,7 +10,7 @@ title: Linear Regression
             <ul>
                 <li>Code: <a href="../linear.R" target="_blank"> example-linear.R</a></li>
                 <li>Will run this together</li>
-                <li>~20 Minutes</li>
+                <li>~30 Minutes</li>
             </ul>
         </div>
         <div class="right">
@@ -77,15 +77,10 @@ title: Linear Regression
 </section>
 
 <section>
-    <h2>Anscombe's Quartet:</h2>
+    <h2>Anscombe's Quartet (<a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">Wikipedia</a>):</h2>
     <a href="{{site.baseurl}}/public/img/anscombe_quartet_3.png" target="_blank">
-        <img src="{{site.baseurl}}/public/img/anscombe_quartet_3.png" alt="Anscombe's Quartet" width="60%">
+        <img src="{{site.baseurl}}/public/img/anscombe_quartet_3.png" alt="Anscombe's Quartet" width="80%">
     </a>
-    <p>
-        <smaller>
-            <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">https://en.wikipedia.org/wiki/Anscombe%27s_quartet</a>
-        </smaller>
-    </p>
 </section>
 
 <section>
@@ -236,7 +231,7 @@ plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1",
 )
     </pre></code>
     <a href="{{site.baseurl}}/public/img/scatter-anscombe-1.png" target="_blank">
-        <img src="{{site.baseurl}}/public/img/scatter-anscombe-1.png" width="40%" class="fragment">
+        <img src="{{site.baseurl}}/public/img/scatter-anscombe-1.png" width="45%" class="fragment">
     </a>
 </section>
 
@@ -295,6 +290,9 @@ Coefficients:
     <h2>Many Ways To View An Object</h2>
     <ul>
         <li>How much detail do you need?</li>
+        <li>
+            Compare results to correlation
+        </li>
     </ul>
     <pre><code>summary(m1)</code></pre>
     <pre class="fragment"><code>
@@ -400,7 +398,7 @@ plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1 w/ Model in Red", xlab="x1"
 abline(m1, col="red")
     </pre></code>
     <a href="{{site.baseurl}}/public/img/model-anscombe-1.png" target="_blank">
-        <img src="{{site.baseurl}}/public/img/model-anscombe-1.png" width="40%" class="fragment">
+        <img src="{{site.baseurl}}/public/img/model-anscombe-1.png" width="45%" class="fragment">
     </a>
 </section>
 
@@ -428,7 +426,7 @@ qqplot(anscombe$x1,anscombe$y1)
 abline(m1, col="red")
     </pre></code>
     <a href="{{site.baseurl}}/public/img/qq-anscombe-1.png" target="_blank">
-        <img src="{{site.baseurl}}/public/img/qq-anscombe-1.png" width="40%" class="fragment">
+        <img src="{{site.baseurl}}/public/img/qq-anscombe-1.png" width="45%" class="fragment">
     </a>
 </section>
 
@@ -491,7 +489,7 @@ plot(rbind(anscombe[,c(1,5)], p1))
 abline(m1, col="red")
     </code></pre>    
     <a href="{{site.baseurl}}/public/img/predict-anscombe-1.png" target="_blank">
-        <img src="{{site.baseurl}}/public/img/predict-anscombe-1.png" width="40%" class="fragment">
+        <img src="{{site.baseurl}}/public/img/predict-anscombe-1.png" width="45%" class="fragment">
     </a>
 </section>
 
