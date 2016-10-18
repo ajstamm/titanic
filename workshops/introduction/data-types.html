@@ -572,6 +572,21 @@ capt_smith_dob <- as.Date("1850-01-27")
 </section>
 
 <section>
+    <h2> REPL Gotcha!</h2>
+    <ul>
+        <li>Each line in R's REPL normally starts with <code>></code></li>
+        <li>If it starts with a <code>+</code>, you haven't finished your statement</li>
+        <li> The <code>+</code> is R's way to tell you it is waiting for you to finish</li>
+        <li>Usually happens because you didn't close your parens</li>
+        <li>(So close them . . . </li>
+    </ul>
+    <pre><code class="r">
+round(9.9
++ 
+    </code></pre>
+</section>
+
+<section>
     <h2>5 Minute Break!</h2>
     <img src="{{base.url}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
     <p>Titanic in Cobh Harbour, County Cork Ireland</p>
