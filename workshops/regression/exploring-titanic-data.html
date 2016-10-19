@@ -1,0 +1,151 @@
+---
+layout: presentation
+title: Import Titanic
+---
+
+<section>
+    <h2>Import & Explore</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Code: <a href="../import-titanic.R" target="_blank">import-titanic.R</a></li>
+                <li>Code: <a href="../exploratory-plots.R" target="_blank">exploratory-plots.R</a></li>
+                <li>Will run this code together</li>
+                <li>~15 Minutes</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic-3.jpg" width="90%" alt="The Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Using only Base R</li>
+        <li>Import CSV data</li>
+        <li>Interactive Plotting / Graphing</li>
+    </ul>
+</section>
+
+<section>
+    <h2> Import CSV Data</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Using: <a href="../import-titanic.R" target="_blank">import-titanic.R</a></li>
+                <li>Titanic data in CSV format</li>
+                <li>
+                    Two data sets:
+                    <ul>
+                        <li>train</li>
+                        <li>test</li>
+                    </ul>
+                </li>
+                <li>Data from <a href="https://www.kaggle.com/c/titanic" target="_blank">Kaggle's Machine Learning demo</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="75%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Import Train</h2>
+    <pre><code class="r">
+url   <- "http://choens.github.io/titanic/public/data/train.csv"
+train <- read.csv(file=url)
+
+## I hate mixed-case column names
+names(train) <- tolower(names(train))
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li>Now, import the test data set.</li>
+        <li>
+            Question: How many rows do you have in train and how many
+            rows do you have in test?
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <h5 style="color:red;">Tell us NOW if you can't get this to work!</h3>
+    <div class="container">
+        <div class="left">
+            <pre><code class="r">
+> dim(train)
+[1] 891  12
+            </code></pre>
+        </div>
+        <div class="left">
+            <pre><code class="r">
+> dim(test)
+[1] 418  11
+            </code></pre>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2> Interactive Graphing / Plotting</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Using: <a href="../exploratory-plots.R" target="_blank">exploratory-plots.R</a></li>
+                <li>R graphics == Interactive</li>
+                <li>Thank You: John W. Tukey</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="75%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Opening Discussion</h2>
+    <p>There are several plotting functions in Base R:</p>
+    <ul>
+        <li>hist()</li>
+        <li>abline()</li>
+        <li>plot()</li>
+        <li>barplot()</li>
+        <li>boxplot()</li>
+        <li>pairs()</li>
+        <li><span style="color:green;"><strong>plot()</strong>:</span></li>
+    </ul>
+</section>
+
+<section>
+    <h2>Let's Get Graphical</h2>
+    <ul>
+        <li>These examples all present data from the "train" data set</li>
+        <li>
+            Big difference between R and tools like SAS/SPSS:
+            <ul>
+                <li>SAS/SPSS: Few, powerful/complex commands</li>
+                <li>R: Many, simple commands which interact</li>
+            </ul>
+        </li>
+        <span style="color:green;"><li>Note the lack of actual graphics on this slide</li></span>
+    </ul>
+</section>
+
+
+
+<section>
+    <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="70%">
+</section>

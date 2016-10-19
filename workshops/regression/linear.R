@@ -116,6 +116,8 @@ tail(m1)
 
 
 ## Many Ways To View An Object -------------------------------------------------
+## Because we are modeling only a single variable, the t-statistic, p-value, 
+## and degrees of freedom are EXACTLY the same as our correlation above.
 summary(m1)
 
 
