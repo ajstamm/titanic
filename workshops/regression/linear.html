@@ -26,13 +26,11 @@ title: Linear Regression
     <ul>
         <li>Define Linear Regression</li>
         <li>Introduce Anscombe's Quartet</li>
-        <li>Brief Description of the Four Sets</li>
-        <li>Use R to characterize Anscombe's data</li>
-        <li>Use R to draw a scatter plot of a continuous variable</li>
-        <li>Use R to build a linear model (OLS) of Set 1</li>
+        <li>Descriptive Stats of Anscombe's Quartet</li>
+        <li>Draw a scatter plot of continuous variables</li>
+        <li>Build a linear model (OLS) of Set 1</li>
         <li>Demonstrate how to use R to test the model</li>
         <li>You will then experiment with sets 2,3, and 4</li>
-        <li><span style="color:green;">Next Up: Logistic Regression!</span></li>
     </ul>
 </section>
 
@@ -43,7 +41,7 @@ title: Linear Regression
         </li>
         <li>For more information, see <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">Wikipedia</a>
             <ul>
-                <li style="color:green;">Note: Most of the <a href="https://en.wikipedia.org/wiki/Wikipedia:Image_use_policy" target="_blank">graphics</a> in this workshop come from Wikipedia!</li>
+                <li style="color:green;">Note: Some of the <a href="https://en.wikipedia.org/wiki/Wikipedia:Image_use_policy" target="_blank">graphics</a> in this workshop come from Wikipedia!</li>
             </ul>
         </li>
     </ul>
@@ -56,7 +54,7 @@ title: Linear Regression
         <li>Most R packages also come with an example data set (or several)</li>
         <li>Right now, we want to use Anscombe's Quartet</li>
     </ul>
-    <pre><code>data()</code></pre>
+    <pre><code class="r">data()</code></pre>
 </section>
 
 <section>
@@ -87,7 +85,7 @@ title: Linear Regression
 <section>
     <h2>Load Data</h2>
     <p>Anscombe's Quartet is built into R
-    <pre><code>
+    <pre><code class="r">
 data(anscombe)
 anscombe
     </pre></code>
@@ -111,12 +109,12 @@ anscombe
 <section>
     <h2>Many Ways To View An Object</h2>
     <ul>
-        <li><pre><code>attributes(anscombe)</code></pre></li>
-        <li><pre><code>summary(anscombe)</code></pre></li>
-        <li><pre><code>str(anscombe)</code></pre></li>
-        <li><pre><code>View(anscombe)</code></pre></li>
-        <li><pre><code>head(anscombe)</code></pre></li>
-        <li><pre><code>tail(anscombe)</code></pre></li>
+        <li><pre><code class="r">attributes(anscombe)</code></pre></li>
+        <li><pre><code class="r">summary(anscombe)</code></pre></li>
+        <li><pre><code class="r">str(anscombe)</code></pre></li>
+        <li><pre><code class="r">View(anscombe)</code></pre></li>
+        <li><pre><code class="r">head(anscombe)</code></pre></li>
+        <li><pre><code class="r">tail(anscombe)</code></pre></li>
         <li>R is an object oriented system</li>
         <li>Functions adapt to the object type</li>
     </ul>
@@ -161,7 +159,7 @@ anscombe
         </li>
         <li><span style="color:green;">Ditto for the y columns</span></li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 colMeans(anscombe)
     </pre></code>
     <pre><code class="fragment r">
@@ -176,7 +174,7 @@ colMeans(anscombe)
         <li>It is less easy to get the standard deviation.</li>
         <li><span style="color:green;">Note: It is also (essentially) identical</span></li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 cbind(x1 = sd(anscombe$x1),
       x2 = sd(anscombe$x2),
       x3 = sd(anscombe$x3),
@@ -204,7 +202,7 @@ cbind(x1 = sd(anscombe$x1),
     <ul>
         <li>To test for correlation, we must use an x and y from a single set</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 cor.test(x=anscombe$x1, y=anscombe$y1)
     </pre></code>
 
@@ -224,7 +222,7 @@ sample estimates:
 
 <section>
     <h2>Scatterplot: Set 1</h2>
-    <pre><code>
+    <pre><code class="r">
 plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1",
      xlab="x1", ylab="y1"
 )
@@ -240,14 +238,14 @@ plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1",
     </h2>
     <ul>
         <li>Are the correlations of Sets 2 - 4 the same?</li>
-        <li>What can you learn from: <pre><code>?cor.test</code></pre></li>
+        <li>What can you learn from: <pre><code class="r">?cor.test</code></pre></li>
         <li>Can you reproduce the other scatterplots from Wikipedia?</li>
     </ul>
 </section>
 
 <section>
     <h2>Linear Regression</h2>
-    <pre><code>
+    <pre><code class="r">
 m1 <- lm(formula=y1~x1, data=anscombe)
 m1
     </pre></code>
@@ -263,7 +261,7 @@ Coefficients:
         <li style="color:green;">
             To learn more about the R formula syntax for multiple
             regression:
-            <code><pre>?formula</code></pre>
+            <code class="r"><pre>?formula</code></pre>
         </li>
         <ul>
 </section>
@@ -271,12 +269,12 @@ Coefficients:
 <section>
     <h2>Many Ways To View An Object</h2>
     <ul>
-        <li><pre><code>attributes(m1)</code></pre></li>
-        <li><pre><code>summary(m1)</code></pre></li>
-        <li><pre><code>str(m1)</code></pre></li>
-        <li><pre style="color:red;text-decoration:line-through"><code>View(m1)</code></pre></li>
-        <li><pre><code>head(m1)</code></pre></li>
-        <li><pre><code>tail(m1)</code></pre></li>
+        <li><pre><code class="r">attributes(m1)</code></pre></li>
+        <li><pre><code class="r">summary(m1)</code></pre></li>
+        <li><pre><code class="r">str(m1)</code></pre></li>
+        <li><pre style="color:red;text-decoration:line-through"><code class="r">View(m1)</code></pre></li>
+        <li><pre><code class="r">head(m1)</code></pre></li>
+        <li><pre><code class="r">tail(m1)</code></pre></li>
         <li>R is an object oriented system</li>
         <li>Functions adapt to the object type</li>
     </ul>
@@ -290,8 +288,8 @@ Coefficients:
             Compare results to correlation
         </li>
     </ul>
-    <pre><code>summary(m1)</code></pre>
-    <pre class="fragment"><code>
+    <pre><code class="r">summary(m1)</code></pre>
+    <pre class="fragment"><code class="r">
 Call:
 lm(formula = y1 ~ x1, data = anscombe)
 
@@ -317,8 +315,8 @@ F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217
     <ul>
         <li>You can access any part of it!</li>
     </ul>
-    <pre><code>attributes(m1)</code></pre>
-    <pre class="fragment"><code>
+    <pre><code class="r">attributes(m1)</code></pre>
+    <pre class="fragment"><code class="r">
 $names
  [1] "coefficients"  "residuals"     "effects"       "rank"         
  [5] "fitted.values" "assign"        "qr"            "df.residual"  
@@ -341,8 +339,8 @@ $class
             SAS and SPSS have fewer, more complex, commands
         </li>
     </ul>
-    <pre><code>attributes(summary(m1))</code></pre>
-    <pre class="fragment"><code>
+    <pre><code class="r">attributes(summary(m1))</code></pre>
+    <pre class="fragment"><code class="r">
 $names
  [1] "call"          "terms"         "residuals"     "coefficients" 
  [5] "aliased"       "sigma"         "df"            "r.squared"    
@@ -358,10 +356,10 @@ $class
     <ul>
         <li>What if we just want the coefficients?</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 summary(m1)$coefficients
     </code></pre>
-    <pre class="fragment"><code>
+    <pre class="fragment"><code class="r">
              Estimate Std. Error  t value    Pr(>|t|)
 (Intercept) 3.0000909  1.1247468 2.667348 0.025734051
 anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
@@ -376,10 +374,10 @@ anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
     <ul>
         <li>There is actually a function to do that!</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 coef(summary(m1))
     </code></pre>
-    <pre class="fragment"><code>
+    <pre class="fragment"><code class="r">
              Estimate Std. Error  t value    Pr(>|t|)
 (Intercept) 3.0000909  1.1247468 2.667348 0.025734051
 anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
@@ -388,7 +386,7 @@ anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
 
 <section>
     <h2>Visualize: Set 1</h2>
-    <pre><code>
+    <pre><code class="r">
 ## Same scatterplot, adds the linear model
 plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
 abline(m1, col="red")
@@ -404,7 +402,7 @@ abline(m1, col="red")
         <li>Exports the Set 1 regression, shown previously</li>
         <li>Exports the file as a PNG file, in the CWD</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 png("anscombe-1.png")
 plot(anscombe$x1, anscombe$y1, main="Anscombe: Set 1 w/ Model in Red", xlab="x1", ylab="y1")
 abline(m1, col="red")
@@ -417,7 +415,7 @@ dev.off()
     <ul>
         <li>It is easy to get a standard QQ Plot of the model</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 qqplot(anscombe$x1,anscombe$y1)
 abline(m1, col="red")
     </pre></code>
@@ -433,7 +431,7 @@ abline(m1, col="red")
     <ul>
         <li>Use a QQ Plot to examine your other models.</li>
         <li>Base R has other tools to evaluate your model:
-            <pre><code>plot(m1)</pre></code>
+            <pre><code class="r">plot(m1)</pre></code>
         </li>
         <li>Today, our time is limited . . .</li>
     </ul>
@@ -441,7 +439,7 @@ abline(m1, col="red")
 
 <section>
     <h2>Prediction</h2>
-    <pre><code>m1</code></pre>
+    <pre><code class="r">m1</code></pre>
     <pre><code class="fragment r">
 Call:
 lm(formula = y1 ~ x1, data = anscombe)
@@ -459,7 +457,7 @@ Coefficients:
         <li>Question: <span>How do we calculate <span style="color:red;">y</span> when <span style="color:green;">x is 10</span>?</span></li>
         <li>
             Answer: <span class="fragment">We can use R as a calculator!
-            <pre><code> 8.0011 = 10 * .5001 + 3.0001</code></pre></span>
+            <pre><code class="r"> 8.0011 = 10 * .5001 + 3.0001</code></pre></span>
         </li>
         <li class="fragment">But is there an easier way?</li>
     </ul>
@@ -472,7 +470,7 @@ Coefficients:
         <li>Create a new data.frame with the SAME column names</li>
         <li>The dependent variable must be NA</li>
     </ul>
-    <pre><code>
+    <pre><code class="r">
 p1 <- data.frame(x1=anscombe$x1+30, y1=NA)
 p1$y1 <- predict(object=m1, newdata=p1)
     </code></pre>    
@@ -480,7 +478,7 @@ p1$y1 <- predict(object=m1, newdata=p1)
 
 <section>
     <h2>Let's Look At Our Predictions</h2>
-    <pre><code>
+    <pre><code class="r">
 plot(rbind(anscombe[,c(1,5)], p1))
 abline(m1, col="red")
     </code></pre>    
@@ -497,6 +495,6 @@ abline(m1, col="red")
         <li>Look at the different models produced</li>
         <li>Do you remember how to view the model?</li>
     </ul>
-    <pre><code>mGood <- lm(formula=y1~x1, data=anscombe)</code></pre>
-    <pre><code>mBad <- lm(formula=anscombe$y1~anscombe$x1)</code></pre>
+    <pre><code class="r">mGood <- lm(formula=y1~x1, data=anscombe)</code></pre>
+    <pre><code class="r">mBad <- lm(formula=anscombe$y1~anscombe$x1)</code></pre>
 </section>

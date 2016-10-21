@@ -1,7 +1,8 @@
 ## #############################################################################
 ## logistic-regression-age.R
 ##
-## Builds a logistic regression model, using Age. After fixing the NAs.
+## Predicts survived as a function of age using logisitc regression, after
+## fixing the NAs in age.
 ## #############################################################################
 
 
