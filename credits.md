@@ -1,4 +1,8 @@
-## Credits
+---
+layout: page
+title: "Credits"
+---
+
 
 - New York State Department of Health Epidemiology and Biostatistics
   Community of Practice (EBCoP)
