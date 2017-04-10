@@ -1,0 +1,107 @@
+---
+layout: presentation
+title: Import CSV
+---
+
+<section>
+    <h2>Import CSV</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Code: <a href="../import-titanic.R" target="_blank">import-titanic.R</a></li>
+                <li>Will run this code together</li>
+                <li>~15 Minutes</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic-3.jpg" width="90%" alt="The Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Import CSV data</li>
+        <li>Quickly Assessing The Data </li>
+    </ul>
+</section>
+
+<section>
+    <h2> Import CSV Data</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Using: <a href="../import-titanic.R" target="_blank">import-titanic.R</a></li>
+                <li>Titanic data in CSV format</li>
+                <li>
+                    Two data sets:
+                    <ul>
+                        <li>train</li>
+                        <li>test</li>
+                    </ul>
+                </li>
+                <li>Data from <a href="https://www.kaggle.com/c/titanic" target="_blank">Kaggle's Machine Learning demo</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="75%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Import Train</h2>
+    <pre><code class="r">
+url   <- "http://choens.github.io/titanic/public/data/train.csv"
+train <- read.csv(file=url)
+
+## I hate mixed-case column names
+names(train) <- tolower(names(train))
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li>Now, import the test data set.</li>
+        <li>
+            Question: How many rows do you have in train and how many
+            rows do you have in test?
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <h5 style="color:red;">Tell us NOW if you can't get this to work!</h3>
+        <div class="container">
+            <div class="left">
+                <pre><code class="r">
+> dim(train)
+[1] 891  12
+                </code></pre>
+            </div>
+            <div class="left">
+                <pre><code class="r">
+> dim(test)
+[1] 418  11
+                </code></pre>
+            </div>
+        </div>
+</section>
+
+<section>
+    TODO: More detail, code, screenshots.
+</section>
+
+
+<section>
+    <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="65%">
+</section>

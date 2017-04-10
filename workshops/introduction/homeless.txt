@@ -1,0 +1,33 @@
+## Assignment Quirks -----------------------------------------------------------
+## R is a quirky language
+## Assignment in a function uses = EXCLUSIVELY
+
+## These are NOT equivalent.
+
+## This is correct (and works)
+a <- foo(x = 1, y = 2)
+
+## This will _NOT_ work. (Feel free to try, it will error out.)
+a <- foo(x <- 1, y <- 2)
+
+
+
+
+<section>
+    <h2>Assignment Quirks</h2>
+    <ul>
+        <li>R is a quirky language</li>
+        <li>Assignment in a function must use <code class="r">=</code></li>
+    </ul>
+
+    <pre><code class="r">
+## These are NOT equivalent.
+
+## This is correct.
+a <- foo(x = 1, y = 2)
+
+## This will _NOT_ work.
+a <- foo(x <- 1, y <- 2)
+
+    </code></pre>
+</section>

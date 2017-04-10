@@ -8,7 +8,7 @@ title: Vectors
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="{{site.baseurl}}/workshops/titanic-introduction/vectors.R"vectors.R">vectors.R</a></li>
+                <li>Code: <a href="{{site.baseurl}}/workshops/titanic/vectors.R"vectors.R">vectors.R</a></li>
                 <li>Run code, learn more</li>
                 <li>Duration: ~45 Minutes</li>
                 <li>Followed by: A 5 Minute Break</li>
@@ -25,7 +25,7 @@ title: Vectors
 <section>
     <h2>Learning Objectives</h2>
     <ul>
-        <li>Vectors Are Important!</li>
+        <li>What is a vector?</li>
         <li>How To Make One</li>
         <li>How To Delete One</li>
         <li>Vector Indexing (How To Subset)</li>
@@ -34,10 +34,10 @@ title: Vectors
 </section>
 
 <section>
-    <h2>Vectors Are Important</h2>
+    <h2>What is a vector></h2>
     <ul>
-        <li>Congrats, you have already worked with Vectors</li>
-        <li>Understanding them is CRITICAL to becoming a useR</li>
+        <li>Congrats, you have already worked with vectors! (We forgot to tell you)</li>
+        <li>Understanding this is CRITICAL to becoming a useR</li>
     </ul>
     
     <pre><code class="r">
@@ -52,11 +52,11 @@ age <- c(22, 38, 26, 35, 35)
 <section>
     <h2>Combine</h2>
     <ul>
-        <li>Use <code class="r">c()</code> to <em>combine</em> things</li>
+        <li>Use the function <code class="r">c()</code> to <em>combine</em> things</li>
         <li>Works for numerics, characters, booleans, dates, etc.</li>
         <li>If they aren't the same type of data, R will reduce to the lowest common denominator.</li>
         <li>In practice, this is usually a character vector</li>
-        <li>You can treat vectors as an object and do things to it</li>
+        <li>All vectors are objects (like everything else in R)</li>
     </ul>
 </section>
 
@@ -184,7 +184,8 @@ mean(age, na.rm=TRUE)
                 <li>Code Completion</li>
                 <li>RStudio help window</li>
                 <li><a href="http://stackoverflow.com/questions/tagged/r" target="_blank">Stack Overflow</a></li>
-                <li>Google, etc.</li>
+                <li>Google: Pre-pend search query with "R"</li>
+                <li>Stack Overflow</li>
             </ul>
         </div>
         <div class="right">
@@ -195,7 +196,7 @@ mean(age, na.rm=TRUE)
 </section>
 
 <section>
-    <h2>Useful Functions</h2>
+    <h2>Some Functions</h2>
     <div class="container">
         <div class="left">
             <h5>Mathematical</h5>
@@ -213,6 +214,9 @@ mean(age, na.rm=TRUE)
                 <li><code class="r">length()</code>: # of items</li>
                 <li><code class="r">table()</code>: # distinct values</li>
                 <li><code class="r">summary()</code>: You tell me</li>
+                <li><code class="r">plot()</code>: You tell me</li>
+                <li><code class="r">hist()</code>: You tell me</li>
+                <li><code class="r">barplot()</code>: You tell me</li>
             </ul>
         </div>
     </div>
@@ -225,6 +229,7 @@ mean(age, na.rm=TRUE)
     <pre><code class="r">
 ## Take a few minutes and spend some
 ## time using a few of these functions.
+## Remember ? to get help with how to use the function.
     </code></pre>
 </section>
 
@@ -260,7 +265,7 @@ age[gender == "male"]
 </section>
 
 <section>
-    <h2>Visualize A Vector</h2>
+    <h2>Visualize 2 Vectors</h2>
     <p>In this case, these vectors are in the same order . . . </p>
     <div class="container">
         <div class="left">
@@ -272,7 +277,7 @@ age[gender == "male"]
                     <tr><td>26</td></tr>
                     <tr><td>35</td></tr>
                     <tr><td>35</td></tr>
-                    <tr><td></td></tr>
+                    <tr><td>NA</td></tr>
                     <tr><td>54</td></tr>
                     <tr><td>2</td></tr>
                     <tr><td>27</td></tr>
@@ -347,8 +352,22 @@ survived_men == 1
 </section>
 
 <section>
-    <h1>Oh yeah, those were real passengers</h1>
+    <h1>Those were actual passengers</h1>
     <img src="{{site.baseurl}}/public/img/grand-staircase.jpg" alt="Photo of the Grand Staircase" width="60%">
+</section>
+
+<section>
+    <h2>Statistical Testing</h2>
+    <ul>
+        <li>
+            Statistical tests are functions in R:
+            <ul>
+                <li>Student's T-Test: <code>t.test()</code></li>
+                <li>Chi Square Test: <code>chisq.test()</code></li>
+            </ul>
+        </li>
+        <li>You know everything you need to know to run</li>
+    </ul>
 </section>
 
 <section>
@@ -372,6 +391,6 @@ mean of x mean of y
 
 <section>
     <h2>5 Minute Break!</h2>
-    <img src="{{base.url}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
+    <img src="{{site.baseurl}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
     <p>Titanic in Cobh Harbour, County Cork Ireland</p>
 </section>

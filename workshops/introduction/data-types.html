@@ -8,7 +8,7 @@ title: Data Types
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="{{site.baseurl}}/workshops/titanic-introduction/data-types.R">data-types.R</a></li>
+                <li>Code: <a href="{{site.baseurl}}/workshops/introduction/data-types.R">data-types.R</a></li>
                 <li>Run code, learn more</li>
                 <li>Duration: ~45 Minutes</li>
                 <li>Followed By: 5 Minute Break</li>
@@ -27,9 +27,9 @@ title: Data Types
     <div class="container">
         <div class="left">
             <ul>
-                <li>Assignment</li>
+                <li>Create Some Data (Assignment)</li>
                 <li>Data Types</li>
-                <li>Boats</li>
+                <li>Yachting For Beginners</li>
             </ul>
         </div>
         <div class="right">
@@ -39,9 +39,10 @@ title: Data Types
 </section>
 
 <section>
-    <h2>Assignment Operator</h2>
+    <h2>Create Some Data</h2>
     <ul>
-        <li>Multiple assignment operators</li>
+        <li>Use an assignment operator</li>
+        <li>More than one!</li>
         <li>History, convention, and some old-school ideas</li>
     </ul>
     <pre><code class="r">
@@ -59,11 +60,10 @@ a =  1
     <div class="container">
         <div class="left">
             <ul>
-                <li>All languages have conventions</li>
-                <li>Deviating can be OK</li>
-                <li>You should have a good reason to do so</li>
-                <li><span style="color:green;">KNOW</span> the conventions, so you can read demo code, etc</li>
-                <li>We will use R conventions today, unless otherwise noted</li>
+                <li>Languages have conventions</li>
+                <li><span style="color:green;">KNOW</span> them, to read demo code, etc</li>
+                <li>Only deviate if you have good reason to do so</li>
+                <li>TITR uses R conventions, unless otherwise noted</li>
             </ul>
         </div>
         <div class="right">
@@ -79,25 +79,6 @@ a =  1
         <li>If you see someone using <code class="r"><--</code> <span style="color:red;">be careful!</span></li>
         <li>Especially if you do not understand concepts such as lexical scoping, global environment, etc</li>
     </ul>
-</section>
-
-<section>
-    <h2>Assignment Quirks</h2>
-    <ul>
-        <li>R is a quirky language</li>
-        <li>Assignment in a function must use <code class="r">=</code></li>
-    </ul>
-
-    <pre><code class="r">
-## These are NOT equivalent.
-
-## This is correct.
-a <- foo(x = 1, y = 2)
-
-## This will _NOT_ work.
-a <- foo(x <- 1, y <- 2)
-
-    </code></pre>
 </section>
 
 <section>
@@ -119,26 +100,37 @@ head(A)
 </section>
 
 <section>
-    <h2>Data Types</h2>
-    <p><em>We are only covering a subset of available data types today</em></p>
+    <h2>Data Types <br />Introduced Today</h2>
+    <p><em>R calls this the data's "class"</em></p>
     <div class="container">
         <div class="left">
-            <h5>Atomic Data Types</h5>
+            <h5>Our Focus:</h5>
             <ul>
                 <li>Numeric</li>
-                <li>Integer (briefly)</li>
                 <li>Character</li>
-                <li>Boolean</li>
+                <li>Logical (Boolean)</li>
             </ul>
         </div>
         <div class="right">
-            <h5>Additional</h5>
+            <h5>Additional:</h5>
             <ul>
-                <li>Dates</li>
+                <li>Date</li>
+                <li>Factor (Later today)</li>
             </ul>
         </div>
     </div>
 </section>
+
+<section>
+    <h2>Data Types <br />Not Introduced Today</h2>
+    <p><em>This is more of an FYI than anything else</em></p>
+    <ul>
+        <li>Integer</li>
+        <li>Complex</li>
+        <li>Raw</li>
+    </ul>
+</section>
+
 
 <section>
     <h2>Numeric</h2>
@@ -146,7 +138,7 @@ head(A)
         <div class="left">
             <h5>R:</h5>
             <ul>
-                <li>Default format for all numbers</li>
+                <li>These are numbers!</li>
             </ul>
         </div>
         <div class="right">
@@ -169,6 +161,8 @@ passenger_capacity <- 2435
 
 ## The crew capacity of the Titanic.
 crew_capacity <- 892
+
+## Note: You _do not_ use a comma separator in a numeric
     </code></pre>
     
 </section>
@@ -193,11 +187,24 @@ percent_crew
 </section>
 
 <section>
+    <h2>Functions</h2>
+    <ul>
+        <li>Being able to do something to what we create is useful</li>
+        <li>We will often use a function to alter our data</li>
+    </ul>
+
+    <pre><code class="r">
+## This is fake code.
+second_variable <- some_function(first_variable)
+    </code></pre>
+</section>
+
+<section>
     <h2>Is Numeric?</h2>
     <ul>
         <li>Is a variable numeric?</li>
         <li>is.numeric() returns a Boolean</li>
-        <li><span style="color:green;">Note:</span> You are using R functions!</li>
+        <li><span style="color:green;">Note:</span> Your first R function!</li>
     </ul>
 
     <div class="container">
@@ -227,22 +234,14 @@ percent_crew
             <pre><code class="r">
 total_capacity
 
-typeof(total_capacity)
-    
-is.double(total_capacity)
-
-is.integer(total_capacity)
+class(total_capacity)
             </code></pre>
         </div>
         <div class="right">
             <pre><code class="r">
 percent_crew
 
-typeof(percent_crew)
-    
-is.double(percent_crew)
-
-is.integer(percent_crew)
+class(percent_crew)
             </code></pre>
         </div>
     </div>
@@ -259,16 +258,9 @@ is.integer(percent_crew)
 > total_capacity
 [1] 3327
 
-> typeof(total_capacity)
-[1] "double"
+> class(total_capacity)
+[1] "numeric"
     
-> is.double(total_capacity)
-[1] TRUE
-
-> is.integer(total_capacity)
-[1] FALSE
-
-## Integers must be declared.
             </code></pre>
             <pre>
         </div>
@@ -277,118 +269,11 @@ is.integer(percent_crew)
 > percent_crew
 [1] 26.81094
 
-> typeof(percent_crew)
-[1] "double"
-    
-> is.double(percent_crew)
-[1] TRUE
-
-> is.integer(percent_crew)
-[1] FALSE
-
-## OK, that makes sense.
+> class(percent_crew)
+[1] "numeric"
             </code></pre>
         </div>
     </div>
-</section>
-
-<section>
-    <h2>Integers v Numerics</h2>
-    <div class="left">
-        <ul>
-            <li>In R, the integer is a sub-type of numeric</li>
-            <li>R will ONLY use this data type if you <span style="color:red;">EXPLICITLY</span> tell it to</li>
-            <li>And if you don't understand them, they can behave oddly</li>
-        </ul>
-    </div>
-    <div class="right">
-        <h4>Integers</h4>
-        <ul>
-            <li>SQL: <code class="r">INT</code></li>
-            <li>SAS: No direct analogue</li>
-        </ul>
-    </div>
-</section>
-    
-</section>
-
-<section>
-    <h2>Integers Get Floored</h2>
-    <p>This is the same behavior as the SAS <code class="r">INT</code> command</p>
-    <pre><code class="r">
-## What does this code return?
-oops <- as.integer(percent_crew)
-
-oops
-    </code></pre>
-    <pre><code class="fragment r">
-[1] 26
-
-## There are FEW reasons to declare an Integer.
-    </code></pre>
-</section>
-
-<section>
-    <h2>Numerical Details</h2>
-    <ul>
-        <li>You can do math with numerics</li>
-        <li>Follows the usual order of operations</li>
-        <li>R is over-kill if all you need is a calculator</li>
-        <li>That said . . . I have used it that way</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Floating Point "Errors"</h2>
-
-    <p>How can both statements be correct?</p>
-
-    <div class="container">
-        <div class="left">
-            <pre><code>
-(3 - 2.9)
-            </code></pre>
-
-            <pre><code class="fragment r">
-[1] 0.1
-            </code></pre>
-        </div>
-        <div class="right">
-            <pre><code>
-(3 - 2.9) == 0.1
-            </code></pre>
-
-            <pre><code class="fragment r">
-[1] FALSE
-            </code></pre>            
-        </div>
-    </div>
-    <p>See next slide for GORY details.</p>
-</section>
-
-<section>
-    <h2>Floating Point "Errors"</h2>
-    <ul>
-        <li>
-            As a matter of convention, children are taught a Base
-            10 (denary) number system
-        </li>
-        <li>
-            Digital computers (must) use a Base 2 (binary) system
-        </li>
-        <li>
-            In Base 2, numbers such as 0.1 are internally held as a
-            floating-point, introducing rounding error
-        </li>
-        <li>
-            See <a href="http://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/" target="_blank">Burns Statistics</a>
-            if you'd like to read more
-        </li>
-    </ul>
-    <pre><code>
-print(3 - 2.9, digits=20)
-[1] 0.10000000000000008882
-    </code></pre>
 </section>
 
 <section>
@@ -561,20 +446,10 @@ capt_smith_dob <- as.Date("1850-01-27")
 </section>
 
 <section>
-    <h2>Data Types</h2>
-    <ul>
-        <li>There are other data types in R</li>
-        <li>Developers create new ones all the time</li>
-        <li>But for the sake of simplicity . . .</li>
-        <li>That's all we need for today</li>
-    </ul>
-</section>
-
-<section>
     <h2> REPL Gotcha!</h2>
     <ul>
-        <li>Each line in R's REPL normally starts with <code>></code></li>
-        <li>If it starts with a <code>+</code>, you haven't finished your statement</li>
+        <li>Each line in R's REPL normally starts with: <code>></code></li>
+        <li>If a line starts with a <code>+</code>, you haven't finished your statement</li>
         <li> The <code>+</code> is R's way to tell you it is waiting for you to finish</li>
         <li>Usually happens because you didn't close your parens</li>
         <li>(So close them . . . </li>
@@ -584,6 +459,18 @@ round(9.9
 + 
     </code></pre>
 </section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+
+    <pre><code class="r">
+## What does this do?
+c(1,2,3)
+    </code></pre>    
+</section>
+
 
 <section>
     <h2>5 Minute Break!</h2>

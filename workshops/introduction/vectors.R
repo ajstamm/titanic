@@ -10,7 +10,7 @@
 
 
 ## LEARNING OBJECTIVES ---------------------------------------------------------
-## - Vectors Are Important!
+## - What is a vector?
 ## - How To Make One
 ## - How To Delete One
 ## - Vector Indexing (How To Subset)
@@ -18,9 +18,9 @@
 
 
 
-## VECTORS ARE IMPORTANT -------------------------------------------------------
+## WHAT IS A VECTOR? -----------------------------------------------------------
 ## - Congrats, you have already worked with Vectors
-## - Understanding them is CRITICAL to becoming a useR (sic)
+## - Understanding this is CRITICAL to becoming a useR (sic)
 
 ## This is a vector, length == 1.
 captain <- "John Smith"
@@ -31,11 +31,11 @@ captain <- "John Smith"
 
 
 ## COMBINE ---------------------------------------------------------------------
-## -Use c() to combine things
+## -Use the function c() to combine things
 ## -Works for numerics, characters, booleans, dates, etc.
 ## -If they aren't the same type of data, R will reduce to the lowest common denominator.
 ## -In practice, this is usually a character vector
-## -You can treat vectors as an object and do things to it
+## -All vectors are objects (like everything else in R)
 
 
 ## YOUR TURN! ------------------------------------------------------------------
@@ -102,11 +102,12 @@ mean(age, na.rm=TRUE)
 ## - Code Completion
 ## - RStudio help window
 ## - Stack Overflow
-## - Google, etc.
+## - Google: Pre-pend search query with "R"
+## - Stack Overflow
 
 
 
-## USEFUL FUNCTIONS ------------------------------------------------------------
+## SOME FUNCTIONS --------------------------------------------------------------
 ##
 ## MATHEMATICAL
 ## - mean(): Average
@@ -119,6 +120,9 @@ mean(age, na.rm=TRUE)
 ## - length(): # of items
 ## - table(): # distinct values
 ## - summary(): You tell me
+## - plot(): You tell me
+## - hist(): You tell me
+## - barplot(): You tell me
 
 
 
@@ -126,6 +130,7 @@ mean(age, na.rm=TRUE)
 
 ## Take a few minutes and spend some
 ## time using a few of these functions.
+## Remember ? to get help with how to use the function.
 
 
 
@@ -155,7 +160,7 @@ age[gender == "male"]
 
 
 
-## VISUALIZE A VECTOR ----------------------------------------------------------
+## VISUALIZE 2 VECTORS ---------------------------------------------------------
 ## In this case, these vectors are in the same order . . .
 
 ##          age   gender  
@@ -192,7 +197,7 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 ## How many women?
 
 
-## OH YEAH, THOSE WERE REAL PASSENGERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+## THOSE WERE ACTUAL PASSENGERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 ##STATISTICAL TESTING ----------------------------------------------------------

@@ -23,13 +23,13 @@
 
 
 ## Data.Frames -----------------------------------------------------------------
-## A 2 or more dimensional object
-## Usually 2 dimensions
-## All objects in a column must have the same data type
-## Columns can have different data types
-## Think table
-## Could do the same thing with LOTS of vectors
-## This is easier to manage
+## - N dimensional object
+##   - Usually 2-dimensional.
+##   - Normal people call this a table.
+## - All entries in a column have the same class (data type)
+## - Rows can have entries of difference classes
+## - A single data.frame is easier to manage than a collection of vectors.
+## - Relationship between the entries is made explicit
 
 
 

@@ -15,9 +15,11 @@
 
 
 
-## Assignment Operator ---------------------------------------------------------
-## Multiple assignment operators
-## History, convention, and some old-school ideas
+## Create Some Data ------------------------------------------------------------
+## - Use an assignment operator
+## - More than one!
+## - History, convention, and some old-school ideas
+
 ## These are equivalent.
 a <- 1
 a =  1
@@ -28,11 +30,10 @@ a =  1
 
 
 ## Why Be Conventional? ---------------------------------------------------------
-## All languages have conventions
-## Deviating can be OK
-## You should have a good reason to do so
-## KNOW the conventions, so you can read demo code, etc
-## We will use R conventions today, unless otherwise noted
+## - Languages have conventions
+## - KNOW</span> them, to read demo code, etc
+## - Only deviate if you have good reason to do so
+## - TITR uses R conventions, unless otherwise noted
 
 
 
@@ -40,20 +41,6 @@ a =  1
 ## Both <- and = assign variables in the local environment
 ## If you see someone using <--, be careful
 ## Especially if you do not understand concepts such as lexical scoping, global environment, etc.
-
-
-
-## Assignment Quirks -----------------------------------------------------------
-## R is a quirky language
-## Assignment in a function uses = EXCLUSIVELY
-
-## These are NOT equivalent.
-
-## This is correct (and works)
-a <- foo(x = 1, y = 2)
-
-## This will _NOT_ work. (Feel free to try, it will error out.)
-a <- foo(x <- 1, y <- 2)
 
 
 
@@ -70,17 +57,31 @@ head(A)
 
 
 
-## Data Types ------------------------------------------------------------------
+## Atomic Data Types Introduced Today ------------------------------------------
 ##
-## Covered Today
-## (Atomic Data Types)
+## R calls this the data's class.
+##
+## Our Focus:
 ## - Numeric
-## - Integer
 ## - Character
-## - Boolean
+## - Logical (Boolean)
 ##
-## (Additional)
-## - Dates
+## Additional:
+## - Date
+## - Factor (Discussed later today)
+
+
+
+## Atomic Data Types Not Introduced Today --------------------------------------
+## - Integer
+## - Complex
+## - Raw
+## This is more of an FYI than anything else.
+
+
+
+## Numeric ---------------------------------------------------------------------
+## - These are numbers!
 
 
 
@@ -94,12 +95,23 @@ passenger_capacity <- 2435
 ## The crew capacity of the Titanic
 crew_capacity <- 892
 
+## Note: You _do not_ use a comma separator in a numeric.
+
 
 
 ## Your Turn! ------------------------------------------------------------------
 ## Can you calculate the total passenger capacity
 ## and the percentage of this total which were staff?
 
+
+
+## Functions -------------------------------------------------------------------
+## Being able to do something to what we create is useful.
+## We will often use a function to alter our data.
+
+## This is fake code.
+## I commented this out, to make sure you don't try to run it!
+##second_variable <- some_function(first_variable)
 
 
 ## Is Numeric ------------------------------------------------------------------
@@ -125,62 +137,13 @@ is.numeric(percent_crew)
 
 total_capacity
 
-typeof(total_capacity)
+class(total_capacity)
     
-is.double(total_capacity)
-
-is.integer(total_capacity)
-
 percent_crew
 
-typeof(percent_crew)
+class(percent_crew)
     
-is.double(percent_crew)
-
-is.integer(percent_crew)
-
 ## We will discuss this as a group.
-
-
-
-## Integers V Numerics ---------------------------------------------------------
-## Integer is a sub-type of numeric
-## R will ONLY use this data type if you EXPLICITLY tell it to
-## And if you don't understand them, they can behave oddly
-
-
-
-## Integers Get Floored --------------------------------------------------------
-oops <- as.integer(percent_crew)
-oops
-
-
-
-## Numerical Details -----------------------------------------------------------
-## - You can do math with numerics
-## - Follows the usual order of operations
-## - R is over-kill if all you need is a calculator
-## - That said . . . I have used it that way
-
-
-
-## Floating Point "Errors" -----------------------------------------------------
-## How can all three of these be correct?
-
-(3 - 2.9)
-
-(3 - 2.9) == 0.1
-
-
-##Floating Point "Errors" ------------------------------------------------------
-## As a matter of convention, children are taught a Base 10 (denary) number
-## system. Digital computers (must) use a Base 2 (binary) system. In Base 2,
-## numbers such as 0.1 are internally held as a floating-point, introducing
-## rounding error. See:
-## http://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/
-## if you'd like to read more.
- 
-print(3 - 2.9, digits=20)
 
 
 
@@ -269,7 +232,7 @@ answer <- 62 > ?
 
 
 
-## DATES
+## DATES -----------------------------------------------------------------------
 ## POSIX Compatible dates:
 ## You can write it as a mm/dd/yyyy, but . . .
 ## then you have to tell R how to read the date. 
@@ -279,12 +242,19 @@ capt_smith_dob <- as.Date("1850-01-27")
 
 
 
-## DATA TYPES
-## - There are other data types in R
-## - Developers create new ones all the time
-## - But for the sake of simplicity . . .
-## - That's all we need for today
+## REPL Gotcha! ----------------------------------------------------------------
+## - Each line in R's REPL normally starts with: ">".
+## - If a line starts with a "+", you haven't finished your statement.
+## - The "+" is R's way to tell you it is waiting for you to finish the statement.
+##   - Usually happens because you forges to close a parens of quotation.
 
 
 
-## 5 Minute Break!
+## YOUR TURN -------------------------------------------------------------------
+## What does this do?
+c(1,2,3)
+
+
+
+## 5 Minute Break! -------------------------------------------------------------
+## Please Come Back!

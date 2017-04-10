@@ -1,0 +1,93 @@
+---
+layout: presentation
+title: Data Types Extra
+---
+
+<section>
+    <h2>Integers v Numerics</h2>
+    <div class="left">
+        <ul>
+            <li>In R, the integer is a sub-type of numeric</li>
+            <li>R will ONLY use this data type if you <span style="color:red;">EXPLICITLY</span> tell it to</li>
+            <li>And if you don't understand them, they can behave oddly</li>
+        </ul>
+    </div>
+    <div class="right">
+        <h4>Integers</h4>
+        <ul>
+            <li>SQL: <code class="r">INT</code></li>
+            <li>SAS: No direct analogue</li>
+        </ul>
+    </div>
+</section>
+
+</section>
+
+<section>
+    <h2>Integers Get Floored</h2>
+    <p>This is the same behavior as the SAS <code class="r">INT</code> command</p>
+    <pre><code class="r">
+## What does this code return?
+oops <- as.integer(percent_crew)
+
+oops
+    </code></pre>
+    <pre><code class="fragment r">
+[1] 26
+
+## There are FEW reasons to declare an Integer.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Floating Point "Errors"</h2>
+
+    <p>How can both statements be correct?</p>
+
+    <div class="container">
+        <div class="left">
+            <pre><code>
+(3 - 2.9)
+            </code></pre>
+
+            <pre><code class="fragment r">
+[1] 0.1
+            </code></pre>
+        </div>
+        <div class="right">
+            <pre><code>
+(3 - 2.9) == 0.1
+            </code></pre>
+
+            <pre><code class="fragment r">
+[1] FALSE
+            </code></pre>            
+        </div>
+    </div>
+    <p>See next slide for GORY details.</p>
+</section>
+
+<section>
+    <h2>Floating Point "Errors"</h2>
+    <ul>
+        <li>
+            As a matter of convention, children are taught a Base
+            10 (denary) number system
+        </li>
+        <li>
+            Digital computers (must) use a Base 2 (binary) system
+        </li>
+        <li>
+            In Base 2, numbers such as 0.1 are internally held as a
+            floating-point, introducing rounding error
+        </li>
+        <li>
+            See <a href="http://www.burns-stat.com/documents/tutorials/impatient-r/more-r-key-objects/more-r-numbers/" target="_blank">Burns Statistics</a>
+            if you'd like to read more
+        </li>
+    </ul>
+    <pre><code>
+print(3 - 2.9, digits=20)
+[1] 0.10000000000000008882
+    </code></pre>
+</section>
