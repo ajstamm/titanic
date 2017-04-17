@@ -352,8 +352,27 @@ survived_men == 1
 </section>
 
 <section>
-    <h1>Those were actual passengers</h1>
-    <img src="{{site.baseurl}}/public/img/grand-staircase.jpg" alt="Photo of the Grand Staircase" width="60%">
+    <h1>Actual Passengers</h1>
+    <div class="left">
+        <small>
+            <table>
+                <tr><th>Name</th><th>Age</th><th>Gender</th></tr>
+                <tr><td>Mr. Owen Braund</td><td>22</td><td>male</td></tr>
+                <tr><td>Mrs. Florence Briggs Thayer</td><td>38</td><td>female</td></tr>
+                <tr><td>Miss. Laina Heikkinen</td><td>26</td><td>female</td></tr>
+                <tr><td>Mrs. Lily May Peel</td><td>35</td><td>female</td></tr>
+                <tr><td>Mr. William Allen</td><td>35</td><td>male</td></tr>
+                <tr><td>Mr. James Moran</td><td>NA</td><td>male</td></tr>
+                <tr><td>Mr. Timothy McCarthy</td><td>54</td><td>male</td></tr>
+                <tr><td>Master. Gosta Palsson</td><td>2</td><td>male</td></tr>
+                <tr><td>Mrs. Elisabeth Vilhelmina Berg</td><td>27</td><td>female</td></tr>
+                <tr><td>Mrs. Adele Achem</td><td>14</td><td>female</td></tr>
+            </table>
+        </small>
+    </div>
+    <div class="right">
+    <img src="{{site.baseurl}}/public/img/grand-staircase.jpg" alt="Photo of the Grand Staircase" width="100%">
+    </div>
 </section>
 
 <section>
@@ -388,6 +407,35 @@ mean of x mean of y
     28.25     28.00 
     </code></pre>
 </section>
+
+<section>
+    <h2>One More Data Type</h2>
+    <ul>
+        <li>Factor</li>
+        <li>Superficially, similar to a string character</li>
+        <li>More efficient with memory usage</li>
+        <li>More importantly, defines a variable explicitly as a categorical</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Make A Factor</h2>
+    <div class="left">
+        <pre><code class="r">
+gender
+[1] "male"   "female" "female" "female" "male"   "male"   "male"   "male"  
+ [9] "female" "female"
+        </code></pre>
+    </div>
+    <div class="left">
+        <pre><code class="r">
+as.factor(gender)
+ [1] male   female female female male   male   male   male   female female
+Levels: female male
+        </code></pre>
+    </div>
+</section>
+
 
 <section>
     <h2>5 Minute Break!</h2>

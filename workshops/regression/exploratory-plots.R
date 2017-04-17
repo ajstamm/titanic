@@ -1,31 +1,29 @@
 ## #############################################################################
 ## Exploratory Plots
 ##
-## Plots to demonstrate Base R's graphics abilities. 
+## Quick (mostly) visual exploration of the passengers data.
+## I often start a real project with something like this, just to get a "feel"
+## of the data. I'm all touchy-feely with my numbers.
 ##
-## Examples focus on the train data set, but work with the test data set too.
+## Provide some documentation on the "meaning" of the variables.
 ##
-## The data dictionary is available here:
-## http://choens.github.io/titanic/workshops/regression/data-dictionary/
+## Requires the passengers data set.
 ##
 ## #############################################################################
 
 ## What are our columns? ------------------------------------------------------
-## Column names, in alphabetical order.
-sort(names(train))
+## Column names, in alphabetical order. Data columns are presented in the same
+## order.
+sort(names(passengers))
 
-
-## As you review these, how can you use these plots to find factors which might
-## affect survival? From time to time, I will demonstrate a feature or two that
-## might be of interest.
 
 ## AGE -------------------------------------------------------------------------
 ## Several ways to look at age.
-plot(train$age)
-plot(as.factor(train$age))
+plot(passengers$age)
+plot(as.factor(passengers$age))
 
 ## This one is better if you want to share with others.
-hist(train$age,
+hist(passengers$age,
      main="Histogram of Age Onboard the RMS Titanic",
      xlab="Age",
      ylab="N Passengers"
@@ -33,60 +31,62 @@ hist(train$age,
 
 
 ## CABIN -----------------------------------------------------------------------
-## This doesn't really "make sense" graphically.
-## So, here's a table. Be happy with that.  :-)
-table(train$cabin)
+## This tells us where they are on the Titanic. This is useful, but hard to
+## represent in a graph. So, here's a table. Be happy with that.  :-)
+table(passengers$cabin)
 
 
 ## EMBARKED --------------------------------------------------------------------
-plot(train$embarked, col="light blue")
-
-
-## FARE ------------------------------------------------------------------------
-plot(train$fare)
-hist(train$fare, col="pink")
+## Shows us which port people boarded the Titanic. Passengers boarding in France
+## were less likely to speak English.
+plot(passengers$embarked, col="light blue")
 
 
 ## NAME ------------------------------------------------------------------------
 ## This doesn't make any sense as a visual, so here's a way to see all of them.
-View(train$name)
+## Really, this is just depressing.
+View(passengers$passenger_name)
 
 
-## PARCH -----------------------------------------------------------------------
-plot(train$parch)
-hist(train$parch)
+## N_PARENTS_CHILDREN ----------------------------------------------------------
+## Basically, how many people were in the group?
+plot(passengers$n_parents_children)
+hist(passengers$n_parents_children)
 
 
-## PASSENGERID -----------------------------------------------------------------
+## PASSENGER_ID ----------------------------------------------------------------
 ## This is another data element which doesn't make any sense as a graphic.
-View(train$passengerid)
+## I included this just to make this comprehensive.
+View(passengers$passenger_id)
 
 
-## PCLASS ----------------------------------------------------------------------
+## PASSENGER_CLASS -------------------------------------------------------------
 ## Although stored as a numeric, this is really a factor.
-plot(as.factor(train$pclass))
-barplot(table(train$pclass))
+## A useful proxy for socio-economic class, since first-class tickets cost
+## more than steerage (third-class)
+plot(as.factor(passengers$passenger_class))
+barplot(table(passengers$passenger_class))
 
 
 ## SEX -------------------------------------------------------------------------
-plot(train$sex)
+## This is just what the label says.
+plot(passengers$sex)
 
 
 ## SIBSP -----------------------------------------------------------------------
-plot(train$sibsp)
-hist(train$sibsp)
+## How many brothers sisters?
+plot(passengers$n_siblings)
+hist(passengers$n_siblings)
 
 
 ## SURVIVED --------------------------------------------------------------------
-## Since more than 50% of the passengers died, I think this column name is a
-## little optimistic.
-plot(as.factor(train$survived))
+## O == Died
+## Since more than 50% of the passengers died, I think the name of this column
+## is a little optimistic.
+plot(as.factor(passengers$survived))
 
 
 ## TICKET ----------------------------------------------------------------------
 ## This is another one that really doesn't work graphically.
-head(train$ticket)
-
-
-## SEX -------------------------------------------------------------------------
-plot(train$sex)
+## This is a nice way to see the first 6 values of an object.
+head(passengers$ticket)

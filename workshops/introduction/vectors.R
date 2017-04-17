@@ -197,13 +197,31 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 ## How many women?
 
 
-## THOSE WERE ACTUAL PASSENGERS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+## ACTUAL PASSENGERS -----------------------------------------------------------
+## Name	                           Age	Gender
+## Mr. Owen Braund	                22	male
+## Mrs. Florence Briggs Thayer	    38	female
+## Miss. Laina Heikkinen	        26	female
+## Mrs. Lily May Peel	            35	female
+## Mr. William Allen	            35	male
+## Mr. James Moran	                NA	male
+## Mr. Timothy McCarthy	            54	male
+## Master. Gosta Palsson	         2	male
+## Mrs. Elisabeth Vilhelmina Berg	27	female
+## Mrs. Adele Achem	                14	female
 
-
-##STATISTICAL TESTING ----------------------------------------------------------
-
+## STATISTICAL TESTING ----------------------------------------------------------
 t.test(age[gender=="male"], age[gender=="female"])
 
+## ONE MORE DATA TYPE ----------------------------------------------------------
+## - Factor
+## - Superficially, similar to a string character.
+## - More efficient with memory usage.
+## - More importantly, defines a variable explicitly as a categorical.
 
+## MAKE A FACTOR ---------------------------------------------------------------
+gender
+
+as.factor(gender)
 
 ## 5 MINUTE BREAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

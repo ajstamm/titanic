@@ -24,26 +24,32 @@ title: Import CSV
 <section>
     <h2>Learning Objectives</h2>
 
-    <p>
-        The remainder of today's workshop uses a sample of the passenger
-        manifest from the Titanic, stored in CSV.
-    </p>
     <ul>
-        <li>Import CSV data</li>
         <li>
-            Did it work?
+            Import CSV data<br />
+            <small>
+                Rest of today's workshop uses a sample of the
+                passenger manifest (CSV) from the Titanic
+            </small>
+        </li>
+        <li>
+            How to tell if we imported the data successfully
             <ul>
                 <li><span style="color:green">Hint #1: We should have data on 250 passengers.</span></li>
                 <li><span style="color:green">Hint #2: We should have 13 columns of data.</span></li>
             </ul>
         </li>
-        <li>Sampled from <a href="https://www.kaggle.com/c/titanic" target="_blank">Kaggle's Machine Learning demo</a></li>
+        <li>Discuss: R Sessions</li>
     </ul>
+    <br />
+    <p>
+        All Titanic data sampled from <br /> <a href="https://www.kaggle.com/c/titanic" target="_blank">Kaggle's Machine Learning demo</a>
+    </p>
 </section>
 
 <section>
     <h2>Import Passengers Data</h2>
-    <p>This could be one in one line of code, <br />but it would run off my slide.</p>
+    <p>This could be one line of code, <br />but it would run off my slide.</p>
     <pre><code class="r">
 url <- "http://choens.github.io/titanic/public/data/passengers.csv"
 passengers <- read.csv(file = url)
@@ -67,6 +73,7 @@ passengers <- read.csv(file = url)
                 </code></pre>
             </div>
         </div>
+        <p><small>Hint: Answers on next slide</small></p>
 </section>
 
 
@@ -100,9 +107,19 @@ passengers <- read.csv(file = url)
 
 <section>
     <h2>Congratulations!</h2>
-    <h5 style="color:green;">You know how to import CSV data</h3>
+    <h5 style="color:green;">You can import CSV data</h3>
 </section>
 
+<section>
+    <h2>Discuss: R Sessions</h2>
+    <ul>
+        <li>You (should) have a data.frame called <code>passengers</code> in the current R session</li>
+        <li>We will spend a couple of hours manipulating it</li>
+        <li>Don't delete it or restart your R session</li>
+        <li>If you do, you have to re-run <code>import-passengers.R</code></li>
+        <li>We will run code from other R scripts, and that is fine, as long as we don't change the R session</li>
+    </ul>
+</section>
 
 <section>
     <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="65%">

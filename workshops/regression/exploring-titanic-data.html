@@ -1,17 +1,18 @@
 ---
 layout: presentation
-title: Import Titanic
+title: Exploring Titanic Data
 ---
 
 <section>
-    <h2>Import & Explore</h2>
+    <h2>Exploring Titanic Data</h2>
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="../import-titanic.R" target="_blank">import-titanic.R</a></li>
+                <li>Data: passengers<br />
+                    <small>Don't have passengers?<br />Use <a href="../import-passengers.R" target="_blank">import-passengers.R</a></li> to get it.</small>
                 <li>Code: <a href="../demo-plots.R" target="_blank">demo-plots.R</a></li>
                 <li>Will run this code together</li>
-                <li>~15 Minutes</li>
+                <li>~30 Minutes</li>
             </ul>
         </div>
         <div class="right">
@@ -25,87 +26,29 @@ title: Import Titanic
 <section>
     <h2>Learning Objectives</h2>
     <ul>
-        <li>Using only Base R</li>
-        <li>Import CSV data</li>
-        <li>Interactive Plotting / Graphing</li>
-    </ul>
-</section>
-
-<section>
-    <h2> Import CSV Data</h2>
-    <div class="container">
-        <div class="left">
-            <ul>
-                <li>Using: <a href="../import-titanic.R" target="_blank">import-titanic.R</a></li>
-                <li>Titanic data in CSV format</li>
-                <li>
-                    Two data sets:
-                    <ul>
-                        <li>train</li>
-                        <li>test</li>
-                    </ul>
-                </li>
-                <li>Data from <a href="https://www.kaggle.com/c/titanic" target="_blank">Kaggle's Machine Learning demo</a></li>
-            </ul>
-        </div>
-        <div class="right">
-            <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="75%">
-        </div>
-    </div>
-</section>
-
-<section>
-    <h2>Import Train</h2>
-    <pre><code class="r">
-url   <- "http://choens.github.io/titanic/public/data/train.csv"
-train <- read.csv(file=url)
-
-## I hate mixed-case column names
-names(train) <- tolower(names(train))
-    </code></pre>
-</section>
-
-<section>
-    <h2>
-        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
-    </h2>
-    <ul>
-        <li>Now, import the test data set.</li>
         <li>
-            Question: How many rows do you have in train and how many
-            rows do you have in test?
-        </li>
+            R has many graphical packages
+            <ul>
+                <li>ggplot2</li>
+                <li>ggvis</li>
+                <li>lattice</li>
+                <li>plotly</li>
+                <li>htmlwidgets</li>
+                <li>rbokeh</li>
+            </ul>
+            <li><span style="color:green">Today, we use Base R</span></li>
+            <li>Why isn't there a graphic on a page about graphics?</li>
     </ul>
 </section>
 
 <section>
-    <h2>
-        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
-    </h2>
-    <h5 style="color:red;">Tell us NOW if you can't get this to work!</h3>
-    <div class="container">
-        <div class="left">
-            <pre><code class="r">
-> dim(train)
-[1] 891  12
-            </code></pre>
-        </div>
-        <div class="left">
-            <pre><code class="r">
-> dim(test)
-[1] 418  11
-            </code></pre>
-        </div>
-    </div>
-</section>
-
-<section>
-    <h2> Interactive Graphing / Plotting</h2>
+    <h2> Base R Graphics</h2>
     <div class="container">
         <div class="left">
             <ul>
-                <li>Using: <a href="../exploratory-plots.R" target="_blank">exploratory-plots.R</a></li>
-                <li>R graphics == Interactive</li>
+                <li>Encourage interactive use</li>
+                <li>Easy to remember commands</li>
+                <li>Good defaults!</li>
                 <li>Thank You: John W. Tukey</li>
             </ul>
         </div>
@@ -117,35 +60,190 @@ names(train) <- tolower(names(train))
 
 <section>
     <h2>Opening Discussion</h2>
-    <p>There are several plotting functions in Base R:</p>
+    <p>Plotting functions we will use today:</p>
     <ul>
-        <li>hist()</li>
-        <li>abline()</li>
-        <li>plot()</li>
-        <li>barplot()</li>
-        <li>boxplot()</li>
-        <li>pairs()</li>
-        <li><span style="color:green;"><strong>plot()</strong>:</span></li>
-    </ul>
-</section>
-
-<section>
-    <h2>Let's Get Graphical</h2>
-    <ul>
-        <li>These examples all present data from the "train" data set</li>
         <li>
-            Big difference between R and tools like SAS/SPSS:
-            <ul>
-                <li>SAS/SPSS: Few, powerful/complex commands</li>
-                <li>R: Many, simple commands which interact</li>
-              </ul>
+            <code><span style="color:green;"><strong>plot()</strong></span></code><br />
+            <small>You've already used this command</small>
         </li>
-        <span style="color:green;"><li>Note the lack of actual graphics on this slide</li></span>
+        <li><code>barplot()</code></li>
+        <li><code>boxplot()</code></li>
+        <li><code>hist()</code></li>
+        <li><code>pairs()</code></li>
+    </ul>
+    <p>These commands should be mostly self-explanatory</p>
+</section>
+
+<section>
+    <h2>Age</h2>
+    <div class="left">
+        <pre><code class="r">
+## Remember:
+mean(passengers$age)
+[1] 30.31759
+        </code></pre>
+        <pre><code class="r">
+## Only one variable?
+## X axis is row number.
+## Can look like a trend.
+plot(passengers$age)
+        </code></pre>
+        <pre><code class="r">
+## Use sample() to avoid.
+plot(sample(passengers$age))
+        </code></pre>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/passengers-scatter-1.png" alt="Passenger age." width="100%">
+    </div>
+</section>
+
+<section>
+    <h2>Age by Passenger Class</h2>
+    <div class="left">
+        <pre><code class="r">
+## X/Y Axis order matters!
+plot(passengers$passenger_class,
+     passengers$age
+    )
+        </code></pre>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/passengers-scatter-2.png" alt="Passenger age by class." width="100%">
+    </div>
+</section>
+
+<section>
+    <h2>Remember Factors?</h2>
+    <ul>
+        <li>Superficially similar to character/string variables</li>
+        <li>Tells R a variable is a categorical variable</li>
+        <li>Factors have different defaults in <code>plot()</code>
     </ul>
 </section>
 
-
+<section>
+    <h2>Age by Passenger Class (Factor)</h2>
+    <div class="left">
+        <pre><code class="r">
+## Now with boxplots!
+plot(as.factor(passengers$passenger_class),
+     passengers$age
+    )
+        </code></pre>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/passengers-scatter-3.png" alt="Passenger age by class." width="100%">
+    </div>
+</section>
 
 <section>
-    <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="65%">
+    <h2>Barplots</h2>
+    <p>You can't create a barplot with raw data. It needs a table.</p>
+    <pre><code class="r">
+# Our passenger data has more males than females
+table(passengers$sex)
+female   male 
+   107    143 
+    </code></pre>
+    <pre><code class="r">
+# Creates a table called tbl_sex
+tbl_sex <- table(passengers$sex)
+tbl_sex
+female   male 
+   107    143 
+    </code></pre>
+</section>
+
+<section>
+    <h2>Passenger Sex</h2>
+    <div class="left">
+        <pre><code class="r">
+## Input is a table.
+barplot(tbl_sex)
+        </code></pre>
+        <img src="{{site.baseurl}}/public/img/passengers-barplot-1.png" alt="Passenger sex." width="90%">
+    </div>
+    <div class="right">
+        <pre><code class="r">
+## Input is the output of table()
+barplot(table(passengers$sex))
+        </code></pre>
+        <img src="{{site.baseurl}}/public/img/passengers-barplot-1.png" alt="Passenger sex." width="90%">
+    </div>
+</section>
+
+<section>
+    <h2><span style="color:red">STOP! (Teachable Moment)</span></h2>
+    <div class="left">
+        <ul>
+            <li><strong>SAS/SPSS:</strong> Powerful, independent commands</li>
+            <li><strong>R:</strong> Simple commands work together</li>
+            <li>Both methods have advantages</li>
+            <li>One reason R is so modular</li>
+        </ul>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/rstudio-ball.png" alt="RStudio icon" width="75%">
+    </div>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <pre><code class="r">
+## Learn how to use the prop.table command.
+## Use this command to build a table showing the
+## proportions of males and females in passengers.
+?prop.table
+    </code></pre>
+    <pre><code class="fragment r">
+prop.table(tbl_sex)*100
+
+female   male 
+  42.8   57.2 
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <pre><code class="r">
+## Now use prop.table to build a proportional barplot.
+    </code></pre>
+    <pre><code class="fragment r">
+barplot( prop.table(tbl_sex)*100 )
+    </code></pre>
+    <p><small>Hint: There's a nice plot on the next slide</small></p>
+</section>
+
+<section>
+    <h2>Nice!</h2>
+    <img src="{{site.baseurl}}/public/img/passengers-barplot-2.png" alt="Passenger sex." width="50%">    
+</section>
+
+<section>
+    <h2><span style="color:red">GET SOME HELP!</span></h2>
+    <ul>
+        <li>Eventually, we all need some help
+        <li><a href="https://stackoverflow.com" target="_blank">Stack Overflow</a></li>
+        <li><a href="https://google.com" target="_blank">Google</a></li>
+        <li>Let's practice finding help</li>
+    </ul>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <ul>
+        <li>Get familiar with this data set. We aren't done with it.</li>
+        <li>The following two files include examples of histograms, density plots, etc. Things that might interest you.</li>
+        <li><a href="../exploratory-plots.R" target="_blank">exploratory-plots.R</a></l1>
+        <li><a href="../advanced-plots.R" target="_blank">advanced-plots.R</a></l1>
+        <li>Take a short break before diving into logistic regression</li>
+        <li>All materials are accessible outside of this workshop</li>    
+    </ul>
 </section>

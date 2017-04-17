@@ -27,11 +27,15 @@ title: Linear Regression
         <li>Define Linear Regression</li>
         <li>Introduce Anscombe's Quartet</li>
         <li>Descriptive Stats of Anscombe's Quartet</li>
-        <li>Draw a scatter plot of continuous variables</li>
-        <li>Build a linear model (OLS) of Set 1</li>
-        <li>Demonstrate how to use R to test the model</li>
-        <li>You will then experiment with sets 2,3, and 4</li>
+        <li>How to test for correlation</li>
+        <li>Scatter Plots</li>
+        <li>Linear Regression (OLS)</li>
+        <li>Visualizing Linear Regression</li>
+        <li>QQ Plots</li>
+        <li>Prediction with Linear Regression</li>
+        <li>Experiment on your own</li>
     </ul>
+    <p><span style="color:green">. . . We have much to discuss.</span></p>
 </section>
 
 <section>
@@ -39,7 +43,8 @@ title: Linear Regression
     <ul>
         <li>An approach for modeling the relationship between a scalar dependent variable <i>(y)</i> and one or more explanatory variables, also know as independent variable(s) <i>(x)</i>
         </li>
-        <li>For more information, see <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">Wikipedia</a>
+        <li>
+            For more information, see <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">Wikipedia</a>
             <ul>
                 <li style="color:green;">Note: Some of the <a href="https://en.wikipedia.org/wiki/Wikipedia:Image_use_policy" target="_blank">graphics</a> in this workshop come from Wikipedia!</li>
             </ul>
@@ -62,7 +67,7 @@ title: Linear Regression
     <div class="container">
         <div class="left">
             <ul>
-                <li>Taking a short break from the boat jokes</li>
+                <li>A (short) break from boat jokes</li>
                 <li>First introduced in 1973, used to teach regression</li>
                 <li>Four data sets with (nearly) identical statistical properties</li>
                 <li>Not identical when plotted!</li>
@@ -157,7 +162,9 @@ anscombe
         <li>It is easy to get the average for each column</li>
         <li><span style="color:green;">Note: The x columns are nearly identical</span>
         </li>
-        <li><span style="color:green;">Ditto for the y columns</span></li>
+        <li>
+            <span style="color:blue;">Note: The y columns are nearly identical</span>
+        </li>
     </ul>
     <pre><code class="r">
 colMeans(anscombe)
@@ -171,8 +178,8 @@ colMeans(anscombe)
 <section>
     <h2>Descriptive Statistics</h2>
     <ul>
-        <li>It is less easy to get the standard deviation.</li>
-        <li><span style="color:green;">Note: It is also (essentially) identical</span></li>
+        <li>Slightly harder to get the standard deviation.</li>
+        <li><span style="color:green;">Note: These are also (essentially) identical</span></li>
     </ul>
     <pre><code class="r">
 cbind(x1 = sd(anscombe$x1),
@@ -311,12 +318,13 @@ F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217
 </section>
 
 <section>
-    <h2>Many Ways To View An Object</h2>
+    <h2>Many Ways To Use Objects</h2>
     <ul>
         <li>You can access any part of it!</li>
     </ul>
-    <pre><code class="r">attributes(m1)</code></pre>
-    <pre class="fragment"><code class="r">
+    <div class="left">
+        <pre><code class="r">attributes(m1)</code></pre>
+        <pre class="fragment"><code class="r">
 $names
  [1] "coefficients"  "residuals"     "effects"       "rank"         
  [5] "fitted.values" "assign"        "qr"            "df.residual"  
@@ -324,64 +332,48 @@ $names
 
 $class
 [1] "lm"
-    </code></pre>
-</section>
-
-<section>
-    <h2>Many Ways To View An Object</h2>
-    <ul>
-        <li>It is easier to take directly from the summary</li>
-        <li>
-            A good example of using simple R commands in conjunction
-            to do something complex
-        </li>
-        <li>
-            SAS and SPSS have fewer, more complex, commands
-        </li>
-    </ul>
-    <pre><code class="r">attributes(summary(m1))</code></pre>
-    <pre class="fragment"><code class="r">
+        </code></pre>
+    </div>
+    <div class="right">
+        <pre><code class="r">attributes(summary(m1))</code></pre>
+        <pre class="fragment"><code class="r">
 $names
- [1] "call"          "terms"         "residuals"     "coefficients" 
- [5] "aliased"       "sigma"         "df"            "r.squared"    
- [9] "adj.r.squared" "fstatistic"    "cov.unscaled" 
+ [1] "coefficients"  "residuals"     "effects"       "rank"         
+ [5] "fitted.values" "assign"        "qr"            "df.residual"  
+ [9] "xlevels"       "call"          "terms"         "model"        
 
 $class
-[1] "summary.lm"
-    </code></pre>
+[1] "lm"
+        </code></pre>        
+    </div>
+        
 </section>
 
+
 <section>
-    <h2>Many Ways To View An Object</h2>
+    <h2>Many Ways To Use Objects</h2>
     <ul>
-        <li>What if we just want the coefficients?</li>
+        <li>How much detail do you want?</li>
     </ul>
-    <pre><code class="r">
+    <div class="left">
+        <pre><code class="r">
+m1$coefficients
+        </code></pre>
+        <pre class="fragment"><code class="r">
+(Intercept)          x1 
+3.0000909   0.5000909 
+        </code></pre>
+    </div>
+    <div class="right">
+        <pre><code class="r">
 summary(m1)$coefficients
-    </code></pre>
-    <pre class="fragment"><code class="r">
+        </code></pre>
+        <pre class="fragment"><code class="r">
              Estimate Std. Error  t value    Pr(>|t|)
 (Intercept) 3.0000909  1.1247468 2.667348 0.025734051
 anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
-    </code></pre>
-</section>
-
-<section>
-    <h2>
-        Many Ways To View An Object<br />
-        <span style="color:green;">And More Than One Way To Skin The Cat</span>
-    </h2>
-    <ul>
-        <li>There is actually a function to do that!</li>
-    </ul>
-    <pre><code class="r">
-coef(summary(m1))
-    </code></pre>
-    <pre class="fragment"><code class="r">
-             Estimate Std. Error  t value    Pr(>|t|)
-(Intercept) 3.0000909  1.1247468 2.667348 0.025734051
-anscombe$x1 0.5000909  0.1179055 4.241455 0.002169629
-    </code></pre>
+        </code></pre>
+    </div>
 </section>
 
 <section>
@@ -412,9 +404,6 @@ dev.off()
 
 <section>
     <h2>Evaluating The Model - QQ PLOT</h2>
-    <ul>
-        <li>It is easy to get a standard QQ Plot of the model</li>
-    </ul>
     <pre><code class="r">
 qqplot(anscombe$x1,anscombe$y1)
 abline(m1, col="red")
