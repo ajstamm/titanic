@@ -11,10 +11,13 @@
 ##
 ## #############################################################################
 
-## What are our columns? ------------------------------------------------------
+
+
+## WHAT ARE OUR COLUMNS? ------------------------------------------------------
 ## Column names, in alphabetical order. Data columns are presented in the same
 ## order.
 sort(names(passengers))
+
 
 
 ## AGE -------------------------------------------------------------------------
@@ -30,10 +33,12 @@ hist(passengers$age,
      )
 
 
+
 ## CABIN -----------------------------------------------------------------------
 ## This tells us where they are on the Titanic. This is useful, but hard to
 ## represent in a graph. So, here's a table. Be happy with that.  :-)
 table(passengers$cabin)
+
 
 
 ## EMBARKED --------------------------------------------------------------------
@@ -42,10 +47,12 @@ table(passengers$cabin)
 plot(passengers$embarked, col="light blue")
 
 
+
 ## NAME ------------------------------------------------------------------------
 ## This doesn't make any sense as a visual, so here's a way to see all of them.
 ## Really, this is just depressing.
 View(passengers$passenger_name)
+
 
 
 ## N_PARENTS_CHILDREN ----------------------------------------------------------
@@ -54,10 +61,12 @@ plot(passengers$n_parents_children)
 hist(passengers$n_parents_children)
 
 
+
 ## PASSENGER_ID ----------------------------------------------------------------
 ## This is another data element which doesn't make any sense as a graphic.
 ## I included this just to make this comprehensive.
 View(passengers$passenger_id)
+
 
 
 ## PASSENGER_CLASS -------------------------------------------------------------
@@ -68,9 +77,11 @@ plot(as.factor(passengers$passenger_class))
 barplot(table(passengers$passenger_class))
 
 
+
 ## SEX -------------------------------------------------------------------------
 ## This is just what the label says.
 plot(passengers$sex)
+
 
 
 ## SIBSP -----------------------------------------------------------------------
@@ -79,11 +90,13 @@ plot(passengers$n_siblings)
 hist(passengers$n_siblings)
 
 
+
 ## SURVIVED --------------------------------------------------------------------
 ## O == Died
 ## Since more than 50% of the passengers died, I think the name of this column
 ## is a little optimistic.
 plot(as.factor(passengers$survived))
+
 
 
 ## TICKET ----------------------------------------------------------------------

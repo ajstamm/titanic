@@ -8,7 +8,8 @@
 ## #############################################################################
 
 
-## Learning Objectives ---------------------------------------------------------
+
+## LEARNING OBJECTIVES ---------------------------------------------------------
 ## - R has many graphical packages.
 ##   - ggplot2     (publishing to, everywhere)
 ##   - ggvis       (publishing to web)
@@ -17,20 +18,26 @@
 ##   - htmlwidgets (publishing to web)
 ## - Today, we use Base R
 
-## Base R Graphics -------------------------------------------------------------
+
+
+## BASE R GRAPHICS -------------------------------------------------------------
 ## - Encourage interactive use
 ## - Easy to remember commands
 ## - Good defaults!
 ## - Thank You: John W. Tukey
 
-## Opening Discussion ----------------------------------------------------------
+
+
+## OPENING DISCUSSION ----------------------------------------------------------
 ## Plotting functions we will use today:
 ## - plot() You've already used this command.
 ## - barplot()
 ## - boxplot()
 ## - hist()
 
-## Age -------------------------------------------------------------------------
+
+
+## AGE -------------------------------------------------------------------------
 ## Remeber:
 mean(passengers$age)
 
@@ -40,18 +47,24 @@ plot(passengers$age)
 ## Use sample() to avoid.
 plot(sample(passengers$age))
 
-## Age By Passenger Class ------------------------------------------------------
+
+
+## AGE BY PASSENGER CLASS ------------------------------------------------------
 ## First Class passengers were the oldest group.
 ## Third Class was the youngest AND the most diverse.
 ## X/Y Axis Order matters!
 plot(x=passengers$passenger_class, y=passengers$age)
 
-## Remember Factors ------------------------------------------------------------
+
+
+## REMEMBER FACTORS ------------------------------------------------------------
 ## - Superficially similar to character/string variables.
 ## - Tells R a variable is a categorical variable.
 ## - Factors have different defaults in plot()
 
-## Age by Passenger Class (Factor) ---------------------------------------------
+
+
+## AGE BY PASSENGER CLASS (FACTOR) ---------------------------------------------
 ## - If we tell R that passengers$passenger_class is a categorical variable,
 ##   the scatter plot becomes a box plot!
 ##   - The box is +/- 1 standard deviation from the mean.
@@ -61,7 +74,9 @@ plot(as.factor(passengers$passenger_class),
      passengers$age
     )
 
-## Barplots ---------------------------------------------------------------------
+
+
+## BARPLOTS ---------------------------------------------------------------------
 ## You can't create a barplot with raw data. It needs a table.
 ## The barplot is a good way to visualize categorical data.
 
@@ -72,7 +87,9 @@ table(passengers$sex)
 tbl_sex <- table(passengers$sex)
 tbl_sex
 
-## Passenger Sex ---------------------------------------------------------------
+
+
+## PASSENGER SEX ---------------------------------------------------------------
 ## Input is a table object.
 barplot(tbl_sex)
 
@@ -93,12 +110,8 @@ barplot(table(passengers$sex))
 
 
 
-
 ## YOUR TURN! ------------------------------------------------------------------
 ## Now use prop.table to build a proportional barplot.
-
-
-
 
 
 ## GET SOME HELP! --------------------------------------------------------------
@@ -106,6 +119,8 @@ barplot(table(passengers$sex))
 ## - stackoverflow.com
 ## - google.com
 ## - Let's practice finding help.
+
+
 
 ## YOUR TURN! ------------------------------------------------------------------
 ## - Download the exploratory-plots.R and advanced-plots.R files.

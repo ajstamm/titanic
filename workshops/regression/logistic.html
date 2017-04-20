@@ -8,11 +8,9 @@ title: "Logistic Regression: Sex"
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="../ratios.R" target="_blank">ratios.R</a></li>
-                <li>Code: <a href="../logistic-sex.R" target="_blank">logistic-sex.R</a></li>
-                <li>Code: <a href="../logistic-age.R" target="_blank">logistic-age.R</a></li>                
+                <li>Code: <a href="../logistic.R" target="_blank">logistic.R</a></li>
                 <li>Will run the code together</li>
-                <li>~30 Minutes</li>
+                <li>~60 Minutes</li>
             </ul>
         </div>
         <div class="right">
@@ -24,15 +22,28 @@ title: "Logistic Regression: Sex"
 </section>
 
 <section>
+    <h2>PASSENGERS</h2>
+    <div class="left">
+        <p>If, for some reason, you have deleted/lost the passengers data set, run the following to retrieve it:
+            <pre><code class="r">
+source("http://choens.github.io/titanic/workshops/regression/import-passengers.R")
+            </code></pre>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/titanic-bow.jpg" alt="Logistic Curve Died~Sex" width="75%">
+    </div>
+</section>
+<section>
     <h2>Learning Objectives</h2>
     <ul>
         <li>Define Logistic Regression</li>
-        <li>Survived</li>
-        <li>Creating a new column! (Died)</li>
+        <li>
+            Survived becomes died!<br />
+            We will create a new column (Died)
+        </li>
         <li>Logistic Regression</li>
         <li>Visualizing Logistic Regression</li>
-        <li>Odds/Risk Ratio</li>
-        <li>Predict Survival</li>
+        <li>Calculating Odds Ratio</li>
     </ul>
 </section>
 
@@ -59,32 +70,8 @@ title: "Logistic Regression: Sex"
 </section>
 
 <section>
-    <h2>Dependent Variable: Survived</h2>
-    <div class="left">
-        <img src="{{site.baseurl}}/public/img/titanic-breaks-in-half.jpg" width="90%" alt="1st Class Restaurant">
-        <p>
-            <small><strong>Editor:</strong> Is this the best image <br />for a slide titled "Survived"?</small>
-        </p>
-    </div>
-    <div class="right">
-    <ul>
-        <li>
-            Today's most important dependent variable.
-        </li>
-        <li>
-            <code># Dead > # Alive</code>
-        </li>
-        <li>
-            Epidemiology == Fun <br />
-            <small>The data where <strike>(most)</strike> everyone dies.</small>
-        </li>
-    </ul>
-    </div>
-</section>
-
-<section>
     <h2>Survived</h2>
-        <pre><code class="r">
+    <pre><code class="r">
 tbl_surv <- table(passengers$survived)
 tbl_surv
 
@@ -96,15 +83,15 @@ tbl_surv
  0  1 
 56 44
 
-## The sample slightly low-balls the death-rate.
-        </code></pre>
+## The sample low-balls the death-rate.
+    </code></pre>
 </section>
 
 <section>
     <h2>Died!</h2>
     <ul>
-        <li>Need a new column; Epis are such positive people.</li>
-        <li>Usually discuss risk factors.</li>
+        <li>Need a new column; Epis are always positive.</li>
+        <li>Usually discuss risk factors.xb</li>
         <li>Easier to type <code>died</code> than <code>survived</code>.</li>
     </ul>
     <pre><code class="r">
@@ -369,13 +356,10 @@ passengers[,c("survived", "died")]
 </section>
 
 <section>
-    <h2>Logistic Regression</h2>
+    <h2>Logistic Regression: Categorical</h2>
     <ul>
-        <li>
-            Women and children first!<br />
-            <small>The title of this afternoon's workshop!</small>
-        </li>
-        <li>Let's start with sex.</li>
+        <li>Independent variable: <code>sex</code></li>
+        <li>Dependent variable: <code>died</code></li>
     </ul>
     <pre><code class="r">
 ## Cannot have NAs in our data.
@@ -385,14 +369,12 @@ sum(is.na(passengers$sex))
 sum(is.na(passengers$died))
 [1] 0
 
-## Creates a new variable.
-## Which makes it possible to plot this model.
+## A numeric variable means we can plot the model.
 passengers$is_male <- 0
 passengers$is_male[passengers$sex == "male"] <- 1
 
 ## To what extent does is_male explain our outcome, died?
 logit_sex <- glm(formula=died~is_male, family=binomial, data=passengers)
-summary(logit_sex)
     </code></pre>
     <p><small>Output on next slide.</small></p>
 </section>
@@ -400,8 +382,9 @@ summary(logit_sex)
 <section>
     <h2>Died~Sex</h2>
     <ul>
-        <li>Sex is statistically significant.</li>
-        <li>Residual deviance & AIC reduced.</li>
+        <li>Formula: died as a function of sex</li>
+        <li>Sex is a statistically significant predictor of died.</li>
+        <li>Reduces residual deviance and AIC.</li>
     </ul>
     <pre><code class="r">
 summary(logit_sex)
@@ -440,14 +423,13 @@ curve(predict(logit_sex, data.frame(is_male=x), type="response"), add=TRUE)
     <a href="{{site.baseurl}}/public/img/logistic-curve-sex.png" target="_blank">
         <img src="{{site.baseurl}}/public/img/logistic-curve-sex.png" alt="Logistic Curve Died~Sex" width="40%">
     </a>
-    <p><small>Yeah - That's supposed to be curved.</small></p>
 </section>
+
 <section>
-    <h2>Logistic Regression</h2>
+    <h2>Logistic Regression: Continuous</h2>
     <ul>
-        <li>Now you know logistic regression with categoricals.</li>
-        <li>Next up: continuous variables.
-        <li>Let's try age (children).</li>
+        <li>Independent variable: <code>age</code></li>
+        <li>Dependent variable: <code>died</code></li>
     </ul>
     <pre><code class="r">
 ## Cannot have NAs in our data.
@@ -459,7 +441,6 @@ sum(is.na(passengers$died))
 
 ## To what extent does the variable age explain our outcome, died?
 logit_age <- glm(formula=died~age, family=binomial, data=passengers)
-summary(logit_age)
     </code></pre>
     <p><small>Output on next slide</small></p>
 </section>
@@ -467,9 +448,10 @@ summary(logit_age)
 <section>
     <h2>Died ~ Age</h2>
     <ul>
-        <li>Age is not statistically significant.</li>
-        <li><strike>Almost</strike> No difference to the residual deviance & high AIC.</li>
-        <li>Why is this a bad model? The conventional story <span style="color:red">IS</span> true.</li>
+        Formula: died as a function of age
+        <li>Age is not a statistically significant predictor of died!</li>
+        <li><strike>Almost</strike> No difference to residual deviance or AIC.</li>
+        <li>Why is this a bad model?</li>
     </ul>
     <pre><code class="r">
 summary(logit_age)
@@ -524,7 +506,7 @@ curve(predict(g_age, data.frame(age=x), type="response"), add=TRUE)
 <section>
     <h2>Suggestions?</h2>
     <ul>
-        <li>How can we use age in our logit regression?</li>
+        <li>How can we use age to predict died?</li>
     </ul>
     <img src="{{site.baseurl}}/public/img/restaurant.jpg" alt="Some Nice Dining Options" width="75%">
 </section>
@@ -541,13 +523,13 @@ prop.table(table(passengers$died))
    0    1 
 0.44 0.56
 
-## Using the indexing we discussed this morning, we can do this:
+## Indexing / Filtering: What percent of passengers
+## five years or age or younger died?
 prop.table(table(passengers$died[passengers$age <= 5]))
 
         0         1 
 0.8181818 0.1818182 
 
-## Extending this one more step, we can really have some fun!
 ## Note: I'm TIRED of typing passengers.
     </code></pre>
 </section>
@@ -555,12 +537,14 @@ prop.table(table(passengers$died[passengers$age <= 5]))
 <section>
     <h2>New Tricks</h2>
     <ul>
-        <li><code>&, |</code></li>
         <li><code>with</code></li>
+        <li><code>&, |</code></li>
         <li><code>round</code></li>
     </ul>
     <pre><code class="r">
-## This is better:
+## - Only write passengers once
+## - Percentage of passengers died who are older than 5
+##   and younger than 11.
 with(passengers,
      prop.table(table(died[age > 5 & age <= 10]))
     )
@@ -568,23 +552,17 @@ with(passengers,
         0         1 
 0.5714286 0.4285714
 
-## This is easier to understand:
+## Make the percentage easier to grok:
 with(passengers,
      round(prop.table(table(died[age > 5 & age <= 10]))*100)
     )
-
-## Do you see a pattern with how this works?
-## Simple -> Complex
     </code></pre>
 </section>
 
 <section>
-    <h2>Or . . . </h2>
-    <ul>
-        <li>DRY</li>
-    </ul>
+    <h2>Age Group, Not Age</h2>
     <pre><code class="r">
-## Let's just create a new factor:
+## Let's create a new factor:
 passengers$age_group                                             <- NA
 passengers$age_group[passengers$age <= 10]                       <- "00-10"
 passengers$age_group[passengers$age > 10 & passengers$age <= 20] <- "11-20"
@@ -597,13 +575,13 @@ passengers$age_group[passengers$age > 60]                        <- "61+"
 </section>
 
 <section>
-    <h2>Which let's us . . . </h2>
+    <h2>Complex Tables</h2>
     <pre><code class="r">
-## Something similar:
+## This should be familiar by now:
 with(passengers,
      round(prop.table(table(age_group, died),1)*100,1))
 
-## And something truly nifty:
+## But this is nice!
 multi_tbl <- with(passengers,
                   round(prop.table(table(age_group, sex, died),1)*100,1))
 ftable(multi_tbl)
@@ -626,12 +604,18 @@ age_group sex
 </section>
 
 <section>
-    <h2>Suggestions?</h2>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
     <ul>
-        <li>A repeat slide. Sue me.</li>
-        <li>How can we use age in our logit regression?</li>
+        <li>
+            Is <code>age_group</code> a statistically significant predictor of
+            <code>died</code>?
+        </li>
+        <li>
+            No peeking!
+        </li>
     </ul>
-    <img src="{{site.baseurl}}/public/img/restaurant.jpg" alt="Some Nice Dining Options" width="75%">
 </section>
 
 <section>
@@ -675,7 +659,7 @@ Number of Fisher Scoring iterations: 4
     </h2>
     <ul>
         <li>There are two logistic regression models below.</li>
-        <li>One is definitely better than the other. Why?</li>
+        <li>One model is definitely better than the other. Why?</li>
     </ul>
     <div class="left">
         <pre><code class="r">
@@ -692,6 +676,247 @@ summary(logit_complex)
     <p><span style="color:green"Hint:</span> <code>?formula</code>
 </section>
 
+<section>
+    <h2>Odds Ratio</h2>
+    <div class="left">
+        <ul>
+            <li>This is for the epidemiologists.</li>
+            <li>No Base R function to calculate odds ratio.</li>
+            <li>But, it isn't hard to calculate it.</li>
+        </ul>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/titanic-launched-belfast.jpg" alt="The Titanic, in Belfast" width="100%">
+    </div>
+</section>
+
+<section>
+    <h2>Odds Ratio (OR)</h2>
+    <ul>
+        <li>
+            Quantifies how strongly the presence or absence of
+            property A is associated with the presence or absence of
+            property B in a given population.
+        </li>
+        <li>
+            Today, we want to know how being male is associated
+            with dying.
+        </li>
+        <li>
+            I am focusing on the Odds Ratio and not Risk Ratio because of the
+            relationship between OR and logistic regression.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>OR: First Steps</h2>
+    <ul>
+        <li>
+            Need the odds of dying for two different groups.
+        </li>
+        <li>
+            We need a 2x2 table: died x is_male
+        </li>
+        <li>
+            This table is backwards from how this is usually shown in
+            text books.
+        </li>
+        <li>
+            Could invert the table, or just do the math right.
+        </li>
+    </ul>
+    <pre><code class="r">
+## Remember: Rows (died), Columns (is_male)
+t_male <- with(passengers,
+               table(died, is_male, dnn=c("died","is_male"))
+              )
+t_male
+
+   is_male
+died   0   1
+   0  77  33
+   1  30 110
+
+## Yeah. Those numbers alone tell you alot.
+
+    </code></pre>
+</section>
+
+<section>
+    <h2>
+        The odds of dying:
+    </h2>
+    <p>
+        <table>
+        <tr>
+            <td>
+                <strong>Man:</strong>
+            </td>
+            <td>
+                <code style="color:red">110/33</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Woman:</strong>
+            </td>
+            <td>
+                <code style="color:green">30/77</code>
+            </td>
+        </table>
+        <br />
+    <p>The ratio of these two odds:</p>
+    <table>
+        </tr>
+        <td>
+            <code>(110/33)/(30/77)</code>
+        </td>
+        <td>
+            or . . .
+        </td>
+        <td>
+            <code>(110*77)/(33*30)</code>
+        </td>
+    </table>
+    <br />
+    <ul>
+        <li>The Odds Ratio in our sample is 8.555555555555555 . . .6</li>
+        <li>That is quite a risk factor.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <p>
+        Can you figure out how to do that with R?
+        <br />It is just some fancy indexing trickery.
+    </p>
+</section>
+
+<section>
+    <h2>OR: Algebraic Method</h2>
+    <pre><code>
+## Remember:
+t_male
+
+   is_male
+died   0   1
+   0  77  33
+   1  30 110
+    </code></pre>
+
+    <p>Thus, our solution . . . </p>
+    
+    <pre><code class="r">
+## Remember, you can use R like a giant calculator:
+(t_male[2,2] * t_male[1,1]) / (t_male[2,1]*t_male[1,2])
+[1] 8.555556
+
+## This does not come with confidence intervals.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Pop Quiz!</h2>
+    <p>
+        What is the relationship between OR and logistic regression?
+    </p>
+    <ul>
+        <li class="fragment">
+            The <code>log()</code> of the OR == the coefficient from
+            the logit model.
+        </li>
+        <li class="fragment">Which means . . . </li>
+        <li class="fragment">
+            The <code>exp()</code> of the coefficient from the logic model == the OR.
+        </li>
+        <li class="fragment">
+            If you can build the logit model, the OR is one step away.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Deriving OR from logit model</h2>
+    <pre><code class="r">
+## How does this help us?
+names(summary(logit_sex))
+    </code></pre>
+</section>
+
+<section>
+    <h2>Deriving OR from logit model</h2>
+    <ul>
+        <li>This is one way to do it.</li>
+    </ul>
+    <pre><code class="r">
+## Step 1: Access the model coefficients:
+summary(logit_sex)$coefficients
+             Estimate Std. Error   z value     Pr(>|z|)
+(Intercept) -0.942608  0.2152215 -4.379712 1.188363e-05
+is_male      2.146581  0.2927698  7.331975 2.267860e-13
+
+## Step 2: Calculate the exponent of the coefficients:
+exp( summary(logit_sex)$coefficients )
+             Estimate Std. Error      z value Pr(>|z|)
+(Intercept) 0.3896104   1.240137 1.252897e-02 1.000012
+is_male     8.5555556   1.340134 1.528397e+03 1.000000
+    </code></pre>
+</section>
+
+<section>
+    <h2>Deriving OR from logit model</h2>
+    <ul>
+        <li>This is another way to do it.</li>
+    </ul>
+    <pre><code class="r">
+## Step 1: Access the model coefficients:
+logit_sex_coef <- summary(logit_sex)$coefficients
+
+TODO
+
+## Step 2: Calculate the exponent of the coefficients:
+exp( logit_sex_coef )
+
+## - Step 1 returns a vector.
+## - Step 2 calculates the exponent for each item in the vector.
+##
+##      Using R is like building a spaceship with LEGOS!
+##      Assemble little things to build big things.
+    </code></pre>
+</section>
+
+<section>
+    <h2>Next Week's R Workshop</h2>
+    <p>
+        <span style="color:red">The following ad is paid for by our sponsors.</span>
+    </p>
+    <div class="left">
+    <ul>
+        <li>What holds you back from using R?</li>
+        <li>Next week, complete a project!</li>
+        <li>
+            This includes:
+            <small>
+            <ul>
+                <li>Download data from OpenData NY</li>
+                <li>Explore the data</li>
+                <li>Build a reproducible report (HTML/Word)</li>
+                <li>
+                    Discuss advanced topics like reproducible
+                    research, automation, etc.
+                </li>
+            </ul>
+            </small>
+    </ul>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/iceberg.jpg" alt="Iceberg == Deep Ieas" width="100%">
+    </div>        
+</section>
 <section>
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!

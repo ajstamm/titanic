@@ -8,13 +8,15 @@
 ## #############################################################################
 
 
-## Plot All The Things! --------------------------------------------------------
+
+## PLOT ALL THE THINGS! --------------------------------------------------------
 ## Try this on for size.
 ## Yes, it is a little overwhelming.
 plot(passengers, main="Plot All The Things!")
 
 
-## Age, Slightly Skewed --------------------------------------------------------
+
+## AGE, SLIGHTLY SKEWED --------------------------------------------------------
 ## This is another example of doing something complex in R, as a series of
 ## simple commands. Previously, you drew a histogram of passenger age. But,
 ## is passenger age normally distributed, or is it skewed?
@@ -29,7 +31,8 @@ yfit <- yfit*diff( h$mids[1:2] )*length(x)
 lines(xfit, yfit, col="red", lwd=2)
 
 
-## Plot the distribution density -----------------------------------------------
+
+## PLOT THE DISTRIBUTION DENSITY -----------------------------------------------
 ## Sometimes, histograms just aren't enough. Sometimes, we want a kernel density
 ## plot. And we can do that. And, I've got a thing for age.
 plot( density(passengers$age), xlab="Age", main="Density Distribution of Titanic Age")
