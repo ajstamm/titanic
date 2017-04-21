@@ -169,4 +169,15 @@ rm(children)
 
 
 
+## FURTHER LEARNING ------------------------------------------------------------
+## - This workshop is just . . . the tip of the iceberg. 
+## - Recommended R Resource: [Quick-R](http://www.statmethods.net/)
+## - Same guy who wrote [R In Action](https://www.manning.com/books/r-in-action-second-edition?a_bid=5c2b1e1d&a_aid=RiA2ed)
+## - They have a great article called
+##   ["Why R has A Steep Learning Curve"](http://www.statmethods.net/about/learningcurve.html)
+##   which is another view on the challenges faced by SAS/SPSS users during their
+##   (inevitable) to transition to R/(Python).
+
+
+
 ## That's All Folks! -----------------------------------------------------------

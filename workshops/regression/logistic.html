@@ -24,10 +24,11 @@ title: "Logistic Regression: Sex"
 <section>
     <h2>PASSENGERS</h2>
     <div class="left">
-        <p>If, for some reason, you have deleted/lost the passengers data set, run the following to retrieve it:
+        <p>If you deleted/lost the passengers data set, run this:
             <pre><code class="r">
 source("http://choens.github.io/titanic/workshops/regression/import-passengers.R")
             </code></pre>
+            <p>Be careful using a command like <code>source()</code></p>
     </div>
     <div class="right">
         <img src="{{site.baseurl}}/public/img/titanic-bow.jpg" alt="Logistic Curve Died~Sex" width="75%">
@@ -71,6 +72,11 @@ source("http://choens.github.io/titanic/workshops/regression/import-passengers.R
 
 <section>
     <h2>Survived</h2>
+    <ul>
+        <li>
+            Survived could be a good dependent variable (outcome).
+        </li>
+    </ul>
     <pre><code class="r">
 tbl_surv <- table(passengers$survived)
 tbl_surv
@@ -369,7 +375,9 @@ sum(is.na(passengers$sex))
 sum(is.na(passengers$died))
 [1] 0
 
-## A numeric variable means we can plot the model.
+## We cannot graph this regression with a categorical.
+## We can graph a numeric variable.
+## This will make sense in a slide or two.
 passengers$is_male <- 0
 passengers$is_male[passengers$sex == "male"] <- 1
 
@@ -382,7 +390,7 @@ logit_sex <- glm(formula=died~is_male, family=binomial, data=passengers)
 <section>
     <h2>Died~Sex</h2>
     <ul>
-        <li>Formula: died as a function of sex</li>
+        <li><strong>Formula:</strong> died as a function of sex</li>
         <li>Sex is a statistically significant predictor of died.</li>
         <li>Reduces residual deviance and AIC.</li>
     </ul>
@@ -448,7 +456,7 @@ logit_age <- glm(formula=died~age, family=binomial, data=passengers)
 <section>
     <h2>Died ~ Age</h2>
     <ul>
-        Formula: died as a function of age
+        <li><strong>Formula:</strong> died as a function of age</li>
         <li>Age is not a statistically significant predictor of died!</li>
         <li><strike>Almost</strike> No difference to residual deviance or AIC.</li>
         <li>Why is this a bad model?</li>
@@ -536,11 +544,13 @@ prop.table(table(passengers$died[passengers$age <= 5]))
 
 <section>
     <h2>New Tricks</h2>
-    <ul>
-        <li><code>with</code></li>
-        <li><code>&, |</code></li>
-        <li><code>round</code></li>
-    </ul>
+    <table>
+        <tr>
+        <td><code>with</code></td>
+        <td><code>&, |</code></td>
+        <td><code>round</code></td>
+        </tr>
+    </table>
     <pre><code class="r">
 ## - Only write passengers once
 ## - Percentage of passengers died who are older than 5
@@ -699,11 +709,10 @@ summary(logit_complex)
             property B in a given population.
         </li>
         <li>
-            Today, we want to know how being male is associated
-            with dying.
+            We want to know how being male is associated with dying.
         </li>
         <li>
-            I am focusing on the Odds Ratio and not Risk Ratio because of the
+            Focus is on the Odds Ratio and not Risk Ratio because of the
             relationship between OR and logistic regression.
         </li>
     </ul>
@@ -782,7 +791,7 @@ died   0   1
     <br />
     <ul>
         <li>The Odds Ratio in our sample is 8.555555555555555 . . .6</li>
-        <li>That is quite a risk factor.</li>
+        <li>That is an enormous risk factor.</li>
     </ul>
 </section>
 
@@ -876,12 +885,10 @@ is_male     8.5555556   1.340134 1.528397e+03 1.000000
 ## Step 1: Access the model coefficients:
 logit_sex_coef <- summary(logit_sex)$coefficients
 
-TODO
-
 ## Step 2: Calculate the exponent of the coefficients:
 exp( logit_sex_coef )
 
-## - Step 1 returns a vector.
+## - Step 1 returns a vector and saves it as logit_sex_coef.
 ## - Step 2 calculates the exponent for each item in the vector.
 ##
 ##      Using R is like building a spaceship with LEGOS!
@@ -914,7 +921,7 @@ exp( logit_sex_coef )
     </ul>
     </div>
     <div class="right">
-        <img src="{{site.baseurl}}/public/img/iceberg.jpg" alt="Iceberg == Deep Ieas" width="100%">
+        <img src="{{site.baseurl}}/public/img/iceberg.jpg" alt="Iceberg == Deep Ieas" width="75%">
     </div>        
 </section>
 <section>
@@ -922,6 +929,9 @@ exp( logit_sex_coef )
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <ul>
-        <li>What else can you add to the regression?</li>
+        <li>Can you create a better regression model?</li>
     </ul>
+    <br />
+    <br />
+    <p>Before you leave, please complete the <a href="https://docs.google.com/forms/d/1kHqxrcbNWRI0_o3CVddUDEw64NAGGxUs6Kw_DwXvle8/prefill" target="_blank">workshop survey</a>.</p>
 </section>

@@ -8,11 +8,11 @@
 
 
 ## PASSENGERS ------------------------------------------------------------------
-## This is not a slide. This is something for you to think about.
-## If you are missing the passengers data frame, run the following command:
-## Use this function carefully. Make sure you trust the person who wrote the
-## code you are running.
+## If you deleted/lost the passengers data set, run this:
 source("http://choens.github.io/titanic/workshops/regression/import-passengers.R")
+
+## Be careful using a command like source().
+## People can ruin your whole week.
 
 
 
@@ -22,7 +22,7 @@ source("http://choens.github.io/titanic/workshops/regression/import-passengers.R
 ##   We will create a new column (died)
 ## - Logistic Regression
 ## - Visualizing Logistic Regression
-## - Calculating Odds Ratio
+## - Odds Ratios
 
 
 
@@ -32,6 +32,7 @@ source("http://choens.github.io/titanic/workshops/regression/import-passengers.R
 
 
 ## SURVIVED --------------------------------------------------------------------
+## - Survived could be a good dependent variable (outcome).
 tbl_surv <- table(passengers$survived)
 tbl_surv
 
@@ -42,11 +43,12 @@ tbl_surv
 
 
 ## DIED! -----------------------------------------------------------------------
+## - So much of epi is looking for "bad" things and they see at ight.
 ## - Need a new column; Epis are always so positive.
 ## - Usually discuss risk factors.
 ## - Easier to type died than survived.
 
-## These two lines create a new column called "died" in the passengers data frame.
+## Creates a new column called "died" in the passengers data frame.
 passengers$died <- 1
 passengers$died[passengers$survived == 1] <- 0
 
@@ -68,14 +70,14 @@ passengers[,c("survived", "died")]  ## Warning: The output here is . . . lengthy
 sum(is.na(passengers$sex))
 sum(is.na(passengers$died))
 
-## I want to graph this, and I can't do what I want with a categorical.
-## A numeric variable means we can plot the model.
+## We cannot graph this regression with a categorical.
+## We can graph a numeric variable.
 ## This will make sense in a slide or two.
 passengers$is_male <- 0
 passengers$is_male[passengers$sex == "male"] <- 1
 
-## Build a logistic model. This is almost identical a linear model.
-## To what extent does is_male explain our outcome, died?
+## Build a logistic model. This is (functionally) almost identical to building a
+## linear model. To what extent does is_male explain our outcome, died?
 logit_sex <- glm(formula=died~is_male, family=binomial, data=passengers)
 
 
@@ -273,8 +275,8 @@ summary(logit_complex)
 ## ODDS RATIO (OR) -------------------------------------------------------------
 ## - Quantifies how strongly the presence or absence of property A is associated
 ##   with the presence or absence of property B in a given population.
-## - Today, we want to know how being male is associated with dying.
-## - I am focusing on the Odds Ratio and not Risk Ratio because of the
+## - We want to know how being male is associated with dying.
+## - Focus is on the Odds Ratio and not Risk Ratio because of the
 ##   relationship between OR and logistic regression.
 
 
@@ -300,7 +302,7 @@ t_male
 ## - (110/33) / (30/77) or . . .
 ## - (110*77) / (33*30)
 ## - The Odds Ratio in our sample is 8.5555555555...6
-## That is quite a risk factor.
+## That is an enormous risk factor.
 
 
 
@@ -402,10 +404,6 @@ logit_sex_coef <- summary(logit_sex)$coefficients
 
 ## Step 2: Calculate the exponent of the coefficients:
 exp( logit_sex_coef )
-
-             Estimate Std. Error      z value Pr(>|z|)
-(Intercept) 0.3896104   1.240137 1.252897e-02 1.000012
-is_male     8.5555556   1.340134 1.528397e+03 1.000000
 
 
 
