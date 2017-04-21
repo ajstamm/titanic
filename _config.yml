@@ -21,7 +21,7 @@ author:
   email:             andy.choens@gmail.com
 
 # Custom vars
-version:             "Fall - 2016"
+version:             "Spring - 2017"
 
 markdown: kramdown
 paginate: 5
