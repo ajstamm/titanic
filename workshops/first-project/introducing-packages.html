@@ -1,0 +1,192 @@
+---
+layout: presentation
+title: Introducing Packages
+---
+
+<section>
+    <h2>Introducing Packages</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Duration: ~15 Minutes</li>
+                <li>5 Minute Break</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>What is a package?</li>
+        <li>How to install?</li>
+        <li>How to load?</li>
+        <li>Introducing dplyr</li>
+    </ul>
+</section>
+
+<section>
+    <h2>What is a package?</h2>
+    <div class="left">
+        <h4>About:</h4>
+        <ul>
+            <li>A set of R functions.</li>
+            <li>Make your life easier</li>
+        </ul>
+    </div>
+    
+    <div class="right">
+        <h4>Examples:</h4>
+        <ul>
+            <li>
+                <a href="https://github.com/tidyverse/dplyr" target="_blank">
+                    dplyr
+                </a>:Advanced data management
+            </li>
+            <li>
+                <a href="http://ggplot2.org/" target="_blank">
+                    ggplot2
+                </a>: Grammar of graphics
+            </li>
+            <li>
+                <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" target="_blank">
+                    And . . . so . . . many . . . more!
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>How to install?</h2>
+    <pre><code class="r">
+## - Always plural
+## - Package name in quotes
+## - Capitalization matters
+install.packages("dplyr")
+    </code></pre>
+</section>
+
+<section>
+    <h2>How to load?</h2>
+    <pre><code class="r">
+## - Always singular
+## - Quotes not needed
+## - Capitalization matters
+library(dplyr)
+    </code></pre>
+</section>
+
+<section>
+    <h2>Introducing: dplyr</h2>
+    <div class="left">
+        <ul>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Hadley_Wickham" target="_blank">
+                    Hadley Wickham</a>: I owe this guy a beer.
+            </li>
+            <li>
+                <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf" target="_blank">
+                    Documentation (PDF)
+                </a>
+            </li>
+            <li>
+                <a href="https://cran.r-project.org/web/packages/dplyr" target="_blank">
+                    CRAN Page
+                </a>
+            </li>
+            <li>Makes hard things easy</li>
+            <li>Makes miracles possible</li>
+            <li>Not a unicorn</li>
+        </ul>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/hadley.jpg" width="80%" alt="Photo of Hadley Wickham, 2016">
+    </div>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <pre><code class="r">
+## Init ========================================================================
+library(dplyr)
+data(cars)
+
+## Are these two lines of code equivalent? =====================================
+cars[cars$speed > 20,]
+filter(cars, speed > 20)
+    </code></pre>
+    <p><small>Answer on next slide</small>
+</section>
+
+<section>
+    <h2>Yes!</h2>
+    <p style="color:red">Because otherwise I was going to look silly.</p>
+    <pre><code class="r">
+  speed dist
+1    22   66
+2    23   54
+3    24   70
+4    24   92
+5    24   93
+6    24  120
+7    25   85
+    </code></pre>
+</section>
+
+<section>
+    <h2>Summary Statistics Made EASY</h2>
+    <p style="color:red">Not enough room for Captain Smith, but run this code too.</p>
+    <div class="left">
+        <h5>Base R</h5>
+        <pre><code class="r">
+## Easy, but limited
+colMeans(cars)
+        </code></pre>
+        <pre><code class="fragment r">
+speed  dist 
+15.40 42.98 
+        </code></pre>        
+    </div>
+    <div class="right">
+        <h5>dplyr</h5>
+        <pre><code class="r">
+## More complex, more powerful
+cars %>%
+summarize(n_rows = n(),
+          speed = mean(speed),
+          dist = mean(dist) 
+)
+        </code></pre>
+        <pre><code class="fragment r">
++ + + +  
+ n_rows       speed      dist
+1     50       15.4     42.98
+        </code></pre>        
+    </div>    
+</section>
+
+<section>
+    <h2>And therein lies the rub</h2>
+    <ul>
+        <li>There are often multiple ways to do the same thing.</li>
+        <li>R <strong>is</strong> ludicrously powerful.</li>
+        <li>But it can also be very complex.</li>
+        <li>
+            <span style="color:green">Today's goal - help you find a path forward.</span>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>5 Minute Break!</h2>
+    <img src="{{site.baseurl}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
+    <p>Titanic in Cobh Harbour, County Cork Ireland</p>
+</section>

@@ -1,0 +1,114 @@
+---
+layout: presentation
+title: Functions
+---
+
+<section>
+    <h2>Functions</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Duration: ~15 Minutes</li>
+                <li>Followed By: 5 Minute Break</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Disclaimer</li>
+                <li>Example</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/titanic-ad.jpg">
+            <p>Titanic Ad For Journey From New York To Europe</p>
+        </div>
+</section>
+
+<section>
+    <h2>Disclaimer</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Will demonstrate.</li>
+                <li>Want you to know it is possible.</li>
+                <li>You don't have to fully understand.</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor" width="50%">
+            <p>John Jacob Astor in 1909. Richest man to die aboard the Titanic</p>
+        </div>
+</section>
+
+<section>
+    <h2>Demo: skew</h2>
+    <ul>
+        <li>
+            R does not have a built-in skew function.
+            <ul><li>Perhaps, because it is easy to program?</li></ul>
+        </li>
+        <li>
+            Several packages include skew.
+        </li>
+        <li>
+            I want us to program our own.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Calculating Skew</h2>
+    <pre><code class="r">
+## Helpful variables
+mean_win   <- mean(take_five$winning_numbers)
+median_win <- median(take_five$winning_numbers)
+sd_win     <- sd(take_five$winning_numbers)
+
+## Is it skewed?
+3*(mean_win - median_win) / sd(take_five$winning_numbers)
+    </code></pre>
+    <pre><code class="fragment r">
+[1] -0.01921861
+    </code></pre>
+</section>
+
+<section>
+    <h2>Function: skew()</h2>
+    <pre><code class="r">
+#' skew
+#'
+#' Pearson's second skew coefficient
+#' https://en.wikipedia.org/wiki/Skewness
+#'
+#' @param x A vector of numbers we can
+#' @return Pearson's second skewness coefficient of the numbers in x.
+#' 
+skew <- function(x) {
+    ## In-scope Variables.
+    x_median <- median(take_five$winning_numbers)
+    x_mean <- mean(take_five$winning_numbers)
+    x_sd <- sd(take_five$winning_numbers)
+
+    x_skew <- 3*(x_mean - x_median) / x_sd
+
+    return(x_skew)
+}
+    </code></pre>
+</section>
+
+<section>
+    <h1>Functions!</h1>
+    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
+    <p>John Jacob Astor in 1919</p>
+</section>
