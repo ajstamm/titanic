@@ -8,10 +8,10 @@ title: "Data.Frames"
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="{{site.baseurl}}/workshops/introduction/data.frames.R" target="_blank">data.frames.R</a></li>
+                <!-- <li>Code: <a href="{{site.baseurl}}/workshops/introduction/data.frames.R" target="_blank">data.frames.R</a></li> -->
                 <li>Run code, learn more</li>
                 <li>~45 Minutes</li>
-                <li>Good Bye</li>
+                <li>Followed By: <i>Good Bye</i><ul><li><i>Or Lunch</i></li></ul></li>
             </ul>
         </div>
         <div class="right">
@@ -56,19 +56,21 @@ title: "Data.Frames"
                 </li>
                 <li>All entries in a column have the same class</li>                
                 <li>Rows can have entries of different classes</li>
+                <li>Each column must be the same length (missing data represented as NA)
                 <li>A single data.frame is easier to manage than a collection of vectors</li>
                 <li>Relationship between the entries is made explicit</li>
             </ul>
         </div>
         <div class="right">
             <img src="{{site.baseurl}}/public/img/paperboy.jpg" alt="Paperboy with newspaper of Titanic's sinking" width="60%">
-            <p>Paperboy Ned Parfett, Soldier and Paperboy</p>
+            <p>Paperboy <a href="https://www.nationalarchives.gov.uk/titanic/stories/ned-parfett.htm" target="_blank">Ned Parfett</a>, Soldier and Paperboy</p>
         </div>
     </div>
 </section>
 
 <section>
-    <h2>Creation</h2>
+    <h2>Creation[1]</h2>
+    <p><span style="color:red;">Works best when you copy/paste</span></p>
     <pre><code class="r">
 ## First we need some vectors
 age <- c(22,38,26,35,35,NA,54,2,27,14)
@@ -80,7 +82,7 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 </section>
 
 <section>
-    <h2>Creation</h2>
+    <h2>Creation[2]</h2>
     <pre><code class="r">
 ## Then we put them together
 passengers <- data.frame(age, gender, survived)
@@ -102,9 +104,21 @@ View(passengers)
 9   27 female     TRUE
 10  14 female     TRUE
 
-## Those numbers on the left, row numbers.
-## All R objects must fit into memory.
+## Those numbers on the left: row numbers.
     </code></pre>
+</section>
+
+<section>
+    <h2>Memory Utilization In R</h2>
+    <ul>
+        <li>Statistical tools such as SAS & SPSS can manage datasets larger than total system RAM</li>
+        <li>Base R cannot do this</li>
+        <li>Once upon a time - this was a practical concern</li>
+        <li>Today - RAM is cheap
+            <ul><li>Other Options: RDBMS tools, Spark, and Hadoop</li></ul>
+        </li>
+        <li>Few useRs experience this limitation</li>
+    </ul>
 </section>
 
 <section>
@@ -129,15 +143,14 @@ dim(passengers)
 <section>
     <h2>Import CSV data</h2>
     <ul>
-        <li>We don't have to make everything</li>
-        <li>We can import data, from CSV, Excel, Databases, etc.</li>
-        <li>Today, we only care about CSV</li>
+        <li>R can import data, from CSV, Excel, Databases, etc.</li>
     </ul>
     <pre><code class="r">
 ## Import data from CSV.
 ## This WILL overwrite the data.frame we made a few minutes ago!
 url <- "http://choens.github.io/titanic/public/data/passengers.csv"
 passengers <- read.csv(url)
+head(passengers)
     </code></pre>
 </section>
 
@@ -148,7 +161,7 @@ passengers <- read.csv(url)
     
     <pre><code class="r">
 ## Spend some quality time with the following commands.
-## ?foo is a great way to read the documentation.
+## ? is a great way to read the documentation.
 dim(passengers)
 names(passengers)
 summary(passengers)
@@ -157,14 +170,13 @@ View(passengers)
 head(passengers)
 tail(passengers)
     </code></pre>
-    <p>Let us know if you need help!</p>
+    <p><span style="color:green;">Let us know if you need help!</span></p>
 </section>
 
 <section>
     <h2>Reuse What You Know!</h2>
     <ul>
-        <li>R is Object Oriented (OO); functions adapt to the data type</li>
-        <li>New data types often work with old commands</li>
+        <li>Functions adapt to the data type (Object Oriented)</li>
         <li>Both of the following code segments work</li>
     </ul>
     <div class="container">
@@ -231,7 +243,7 @@ passengers[ ,"age"]
 </section>
 
 <section>
-    <h2>Another Way To Index</h2>
+    <h2>Just Give Me A Vector!</h2>
     
     <pre><code class="r">
 ## There is an easier way to refer to a single column
@@ -253,13 +265,32 @@ passengers$age
 </section>
 
 <section>
+    <h2>The Real Power Is Boolean</h2>
+    <ul>
+        <li>A Boolean test on a vector returns a vector of TRUE/FALSE/NA the same length as the vector</li>
+        <li>We can use this vector as a filter</li>
+        <li><span style="color:green;">Let's do this together!</span></li>
+    </ul>
+    <pre><code class="r">
+## This should tell us that passengers has 250 rows.
+dim(these_passengers)
+
+my_filter <- passengers$survived == 1
+these_passengers_lived <- passengers[my_filter,]
+
+## This should be less than 250.
+dim(these_passengers_lived)
+    </code></pre>
+</section>
+
+<section>
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     
     <pre><code class="r">
-## Create a new data.frame called "children".
-## Children must be younger than 18.
+## Using passgengers, create a new data.frame of "children".
+## Define children as passengers where age < 18.
     </code></pre>
     <p>Answer on the next slide!</p>
 </section>
@@ -270,8 +301,8 @@ passengers$age
     </h2>
     
     <pre><code class="r">
-## Create a new data.frame called "children".
-## Children must be younger than 18.
+## Define children as passengers where age < 18.
+## Unlike last time - I did this as one step.
 children <- passengers[passengers$age < 18, ]
 summary(children)
     </code></pre>
@@ -299,15 +330,31 @@ ls()
 </section>
 
 <section>
+    <h2>Crosstabs!</h2>
+    <p>Very useful when working with categorical data.</p>
+    <pre><code class="fragment r">
+## This command works with ONE vector . . . 
+table(passengers$sex)
+
+## Or Two
+table(passengers$sex, passengers$survived)
+
+## Or More! This one is a little weird.
+table(passengers$sex, passengers$survived, passengers$passenger_class)
+
+## This makes it more readable. A function inside a function!
+ftable(table(passengers$sex, passengers$survived, passengers$passenger_class))
+    </code></pre>
+</section>
+
+<section>
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <p>Were men and women equally likely to survive the Titanic?</p>
     <pre><code class="r">
-## chisq.test() is the command to run the Chi Squared Test.
-## table() can be used with 2 vectors! Try table(foo$bar, foo$baz).
-## Don't worry about calculating the percents. We'll do that together.
-## You can use a calculator or Excel. I won't tell anyone.
+## - chisq.test() is the command to run the Chi Squared Test.
+## Don't worry about calculating the percents.
     </code></pre>
     <p>Answer on the next slide!</p>
 </section>
@@ -318,14 +365,9 @@ ls()
     </h2>
     
     <pre><code class="r">
-table(passengers$sex, passengers$survived)
 chisq.test( passengers$sex, passengers$survived )
     </code></pre>
     <pre><code class="fragment r">    
-          0  1
-  female  8 31
-  male   51 10
-
 	Pearson's Chi-squared test with Yates' continuity correction
 
 data:  passengers$sex and passengers$survived
@@ -341,30 +383,61 @@ X-squared = 36.585, df = 1, p-value = 1.461e-09
             <h5>Margins</h5>
             <pre><code class="r">
 ## Margins are what other tools call Totals.
-margin.table( table(passengers$sex, passengers$survived), margin=2)
+tbl <- table(passengers$sex, passengers$survived)
+mbl <- margin.table( tbl, margin=1)
+mbl
             </code></pre>
             <pre><code class="fragment r">
 
- 0  1 
-59 41 
+female   male 
+   107    143 
             </code></pre>                        
         </div>
         <div class="right">
             <h5>Margins</h5>
             <pre><code class="r">
 ## At least they didn't invent a new term for proportion.
-prop.table( table(passengers$sex, passengers$survived), margin=2)
+tbl <- table(passengers$sex, passengers$survived)
+pbl <- prop.table( tbl, margin=1)
+pbl
             </code></pre>
             <pre><code class="fragment r">
-
-                 0         1
-  female 0.1355932 0.7560976
-  male   0.8644068 0.2439024
-
-## You can use round() with this command.
+               0         1
+  female 0.2803738 0.7196262
+  male   0.7692308 0.2307692
             </code></pre>            
         </div>
     </div>
+    <p><span style="color:green;">You _can_ do this without the intermediaries!</span></p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <p>Can you figure out how to round the proportions?</p>
+    <pre><code class="r">
+## Try the round command!
+    </code></pre>
+    <p>Answer on the next slide!</p>
+</section>
+
+<section>
+    <h2>
+        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
+    </h2>
+    <p>Can you figure out how to round the proportions?</p>
+    <pre><code class="r">
+## Try the round command!
+tbl <- table(passengers$sex, passengers$survived)
+pbl <- prop.table( tbl, margin=1)
+round(100*pbl,1)
+    </code></pre>
+    <pre><code class="r fragment">
+            0    1
+  female 28.0 72.0
+  male   76.9 23.1
+    </code></pre>
 </section>
 
 <section>
@@ -373,7 +446,7 @@ prop.table( table(passengers$sex, passengers$survived), margin=2)
         <li>This is thankfully EASY</li>
     </ul>
     <pre><code class="r">
-## Make it all go away
+## Always clean up after yourself.
 rm(children)
     </code></pre>
 </section>
@@ -390,12 +463,12 @@ rm(children)
             <ul>
                 <li>Same guy who wrote <a href="https://www.manning.com/books/r-in-action-second-edition?a_bid=5c2b1e1d&a_aid=RiA2ed" target="_blank">R In Action</a></li>
                 <li>
-                    They have a great article called
+                    Read: 
                     <a href="http://www.statmethods.net/about/learningcurve.html" target="_blank">"
                         Why R has A Steep Learning Curve"
-                    </a>
-                    which is another view on the challenges faced by
-                    SAS/SPSS users during their to transition to R.
+                    </a><br />
+                    Which is a review of the challenges faced by
+                    SAS/SPSS users during their to transition to R
                 </li>
             </ul>
         </li>
@@ -405,7 +478,7 @@ rm(children)
 <section>
     <h1>That's All Folks!</h1>
     <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
-    <p>John Jacob Astor in 1919</p>
+    <p><a href="https://en.wikipedia.org/wiki/John_Jacob_Astor_IV" target="_blank">John Jacob Astor IV</a> in 1919</p>
     <p>
         Before you leave, please complete the
         <a href="https://docs.google.com/forms/d/1kHqxrcbNWRI0_o3CVddUDEw64NAGGxUs6Kw_DwXvle8/viewform?usp=send_form" target="_blank">

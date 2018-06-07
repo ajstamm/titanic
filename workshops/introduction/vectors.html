@@ -8,10 +8,10 @@ title: Vectors
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="{{site.baseurl}}/workshops/introduction/vectors.R"vectors.R">vectors.R</a></li>
+                <!-- <li>Code: <a href="{{site.baseurl}}/workshops/introduction/vectors.R"vectors.R">vectors.R</a></li> -->
                 <li>Run code, learn more</li>
                 <li>Duration: ~45 Minutes</li>
-                <li>Followed by: A 5 Minute Break</li>
+                <li>Followed by: <i>A Break!</i></li>
             </ul>
         </div>
         <div class="right">
@@ -25,27 +25,36 @@ title: Vectors
 <section>
     <h2>Learning Objectives</h2>
     <ul>
-        <li>What is a vector?</li>
+        <li>What Is A Vector?</li>
         <li>How To Make One</li>
         <li>How To Delete One</li>
         <li>Vector Indexing (How To Subset)</li>
-        <li>Work With Two Vectors</li>        
+        <li>Work With Two Vectors</li>
+        <li>Apply Functions To A Vector</li>
     </ul>
 </section>
 
 <section>
-    <h2>What is a vector></h2>
+    <h2>What is a vector?</h2>
     <ul>
-        <li>Congrats, you have already worked with vectors! (We forgot to tell you)</li>
-        <li>Understanding this is CRITICAL to becoming a useR</li>
+        <li>Congrats, you have already worked with vectors! 
+            <ul><li>(We forgot to tell you)</li></ul>
+        </li>
+        <li>Understanding vectors is CRITICAL to becoming a useR</li>
     </ul>
     
     <pre><code class="r">
 ## This is a vector, length == 1.
 captain <- "John Smith"
 
+## This is a vector, length == 2.
+captain <- c("John", "Smith")
+
 ## This is a vector too, length == 5.
 age <- c(22, 38, 26, 35, 35)
+
+## What does c stand for?
+?c
     </code></pre>
 </section>
 
@@ -54,9 +63,8 @@ age <- c(22, 38, 26, 35, 35)
     <ul>
         <li>Use the function <code class="r">c()</code> to <em>combine</em> things</li>
         <li>Works for numerics, characters, booleans, dates, etc.</li>
-        <li>If they aren't the same type of data, R will reduce to the lowest common denominator.</li>
-        <li>In practice, this is usually a character vector</li>
-        <li>All vectors are objects (like everything else in R)</li>
+        <li>All arguments are coerced to a common type</li>
+        <li>Each vector is an object <ul><li>(Everything is an object in R)</li></ul></li>
     </ul>
 </section>
 
@@ -65,7 +73,8 @@ age <- c(22, 38, 26, 35, 35)
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <pre><code class="r">
-## Going forward, you will want these two vectors.
+## You can copy/paste this from the slide.
+## These will be used again, don't delete.
 age <- c(22,38,26,35,35,NA,54,2,27,14)
 gender <- c("male","female","female","female","male",
             "male","male","male","female","female")
@@ -80,8 +89,7 @@ length(gender)
 <section>
     <h2>STOP!</h2>
     <img src="{{site.baseurl}}/public/img/titanic-iceberg.jpg" width="75%">
-    <p>If you didn't succeed with the last slide, SAY SOMETHING!</p>
-    <img src="">
+    <p>If you didn't succeed with the last slide, <span style="color:red;">SAY SOMETHING!</span></p>
 </section>
 
 <section>
@@ -105,10 +113,10 @@ length(gender)
         </table>
     </small>
 
-    <p>NA isn't a string, it is NA</p>
+    <p><b>Note:</b> NA isn't a string, it is NA</p>
 </section>
 <section>
-    <h2>Functions On A Vector</h2>
+    <h2>Apply A Function</h2>
     <ul>
         <li>Some functions act on each element in the vector</li>
         <li>Some functions act on the vector in total</li>
@@ -142,7 +150,7 @@ female   male
     <h2>NA</h2>
     <ul>
         <li>NA is the bane of our existence</li>
-        <li><code class="r">na.rm=TRUE</code> is our friend</li>
+        <li><code class="r">na.rm = TRUE</code> is our friend</li>
         <li>Example: <code class="r">mean()</code>
     </ul>
     <br />
@@ -163,7 +171,7 @@ mean(age)
             <h5>Good</h5>
             <pre><code class="r">
 ## This works just fine.
-mean(age, na.rm=TRUE)
+mean(age, na.rm = TRUE)
             </code></pre>
             <pre><code class="fragment r">
 [1] 28.11111
@@ -185,7 +193,8 @@ mean(age, na.rm=TRUE)
                 <li>RStudio help window</li>
                 <li><a href="http://stackoverflow.com/questions/tagged/r" target="_blank">Stack Overflow</a></li>
                 <li>Google: Pre-pend search query with "R"</li>
-                <li>Stack Overflow</li>
+                <li><a href="https://www.statmethods.net/index.html" target="_blank">Quick-R (Stat Methods)</a></li>
+                <li><a href="https://www.rstudio.com/resources/cheatsheets/", target="_blank">RStudio Cheatsheets</a></li>
             </ul>
         </div>
         <div class="right">
@@ -213,10 +222,10 @@ mean(age, na.rm=TRUE)
             <ul>
                 <li><code class="r">length()</code>: # of items</li>
                 <li><code class="r">table()</code>: # distinct values</li>
-                <li><code class="r">summary()</code>: You tell me</li>
-                <li><code class="r">plot()</code>: You tell me</li>
-                <li><code class="r">hist()</code>: You tell me</li>
-                <li><code class="r">barplot()</code>: You tell me</li>
+                <li><code class="r">summary()</code>: <i>You tell me</i></li>
+                <li><code class="r">plot()</code>: <i>You tell me</i></li>
+                <li><code class="r">hist()</code>: <i>You tell me</i></li>
+                <li><code class="r">barplot()</code>: <i>You tell me</i></li>
             </ul>
         </div>
     </div>
@@ -237,11 +246,12 @@ mean(age, na.rm=TRUE)
     <h2>Index[1]</h2>
     <ul>
         <li>AKA Subsetting / Filtering</li>
-        <li>Welcome to the world of square brackets</li>
-        <li>This part is tricky. Run this as I talk</li>
+        <li><span style="color:red;">Let's do this together</span></li>
     </ul>
     <pre><code class="r">
-## There are 10 entries in age and gender
+## Use the square bracket operator to select which
+## entries in a vector to return.
+## Remember: There are 10 entries in age and gender.
 
 ## But maybe we only want one of them.
 gender[10]
@@ -253,13 +263,15 @@ age[3:5]
 
 <section>
     <h2>Index[2]</h2>
-    <pre><code class="r">
-## There are 10 entries in age and gender
+    <p>
+        <span style="color:red;">STOP ME IF THIS DOESN'T MAKE SENSE!</span>
+    </p>
 
-## But maybe we only want to see the males.
+    <pre><code class="r">
+## Perhaps we only want to return the males.
 gender[gender == "male"]
 
-## And you can do this across vectors.
+## More usefully - this works across vectors.
 age[gender == "male"]
     </code></pre>
 </section>
@@ -414,7 +426,7 @@ mean of x mean of y
         <li>Factor</li>
         <li>Superficially, similar to a string character</li>
         <li>More efficient with memory usage</li>
-        <li>More importantly, defines a variable explicitly as a categorical</li>
+        <li>Defines a variable explicitly as a categorical</li>
     </ul>
 </section>
 
@@ -436,9 +448,8 @@ Levels: female male
     </div>
 </section>
 
-
 <section>
-    <h2>5 Minute Break!</h2>
+    <h2>Take A Break!</h2>
     <img src="{{site.baseurl}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
     <p>Titanic in Cobh Harbour, County Cork Ireland</p>
 </section>

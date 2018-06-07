@@ -4,14 +4,14 @@ title: Data Types
 ---
 
 <section>
-    <h2>Data Types</h2>
+    <h2>Hello World</h2>
     <div class="container">
         <div class="left">
             <ul>
-                <li>Code: <a href="{{site.baseurl}}/workshops/introduction/data-types.R">data-types.R</a></li>
+                <!-- <li>Code: <a href="{{site.baseurl}}/workshops/introduction/data-types.R">data-types.R</a></li> -->
                 <li>Run code, learn more</li>
                 <li>Duration: ~45 Minutes</li>
-                <li>Followed By: 5 Minute Break</li>
+                <li>Followed By: <i>A Break!</i></li>
             </ul>
         </div>
         <div class="right">
@@ -27,7 +27,7 @@ title: Data Types
     <div class="container">
         <div class="left">
             <ul>
-                <li>Create Some Data (Assignment)</li>
+                <li>Create Variables</li>
                 <li>Data Types</li>
                 <li>Yachting For Beginners</li>
             </ul>
@@ -39,19 +39,35 @@ title: Data Types
 </section>
 
 <section>
-    <h2>Create Some Data</h2>
+    <h2>Hello World</h2>
     <ul>
-        <li>Use an assignment operator</li>
-        <li>More than one!</li>
-        <li>History, convention, and some old-school ideas</li>
+        <li><code class="r"><-</code> is the assignment operator</li>
+        <li>Variable <code class="r">hi</code> has a length of one</li>
+        <li>Variable <code class="r">hi</code> is assigned the value, <code class="r">Hello World</code></li>
+        <li>Everything in R, including this variable, is an object
+        <li>It is easy to return the assigned value of a variable</li>
+    </ul>
+    <pre><code class="r">
+hi <- "Hello World"
+hi
+    </code></pre>
+    <pre><code class=" fragment r">
+[1] "Hello World"    
+    </code></pre>
+    <ul>
+</section>
+
+<section>
+    <h2>Assignment Conventions</h2>
+    <ul>
+        <li><code class="r"><-</code> was the first assignment operator</li>
+        <li>Although <code class="r">=</code> works, <code class="r"><-</code> is the standard </li>
+        <li><a href="https://www.statmethods.net/management/variables.html" target="blank">https://www.statmethods.net/management/variables.html</a>
     </ul>
     <pre><code class="r">
 ## These are equivalent.
 a <- 1
-a =  1
-
-## In the beginning <- was the only assignment operator.
-## Most R programmers continue to use it as a convention
+b =  1
     </code></pre>
 </section>
 
@@ -60,10 +76,10 @@ a =  1
     <div class="container">
         <div class="left">
             <ul>
-                <li>Languages have conventions</li>
+                <li>All languages have conventions</li>
                 <li><span style="color:green;">KNOW</span> them, to read demo code, etc</li>
                 <li>Only deviate if you have good reason to do so</li>
-                <li>TITR uses R conventions, unless otherwise noted</li>
+                <li>TITR uses Base R conventions, unless otherwise noted</li>
             </ul>
         </div>
         <div class="right">
@@ -76,27 +92,40 @@ a =  1
     <h2>Assignment Conventions</h2>
     <ul>
         <li>Both <code class="r"><-</code> and <code class="r">=</code> assign variables in the local environment</li>
-        <li>If you see someone using <code class="r"><--</code> <span style="color:red;">be careful!</span></li>
-        <li>Especially if you do not understand concepts such as lexical scoping, global environment, etc</li>
+        <li>If you see someone using <code class="r"><<-</code> <span style="color:red;">run away!</span>
+            <ul>
+                <li>Unless you do not lexical scoping and the difference between local and global environment</li>
+                <li>If you do, <code class="r"><<-</code> is the global assignment operator</li>
+                <li><a href="https://stat.ethz.ch/R-manual/R-patched/library/base/html/assignOps.html" target="blank">https://stat.ethz.ch/R-manual/R-patched/library/base/html/assignOps.html</a>
+            </ul>
+        </li>
     </ul>
 </section>
 
 <section>
+    <h2>Checking For Understanding</h2>
+    <h3>Text Editor v REPL</h3>
+    <img src="{{site.baseurl}}/public/img/rstudio-02.png" alt="Second Screenshot of RStudio" width="100%">
+</section>
+
+
+<section>
     <h2>Capitalization Matters</h2>
-    <ul>
-        <li>Capitalization does not matter in SQL</li>
-        <li>It does matter in R (and most other languages)</li>
-    </ul>
+    <div class="wideleft">
+        <ul>
+            <li>SAS & SQL <span style="color:red;">ARE NOT</span> case sensitive</li>
+            <li>Most languages such as R and Python <span style="color:green;">ARE</span> case sensitive</li>
+        </ul>
+    </div>
+    <div class="narrowright">
+        <pre><code class="r">
+## In this session:
 
-    <pre><code class="r">
-## Using our object, "a" from previous slide.
+a ## This works.
 
-## This works.
-head(a)
-
-## This will _NOT_ work.
-head(A)
-    </code></pre>
+A ## - This does not.
+        </code></pre>
+    </div>
 </section>
 
 <section>
@@ -139,33 +168,54 @@ head(A)
             <h5>R:</h5>
             <ul>
                 <li>These are numbers!</li>
+                <li>For more info: <code class="r">?numeric</code>
             </ul>
         </div>
         <div class="right">
             <h5>Analogues:</h5>
             <ul>
-                <li>SQL: <code class="r">FLOAT</code></li>
-                <li>SAS: <code class="r">NUM</code></li>
+                <li>Python: <code class="python">FLOAT</code></li>
+                <li>SQL: <code class="sql">FLOAT</code></li>
+                <li>SAS: <code class="sas">NUM</code></li>
             </ul>
         </div>
     </div>
 </section>
+
 <section>
     <h2>Numeric</h2>
     <pre><code class="r">
-## Use the assignment operator (<-) to assign a value
-## to a variable.
-
 ## The passenger capacity of the Titanic.
 passenger_capacity <- 2435
 
 ## The crew capacity of the Titanic.
 crew_capacity <- 892
-
-## Note: You _do not_ use a comma separator in a numeric
     </code></pre>
+
+    <ul>
+        <li><b>Note:</b> Do not use a comma separator in a numeric</li>
+    </ul>
     
 </section>
+
+
+<section>
+    <h2>Numeric</h2>
+    <ul>
+        <li>Arithmetic is straightforward
+            <ul>
+                <li>Addition: <code class="r">+</code></li>
+                <li>Subtraction: <code class="r">-</code></li>
+                <li>Multiplication: <code class="r">*</code></li>
+                <li>Division: <code class="r">/</code></li>
+                <li>Exponentiation: <code class="r">^</code></li>
+            </ul></li>
+    </ul>
+    
+</section>
+
+
+
 
 <section>
     <h2>
@@ -179,7 +229,7 @@ crew_capacity <- 892
     <pre><code class="fragment r">
 total_capacity <- passenger_capacity + crew_capacity
 
-percent_crew = 100* crew_capacity / total_capacity
+percent_crew = 100 * crew_capacity / total_capacity
 
 percent_crew
     </code></pre>
@@ -189,13 +239,17 @@ percent_crew
 <section>
     <h2>Functions</h2>
     <ul>
-        <li>Being able to do something to what we create is useful</li>
-        <li>We will often use a function to alter our data</li>
+        <li>We use functions to alter or understand our data</li>
+        <li>Arithmetic operators are actually special functions</li>
     </ul>
 
     <pre><code class="r">
-## This is fake code.
-second_variable <- some_function(first_variable)
+## Another way to do it!
+total_capacity <- sum(passenger_capacity, crew_capacity)
+total_capacity
+    </code></pre>
+    <pre><code class="r fragment">
+[1] 3327
     </code></pre>
 </section>
 
@@ -204,7 +258,6 @@ second_variable <- some_function(first_variable)
     <ul>
         <li>Is a variable numeric?</li>
         <li>is.numeric() returns a Boolean</li>
-        <li><span style="color:green;">Note:</span> Your first R function!</li>
     </ul>
 
     <div class="container">
@@ -216,12 +269,12 @@ second_variable <- some_function(first_variable)
             </p>
         </div>
         <div class="right">
-            <pre><code class="r">is.numeric(percent_crew)</code></pre>
+            <pre><code class="r">is.numeric(hi)</code></pre>
             <p class="returns">
                 Returns:
-                <pre><code class="fragment r">[1] TRUE</code></pre>
+                <pre><code class="fragment r">[1] FALSE</code></pre>
             </p>
-    
+            
 </section>
 
 <section>
@@ -278,14 +331,23 @@ class(percent_crew)
 
 <section>
     <h2>Characters</h2>
-    <ul>
-        <li>SQL: <code class="r">char()</code>, <code class="r">varchar()</code></li>
-        <li>SAS: <code class="r">CHAR</code></li>
-        <li>In R - characters can be of any arbitrary length <br /><smaller>(until you run out of memory)</smaller></li>
-        <li>Quotes: <code class="r">'foo'</code> or <code class="r">"foo"</code></li>
-        <li>Double quotes are the convention, mostly</li>
-        <li>Assignment works the same way as numerics(<code class="r"><-</code>)</li>
-    </ul>
+    <div class="wideleft">
+        <h5>R:</h5>
+        <ul>
+            <li>Characters can be of any arbitrary length <br /><smaller>(memory dependent)</smaller></li>
+            <li>Quotes: <code class="r">'foo'</code> or <code class="r">"foo"</code>
+                <ul><li>Double quotes are the convention (mostly)</li></ul></li>
+            <li>Assignment uses (<code class="r"><-</code>)</li>
+        </ul>
+    </div>
+    <div class="narrowright">
+        <h5>Analogues:</h5>
+        <ul>
+            <li>Python: <code class="python">string</code></li>
+            <li>SAS: <code class="sas">CHAR</code></li>
+            <li>SQL: <code class="sql">char()</code>, <code class="r">varchar()</code></li>
+        </ul>
+    </div>
 </section>
 
 <section>
@@ -294,7 +356,7 @@ class(percent_crew)
     </h2>
 
     <pre><code class="r">
-## Let's make some character vars!
+## Let's make some character variables!
 title <- "Captain"
 name  <- "Smith"
 
@@ -317,8 +379,10 @@ paste(title, name, sep=" ")
         </ul>
     </div>
     <div class="right">
+        <h5>Analogues:</h5>
         <ul>
-            <li>SQL: Either <code class="r">BOOL</code> or <code class="r">INT</code> (There may or may not be an analogue)</li>
+            <li>Python: <code class="python"> True, False</code>
+            <li>SQL: Either <code class="sql">BOOL</code> or <code class="r">INT</code> (There may or may not be an analogue)</li>
             <li>SAS: 1 = Yes, 0 = No. <br /><smaller>No direct analogue in SAS</smaller></li>
         </ul>
     </div>
@@ -332,25 +396,29 @@ survived <- TRUE
 ## OR
 
 survived <- FALSE
-
-## Nothing Surprising Here.
     </code></pre>
+
+    - <b>Note:</b> CAPITALIZATION MATTERS!
 </section>
 
 <section>
     <h2>Comparison Operators</h2>
-    <h5>In R:</h5>
-    <div class="left">
+    <div class="wideleft">
+        <h5>In R:</h5>
         <ul>
-            <li>Equals: <code class="r">==</code> (Cannot use <code class="r">=</code>)</li>
+            <li>Equals: <code class="r">==</code><br /><i>(Remember, <code class="r">=</code>, is an assignment operator)</i></li>
             <li>Less Than: <code class="r"><</code>, <code class="r"><=</code></li>
             <li>Greater Than:<code class="r">></code>, <code class="r">>=</code></li>
             <li>Not Equal: !=</li>
         </ul>
-        <p>Returns: <code class="r">TRUE</code>, <code class="r">FALSE</code> OR <code class="r">NA</code></p>
+        <p><b>Boolean Operators ALWAYS Return:</b> <code class="r">TRUE</code>, <code class="r">FALSE</code> OR <code class="r">NA</code></p>
     </div>
-    <div class="right">
+    <div class="narrowright">
+        <h5>In Python/SQL</h5>
+        <ul><li>Identical to R</li></ul>
+        <br /><br />
         <h5>In SAS:</h5>
+        <small>
         <table>
             <tr>
                 <td>Symbol</td>
@@ -381,6 +449,7 @@ survived <- FALSE
                 <td><code class="r">Ne</code></td>
             </tr>
         </table>
+        </small>
     </div>
 </section>
 
@@ -388,16 +457,14 @@ survived <- FALSE
     <h2>Comparisons</h2>
     <pre><code class="r">
 # Were there more passengers than crew?
-# Hint: Yes, but let's prove it
 > passenger_capacity > crew_capacity
 [1] TRUE
 
 # Were there exactly 1,000 passengers?
-# Hint: No. Of course not.
 > passenger_capacity == 1000
 [1] FALSE
 
-## You can assign the results to a variable
+## Assign the results to a variable.
 answer <- passenger_capacity < 1000
 
 ## Doing so returns nothing, unless there is an error.
@@ -412,8 +479,9 @@ answer <- passenger_capacity < 1000
 ## Captain Edward Smith was 62 years old when he died.
 ## Was he older when he died than you are today?
 answer <- 62 > ?
+answer
 
-## Additional Questions
+## Additional Questions:
 ## Is 'answer' a Numeric?
 ## Is 'answer' a Boolean?
 
@@ -423,12 +491,13 @@ answer <- 62 > ?
 <section>
     <h2>Dates</h2>
     <ul>
+        <li>Not needed today, just demonstrative</li>
         <li><b>Fact of Life:</b> Dates universally suck</li>
         <li>R is no different</li>
-        <li>Not needed today, just demonstrative</li>
         <li>Like Integers, must be explicitly declared</li>
-        <li>The command <code class="r">as.Date()</code>, is funky</li>
-        <li>Why the capital <code class="r">D</code>? Dunno</li>
+        <li><code class="r">as.Date()</code>
+            <ul><li>Why the capital <code class="r">D</code>? </li><li>Dunno</li></ul>
+        </li>
     </ul>
     
 </section>
@@ -448,11 +517,10 @@ capt_smith_dob <- as.Date("1850-01-27")
 <section>
     <h2> REPL Gotcha!</h2>
     <ul>
-        <li>Each line in R's REPL normally starts with: <code>></code></li>
-        <li>If a line starts with a <code>+</code>, you haven't finished your statement</li>
-        <li> The <code>+</code> is R's way to tell you it is waiting for you to finish</li>
-        <li>Usually happens because you didn't close your parens</li>
-        <li>(So close them . . . </li>
+        <li>Each line in R's REPL usually starts with: <code class="r">></code></li>
+        <li>Sometimes a line starts with a <code class="r">+</code> instead</li>
+        <li>This is R waiting for you to finish a command</li>
+        <li>You failed to close a pair of parens, quotation, etc. </li>
     </ul>
     <pre><code class="r">
 round(9.9
@@ -467,13 +535,14 @@ round(9.9
 
     <pre><code class="r">
 ## What does this do?
+## And how is this different?
 c(1,2,3)
     </code></pre>    
 </section>
 
 
 <section>
-    <h2>5 Minute Break!</h2>
+    <h2>Take A Break!</h2>
     <img src="{{site.baseurl}}/public/img/titanic-cobh-harbour-1912.jpg" alt="Titanic in Cobh Harbour, County Cork Ireland">
     <p>Titanic in Cobh Harbour, County Cork Ireland</p>
 </section>

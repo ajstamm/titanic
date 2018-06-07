@@ -1,18 +1,18 @@
-gems:                [jekyll-paginate]
-paginate:            5
-paginate_path:       'page:num'
+plugins:            [jekyll-paginate]
+paginate:           5
+paginate_path:      'page:num'
 
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
+permalink:          pretty
 
 # Setup
-title:               A Titanic Introduction To R
-tagline:             ''
-description:         ''
-url:                 'http://choens.github.io'
-baseurl:             '/titanic'
+title:              A Titanic Introduction To R
+tagline:            ''
+description:        ''
+url:                'http://choens.github.io'
+baseurl:            '/titanic'
 
 # About/contact
 author:
@@ -21,11 +21,11 @@ author:
   email:             andy.choens@gmail.com
 
 # Custom vars
-version:             "Spring - 2017"
+version:             "Summer - 2018"
 
-markdown: kramdown
-paginate: 5
+markdown:             kramdown
+paginate:             5
 
 kramdown:
-  input: GFM
+  input:              GFM
   syntax_highlighter: rouge
