@@ -11,14 +11,14 @@ title: About
 </div>
 
 In the span of only a few years, R has become the Lingua Franca of
-statistics. The Titanic Introduction to R (TITR) is a series of
-workshops presented by the <abbr title="Epidemiology and Biostatistics
+statistics. The Titanic Introduction to R <i>(TITR)</i> is a series of
+workshops developed by <abbr title="Epidemiology and Biostatistics
 Community of Practice">EBCoP</abbr> <a
 href="http://www.health.ny.gov/" target="_blank">(New York State
 DOH)</a> and the <a href="http://www.albany.edu/rockefeller/homepage/"
 target="_blank">Rockefeller College of Public Affairs & Policy (SUNY
-Albany)</a>. Each workshop is a free three hour cruise which
-introduces one or more key R concepts. Each workshop includes slides,
+Albany)</a>, and Andy Choens. Each workshop is a free three hour
+cruise which introduces key R concepts. Each workshop includes slides,
 participant materials (code, data, etc.) and resources to further
 participant development. Each participant should have access to a
 laptop or desktop computer running <a

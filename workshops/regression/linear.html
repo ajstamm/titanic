@@ -56,9 +56,9 @@ title: Linear Regression
 <section>
     <h2>Many Data Sets</h2>
     <ul>
-        <li>R comes with several classic data sets which are useful for learning how to write R script</li>
-        <li>Most R packages also come with an example data set (or several)</li>
-        <li>Right now, we want to use Anscombe's Quartet</li>
+        <li>R comes with several classic data sets</li>
+        <li>R packages come with one or more example data sets</li>
+        <li>This presentation relies on Anscombe's Quartet</li>
     </ul>
     <pre><code class="r">data()</code></pre>
 </section>
@@ -66,7 +66,7 @@ title: Linear Regression
 <section>
     <h2>Anscombe's Quartet:</h2>
     <div class="container">
-        <div class="left">
+        <div class="wideleft">
             <ul>
                 <li>A (short) break from boat jokes</li>
                 <li>First introduced in 1973, used to teach regression</li>
@@ -74,9 +74,9 @@ title: Linear Regression
                 <li>Not identical when plotted!</li>
             </ul>
         </div>
-        <div class="right">
+        <div class="narrowright">
             <img src="{{site.baseurl}}/public/img/francis_anscombe.jpeg" alt="Photo of Francis Anscombe">
-            <p>This is Francis Anscombe (according to <a href="https://en.wikipedia.org/wiki/Francis_Anscombe" target="_blank">Wikipedia</a>)</p>
+            <p><a href="https://en.wikipedia.org/wiki/Francis_Anscombe" target="_blank">Francis Anscombe</a></p>
         </div>
     </div>
 </section>
@@ -155,6 +155,19 @@ anscombe
             <td style="text-align:center;">y4</td>
         </tr>
     </table>
+</section>
+
+<section>
+    <h2>How Do We Access A Single Column Of Data?</h2>
+    <p>
+        Anscombe's Quartet is a synthetic data set. The abstract ideas which
+        underlie the normal differences between row and column in a data frame
+        do not really apply here. There is relationship between X1 and X3. But,
+        to use the data, we need to access individual columns of data.
+    </p>
+    <p>
+        <b>Question</b> How can we access all the values in a given colum?
+    </p>
 </section>
 
 <section>

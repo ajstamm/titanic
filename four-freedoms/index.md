@@ -6,7 +6,7 @@ title: Four Freedoms
 <div style="text-align:center;">
     <img class="center" src="{{site.baseurl}}/public/img/titanic-side.gif" width="100%" alt="Drawing of the Titanic">
     <div>
-            RMS Titanic
+        RMS Titanic
     </div>
 </div>
 <br />
