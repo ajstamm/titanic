@@ -5,15 +5,13 @@ title: Introducing Packages
 
 <section>
     <h2>Introducing Packages</h2>
-    <div class="container">
-        <div class="left">
-            Duration: ~15 Minutes</li>
-            5 Minute Break</li>
-        </div>
-        <div class="right">
-            <div class="center" style="text-align:center;">
-                <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
-            </div>
+    <div class="left">
+        <p>Duration: ~15 Minutes</p>
+        <p>5 Minute Break</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="{{site.baseurl}}/public/img/titanic.jpg" width="90%" alt="Photo of the Titanic">
         </div>
     </div>
 </section>
@@ -30,30 +28,29 @@ title: Introducing Packages
 
 <section>
     <h2>What is a package?</h2>
-    A set of R functions to make your life easier
+    
+    <p>A set of R functions to make your life easier</p>
 
     <h4>Examples</h4>
     <ul>
         <li>
             <a href="https://github.com/tidyverse/dplyr" target="_blank">
-                dplyr
-            </a>: Advanced data management
+                dplyr </a>: Advanced data management
         </li>
         <li>
             <a href="http://ggplot2.org/" target="_blank">
-                ggplot2
-            </a>: Grammar of graphics
-         </li>
-         <li>
-             <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" target="_blank">
-                And . . . so . . . many . . . more!
-             </a>
-         </li>
-     </ul>
+                ggplot2 </a>: Grammar of graphics
+        </li>
+        <li>
+            <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" target="_blank">
+                And . . . so . . . many . . . more! </a>
+        </li>
+    </ul>
 </section>
 
 <section>
     <h2>Install a package</h2>
+    
     <pre><code class="r">
 ## - Always plural
 ## - Package name in quotes
@@ -64,6 +61,7 @@ install.packages("dplyr")
 
 <section>
     <h2>Load a package</h2>
+    
     <pre><code class="r">
 ## - Always singular
 ## - Quotes not needed
@@ -74,6 +72,7 @@ library(dplyr)
 
 <section>
     <h2>Introduce dplyr</h2>
+    
     <div class="left">
         <ul>
             <li>
@@ -102,6 +101,7 @@ library(dplyr)
 
 <section>
     <h2>Your Turn!</h2>
+    
     <pre><code class="r">
 ## Init ==================================================
 library(dplyr)
@@ -111,12 +111,14 @@ data(cars)
 cars[cars$speed > 20,]
 filter(cars, speed > 20)
     </code></pre>
+    
     <p style="color:red">Try this code.</p>
     <p><small>Answer on next slide</small>
 </section>
 
 <section>
     <h2>Yes, they are.</h2>
+    
     <pre><code class="r">
   speed dist
 1    22   66
@@ -131,7 +133,9 @@ filter(cars, speed > 20)
 
 <section>
     <h2>Summary Statistics Made EASY</h2>
+    
     <p style="color:red">Try this code, too.</p>
+    
     <div class="left">
         <h5>Base R</h5>
         <pre><code class="r">
