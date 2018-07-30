@@ -7,10 +7,8 @@ title: Introducing Packages
     <h2>Introducing Packages</h2>
     <div class="container">
         <div class="left">
-            <ul>
-                <li>Duration: ~15 Minutes</li>
-                <li>5 Minute Break</li>
-            </ul>
+            Duration: ~15 Minutes</li>
+            5 Minute Break</li>
         </div>
         <div class="right">
             <div class="center" style="text-align:center;">
@@ -22,31 +20,24 @@ title: Introducing Packages
 
 <section>
     <h2>Learning Objectives</h2>
-    <ul>
-        <li>What is a package?</li>
-        <li>How to install?</li>
-        <li>How to load?</li>
-        <li>Introducing dplyr</li>
-    </ul>
+    <ol>
+        <li>Define a package</li>
+        <li>Install a package</li>
+        <li>Load a package</li>
+        <li>Introduce dplyr</li>
+    </ol>
 </section>
 
 <section>
     <h2>What is a package?</h2>
-    <div class="left">
-        <h4>About:</h4>
-        <ul>
-            <li>A set of R functions.</li>
-            <li>Make your life easier</li>
-        </ul>
-    </div>
-    
-    <div class="right">
-        <h4>Examples:</h4>
+        A set of R functions to make your life easier
+
+        <h4>Examples</h4>
         <ul>
             <li>
                 <a href="https://github.com/tidyverse/dplyr" target="_blank">
                     dplyr
-                </a>:Advanced data management
+                </a>: Advanced data management
             </li>
             <li>
                 <a href="http://ggplot2.org/" target="_blank">
@@ -63,7 +54,7 @@ title: Introducing Packages
 </section>
 
 <section>
-    <h2>How to install?</h2>
+    <h2>Install a package</h2>
     <pre><code class="r">
 ## - Always plural
 ## - Package name in quotes
@@ -73,7 +64,7 @@ install.packages("dplyr")
 </section>
 
 <section>
-    <h2>How to load?</h2>
+    <h2>Load a package</h2>
     <pre><code class="r">
 ## - Always singular
 ## - Quotes not needed
@@ -83,12 +74,14 @@ library(dplyr)
 </section>
 
 <section>
-    <h2>Introducing: dplyr</h2>
+    <h2>Introduce dplyr</h2>
     <div class="left">
         <ul>
             <li>
+                Creator:  
                 <a href="https://en.wikipedia.org/wiki/Hadley_Wickham" target="_blank">
-                    Hadley Wickham</a>: I owe this guy a beer.
+                    Hadley Wickham
+                </a>
             </li>
             <li>
                 <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf" target="_blank">
@@ -100,35 +93,31 @@ library(dplyr)
                     CRAN Page
                 </a>
             </li>
-            <li>Makes hard things easy</li>
-            <li>Makes miracles possible</li>
-            <li>Not a unicorn</li>
+            <li>Simplifies data management</li>
         </ul>
     </div>
     <div class="right">
-        <img src="{{site.baseurl}}/public/img/hadley.jpg" width="80%" alt="Photo of Hadley Wickham, 2016">
+        <img src="{{site.baseurl}}/public/img/hadley.jpg" width="60%" alt="Photo of Hadley Wickham, 2016">
     </div>
 </section>
 
 <section>
-    <h2>
-        <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
-    </h2>
+    <h2>Your Turn!</h2>
     <pre><code class="r">
-## Init ========================================================================
+## Init ==================================================
 library(dplyr)
 data(cars)
 
-## Are these two lines of code equivalent? =====================================
+## Are these two lines of code equivalent? ===============
 cars[cars$speed > 20,]
 filter(cars, speed > 20)
     </code></pre>
+    <p style="color:red">Try this code.</p>
     <p><small>Answer on next slide</small>
 </section>
 
 <section>
-    <h2>Yes!</h2>
-    <p style="color:red">Because otherwise I was going to look silly.</p>
+    <h2>Yes, they are.</h2>
     <pre><code class="r">
   speed dist
 1    22   66
@@ -143,12 +132,16 @@ filter(cars, speed > 20)
 
 <section>
     <h2>Summary Statistics Made EASY</h2>
-    <p style="color:red">Not enough room for Captain Smith, but run this code too.</p>
+    <p style="color:red">Try this code, too.</p>
     <div class="left">
         <h5>Base R</h5>
         <pre><code class="r">
 ## Easy, but limited
 colMeans(cars)
+
+
+
+
         </code></pre>
         <pre><code class="fragment r">
 speed  dist 
@@ -169,6 +162,7 @@ summarize(n_rows = n(),
 + + + +  
  n_rows       speed      dist
 1     50       15.4     42.98
+
         </code></pre>        
     </div>    
 </section>
