@@ -4,7 +4,7 @@ title: ""
 ---
 
 <div class="pic-right" style="text-align:center;">
-    <img src="public/img/titanic-bow.jpg" width="50%" alt="Photo of the bow of the Titanic">
+    <img src="public/img/titanic-bow.jpg" width="20%" alt="Photo of the bow of the Titanic">
     <div>
         Titanic bow
     </div>
@@ -26,17 +26,3 @@ title: ""
 <p>
     To learn more about the workshops, follow the link to the <a href="workshops/">Workshops page</a>.
 </p>
-
-<h2>Workshop News</h2>
-
-<article>
-    {% for post in paginator.posts %}
-    <h5><a href="https://ajstamm.github.io/titanic/{{post.url}}">{{post.title}}</a></h5>
-    <p><small>{{ post.date | date_to_string }}</small> <br /> {{ post.excerpt }} . . . <small><a href="{{site.baseurl}}/{{post.url}}">Read More</a></small></p>
-    {% endfor %}
-    
-    <div class="pagination">
-        {% if paginator.next_page %} Older {% else %} Older {% endif %} {% if paginator.previous_page %} {% if paginator.page == 2 %} Newer {% else %} Newer {% endif %} {% else %} Newer {% endif %}
-</article>
-    </div>
-    
