@@ -11,14 +11,13 @@ permalink:          pretty
 title:              A Titanic Introduction To R
 tagline:            ''
 description:        ''
-url:                'http://choens.github.io'
+url:                'http://ajstamm.github.io'
 baseurl:            '/titanic'
 
 # About/contact
 author:
   name:              Abigail Stamm
   url:               http://ajstamm.github.io
-  email:             astamm@albany.edu
 
 # Custom vars
 version:             "Fall 2018"
