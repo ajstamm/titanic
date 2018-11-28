@@ -16,12 +16,12 @@ baseurl:            '/titanic'
 
 # About/contact
 author:
-  name:              Andy Choens
-  url:               http://choens.github.io
-  email:             andy.choens@gmail.com
+  name:              Abigail Stamm
+  url:               http://ajstamm.github.io
+  email:             astamm@albany.edu
 
 # Custom vars
-version:             "Summer - 2018"
+version:             "Fall 2018"
 
 markdown:             kramdown
 paginate:             5
