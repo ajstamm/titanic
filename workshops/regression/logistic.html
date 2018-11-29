@@ -111,10 +111,7 @@ head(passengers[, c("survived", "died")])
 
 <section>
     <h2>Logistic Regression: Categorical</h2>
-    <ul>
-        <li>Independent variable: <code>sex</code></li>
-        <li>Dependent variable: <code>died</code></li>
-    </ul>
+    <p>Independent variable: <code>sex</code>; Dependent variable: <code>died</code></p>
     <pre><code class="r">
 ## Cannot have NAs in our data.
 sum(is.na(passengers$sex))
@@ -127,7 +124,7 @@ passengers$is_male <- 0
 passengers$is_male[passengers$sex == "male"] <- 1
 
 logit_sex <- glm(formula=died~is_male, family=binomial, 
-				 data=passengers)
+                 data=passengers)
     </code></pre>
     <p>To what extent does is_male explain our outcome, died?</p>
 </section>
@@ -315,15 +312,15 @@ with(passengers,
 passengers$age_group                       <- NA
 passengers$age_group[passengers$age <= 10] <- "00-10"
 passengers$age_group[passengers$age > 10 & 
-					 passengers$age <= 20] <- "11-20"
+                     passengers$age <= 20] <- "11-20"
 passengers$age_group[passengers$age > 20 & 
-					 passengers$age <= 30] <- "21-30"
+                     passengers$age <= 30] <- "21-30"
 passengers$age_group[passengers$age > 30 & 
-					 passengers$age <= 40] <- "31-40"
+                     passengers$age <= 40] <- "31-40"
 passengers$age_group[passengers$age > 40 & 
-					 passengers$age <= 50] <- "41-50"
+                     passengers$age <= 50] <- "41-50"
 passengers$age_group[passengers$age > 50 & 
-					 passengers$age <= 60] <- "51-60"
+                     passengers$age <= 60] <- "51-60"
 passengers$age_group[passengers$age > 60]  <- "61+"
     </code>
 </section>
@@ -337,8 +334,8 @@ with(passengers,
 
 ## But this is nice!
 multi_tbl <- with(passengers,
-				  round(prop.table(100 *
-				  table(age_group, sex, died), 1), 1))
+                  round(prop.table(100 *
+                  table(age_group, sex, died), 1), 1))
 ftable(multi_tbl)
 			     died    0    1
 age_group sex
@@ -371,11 +368,10 @@ age_group sex
     <h2>Died~Age_Group Is Better</h2>
     <pre><code class="r">
 logit_age <- glm(formula=died~age_group, family=binomial, 
-				 data=passengers)
+                 data=passengers)
 summary(logit_age)
 Call:
-glm(formula = died ~ age_group, family = binomial, 
-	data = passengers)
+glm(formula = died ~ age_group, family = binomial, data = passengers)
 
 Deviance Residuals: 
    Min      1Q  Median      3Q     Max  
@@ -477,8 +473,7 @@ summary(logit_complex)
     <pre><code class="r">
 ## Remember: Rows (died), Columns (is_male)
 t_male <- with(passengers,
-               table(died, is_male, dnn=c("died","is_male"))
-              )
+               table(died, is_male, dnn=c("died","is_male")))
 t_male
 
    is_male
@@ -628,34 +623,23 @@ exp( logit_sex_coef )
 
 ## - Step 1 returns a vector and saves it as logit_sex_coef.
 ## - Step 2 calculates the exponent for each item in the vector.
-##
-##      Using R is like building a spaceship with LEGOS!
-##      Assemble little things to build big things.
     </code></pre>
+	<p>Using R is like building a spaceship with LEGOS!<br>
+		Assemble little things to build big things.</p>
 </section>
 
 <section>
-    <h2>Next Week's R Workshop</h2>
+    <h2>Next Spring's R Workshops</h2>
     <p>
         <span style="color:red">The following ad is paid for by our sponsors.</span>
     </p>
     <div class="left">
         <ul>
             <li>What holds you back from using R?</li>
-            <li>Next week, complete a project!</li>
-            <li>
-                This includes:
-                <small>
-                    <ul>
-                        <li>Download data from OpenData NY</li>
-                        <li>Explore the data</li>
-                        <li>Build a reproducible report (HTML/Word)</li>
-                        <li>
-                             Discuss advanced topics like reproducible
-                            research, automation, etc.
-                        </li>
-                    </ul>
-                </small>
+            <li>Next spring, we plan to offer advanced courses 
+			with even more exciting data management tools!</li>
+            <li>Stay tuned through EBCoP's blog and your school's 
+			announcements.
         </ul>
     </div>
     <div class="right">
@@ -667,13 +651,11 @@ exp( logit_sex_coef )
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
     <ul>
-        <li>Can you create a better regression model?</li>
+        <li>Try your new skills in your work.</li>
+		<li>At the DOH? Join EBCoP!<li>
         <li>Please complete the
             <a href="https://docs.google.com/forms/d/1kHqxrcbNWRI0_o3CVddUDEw64NAGGxUs6Kw_DwXvle8/viewform?usp=send_form" target="_blank">workshop survey</a></li>
-        <li>I am trying to plan our afternoon on the 22nd.<br />
-            I would like to know what kinds of analyses <i>YOU</i> would like to be able to do in R.
-            Please email me at <a href="mailto:andy.choens@acuitashealth.com">andy.choens@acuitashealth.com</a>,
-            with your ideas.<br />
-            Some/all (depends) will make it into the afternoon of the 22nd.</li>
+        <li>Email us if there are specific skills you want to learn in R. 
+		We will consider your requests when developing new workshops.</li>
     </ul>
 </section>
