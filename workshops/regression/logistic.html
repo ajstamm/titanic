@@ -4,7 +4,7 @@ title: "Logistic Regression: Sex"
 ---
 
 <section>
-    <h2>Logistic Regression: Sex</h2>
+    <h2>Logistic Regression</h2>
     <div class="container">
         <div class="left">
             <ul>
@@ -65,11 +65,9 @@ source("http://ajstamm.github.io/titanic/workshops/regression/import-passengers.
 
 <section>
     <h2>Survived</h2>
-    <ul>
-        <li>
+    <p>
             Dependent variable (outcome): what we want to predict.
-        </li>
-    </ul>
+        </p>
     <pre><code class="r">
 tbl_surv <- table(passengers$survived)
 tbl_surv
@@ -126,7 +124,7 @@ passengers$is_male[passengers$sex == "male"] <- 1
 logit_sex <- glm(formula=died~is_male, family=binomial, 
                  data=passengers)
     </code></pre>
-    <p>To what extent does is_male explain our outcome, died?</p>
+    <p>To what extent does is_male explain died?</p>
 </section>
 
 <section>
@@ -178,10 +176,7 @@ curve(predict(logit_sex, data.frame(is_male=x), type="response"),
 
 <section>
     <h2>Logistic Regression: Continuous</h2>
-    <ul>
-        <li>Independent variable: <code>age</code></li>
-        <li>Dependent variable: <code>died</code></li>
-    </ul>
+    <p>Independent variable: <code>age</code>; Dependent variable: <code>died</code></p>
     <pre><code class="r">
 ## Cannot have NAs in our data.
 sum(is.na(passengers$age))
@@ -192,7 +187,7 @@ sum(is.na(passengers$died))
 logit_age <- glm(formula=died~age, family=binomial, 
 				 data=passengers)
     </code></pre>
-    <p>To what extent does the variable age explain our outcome, died?</p>
+    <p>To what extent does the variable age explain died?</p>
 </section>
 
 <section>
@@ -262,7 +257,7 @@ curve(predict(g_age, data.frame(age=x), type="response"), add=TRUE)
 <section>
     <h2>New Factors</h2>
     
-    <p>First we explore. And we need new tricks.</p>
+    <p>1. Explore. 2. Learn new tricks.</p>
     
     <pre><code class="r">
 ## You've seen this:
@@ -337,7 +332,7 @@ multi_tbl <- with(passengers,
                   round(prop.table(100 *
                   table(age_group, sex, died), 1), 1))
 ftable(multi_tbl)
-			     died    0    1
+                 died    0    1
 age_group sex
 00-10     female      27.8 22.2
           male        44.4  5.6
@@ -405,7 +400,7 @@ Number of Fisher Scoring iterations: 4
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
-    <p>Which logistic regression model below is better? Why?</p>
+    <p>How are these two models different?</p>
     <div class="left">
         <pre><code class="r">
 logit_complex <- glm(formula = 
@@ -643,7 +638,7 @@ exp( logit_sex_coef )
         </ul>
     </div>
     <div class="right">
-        <img src="{{site.baseurl}}/public/img/iceberg.jpg" alt="Iceberg == Deep Ieas" width="75%">
+        <img src="{{site.baseurl}}/public/img/iceberg.jpg" alt="Iceberg == Deep Ideas" width="75%">
     </div>        
 </section>
 <section>
@@ -652,10 +647,9 @@ exp( logit_sex_coef )
     </h2>
     <ul>
         <li>Try your new skills in your work.</li>
-		<li>At the DOH? Join EBCoP!<li>
+		<li>At the DOH? Join EBCoP!<br></li>
         <li>Please complete the
             <a href="https://docs.google.com/forms/d/1kHqxrcbNWRI0_o3CVddUDEw64NAGGxUs6Kw_DwXvle8/viewform?usp=send_form" target="_blank">workshop survey</a></li>
-        <li>Email us if there are specific skills you want to learn in R. 
-		We will consider your requests when developing new workshops.</li>
+        <li>Are there specific skills you want to learn in R? Email us!</li>
     </ul>
 </section>
