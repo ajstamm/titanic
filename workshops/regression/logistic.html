@@ -8,10 +8,9 @@ title: "Logistic Regression: Sex"
     <div class="container">
         <div class="left">
             <ul>
-                <!-- <li>Code: <a href="../logistic.R" target="_blank">logistic.R</a></li> -->
-                <li>Will run the code together</li>
+                <li>Coding practice</li>
                 <li>~60 Minutes</li>
-                <li>Followed By: <i>Goodbye!</i></li>
+                <li>Participant survey</li>
             </ul>
         </div>
         <div class="right">
@@ -25,11 +24,11 @@ title: "Logistic Regression: Sex"
 <section>
     <h2>PASSENGERS</h2>
     <div class="left">
-        <p>If you deleted/lost the passengers data set, run this:
+        <p>If you need to load the passengers data set, run this:
             <pre><code class="r">
-source("http://choens.github.io/titanic/workshops/regression/import-passengers.R")
+source("http://ajstamm.github.io/titanic/workshops/regression/import-passengers.R")
             </code></pre>
-            <p>Be careful using a command like <code>source()</code></p>
+            <p>Note: <code>source()</code> runs all code in the file.</p>
     </div>
     <div class="right">
         <img src="{{site.baseurl}}/public/img/titanic-bow.jpg" alt="Logistic Curve Died~Sex" width="75%">
@@ -38,14 +37,11 @@ source("http://choens.github.io/titanic/workshops/regression/import-passengers.R
 <section>
     <h2>Learning Objectives</h2>
     <ul>
-        <li>Define Logistic Regression</li>
-        <li>
-            Survived becomes died!<br />
-            We will create a new column (Died)
-        </li>
+        <li>Definition</li>
+        <li>Changing survived to died</li>
         <li>Logistic Regression</li>
-        <li>Visualizing Logistic Regression</li>
-        <li>Calculating Odds Ratio</li>
+        <li>Visualization</li>
+        <li>Odds Ratio</li>
     </ul>
 </section>
 
@@ -53,17 +49,13 @@ source("http://choens.github.io/titanic/workshops/regression/import-passengers.R
     <h2>Logistic Regression</h2>
     <ul>
         <li>
-            A regression model with a categorical dependent
-            variable. Today's workshop covers the case of a binary
-            dependent variable, which has only two values, "0"
-            and "1", which represent outcomes such as alive/dead.
+            Model with a categorical dependent variable. 
+			Today's example is binary: "0" = alive; "1" = dead 
         </li>
         <li>
-            Developed by statistician David Cox in 1958. Used to
-            estimate the probability of a binary response based on one
-            or more predictor variables. It allows one to say the
-            presence of a risk factor affects the probability of a
-            given outcome by a specific percentage.
+            Estimates the probability of a binary response based on predictor 
+			variables to determine how much the presence of a risk factor affects 
+            the probability of a given outcome.
         </li>
         <li>
             For more information, see <a href="https://en.wikipedia.org/wiki/Logistic_regression" target="_blank">Wikipedia</a>
@@ -75,7 +67,7 @@ source("http://choens.github.io/titanic/workshops/regression/import-passengers.R
     <h2>Survived</h2>
     <ul>
         <li>
-            Survived could be a good dependent variable (outcome).
+            Dependent variable (outcome): what we want to predict.
         </li>
     </ul>
     <pre><code class="r">
@@ -85,29 +77,28 @@ tbl_surv
   0   1 
 140 110 
 
+## table above as percentages
 100*prop.table(tbl_surv)
 
  0  1 
 56 44
-
-## The sample low-balls the death-rate.
     </code></pre>
 </section>
 
 <section>
     <h2>Died!</h2>
     <ul>
-        <li>Need a new column; Epis are always positive.</li>
-        <li>Usually discuss risk factors.xb</li>
+        <li>New column.</li>
+        <li>Easier to interpret risk factors.</li>
         <li>Easier to type <code>died</code> than <code>survived</code>.</li>
     </ul>
     <pre><code class="r">
 passengers$died <- 1
 passengers$died[passengers$survived == 1] <- 0
 
-## These two cols should be opposites.
-## Or, you did something silly.
-passengers[,c("survived", "died")]
+## Check if survived and died are opposites.
+## head() shows the first 6 rows of your table
+head(passengers[, c("survived", "died")])
     survived died
 1          0    1
 2          1    0
@@ -115,250 +106,6 @@ passengers[,c("survived", "died")]
 4          1    0
 5          0    1
 6          0    1
-7          1    0
-8          1    0
-9          0    1
-10         0    1
-11         1    0
-12         0    1
-13         0    1
-14         1    0
-15         0    1
-16         0    1
-17         0    1
-18         0    1
-19         1    0
-20         0    1
-21         1    0
-22         1    0
-23         0    1
-24         0    1
-25         1    0
-26         0    1
-27         0    1
-28         0    1
-29         1    0
-30         0    1
-31         0    1
-32         1    0
-33         0    1
-34         0    1
-35         0    1
-36         1    0
-37         0    1
-38         0    1
-39         0    1
-40         0    1
-41         0    1
-42         0    1
-43         1    0
-44         1    0
-45         1    0
-46         0    1
-47         0    1
-48         0    1
-49         0    1
-50         0    1
-51         0    1
-52         0    1
-53         0    1
-54         0    1
-55         1    0
-56         0    1
-57         0    1
-58         0    1
-59         0    1
-60         0    1
-61         1    0
-62         1    0
-63         1    0
-64         1    0
-65         1    0
-66         1    0
-67         0    1
-68         0    1
-69         0    1
-70         1    0
-71         0    1
-72         0    1
-73         1    0
-74         1    0
-75         0    1
-76         0    1
-77         0    1
-78         1    0
-79         0    1
-80         0    1
-81         1    0
-82         1    0
-83         0    1
-84         0    1
-85         0    1
-86         1    0
-87         1    0
-88         1    0
-89         1    0
-90         0    1
-91         0    1
-92         1    0
-93         1    0
-94         0    1
-95         0    1
-96         1    0
-97         0    1
-98         1    0
-99         1    0
-100        0    1
-101        1    0
-102        1    0
-103        1    0
-104        1    0
-105        0    1
-106        0    1
-107        0    1
-108        0    1
-109        1    0
-110        0    1
-111        0    1
-112        1    0
-113        0    1
-114        0    1
-115        1    0
-116        0    1
-117        0    1
-118        1    0
-119        0    1
-120        1    0
-121        1    0
-122        0    1
-123        0    1
-124        0    1
-125        0    1
-126        1    0
-127        1    0
-128        1    0
-129        0    1
-130        1    0
-131        0    1
-132        1    0
-133        0    1
-134        1    0
-135        0    1
-136        1    0
-137        1    0
-138        1    0
-139        0    1
-140        0    1
-141        1    0
-142        1    0
-143        0    1
-144        0    1
-145        0    1
-146        1    0
-147        1    0
-148        1    0
-149        0    1
-150        0    1
-151        1    0
-152        0    1
-153        0    1
-154        1    0
-155        1    0
-156        0    1
-157        1    0
-158        1    0
-159        1    0
-160        0    1
-161        0    1
-162        1    0
-163        1    0
-164        0    1
-165        1    0
-166        1    0
-167        0    1
-168        1    0
-169        1    0
-170        1    0
-171        0    1
-172        0    1
-173        1    0
-174        1    0
-175        0    1
-176        1    0
-177        1    0
-178        1    0
-179        1    0
-180        0    1
-181        0    1
-182        0    1
-183        0    1
-184        1    0
-185        0    1
-186        0    1
-187        1    0
-188        1    0
-189        1    0
-190        0    1
-191        0    1
-192        0    1
-193        1    0
-194        0    1
-195        0    1
-196        0    1
-197        1    0
-198        1    0
-199        0    1
-200        1    0
-201        1    0
-202        1    0
-203        0    1
-204        0    1
-205        1    0
-206        1    0
-207        0    1
-208        1    0
-209        0    1
-210        0    1
-211        1    0
-212        0    1
-213        0    1
-214        1    0
-215        0    1
-216        1    0
-217        1    0
-218        0    1
-219        0    1
-220        0    1
-221        0    1
-222        0    1
-223        1    0
-224        0    1
-225        1    0
-226        1    0
-227        0    1
-228        1    0
-229        0    1
-230        1    0
-231        0    1
-232        1    0
-233        1    0
-234        0    1
-235        0    1
-236        1    0
-237        1    0
-238        0    1
-239        0    1
-240        0    1
-241        1    0
-242        0    1
-243        0    1
-244        0    1
-245        0    1
-246        0    1
-247        1    0
-248        0    1
-249        0    1
-250        0    1
     </code></pre>
 </section>
 
@@ -372,20 +119,17 @@ passengers[,c("survived", "died")]
 ## Cannot have NAs in our data.
 sum(is.na(passengers$sex))
 [1] 0
-
 sum(is.na(passengers$died))
 [1] 0
 
-## We cannot graph this regression with a categorical.
-## We can graph a numeric variable.
-## This will make sense in a slide or two.
+## We can only graph numeric variables, not categorical.
 passengers$is_male <- 0
 passengers$is_male[passengers$sex == "male"] <- 1
 
-## To what extent does is_male explain our outcome, died?
-logit_sex <- glm(formula=died~is_male, family=binomial, data=passengers)
+logit_sex <- glm(formula=died~is_male, family=binomial, 
+				 data=passengers)
     </code></pre>
-    <p><small>Output on next slide.</small></p>
+    <p>To what extent does is_male explain our outcome, died?</p>
 </section>
 
 <section>
@@ -427,7 +171,8 @@ Number of Fisher Scoring iterations: 4
     <pre><code class="r">
 plot(jitter(passengers$died, .4),
      jitter(passengers$is_male, .4))
-curve(predict(logit_sex, data.frame(is_male=x), type="response"), add=TRUE) 
+curve(predict(logit_sex, data.frame(is_male=x), type="response"), 
+	  add=TRUE) 
     </code></pre>
     <a href="{{site.baseurl}}/public/img/logistic-curve-sex.png" target="_blank">
         <img src="{{site.baseurl}}/public/img/logistic-curve-sex.png" alt="Logistic Curve Died~Sex" width="40%">
@@ -444,14 +189,13 @@ curve(predict(logit_sex, data.frame(is_male=x), type="response"), add=TRUE)
 ## Cannot have NAs in our data.
 sum(is.na(passengers$age))
 [1] 0
-
 sum(is.na(passengers$died))
 [1] 0
 
-## To what extent does the variable age explain our outcome, died?
-logit_age <- glm(formula=died~age, family=binomial, data=passengers)
+logit_age <- glm(formula=died~age, family=binomial, 
+				 data=passengers)
     </code></pre>
-    <p><small>Output on next slide</small></p>
+    <p>To what extent does the variable age explain our outcome, died?</p>
 </section>
 
 <section>
@@ -460,7 +204,6 @@ logit_age <- glm(formula=died~age, family=binomial, data=passengers)
         <li><strong>Formula:</strong> died as a function of age</li>
         <li>Age is not a statistically significant predictor of died!</li>
         <li><strike>Almost</strike> No difference to residual deviance or AIC.</li>
-        <li>Why is this a bad model?</li>
     </ul>
     <pre><code class="r">
 summary(logit_age)
@@ -503,7 +246,6 @@ curve(predict(g_age, data.frame(age=x), type="response"), add=TRUE)
     <h2>Let's Cheat for a moment</h2>
     <ul>
         <li>GAM: Generalized Additive Model</li>
-        <li>Not doing these today, but you need to understand.</li>
         <li>Several confounders here. What can we do?</li>
     </ul>
     <a href="{{site.baseurl}}/public/img/gam-curve-age.png" target="_blank">
@@ -514,17 +256,17 @@ curve(predict(g_age, data.frame(age=x), type="response"), add=TRUE)
 
 <section>
     <h2>Suggestions?</h2>
-    <ul>
-        <li>How can we use age to predict died?</li>
-    </ul>
+    
+    <p>How can we use age to predict died?</p>
+    
     <img src="{{site.baseurl}}/public/img/restaurant.jpg" alt="Some Nice Dining Options" width="75%">
 </section>
 
 <section>
     <h2>New Factors</h2>
-    <ul>
-        <li>First we explore. And we need new tricks.</li>
-    </ul>
+    
+    <p>First we explore. And we need new tricks.</p>
+    
     <pre><code class="r">
 ## You've seen this:
 prop.table(table(passengers$died))
@@ -533,14 +275,13 @@ prop.table(table(passengers$died))
 0.44 0.56
 
 ## Indexing / Filtering: What percent of passengers
-## five years or age or younger died?
+## five years of age or younger died?
 prop.table(table(passengers$died[passengers$age <= 5]))
 
         0         1 
 0.8181818 0.1818182 
-
-## Note: I'm TIRED of typing passengers.
     </code></pre>
+	<p>Note: I'm TIRED of typing passengers.</p>
 </section>
 
 <section>
@@ -554,19 +295,16 @@ prop.table(table(passengers$died[passengers$age <= 5]))
     </table>
     <pre><code class="r">
 ## - Only write passengers once
-## - Percentage of passengers died who are older than 5
-##   and younger than 11.
+## - Percent of passengers died older than 5 and younger than 11.
 with(passengers,
-     prop.table(table(died[age > 5 & age <= 10]))
-    )
+     prop.table(table(died[age > 5 & age <= 10])))
 
         0         1 
 0.5714286 0.4285714
 
-## Make the percentage easier to grok:
+## Change proportion to percent and round:
 with(passengers,
-     round(prop.table(table(died[age > 5 & age <= 10]))*100)
-    )
+     round(prop.table(table(died[age > 5 & age <= 10]))*100))
     </code></pre>
 </section>
 
@@ -574,14 +312,19 @@ with(passengers,
     <h2>Age Group, Not Age</h2>
     <pre><code class="r">
 ## Let's create a new factor:
-passengers$age_group                                             <- NA
-passengers$age_group[passengers$age <= 10]                       <- "00-10"
-passengers$age_group[passengers$age > 10 & passengers$age <= 20] <- "11-20"
-passengers$age_group[passengers$age > 20 & passengers$age <= 30] <- "21-30"
-passengers$age_group[passengers$age > 30 & passengers$age <= 40] <- "31-40"
-passengers$age_group[passengers$age > 40 & passengers$age <= 50] <- "41-50"
-passengers$age_group[passengers$age > 50 & passengers$age <= 60] <- "51-60"
-passengers$age_group[passengers$age > 60]                        <- "61+"
+passengers$age_group                       <- NA
+passengers$age_group[passengers$age <= 10] <- "00-10"
+passengers$age_group[passengers$age > 10 & 
+					 passengers$age <= 20] <- "11-20"
+passengers$age_group[passengers$age > 20 & 
+					 passengers$age <= 30] <- "21-30"
+passengers$age_group[passengers$age > 30 & 
+					 passengers$age <= 40] <- "31-40"
+passengers$age_group[passengers$age > 40 & 
+					 passengers$age <= 50] <- "41-50"
+passengers$age_group[passengers$age > 50 & 
+					 passengers$age <= 60] <- "51-60"
+passengers$age_group[passengers$age > 60]  <- "61+"
     </code>
 </section>
 
@@ -594,9 +337,11 @@ with(passengers,
 
 ## But this is nice!
 multi_tbl <- with(passengers,
-                  round(prop.table(table(age_group, sex, died),1)*100,1))
+				  round(prop.table(100 *
+				  table(age_group, sex, died), 1), 1))
 ftable(multi_tbl)
-age_group sex                  
+			     died    0    1
+age_group sex
 00-10     female      27.8 22.2
           male        44.4  5.6
 11-20     female      24.3 13.5
@@ -618,24 +363,19 @@ age_group sex
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
-    <ul>
-        <li>
-            Is <code>age_group</code> a statistically significant predictor of
-            <code>died</code>?
-        </li>
-        <li>
-            No peeking!
-        </li>
-    </ul>
+    <p>Is <code>age_group</code> a statistically significant predictor of <code>died</code>?</p>
+    <p>No peeking!</p>
 </section>
 
 <section>
     <h2>Died~Age_Group Is Better</h2>
     <pre><code class="r">
-logit_age <- glm(formula=died~age_group, family=binomial, data=passengers)
+logit_age <- glm(formula=died~age_group, family=binomial, 
+				 data=passengers)
 summary(logit_age)
 Call:
-glm(formula = died ~ age_group, family = binomial, data = passengers)
+glm(formula = died ~ age_group, family = binomial, 
+	data = passengers)
 
 Deviance Residuals: 
    Min      1Q  Median      3Q     Max  
@@ -661,26 +401,30 @@ AIC: 344.08
 
 Number of Fisher Scoring iterations: 4
     </code></pre>
-    <p>Tweak these groups to reduce the residuals further.<br /><span style="color:red">But don't overfit.</span></p>
+    <p>Tweak these groups to reduce the residuals further.<br />
+	<span style="color:red">But don't overfit.</span></p>
 </section>
 
 <section>
     <h2>
         <img src="{{site.baseurl}}/public/img/captain-smith.jpg" width="20%" alt="Photo of Captain Smith" style="vertical-align:middle;"> Your Turn!
     </h2>
-    <ul>
-        <li>There are two logistic regression models below.</li>
-        <li>One model is definitely better than the other. Why?</li>
-    </ul>
+    <p>Which logistic regression model below is better? Why?</p>
     <div class="left">
         <pre><code class="r">
-logit_complex <- glm(formula = died ~ age_group+is_male, family = binomial, data = passengers)
+logit_complex <- glm(formula = 
+	died ~ age_group+is_male, 
+	family = binomial, 
+	data = passengers)
 summary(logit_complex)
         </code></pre>
     </div>
     <div class="right">
         <pre><code class="r">
-logit_complex <- glm(formula = died ~ age_group*is_male, family = binomial, data = passengers)
+logit_complex <- glm(formula = 
+	died ~ age_group*is_male, 
+	family = binomial, 
+	data = passengers)
 summary(logit_complex)
         </code></pre>
     </div>
@@ -691,9 +435,9 @@ summary(logit_complex)
     <h2>Odds Ratio</h2>
     <div class="left">
         <ul>
-            <li>This is for the epidemiologists.</li>
-            <li>No Base R function to calculate odds ratio.</li>
-            <li>But, it isn't hard to calculate it.</li>
+            <li>For epidemiologists.</li>
+            <li>No Base R odds ratio function.</li>
+            <li>Easy to calculate.</li>
         </ul>
     </div>
     <div class="right">
@@ -703,39 +447,33 @@ summary(logit_complex)
 
 <section>
     <h2>Odds Ratio (OR)</h2>
-    <ul>
-        <li>
+    <p>
             Quantifies how strongly the presence or absence of
             property A is associated with the presence or absence of
             property B in a given population.
-        </li>
-        <li>
-            We want to know how being male is associated with dying.
-        </li>
-        <li>
-            Focus is on the Odds Ratio and not Risk Ratio because of the
-            relationship between OR and logistic regression.
-        </li>
-    </ul>
+        </p>
+        <p>
+            Question: how is being male associated with dying?
+        </p>
+        <p>
+            Logistic regression calculates OR, not RR.
+        </p>
 </section>
 
 <section>
     <h2>OR: First Steps</h2>
-    <ul>
+    <ol>
         <li>
-            Need the odds of dying for two different groups.
+            Want odds of dying for two different groups.
         </li>
         <li>
-            We need a 2x2 table: died x is_male
+            Calculate a 2x2 table: died x is_male<br>
+			This table is backwards from most text books.
         </li>
         <li>
-            This table is backwards from how this is usually shown in
-            text books.
+            Invert the table, or do the math right.
         </li>
-        <li>
-            Could invert the table, or just do the math right.
-        </li>
-    </ul>
+    </ol>
     <pre><code class="r">
 ## Remember: Rows (died), Columns (is_male)
 t_male <- with(passengers,
@@ -748,14 +486,13 @@ died   0   1
    0  77  33
    1  30 110
 
-## Yeah. Those numbers alone tell you alot.
-
+## Those numbers alone tell you alot.
     </code></pre>
 </section>
 
 <section>
     <h2>
-        The odds of dying:
+        Odds of dying
     </h2>
     <p>
         <table>
