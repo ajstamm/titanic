@@ -47,10 +47,9 @@ title: "Data.Frames"
         <div class="left">
             <ul>
                 <li>N dimensional object</li>
-                <li>Column entries have the same class</li>                
-                <li>Rows entries can have different classes</li>
-                <li>Columns all same length (missing = NA)
-                <li>data.frame easier to manage than vectors</li>
+                <li>Column = same class & length</li>                
+                <li>Row = different classes</li>
+                <li>Easier to manage than vectors</li>
                 <li>Explicit relationship between entries</li>
             </ul>
         </div>
@@ -76,7 +75,7 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 
 <section>
     <h2>Creation[2]</h2>
-	<p>Combine the vectors. Numbers on the left below are row indices.</p>
+	<p>Combine the vectors.</p>
 	
     <pre><code class="r">
 passengers <- data.frame(age, gender, survived)
@@ -453,8 +452,8 @@ rm(children)
 </section>
 
 <section>
-    <h1>Your Turn!</h1>
-    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
+    <h2>Your Turn!</h2>
+    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%" align = "right" style="margin: 20px 20px">
     <p><a href="https://en.wikipedia.org/wiki/John_Jacob_Astor_IV" target="_blank">John Jacob Astor IV</a> in 1919</p>
     <ul>
         <li>Try your new skills in your work.</li>
