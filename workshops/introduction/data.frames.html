@@ -8,9 +8,9 @@ title: "Data.Frames"
     <div class="container">
         <div class="left">
             <ul>
-                <li>Run code, learn more</li>
+                <li>Learn more code</li>
                 <li>~45 Minutes</li>
-                <li>Followed By: <i>Good Bye</i><ul><li><i>Or Lunch</i></li></ul></li>
+                <li>Participant survey</li>
             </ul>
         </div>
         <div class="right">
@@ -26,7 +26,7 @@ title: "Data.Frames"
     <div class="container">
         <div class="left">
             <ul>
-                <li>What is a data.frame?</li>
+                <li>Definition</li>
                 <li>Creation</li>
                 <li>Import CSV data</li>
                 <li>Indexing</li>
@@ -46,17 +46,12 @@ title: "Data.Frames"
     <div class="container">
         <div class="left">
             <ul>
-                <li>N dimensional object
-                    <ul>
-                        <li><small>Usually 2-dimensional</small></li>
-                        <li><small>Normal people call this a table</small></li>
-                    </ul>
-                </li>
-                <li>All entries in a column have the same class</li>                
-                <li>Rows can have entries of different classes</li>
-                <li>Each column must be the same length (missing data represented as NA)
-                <li>A single data.frame is easier to manage than a collection of vectors</li>
-                <li>Relationship between the entries is made explicit</li>
+                <li>N dimensional object</li>
+                <li>Column entries have the same class</li>                
+                <li>Rows entries can have different classes</li>
+                <li>Columns all same length (missing = NA)
+                <li>data.frame easier to manage than vectors</li>
+                <li>Explicit relationship between entries</li>
             </ul>
         </div>
         <div class="right">
@@ -81,11 +76,10 @@ survived <- c(FALSE,TRUE,TRUE,TRUE,FALSE,
 
 <section>
     <h2>Creation[2]</h2>
+	<p>Combine the vectors. Numbers on the left below are row indices.</p>
+	
     <pre><code class="r">
-## Then we put them together
 passengers <- data.frame(age, gender, survived)
-
-## Yeah, the capital V is important. Dunno why.
 View(passengers)
     </code></pre>
     
@@ -101,8 +95,6 @@ View(passengers)
 8    2   male    FALSE
 9   27 female     TRUE
 10  14 female     TRUE
-
-## Those numbers on the left: row numbers.
     </code></pre>
 </section>
 
