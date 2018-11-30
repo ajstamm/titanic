@@ -184,7 +184,7 @@ head(passengers)
 <section>
     <h2>Indexing</h2>
     <ul>
-        <li>Back to the land of square brackets</li>
+        <li>Back to square brackets</li>
         <li><span style="color:red;">Critical:</span> <code class="r">passengers[ROW,COLUMN]</code></li>
     </ul>
     <div class="container">
@@ -200,7 +200,7 @@ passengers[10, ]
         </div>
         <div class="right">
             <pre><code class="r">
-## Returns one column by column name.
+## Returns one column by name.
 passengers[ ,"age"]
             </code></pre>
             <pre><code class="fragment r">
@@ -228,15 +228,16 @@ passengers$age
     </code></pre>
     <pre><code class="fragment r">
 passengers$age
-  [1] 22.00 38.00 26.00 35.00 35.00    NA 54.00  2.00 27.00 14.00  4.00 58.00
- [13] 20.00 39.00 14.00 55.00  2.00    NA 31.00    NA 35.00 34.00 15.00 28.00
- [25]  8.00 38.00    NA 19.00    NA    NA 40.00    NA    NA 66.00 28.00 42.00
- [37]    NA 21.00 18.00 14.00 40.00 27.00    NA  3.00 19.00    NA    NA    NA
- [49]    NA 18.00  7.00 21.00 49.00 29.00 65.00    NA 21.00 28.50  5.00 11.00
- [61] 22.00 38.00 45.00  4.00    NA    NA 29.00 19.00 17.00 26.00 32.00 16.00
- [73] 21.00 26.00 32.00 25.00    NA    NA  0.83 30.00 22.00 29.00    NA 28.00
- [85] 17.00 33.00 16.00    NA 23.00 24.00 29.00 20.00 46.00 26.00 59.00    NA
- [97] 71.00 23.00 34.00 34.00
+  [1] 22.00 38.00 26.00 35.00 35.00    NA 54.00  2.00 27.00 14.00  4.00
+ [12] 58.00 20.00 39.00 14.00 55.00  2.00    NA 31.00    NA 35.00 34.00
+ [23] 15.00 28.00  8.00 38.00    NA 19.00    NA    NA 40.00    NA    NA
+ [34] 66.00 28.00 42.00    NA 21.00 18.00 14.00 40.00 27.00    NA  3.00
+ [45] 19.00    NA    NA    NA    NA 18.00  7.00 21.00 49.00 29.00 65.00
+ [56]    NA 21.00 28.50  5.00 11.00 22.00 38.00 45.00  4.00    NA    NA
+ [67] 29.00 19.00 17.00 26.00 32.00 16.00 21.00 26.00 32.00 25.00    NA
+ [78]    NA  0.83 30.00 22.00 29.00    NA 28.00 17.00 33.00 16.00    NA
+ [89] 23.00 24.00 29.00 20.00 46.00 26.00 59.00    NA 71.00 23.00 34.00
+[100] 34.00
     </code></pre>
 </section>
 
@@ -265,7 +266,7 @@ dim(these_passengers_lived)
     </h2>
     
     <pre><code class="r">
-## Using passgengers, create a new data.frame of "children".
+## Using passengers, create a new data.frame of "children".
 ## Define children as passengers where age < 18.
     </code></pre>
     <p>Answer on the next slide!</p>
@@ -316,10 +317,12 @@ table(passengers$sex)
 table(passengers$sex, passengers$survived)
 
 ## Or More! This one is a little weird.
-table(passengers$sex, passengers$survived, passengers$passenger_class)
+table(passengers$sex, passengers$survived, 
+      passengers$passenger_class)
 
-## This makes it more readable. A function inside a function!
-ftable(table(passengers$sex, passengers$survived, passengers$passenger_class))
+## This is more readable. A function inside a function!
+ftable(table(passengers$sex, passengers$survived, 
+       passengers$passenger_class))
     </code></pre>
 </section>
 
@@ -358,8 +361,9 @@ X-squared = 36.585, df = 1, p-value = 1.461e-09
         <div class="left">
             <h5>Margins</h5>
             <pre><code class="r">
-## Margins are what other tools call Totals.
-tbl <- table(passengers$sex, passengers$survived)
+## Margins are Totals.
+tbl <- table(passengers$sex, 
+             passengers$survived)
 mbl <- margin.table( tbl, margin=1)
 mbl
             </code></pre>
@@ -372,8 +376,9 @@ female   male
         <div class="right">
             <h5>Margins</h5>
             <pre><code class="r">
-## At least they didn't invent a new term for proportion.
-tbl <- table(passengers$sex, passengers$survived)
+## Prop = proportion.
+tbl <- table(passengers$sex, 
+             passengers$survived)
 pbl <- prop.table( tbl, margin=1)
 pbl
             </code></pre>
