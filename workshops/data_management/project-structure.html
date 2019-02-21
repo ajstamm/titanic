@@ -1,0 +1,221 @@
+---
+layout: presentation
+title: "Project Structure"
+---
+
+<section>
+    <h2>Project Structure</h2>
+    <div class="container">
+        <div class="left">
+            <p>~10 Minutes</p>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="" width="90%" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <div class="container">
+        <div class="left">
+            <ul>
+                <li>Project or Script</li>
+                <li>Working Directory</li>
+                <li>Folder Structure</li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="" alt="" width="90%">
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Project or Script</h2>
+    <div class="container">
+        <p style="color:red">
+            Thus far, we have worked only with scripts. 
+            Today, we work with projects. An R project:
+        </p>
+        <div class="left">
+            <ul>
+                <li>divides work into multiple parts.</li>
+                <li>contains code, data, charts, etc.</li>
+                <li>defines the root directory in RStudio.</li>                
+            </ul>
+        </div>
+        <div class="right">
+            <img src="" alt="" width="60%">
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>New RStudio Project</h2>
+    <div class="container">
+        <div class="left">
+            <p> Let's make a new project!</p>
+            <p>File -> New Project</p>
+            <p>Select "New Directory".
+                <br /><span style="color:red"><small>
+                    We won't cover Version Control today.
+                </small></span>
+            </p>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-new-project-1.png" 
+                 alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>RStudio Project Type</h2>
+    <div class="container">
+        <div class="left">
+            <p>Create an Empty Project</p>
+            <p>I promise, you don't want to do 
+               either of the others.</p>                
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-new-project-2.png" 
+                 alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>RStudio Project Name</h2>
+    <div class="container">
+        <div class="left">
+            <p>Directory Name: <code>foo</code></p>
+            <p><code>~</code> is your home directory</p>
+            
+            <p>Don't start a repository.<br /><br />
+               RStudio will create an empty git
+               repo at the project root.</p>
+            <p>If you open in a new session, 
+               RStudio will open a new window.</p>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-new-project-3.png" alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Our New Project</h2>
+    <pre><code>
+R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-redhat-linux-gnu (64-bit)
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> getwd()
+[1] "/home/abby/foo"
+    </code></pre>
+    <p>Locate your new folder.</p>
+    <p><code>foo.Rproj</code> is an RStudio file.</p>
+</section>
+
+
+<section>
+    <h2>Your Turn! Create a script.</h2>
+    <pre><code class="r">
+## Load some data:
+data(cars)
+
+## Look at it:
+str(cars)
+head(cars)
+?cars
+
+## Play with it: 
+colMeans(cars)
+plot(cars$speed, cars$dist)
+    </code></pre>
+</section>
+
+<section>
+    <h2>Your Turn! Save your script.</h2>
+    <p>Save the file as <code>my_cars.R</code>. What happens?</p>
+    <p>What does this code return? Does it make sense?</p>
+    <pre><code class="r">
+getwd()
+    </code></pre>
+</section>
+
+<section>
+    <h2>Your Turn! Restart your project.</h2>
+    <p>Close RStudio and restart it.</p>
+    <p>Open your project.</p>
+</section>
+
+
+<section>
+    <h2>Folder Structure</h2>
+    <p>Create your own structure.
+       Today's example is modeled on R packages.</p>
+    <p>Goals:</p>
+    <ul>
+        <li>Separate data management from analysis.</li>
+        <li>Emphasize documentation and reproducibity.</li>
+        <li>Compatible with version control sites.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Folder Structure Example</h2>
+    <p style="text-align:left">Root Project Folder (foo):</p>
+    <ul>
+        <li>
+            data-raw/
+            <ul><small>
+                <li>README.md</li>
+                <li>something_awesome.R</li>
+            </small></ul>
+        </li>
+        <li>
+            data/
+            <ul><small>
+                <li>README.md</li>
+                <li>something_awesome.Rda</li>
+            </small></ul>
+        </li>
+        <li>
+            R/
+            <ul><small>
+                <li>README.R</li>
+                <li>awesome_function.R</li>
+            </small></ul>
+        </li>
+        <li>README.md</li>
+        <li>explore.R</li>
+        <li>some_awesome_analysis.R</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Documentation</h2>
+    <p>Start your R journey with documentation!</p>
+    <ul>
+        <li>.md are text files that use Markdown.</li>
+        <li><code>README.md</code> is a naming convention.</li>
+        <li>Document everything.</li>
+    </ul>
+    <p>We will cover Markdown language in a future workshop.
+       For now, use plain text.</p>
+</section>
+
+<section>
+    <h2>Next Up</h2>
+    <p>Packages</p>
+</section>
