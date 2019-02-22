@@ -1,0 +1,157 @@
+---
+layout: presentation
+title: "Selecting Packages"
+---
+
+<section>
+    <h2>Tidyverse</h2>
+    <div class="left">
+        <p>Duration: ~60 Minutes</p>
+        <p>5 Minute Break</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="" width="90%" alt="">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Learn piping syntax</li>
+        <li>Subset and sort data</li>
+        <li>Create and rename variables</li>
+        <li>Group and summarize data</li>
+        <!-- everything below shift to relational database workshop -->
+        <!-- put merging in its own section -->
+        <li>Merge and concatenate datasets</li>
+        <!-- <li>Gather, spread, and transpose datasets</li> -->
+        <!-- <li>Read and save CSV files</li> -->
+    </ul>
+</section>
+
+
+
+
+
+
+<section>
+    <h2>Introducing tidyverse</h2>
+    <!-- Rewrite this for tidyverse. Decide which dataset(s) to use for examples - 
+    are there any in the tidyverse package? Reference dplyr when introducing piping.
+    Estimate 45-60 minutes to get through material. -->
+    
+    <div class="left">
+        <ul>
+            <li>
+                Creator:  
+                <a href="https://en.wikipedia.org/wiki/Hadley_Wickham" target="_blank">
+                    Hadley Wickham
+                </a>
+            </li>
+            <li>
+                <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf" target="_blank">
+                    Documentation (PDF)
+                </a>
+            </li>
+            <li>
+                <a href="https://cran.r-project.org/web/packages/dplyr" target="_blank">
+                    CRAN Page
+                </a>
+            </li>
+            <li>Simplifies data management</li>
+        </ul>
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/hadley.jpg" width="50%" alt="Photo of Hadley Wickham, 2016">
+    </div>
+</section>
+
+<section>
+    <h2>Your Turn!</h2>
+    
+    <pre><code class="r">
+## Init ==================================================
+library(dplyr)
+data(cars)
+
+## Are these two lines of code equivalent? ===============
+cars[cars$speed > 20,]
+filter(cars, speed > 20)
+    </code></pre>
+    
+    <p style="color:red">Try this code.</p>
+    <p><small>Answer on next slide</small>
+</section>
+
+<section>
+    <h2>Yes, they are.</h2>
+    
+    <pre><code class="r">
+  speed dist
+1    22   66
+2    23   54
+3    24   70
+4    24   92
+5    24   93
+6    24  120
+7    25   85
+    </code></pre>
+</section>
+
+<section>
+    <h2>Summary Statistics Made EASY</h2>
+    
+    <p style="color:red">Try this code, too.</p>
+    
+    <div class="left">
+        <h5>Base R</h5>
+        <pre><code class="r">
+## Easy, but limited
+colMeans(cars)
+
+
+
+
+        </code></pre>
+        <pre><code class="fragment r">
+speed     dist 
+15.40    42.98 
+        </code></pre>        
+    </div>
+    <div class="right">
+        <h5>dplyr</h5>
+        <pre><code class="r">
+## More complex, more powerful
+cars %>%
+summarize(n_rows = n(),
+          speed = mean(speed),
+          dist = mean(dist) 
+)
+        </code></pre>
+        <pre><code class="fragment r">  
+n_rows      speed      dist
+1   50       15.4     42.98
+        </code></pre>        
+    </div>    
+</section>
+
+<section>
+    <h2>And therein lies the rub</h2>
+    
+    <p>There are often multiple ways to do the same thing.<br>
+        R is <i><strong>ludicrously</strong></i> powerful, 
+        but it can also be very complex.</p>
+    
+    <p><span style="color:green">Today's goal - help you find a path forward.</span></p>
+</section>
+
+
+
+
+<section>
+    <h1>And Now You Know!</h1>
+    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
+    <p>John Jacob Astor in 1919</p>
+</section>
