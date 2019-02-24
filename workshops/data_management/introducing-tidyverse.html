@@ -1,6 +1,6 @@
 ---
 layout: presentation
-title: "Selecting Packages"
+title: "Basic Tidyverse"
 ---
 
 <section>
@@ -23,45 +23,28 @@ title: "Selecting Packages"
         <li>Subset and sort data</li>
         <li>Create and rename variables</li>
         <li>Group and summarize data</li>
-        <!-- everything below shift to relational database workshop -->
-        <!-- put merging in its own section -->
-        <li>Merge and concatenate datasets</li>
-        <!-- <li>Gather, spread, and transpose datasets</li> -->
-        <!-- <li>Read and save CSV files</li> -->
     </ul>
 </section>
 
-
-
-
-
-
 <section>
-    <h2>Introducing tidyverse</h2>
-    <!-- Rewrite this for tidyverse. Decide which dataset(s) to use for examples - 
-    are there any in the tidyverse package? Reference dplyr when introducing piping.
-    Estimate 45-60 minutes to get through material. -->
+    <h2>Tidyverse</h2>
+    <p>A constellation of packages that restructure the way R code works.</p>
+    
+    <p>Includes:</p>
+    <ul>
+        <li>magittr's piping (<code>%>%</code>)</li>
+        <li>dplyr: most functions we will use today</li>
+    </ul>
+</section>
+    
+<section>
+    <h2>Dplyr</h2>
     
     <div class="left">
-        <ul>
-            <li>
-                Creator:  
-                <a href="https://en.wikipedia.org/wiki/Hadley_Wickham" target="_blank">
-                    Hadley Wickham
-                </a>
-            </li>
-            <li>
-                <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf" target="_blank">
-                    Documentation (PDF)
-                </a>
-            </li>
-            <li>
-                <a href="https://cran.r-project.org/web/packages/dplyr" target="_blank">
-                    CRAN Page
-                </a>
-            </li>
-            <li>Simplifies data management</li>
-        </ul>
+        <p>Creator <a href="https://en.wikipedia.org/wiki/Hadley_Wickham" 
+                      target="_blank">Hadley Wickham</a></p>
+        <p>Documentation on <a href="https://cran.r-project.org/web/packages/dplyr" 
+                               target="_blank">CRAN Page</a></p>
     </div>
     <div class="right">
         <img src="{{site.baseurl}}/public/img/hadley.jpg" width="50%" alt="Photo of Hadley Wickham, 2016">
@@ -69,21 +52,190 @@ title: "Selecting Packages"
 </section>
 
 <section>
-    <h2>Your Turn!</h2>
-    
-    <pre><code class="r">
-## Init ==================================================
-library(dplyr)
-data(cars)
-
-## Are these two lines of code equivalent? ===============
-cars[cars$speed > 20,]
-filter(cars, speed > 20)
-    </code></pre>
-    
-    <p style="color:red">Try this code.</p>
-    <p><small>Answer on next slide</small>
+    <h2>Piping</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+foo_foo <- little_bunny()
+foo_foo <- hop(foo_foo, through = forest)
+foo_foo <- scoop(foo_foo, up = field_mice)
+foo_foo <- bop(foo_foo, on = head)
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+foo_foo <- littlebunny() %>%
+  hop(through = forest) %>%
+  scoop(up = field_mice) %>%
+  bop(on = head)
+        </code></pre>
+    </div>
+    <p>Example from <a href="https://r4ds.had.co.nz/pipes.html">R for Data Science</a></p>
 </section>
+
+<section>
+    <h2>filter()</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris[iris$Species == "setosa" & 
+                iris$Petal.Width < 0.5, ]
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris %>% filter(Species == "setosa", 
+                           Sepal.Width < 4.0)
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2>select()</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris[, c("Species", 
+                    "Sepal.Length", 
+                    "Sepal.Width")]
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris %>% select(Species, 
+                           Sepal.Length,
+                           Sepal.Width)
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2>arrange()</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris[order(iris$Sepal.Width, 
+                      -iris$Sepal.Length), ]
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris %>% arrange(Sepal.Width, 
+                            desc(Sepal.Length))
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2>rename()</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris
+names(my_iris)[1:2] <- c("slength", 
+                         "swidth")
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris %>% rename(swidth = Sepal.Width, 
+                           slength = Sepal.Length)
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2>mutate()</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris
+my_iris$Sepal.Ratio <- 
+  my_iris$Sepal.Length / my_iris$Sepal.Width
+my_iris$Petal.Ratio <- 
+  my_iris$Petal.Length / my_iris$Petal.Width
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+data(iris)
+my_iris <- iris %>% 
+  mutate(
+    Sepal.Ratio = Sepal.Length / Sepal.Width,
+    Petal.Ratio = Petal.Length / Petal.Width
+  )
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2>Your Turn: filter()</h2>
+    
+    <p>Filter only versicolor irises using pipes.</p>
+    
+    <pre><code class="fragment r">
+my_iris <- iris %>% filter(Species == "versicolor")
+    </code></pre>
+    <p>To check your code, try <code>head()</code> or summary()</p>
+</section>
+
+<section>
+    <h2>Your Turn: select()</h2>
+    
+    <p>Select only petal variables from your subset using pipes.</p>
+    
+    <pre><code class="fragment r">
+my_iris <- my_iris %>% subset(Petal.Length, Petal.Width)
+    </code></pre>
+</section>
+
+<section>
+    <h2>Your Turn: arrange()</h2>
+    
+    <p>Arrange observations in your subset by <code>Petal.Length</code> using pipes. 
+       Now try arranging by <code>Petal.Width</code> in descending order.</p>
+    
+    <pre><code class="fragment r">
+my_iris <- my_iris %>% arrange(Petal.Length)
+my_iris <- my_iris %>% arrange(desc(Petal.Width))
+    </code></pre>
+</section>
+
+<!-- start with renaming -->
+
+
+
+    <!-- 
+    piping
+    filter
+    select
+    arrange
+    rename
+    mutate
+    
+    maybe summarize at the end
+    
+    -->
+    
+    <!-- Rewrite this for tidyverse. Decide which dataset(s) to use for examples - 
+    are there any in the tidyverse package? Reference dplyr when introducing piping.
+    Estimate 45-60 minutes to get through material. -->
+    
 
 <section>
     <h2>Yes, they are.</h2>
