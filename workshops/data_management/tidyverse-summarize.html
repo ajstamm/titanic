@@ -28,11 +28,11 @@ title: "Summarizing Data with Tidyverse"
     
     <p>Base R has many ways to summarize data.</p>
     
-    <p>With <code>summarize()</code>, do this with:</p>
+    <p>With <code>summarize()</code>, get</p>
     <ul>
         <li>Cleaner code</li>
         <li>More readable code</li>
-        <li>Shorter code</li>
+        <li>Shorter code (sometimes)</li>
     </ul>
 </section>
 
@@ -53,12 +53,14 @@ colMeans(iris[, 1:2])
         <p>Tidyverse</p>
         <pre><code class="r">
 iris %>% summarize(
-    mean_sepal_length = mean(Sepal.Length),
-    mean_sepal_width = mean(Sepal.Width)
+    mean_slength = 
+      mean(Sepal.Length),
+    mean_swidth = 
+      mean(Sepal.Width)
   )
   
-#   mean_sepal_length mean_sepal_width
-# 1          5.843333         3.057333
+#   mean_slength mean_swidth
+# 1     5.843333    3.057333
         </code></pre>
     </div>
 </section>
@@ -70,11 +72,14 @@ iris %>% summarize(
         <pre><code class="r">
 data.frame(mean_petal_length = 
   c(setosa = mean(
-      iris$Petal.Length[iris$Species == "setosa"]
+      iris$Petal.Length
+        [iris$Species == "setosa"]
     ), versicolor = mean(
-      iris$Petal.Length[iris$Species == "versicolor"]
+      iris$Petal.Length
+        [iris$Species == "versicolor"]
     ), virginica = mean(
-      iris$Petal.Length[iris$Species == "virginica"]
+      iris$Petal.Length
+        [iris$Species == "virginica"]
     )))
     
 #            mean_petal_length
@@ -88,14 +93,17 @@ data.frame(mean_petal_length =
         <pre><code class="r">
 iris %>% group_by(Species) %>%
   summarize(
-    mean_petal_length = mean(Petal.Length)
+    mean_petal_length = 
+      mean(Petal.Length)
   ) %>% ungroup()
 
 
 
-# A tibble: 3 x 2
+
+
+
+
 #   Species    mean_petal_length
-#   <fct>                  <dbl>
 # 1 setosa                  1.46
 # 2 versicolor              4.26
 # 3 virginica               5.55
@@ -107,7 +115,8 @@ iris %>% group_by(Species) %>%
     <h2>Your Turn: summarize()</h2>
     
     <p>Calculate the sums of <code>Petal.Length</code> and 
-       <code>Petal.Width</code>. Save your results to a dataset.</p> 
+       <code>Petal.Width</code>. <br />
+       Save your results to a dataset.</p> 
     
     <pre><code class="fragment r">
 my_iris <- iris %>% summarize(
@@ -121,8 +130,8 @@ my_iris <- iris %>% summarize(
     <h2>Your Turn: group_by()</h2>
     
     <p>Calculate the sums and of <code>Petal.Length</code> and 
-       <code>Petal.Width</code> grouped by <code>Species</code>. 
-       Save your results to a datset.</p> 
+       <code>Petal.Width</code> grouped by <code>Species</code>.<br />
+       Save your results to a dataset.</p> 
     
     <pre><code class="fragment r">
 my_iris <- iris %>% group_by(Species) %>%
@@ -136,7 +145,7 @@ my_iris <- iris %>% group_by(Species) %>%
 <section>
     <h2>Bonus: rowwise()</h2>
     
-    <p>Sometimes, you need to summarize across rows instead of columns.</p>  
+    <p>Summarize across rows instead of columns.</p>  
     
      <div class="left">
         <p>Base R</p>
@@ -144,8 +153,10 @@ my_iris <- iris %>% group_by(Species) %>%
 rowMeans(iris[, 1:4])
 
 
-# [1] 2.550 2.375 2.350 2.350 2.550 
-# [6] 2.850 2.425 2.525 2.225 2.400 ...
+
+# [1] 2.550 2.375 2.350 2.350 
+# [5] 2.550 2.850 2.425 2.525 
+# [9] 2.225 2.400 ...
         </code></pre>
     </div>
     <div class="right">
@@ -153,8 +164,10 @@ rowMeans(iris[, 1:4])
         <pre><code class="r">
 iris %>% rowwise() %>%
   mutate(
-    mean = mean(c(Sepal.Length, Sepal.Width, 
-                  Petal.Length, Petal.Width))
+    mean = mean(c(Sepal.Length, 
+                  Sepal.Width, 
+                  Petal.Length, 
+                  Petal.Width))
   )
         </code></pre>
     </div>
