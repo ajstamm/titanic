@@ -1,12 +1,12 @@
 ---
 layout: presentation
-title: "Basic Tidyverse"
+title: "Summarizing Data with Tidyverse"
 ---
 
 <section>
-    <h2>Tidyverse</h2>
+    <h2>Summarizing data</h2>
     <div class="left">
-        <p>Duration: ~40 Minutes</p>
+        <p>Duration: ~20 Minutes</p>
         <p>5 Minute Break</p>
     </div>
     <div class="right">
@@ -325,9 +325,75 @@ my_iris <- iris %>%
     </code></pre>
 </section>
 
+
+
+
+
+<!-- start with renaming -->
+
+
+
+    <!-- 
+    piping
+    filter
+    select
+    arrange
+    rename
+    mutate
+    
+    maybe summarize at the end
+    
+    -->
+    
+    <!-- Rewrite this for tidyverse. Decide which dataset(s) to use for examples - 
+    are there any in the tidyverse package? Reference dplyr when introducing piping.
+    Estimate 45-60 minutes to get through material. -->
+    
+
+
+<section>
+    <h2>Summary Statistics Made EASY</h2>
+    
+    <p style="color:red">Try this code, too.</p>
+    
+    <div class="left">
+        <h5>Base R</h5>
+        <pre><code class="r">
+## Easy, but limited
+colMeans(cars)
+
+
+
+
+        </code></pre>
+        <pre><code class="fragment r">
+speed     dist 
+15.40    42.98 
+        </code></pre>        
+    </div>
+    <div class="right">
+        <h5>dplyr</h5>
+        <pre><code class="r">
+## More complex, more powerful
+cars %>%
+summarize(n_rows = n(),
+          speed = mean(speed),
+          dist = mean(dist) 
+)
+        </code></pre>
+        <pre><code class="fragment r">  
+n_rows      speed      dist
+1   50       15.4     42.98
+        </code></pre>        
+    </div>    
+</section>
+
+
+
+
+
 <section>
     <h1>And Now You Know!</h1>
-    <!-- break? -->
-    <img src="" alt="" width="30%">
-    <p></p>
+    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
+    <p>John Jacob Astor in 1919</p>
 </section>
