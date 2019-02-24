@@ -24,332 +24,145 @@ title: "Summarizing Data with Tidyverse"
 </section>
 
 <section>
-    <h2>Herein lies the rub:</h2>
+    <h2>Why learn Summarize()</h2>
     
-    <p>R is <i><strong>ludicrously</strong></i> powerful, 
-       but it can also be very complex.<br>
-       There are often multiple ways to do the same thing.</p>
+    <p>Base R has many ways to summarize data.</p>
     
-    <p><span style="color:green">Today's goal - 
-       teach you new ways to do old things.</span></p>
-</section>
-
-
-<section>
-    <h2>Tidyverse</h2>
-    <p>Set of packages that restructure how R code works.</p>
-    
-    <p>Includes:</p>
+    <p>With <code>summarize()</code>, do this with:</p>
     <ul>
-        <li>magittr's piping (<code>%>%</code>)</li>
-        <li>dplyr: most functions we will use today</li>
+        <li>Cleaner code</li>
+        <li>More readable code</li>
+        <li>Shorter code</li>
     </ul>
 </section>
+
+<section>
+    <h2>Example: column means</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+colMeans(iris[, 1:2])
+
+
+
+# Sepal.Length  Sepal.Width 
+#     5.843333     3.057333
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+iris %>% summarize(
+    mean_sepal_length = mean(Sepal.Length),
+    mean_sepal_width = mean(Sepal.Width)
+  )
+  
+#   mean_sepal_length mean_sepal_width
+# 1          5.843333         3.057333
+        </code></pre>
+    </div>
+</section>
+
+<section>
+    <h2>Example: category means</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+data.frame(mean_petal_length = 
+  c(setosa = mean(
+      iris$Petal.Length[iris$Species == "setosa"]
+    ), versicolor = mean(
+      iris$Petal.Length[iris$Species == "versicolor"]
+    ), virginica = mean(
+      iris$Petal.Length[iris$Species == "virginica"]
+    )))
     
+#            mean_petal_length
+# setosa                 1.462
+# versicolor             4.260
+# virginica              5.552
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+iris %>% group_by(Species) %>%
+  summarize(
+    mean_petal_length = mean(Petal.Length)
+  ) %>% ungroup()
+
+
+
+# A tibble: 3 x 2
+#   Species    mean_petal_length
+#   <fct>                  <dbl>
+# 1 setosa                  1.46
+# 2 versicolor              4.26
+# 3 virginica               5.55
+        </code></pre>
+    </div>
+</section>
+
 <section>
-    <h2>Dplyr</h2>
+    <h2>Your Turn: summarize()</h2>
     
-    <div class="left">
-        <p>Creator <a href="https://en.wikipedia.org/wiki/Hadley_Wickham" 
-                      target="_blank">Hadley Wickham</a></p>
-        <p>Documentation on <br />
-           <a href="https://cran.r-project.org/web/packages/dplyr" 
-              target="_blank">CRAN Page</a></p>
-    </div>
-    <div class="right">
-        <img src="{{site.baseurl}}/public/img/hadley.jpg" width="50%" alt="Photo of Hadley Wickham, 2016">
-    </div>
-</section>
-
-<section>
-    <h2>Piping</h2>
-     <div class="left">
-        <p>Base R</p>
-        <pre><code class="r">
-foo_foo <- little_bunny()
-foo_foo <- hop(foo_foo, 
-  through = forest)
-foo_foo <- scoop(foo_foo, 
-  up = field_mice)
-foo_foo <- bop(foo_foo, 
-  on = head)
-        </code></pre>
-    </div>
-    <div class="right">
-        <p>Tidyverse</p>
-        <pre><code class="r">
-foo_foo <- littlebunny() %>%
-  hop(through = forest) %>%
-  scoop(up = field_mice) %>%
-  bop(on = head)
-  
-  
-  
-        </code></pre>
-    </div>
-    <p>Example from <a href="https://r4ds.had.co.nz/pipes.html">R for Data Science</a></p>
-</section>
-
-<section>
-    <h2>filter()</h2>
-     <div class="left">
-        <p>Base R</p>
-        <pre><code class="r">
-data(iris)
-my_iris <- 
-  iris[iris$Species == "setosa" & 
-       iris$Petal.Width < 0.5, ]
-       
-       
-        </code></pre>
-    </div>
-    <div class="right">
-        <p>Tidyverse</p>
-        <pre><code class="r">
-data(iris)
-my_iris <- iris %>% 
-  filter(
-    Species == "setosa", 
-    Sepal.Width < 4.0
-  )
-        </code></pre>
-    </div>
-</section>
-
-<section>
-    <h2>select()</h2>
-     <div class="left">
-        <p>Base R</p>
-        <pre><code class="r">
-my_iris <- 
-  iris[, c("Species", 
-           "Sepal.Length", 
-           "Sepal.Width")]
-           
-           
-        </code></pre>
-    </div>
-    <div class="right">
-        <p>Tidyverse</p>
-        <pre><code class="r">
-my_iris <- iris %>% 
-  select(
-    Species, 
-    Sepal.Length,
-    Sepal.Width
-  )
-        </code></pre>
-    </div>
-</section>
-
-<section>
-    <h2>arrange()</h2>
-     <div class="left">
-        <p>Base R</p>
-        <pre><code class="r">
-my_iris <- 
-  iris[order(iris$Sepal.Width, 
-       -iris$Sepal.Length), ]
-       
-       
-        </code></pre>
-    </div>
-    <div class="right">
-        <p>Tidyverse</p>
-        <pre><code class="r">
-my_iris <- iris %>% 
-  arrange(
-    Sepal.Width, 
-    desc(Sepal.Length)
-  )
-        </code></pre>
-    </div>
-</section>
-
-<section>
-    <h2>rename()</h2>
-     <div class="left">
-        <p>Base R</p>
-        <pre><code class="r">
-my_iris <- iris
-names(my_iris)[1:2] <- 
-  c("slength", "swidth")
-  
-  
-        </code></pre>
-    </div>
-    <div class="right">
-        <p>Tidyverse</p>
-        <pre><code class="r">
-my_iris <- iris %>% 
-  rename(
-    swidth = Sepal.Width, 
-    slength = Sepal.Length
-  )
-        </code></pre>
-    </div>
-</section>
-
-<section>
-    <h2>mutate()</h2>
-     <div class="left">
-        <p>Base R</p>
-        <pre><code class="r">
-data(iris)
-my_iris <- iris
-my_iris$Sepal.Ratio <- 
-  my_iris$Sepal.Length / 
-  my_iris$Sepal.Width
-my_iris$Petal.Ratio <- 
-  my_iris$Petal.Length / 
-  my_iris$Petal.Width
-        </code></pre>
-    </div>
-    <div class="right">
-        <p>Tidyverse</p>
-        <pre><code class="r">
-data(iris)
-my_iris <- iris %>% 
-  mutate(
-    Sepal.Ratio = Sepal.Length / 
-                  Sepal.Width,
-    Petal.Ratio = Petal.Length / 
-                  Petal.Width
-  )
-        </code></pre>
-    </div>
-</section>
-
-<section>
-    <h2>Your Turn: filter()</h2>
-    
-    <p>Filter only versicolor irises using pipes.</p>
+    <p>Calculate the sums of <code>Petal.Length</code> and 
+       <code>Petal.Width</code>. Save your results to a dataset.</p> 
     
     <pre><code class="fragment r">
-my_iris <- iris %>% filter(Species == "versicolor")
-    </code></pre>
-    <p>To check your code, try <code>head()</code> or summary()</p>
-</section>
-
-<section>
-    <h2>Your Turn: arrange()</h2>
-    
-    <p>Arrange your subset by <code>Petal.Length</code> using pipes.</p> 
-    
-    <pre><code class="fragment r">
-my_iris <- my_iris %>% arrange(Petal.Length)
-    </code></pre>
-
-    <p></p>Now arrange by <code>Petal.Width</code> in descending order.</p>
-    
-    <pre><code class="fragment r">
-my_iris <- my_iris %>% arrange(desc(Petal.Width))
-    </code></pre>
-</section>
-
-<section>
-    <h2>Your Turn: mutate()</h2>
-    
-    <p>In your subset, create <code>Ratio.Length</code> as a  
-       ratio of <code>Petal.Length</code> and <code>Sepal.Length</code> using pipes.</p> 
-    
-    <pre><code class="fragment r">
-my_iris <- my_iris %>% mutate(
-  Ratio.Length = Petal.Length / Sepal.Length
+my_iris <- iris %>% summarize(
+  sum_petal_length = sum(Petal.Length),
+  sum_petal_width = sum(Petal.Width)
 )
     </code></pre>
 </section>
 
 <section>
-    <h2>Your Turn: select()</h2>
+    <h2>Your Turn: group_by()</h2>
     
-    <p>Select only length variables from your subset using pipes.</p>
+    <p>Calculate the sums and of <code>Petal.Length</code> and 
+       <code>Petal.Width</code> grouped by <code>Species</code>. 
+       Save your results to a datset.</p> 
     
     <pre><code class="fragment r">
-my_iris <- my_iris %>% subset(Petal.Length, Sepal.Length, Ratio.Length)
+my_iris <- iris %>% group_by(Species) %>%
+  summarize(
+    sum_petal_length = sum(Petal.Length),
+    sum_petal_width = sum(Petal.Width)
+  )
     </code></pre>
 </section>
 
 <section>
-    <h2>Your Turn: rename()</h2>
+    <h2>Bonus: rowwise()</h2>
     
-    <p>In your subset, rename <code>Petal.Length</code> to 
-       <code>petallength</code> using pipes.</p> 
+    <p>Sometimes, you need to summarize across rows instead of columns.</p>  
     
-    <pre><code class="fragment r">
-my_iris <- my_iris %>% rename(petallength = Petal.Length)
-    </code></pre>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+rowMeans(iris[, 1:4])
+
+
+# [1] 2.550 2.375 2.350 2.350 2.550 
+# [6] 2.850 2.425 2.525 2.225 2.400 ...
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+iris %>% rowwise() %>%
+  mutate(
+    mean = mean(c(Sepal.Length, Sepal.Width, 
+                  Petal.Length, Petal.Width))
+  )
+        </code></pre>
+    </div>
+    <p>What happens if you leave out <code>rowwise()</code>?</p>
 </section>
 
-
-
 <section>
-    <h2>Your Turn: Chaining pipes</h2>
-    
-    <p>Now try chaining together all of the steps in the previous slides:</p> 
-    <ol>
-        <li>Filter versicolor irises.</li>
-        <li>Arrange by <code>Petal.Length</code>.</li>
-        <li>Create <code>Ratio.Length</code> from <code>Petal.Length</code> 
-            and <code>Sepal.Length</code>.</li>
-        <li>Select length variables.</li>
-        <li>Rename <code>Petal.Length</code> to <code>petallength</code>.</li>
-    </ol>
-    <p>Code is on the next slide.</p>
-</section>
-
-<section>
-    <h2>Chaining pipes answer</h2>
-    
-    <p>Now try chaining together all of the steps in the previous slides:</p> 
-    <ol>
-        <li>Filter versicolor irises.</li>
-        <li>Arrange by <code>Petal.Length</code>.</li>
-        <li>Create <code>Ratio.Length</code> from <code>Petal.Length</code> 
-            and <code>Sepal.Length</code>.</li>
-        <li>Select length variables.</li>
-        <li>Rename <code>Petal.Length</code> to <code>petallength</code>.</li>
-    </ol>
-    <p>Code is on the next slide.</p>
-
-    <pre><code class="fragment r">
-my_iris <- iris %>% 
-  filter(Species == "versicolor") %>%
-  arrange(Petal.Length) %>%
-  mutate(Ratio.Length = Petal.Length / Sepal.Length) %>%
-  select(Petal.Length, Sepal.Length, Ratio.Length) %>%
-  rename(petallength = Petal.Length)
-    </code></pre>
-</section>
-
-
-
-
-
-<!-- start with renaming -->
-
-
-
-    <!-- 
-    piping
-    filter
-    select
-    arrange
-    rename
-    mutate
-    
-    maybe summarize at the end
-    
-    -->
-    
-    <!-- Rewrite this for tidyverse. Decide which dataset(s) to use for examples - 
-    are there any in the tidyverse package? Reference dplyr when introducing piping.
-    Estimate 45-60 minutes to get through material. -->
-    
-
-
-<section>
-    <h2>Summary Statistics Made EASY</h2>
+    <h2>Another example</h2>
     
     <p style="color:red">Try this code, too.</p>
     
@@ -357,15 +170,15 @@ my_iris <- iris %>%
         <h5>Base R</h5>
         <pre><code class="r">
 ## Easy, but limited
-colMeans(cars)
-
+c(n_rows = nrow(cars), 
+  colMeans(cars))
 
 
 
         </code></pre>
         <pre><code class="fragment r">
-speed     dist 
-15.40    42.98 
+n_rows  speed   dist 
+ 50.00  15.40  42.98 
         </code></pre>        
     </div>
     <div class="right">
@@ -373,10 +186,10 @@ speed     dist
         <pre><code class="r">
 ## More complex, more powerful
 cars %>%
-summarize(n_rows = n(),
-          speed = mean(speed),
-          dist = mean(dist) 
-)
+  summarize(n_rows = n(),
+            speed = mean(speed),
+            dist = mean(dist) 
+  )
         </code></pre>
         <pre><code class="fragment r">  
 n_rows      speed      dist
@@ -385,12 +198,9 @@ n_rows      speed      dist
     </div>    
 </section>
 
-
-
-
-
 <section>
     <h1>And Now You Know!</h1>
-    <img src="{{site.baseurl}}/public/img/john-jacob-astor-1909.jpg" alt="Photo of John Jacob Astor in 1919" width="30%">
-    <p>John Jacob Astor in 1919</p>
+    <!-- break? -->
+    <img src="" alt="" width="30%">
+    <p></p>
 </section>
