@@ -22,7 +22,6 @@ title: "Basic Tidyverse"
         <li>Learn piping syntax</li>
         <li>Subset and sort data</li>
         <li>Create and rename variables</li>
-        <li>Group and summarize data</li>
     </ul>
 </section>
 
@@ -304,18 +303,7 @@ my_iris <- my_iris %>% rename(petallength = Petal.Length)
 <section>
     <h2>Chaining pipes answer</h2>
     
-    <p>Now try chaining together all of the steps in the previous slides:</p> 
-    <ol>
-        <li>Filter versicolor irises.</li>
-        <li>Arrange by <code>Petal.Length</code>.</li>
-        <li>Create <code>Ratio.Length</code> from <code>Petal.Length</code> 
-            and <code>Sepal.Length</code>.</li>
-        <li>Select length variables.</li>
-        <li>Rename <code>Petal.Length</code> to <code>petallength</code>.</li>
-    </ol>
-    <p>Code is on the next slide.</p>
-
-    <pre><code class="fragment r">
+    <pre><code class="r">
 my_iris <- iris %>% 
   filter(Species == "versicolor") %>%
   arrange(Petal.Length) %>%
