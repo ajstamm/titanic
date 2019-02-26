@@ -80,7 +80,7 @@ foo_foo <- bop(foo_foo,
     <div class="right">
         <p>Tidyverse</p>
         <pre><code class="r">
-foo_foo <- littlebunny() %>%
+foo_foo <- little_bunny() %>%
   hop(through = forest) %>%
   scoop(up = field_mice) %>%
   bop(on = head)
@@ -93,7 +93,8 @@ foo_foo <- littlebunny() %>%
 </section>
 
 <section>
-    <h2>filter()</h2>
+    <h2>Conditional selection</h2>
+    <p>To select rows based on some condition, use <code>filter()</code>.</p>
      <div class="left">
         <p>Base R</p>
         <pre><code class="r">
@@ -119,7 +120,12 @@ my_iris <- iris %>%
 </section>
 
 <section>
-    <h2>select()</h2>
+    <h2>Variable selection</h2>
+    <p>To choose specific columns, use 
+       <code>select()</code>.<br \>
+       To choose all columns except <code>x</code>,
+       use <code>select(-x)</code>.
+    </p>
      <div class="left">
         <p>Base R</p>
         <pre><code class="r">
@@ -145,7 +151,9 @@ my_iris <- iris %>%
 </section>
 
 <section>
-    <h2>arrange()</h2>
+    <h2>Sorting columns</h2>
+    <p>To sort by one or more columns, use 
+       <code>arrange()</code>.</p>
      <div class="left">
         <p>Base R</p>
         <pre><code class="r">
@@ -169,7 +177,8 @@ my_iris <- iris %>%
 </section>
 
 <section>
-    <h2>rename()</h2>
+    <h2>Renaming variables</h2>
+    <p>To rename a column, use<code>rename()</code>.</p>
      <div class="left">
         <p>Base R</p>
         <pre><code class="r">
@@ -193,7 +202,8 @@ my_iris <- iris %>%
 </section>
 
 <section>
-    <h2>mutate()</h2>
+    <h2>Creating variables</h2>
+    <p>To create a new variable, use <code>mutate()</code>.</p>
      <div class="left">
         <p>Base R</p>
         <pre><code class="r">
@@ -234,22 +244,6 @@ my_iris <- iris %>% filter(Species == "versicolor")
 </section>
 
 <section>
-    <h2>Your Turn: arrange()</h2>
-    
-    <p>Arrange your subset by <code>Petal.Length</code> using pipes.</p> 
-    
-    <pre><code class="fragment r">
-my_iris <- my_iris %>% arrange(Petal.Length)
-    </code></pre>
-
-    <p></p>Now arrange by <code>Petal.Width</code> in descending order.</p>
-    
-    <pre><code class="fragment r">
-my_iris <- my_iris %>% arrange(desc(Petal.Width))
-    </code></pre>
-</section>
-
-<section>
     <h2>Your Turn: mutate()</h2>
     
     <p>In your subset, create <code>Ratio.Length</code> as a  
@@ -273,6 +267,22 @@ my_iris <- my_iris %>% subset(Petal.Length, Sepal.Length, Ratio.Length)
 </section>
 
 <section>
+    <h2>Your Turn: arrange()</h2>
+    
+    <p>Arrange your subset by <code>Ratio.Length</code> using pipes.</p> 
+    
+    <pre><code class="fragment r">
+my_iris <- my_iris %>% arrange(Ratio.Length)
+    </code></pre>
+
+    <p></p>Now arrange by <code>Ratio.Length</code> in descending order.</p>
+    
+    <pre><code class="fragment r">
+my_iris <- my_iris %>% arrange(desc(Ratio.Length))
+    </code></pre>
+</section>
+
+<section>
     <h2>Your Turn: rename()</h2>
     
     <p>In your subset, rename <code>Petal.Length</code> to 
@@ -291,10 +301,10 @@ my_iris <- my_iris %>% rename(petallength = Petal.Length)
     <p>Now chain together the steps in the previous slides:</p> 
     <ol>
         <li>Filter versicolor irises.</li>
-        <li>Arrange by <code>Petal.Length</code>.</li>
         <li>Create <code>Ratio.Length</code> from <code>Petal.Length</code> 
             and <code>Sepal.Length</code>.</li>
         <li>Select length variables.</li>
+        <li>Arrange by <code>Ratio.Length</code> in descending order.</li>
         <li>Rename <code>Petal.Length</code> to <code>petallength</code>.</li>
     </ol>
     <p>Code is on the next slide.</p>
@@ -306,9 +316,9 @@ my_iris <- my_iris %>% rename(petallength = Petal.Length)
     <pre><code class="r">
 my_iris <- iris %>% 
   filter(Species == "versicolor") %>%
-  arrange(Petal.Length) %>%
   mutate(Ratio.Length = Petal.Length / Sepal.Length) %>%
   select(Petal.Length, Sepal.Length, Ratio.Length) %>%
+  arrange(desc(Ratio.Length)) %>%
   rename(petallength = Petal.Length)
     </code></pre>
 </section>

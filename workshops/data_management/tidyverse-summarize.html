@@ -19,7 +19,8 @@ title: "Summarizing Data with Tidyverse"
 <section>
     <h2>Learning Objectives</h2>
     <ul>
-        <li>Group and summarize data</li>
+        <li>Summarize data</li>
+        <li>Group and ungroup data</li>
     </ul>
 </section>
 
@@ -28,16 +29,17 @@ title: "Summarizing Data with Tidyverse"
     
     <p>Base R has many ways to summarize data.</p>
     
-    <p>With <code>summarize()</code>, get</p>
+    <p>With <code>summarize()</code>, get code that is</p>
     <ul>
-        <li>Cleaner code</li>
-        <li>More readable code</li>
-        <li>Shorter code (sometimes)</li>
+        <li>Cleaner</li>
+        <li>More readable</li>
+        <li>Shorter (sometimes)</li>
     </ul>
 </section>
 
 <section>
     <h2>Example: column means</h2>
+    <p>One of the few times Tidyverse is longer.</p>
      <div class="left">
         <p>Base R</p>
         <pre><code class="r">
@@ -76,13 +78,13 @@ iris %>% summarize(
 data.frame(mean_petal_length = 
   c(setosa = mean(
       iris$Petal.Length
-        [iris$Species == "setosa"]
+      [iris$Species=="setosa"]
     ), versicolor = mean(
       iris$Petal.Length
-        [iris$Species == "versicolor"]
+      [iris$Species=="versicolor"]
     ), virginica = mean(
       iris$Petal.Length
-        [iris$Species == "virginica"]
+      [iris$Species=="virginica"]
     )))
     
 #            mean_petal_length
@@ -139,7 +141,7 @@ my_iris <- iris %>% group_by(Species) %>%
   summarize(
     sum_petal_length = sum(Petal.Length),
     sum_petal_width = sum(Petal.Width)
-  )
+  ) %>% ungroup()
     </code></pre>
 </section>
 
@@ -178,7 +180,7 @@ iris %>% rowwise() %>%
 <section>
     <h2>Another example</h2>
     
-    <p style="color:red">Try this code, too.</p>
+    <p style="color:red">Now we are swtching to cars.</p>
     
     <div class="left">
         <h5>Base R</h5>
