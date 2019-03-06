@@ -50,7 +50,7 @@ title: "Relational Database Intro"
     <h2>Relational database structure</h2>
     
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; float: left; margin-right: 10px;"
+           style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
            border="1">
         <caption>Pet-level data</caption>
         <thead>
@@ -89,7 +89,7 @@ title: "Relational Database Intro"
         </tbody>
     </table>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-right: 0; margin-left: auto"
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
            border="1">
         <caption>Child-level data</caption>
         <thead>
@@ -122,10 +122,9 @@ title: "Relational Database Intro"
 <section>
     <h2>Merged dataset structure</h2>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-left: auto; margin-right: auto;"
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
            border="1">
         <caption>Child and pet-level data</caption>
-    
         <thead>
             <tr>
                 <th style="text-align:center;">pet_name</th>
@@ -198,7 +197,7 @@ I will not cover these in detail today, but you should know they are possible.
     <h2>Left joining</h2>
     
     <table class="table table-striped table-hover table-condensed table-responsive" 
-       style="width: auto !important; float: left; margin-right: 10px;"
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
        border="1">
         <caption>Pets</caption>
         <thead>
@@ -227,7 +226,7 @@ I will not cover these in detail today, but you should know they are possible.
         </tbody>
     </table>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-right: 0; margin-left: auto"
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
            border="1">
         <caption>Children</caption>
         <thead>
@@ -260,7 +259,7 @@ I will not cover these in detail today, but you should know they are possible.
 leftjoin <- pet %>% left_join(child, by = "child_key")
 </code></pre>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-       style="width: auto !important; margin-left: auto; margin-right: auto;"
+       style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
        border="1">
         <caption>Left joined table</caption>
         <thead>
@@ -302,7 +301,7 @@ leftjoin <- pet %>% left_join(child, by = "child_key")
     <h2>Right joining</h2>
     
     <table class="table table-striped table-hover table-condensed table-responsive" 
-       style="width: auto !important; float: left; margin-right: 10px;"
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
        border="1">
         <caption>Pets</caption>
         <thead>
@@ -331,7 +330,7 @@ leftjoin <- pet %>% left_join(child, by = "child_key")
         </tbody>
     </table>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-right: 0; margin-left: auto"
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
            border="1">
         <caption>Children</caption>
         <thead>
@@ -364,7 +363,7 @@ leftjoin <- pet %>% left_join(child, by = "child_key")
 rightjoin <- pet %>% right_join(child, by = "child_key")
 </code></pre>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-left: auto; margin-right: auto;"
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
            border="1">
         <caption>Right joined table</caption>
         <thead>
@@ -406,7 +405,7 @@ rightjoin <- pet %>% right_join(child, by = "child_key")
     <h2>Full joining</h2>
     
     <table class="table table-striped table-hover table-condensed table-responsive" 
-       style="width: auto !important; float: left; margin-right: 10px;"
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
        border="1">
         <caption>Pets</caption>
         <thead>
@@ -435,7 +434,7 @@ rightjoin <- pet %>% right_join(child, by = "child_key")
         </tbody>
     </table>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-right: 0; margin-left: auto"
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
            border="1">
         <caption>Children</caption>
         <thead>
@@ -468,7 +467,7 @@ rightjoin <- pet %>% right_join(child, by = "child_key")
 fulljoin <- pet %>% full_join(child, by = "child_key")
 </code></pre>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-left: auto; margin-right: auto;"
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
            border="1">
         <caption>Fully joined table</caption>
         <thead>
@@ -517,7 +516,7 @@ fulljoin <- pet %>% full_join(child, by = "child_key")
     <h2>Inner joining</h2>
     
     <table class="table table-striped table-hover table-condensed table-responsive" 
-       style="width: auto !important; float: left; margin-right: 10px;"
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
        border="1">
         <caption>Pets</caption>
         <thead>
@@ -546,7 +545,7 @@ fulljoin <- pet %>% full_join(child, by = "child_key")
         </tbody>
     </table>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-right: 0; margin-left: auto"
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
            border="1">
         <caption>Children</caption>
         <thead>
@@ -579,7 +578,7 @@ fulljoin <- pet %>% full_join(child, by = "child_key")
 innerjoin <- pet %>% inner_join(child, by = "child_key")
 </code></pre>
     <table class="table table-striped table-hover table-condensed table-responsive" 
-           style="width: auto !important; margin-left: auto; margin-right: auto;"
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
            border="1">
         <caption>Inner joined table</caption>
         <thead>
