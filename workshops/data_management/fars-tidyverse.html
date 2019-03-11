@@ -249,7 +249,7 @@ new_fars <- my_fars %>%
     <h2>Group your data</h2>
     <p>Group the data by your new variable</p>
 <pre><code class="fragment r">
-new_fars <- new_fars %>% group_by(SURVIVAL)
+summary <- new_fars %>% group_by(SURVIVAL)
 </code></pre>
 </section>
 
@@ -263,7 +263,7 @@ new_fars <- new_fars %>% group_by(SURVIVAL)
         <li>number male and female</li>
     </ul>
 <pre><code class="fragment r">
-new_fars <- new_fars %>% 
+summary <- summary %>% 
   summarize(
     total = n(),
     age_mean = mean(AGE, na.rm=TRUE),
@@ -275,10 +275,32 @@ new_fars <- new_fars %>%
 </section>
 
 <section>
+    <h2>Link your code</h2>
+    <p>Chain these steps together:</p>
+    <ol>
+        <li>group by <code>SURVIVAL</code> (use <code>new_fars</code>)</li>
+        <li>summarize by total number, mean and median age, 
+            and numbers of males and females</li>
+        <li><strong>ungroup</strong></li>
+    </ol>
+<pre><code class="fragment r">
+summary <- new_fars %>% group_by(SURVIVAL) %>%
+  summarize(
+    total = n(),
+    age_mean = mean(AGE, na.rm=TRUE),
+    age_median = median(AGE, na.rm=TRUE),
+    males = sum(SEX == "male"),
+    females = sum(SEX == "female")
+  ) %>% ungroup()
+</code></pre>
+</section>
+
+
+<section>
     <h2>View your data</h2>
     <p>View your summarized dataset.</p>
 <pre><code class="fragment r">
-new_data
+summary
 </code></pre>
 </section>
 
@@ -286,7 +308,7 @@ new_data
     <h2>Save your data</h2>
     <p>Save your data in the folder <code>data</code>.</p>
 <pre><code class="fragment r">
-write.csv(new_fars, "data/fars2015nys_Albany_person_bysurvival.csv", 
+write.csv(summary, "data/fars2015nys_Albany_person_bysurvival.csv", 
           row.names = FALSE)
 </code></pre>
 </section>
