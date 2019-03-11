@@ -1,0 +1,291 @@
+---
+layout: presentation
+title: "Tidyverse Practice"
+---
+
+<section>
+    <h2>Tidyverse Practice</h2>
+    <div class="left">
+        <p>Duration: ~40 Minutes</p>
+        <p>5 Minute Break</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b41fff31126373.56424229bf48e.jpg" 
+                 width="50%" alt="Clock made of Legos">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Manage a project</li>
+        <li>Prepare a dataset for analysis</li>
+        <li>Save your script as a record of your data prep</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Download the data</h2>
+    
+    <p>Fatality Analysis Reporting System, NYS, 2015</p>
+    <p><a href="{{site.baseurl}}/public/data/fars2015ny_person.csv">Workshop dataset</a></p>
+    
+    <p>Source: <a href="https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars">FARS website</a></p>
+</section>
+
+<section>
+    <h2>Copy the data</h2>
+    <ol>
+      <li>Navigate to your project folder</li>
+      <li>Create 2 folders: <code>raw_data</code> and <code>data</code></li>
+      <li>Copy your downloaded CSV to <code>raw_data</code></li>
+    </ol>
+    <p><img src="{{site.baseurl}}/public/img/newfoldercreation.png"></p>
+</section>
+
+<section>
+    <h2>Create a new script file</h2>
+    
+    <div class="left">
+        <p>Go to: <br /> "File" > <br />
+                 "New File" > <br />
+                 "R Script"<br />
+    </div>
+    <div class="right">
+        <img src="{{site.baseurl}}/public/img/newscriptfile.png">
+    </div>
+</section>
+
+<section>
+    <h2>Create a header</h2>
+    <p>Simple ...</p>
+<pre><code class="r">
+# Author: Abby
+# Date: 19 April 2019
+# Project: Data management with tidyverse workshop
+# Purpose: To practice piping and dplyr
+# Data source: FARS person level data, 2015
+</code></pre>
+    <p>... or fancy ...</p>
+<pre><code class="r">
+#=============================================================================#
+# Author:   Abigail Stamm (GitHub ID: ajstamm)                                #
+# Date:     Friday, 19 April 2019                                             #
+# Project:  Data management with tidyverse, an R workshop offered by the NYS  #
+#           Department of Health Epidemiology and Biostatistics Community of  #
+#           Practice                                                          #
+# Purpose:  To practice basic piping and common dplyr commands                #
+# Data source:  FARS person level data, 2015                                  #
+# https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars #
+#=============================================================================#
+</code></pre>
+</section>
+
+<section>
+    <h2>Load packages</h2>
+    <p>Load <code>tidyverse</code>. <br />
+       It will auto-load <code>dplyr</code>.</p>
+<pre><code class="r">
+library(tidyverse)
+</code></pre>
+</section>
+
+<section>
+    <h2>Load data</h2>
+    <p>Use <code>read.csv()</code> (base R) or 
+       <code>read_csv()</code> (tidyverse).<br />
+       Differences between them are beyond the scope of this workshop.</p>
+<pre><code class="fragment r">
+fars <- read_csv("raw_data/fars2015nys_person.csv", 
+                 col_types="ccccccnccccccccc")
+</code></pre>
+    <p>Options vary. To see them, query <code>?<command></code>.</p>
+</section>
+
+<section>
+    <h2>Subset data</h2>
+    <p>Select only observations in Albany (where <code>COUNTY</code> = 1). 
+       FARS uses FIPS codes.</p>
+<pre><code class="fragment r">
+my_fars <- fars %>% filter(COUNTY == 1)
+</code></pre>
+</section>
+
+<section>
+    <h2>Keep only relevant variables</h2>
+    <p>Drop the following variables:</p>
+    <p><code>DOA, SEAT_POS, STATE</code></p>
+<pre><code class="fragment r">
+my_fars <- my_fars %>%
+  select(-DOA, -SEAT_POS, -STATE)
+</code></pre>
+</section>
+
+<section>
+    <h2>Rename your variables</h2>
+    <p>Change the following variable names:</p>
+    <ul>
+        <li><case>ST_CASE</case> to <case>case_num</case></li>
+        <li><case>PER_NO</case> to <case>person_num</case></li>
+        <li><case>VEH_NO</case> to <case>vehicle_num</case></li>
+    </ul>
+<pre><code class="fragment r">
+my_fars <- my_fars %>% rename(case_num = ST_CASE,
+                              person_num = PER_NO,
+                              vehicle_num = VEH_NO)
+</code></pre>
+</section>
+
+<section>
+    <h2>Create new variables</h2>
+    <ol>
+        <li>Create a logical `driver` variable, where TRUE means 
+            the person was a driver (PER_TYPE = 1).</li>
+        <li>Create a categorical `agegroup` variable to identify 
+            if the person was:</li>
+        <ul>
+            <li>child (12 and below)</li>
+            <li>adolescent (13-19)</li>
+            <li>young adult (20-29)</li>
+            <li>middle-aged (30-64)</li>
+            <li>older adult (65 and up)</li>
+            <li>unknown (999)</li>
+        </ul>
+    </ol>
+<pre><code class="fragment r">
+my_fars <- my_fars %>% mutate(
+  driver = (PER_TYP == 1),
+  agegroup = ifelse(AGE == 999, NA,
+             ifelse(AGE < 13, "child",
+             ifelse(AGE < 20, "adolescent",
+             ifelse(AGE < 30, "young adult",
+             ifelse(AGE < 65, "middle-aged",
+             ifelse(AGE >= 65, "older adult", NA)))))))
+</code></pre>
+</section>
+
+<section>
+    <h2>Rearrange the data</h2>
+    <p>Arrange the data by <code>RACE</code> and <code>HISPANIC</code>.</p>
+<pre><code class="fragment r">
+my_fars <- my_fars %>% arrange(RACE, HISPANIC)
+</code></pre>
+    <p>Check the first few rows. What do you notice?</p>
+</section>
+
+<section>
+    <h2>Put the code together</h2>
+    <p>Combine all steps.</p>
+    <ol>
+        <li>load the data</li>
+        <li>subset only Albany County</li>
+        <li>drop state, seat position, index, and dead on arrival</li>
+        <li>rename vehicle, case, and person number</li>
+        <li>create driver and age group</li>
+        <li>sort by race and ethnicity</li>
+    </ol>
+    <p>Code on the next side</p>
+</section>
+
+
+<section>
+    <h2>Complete code</h2>
+
+<pre><code class="fragment r">
+fars <- read_csv("raw_data/fars2015nys_person.csv", 
+                 col_types="ccccccnccccccccc")
+
+my_fars <- fars %>% filter(COUNTY == 1) %>%
+  select(-DOA, -SEAT_POS, -STATE, -X1) %>%
+  rename(case_num = ST_CASE, person_num = PER_NO, vehicle_num = VEH_NO) %>%
+  mutate(
+    driver = (PER_TYP == 1),
+    agegroup = ifelse(AGE == 999, NA,
+               ifelse(AGE < 13, "child",
+               ifelse(AGE < 20, "adolescent",
+               ifelse(AGE < 30, "young adult",
+               ifelse(AGE < 65, "middle-aged",
+               ifelse(AGE >= 65, "older adult", NA))))))
+  ) %>% arrange(RACE, HISPANIC)
+</code></pre>
+</section>
+
+<section>
+    <h2>Save your data</h2>
+    <p>Save to <code>data</code>. Use a meaningful name.</p>
+<pre><code class="fragment r">
+write.csv(my_fars, "data/fars2015nys_AlbanyCounty_person.csv", 
+          row.names = FALSE)
+</code></pre>
+</section>
+
+<section>
+    <h2>Summarize your data</h2>
+    <p>In this section, you will create a second dataset that 
+       summarizes people based on their survival.</p>
+    <p>In a workflow, you might write a new script for this section
+       so that each new dataset has its own script file.</p>
+</section>
+
+<section>
+    <h2>Create the survival variable</h2>
+    <p>Create a new variable <code>SURVIVAL</code> where<br />
+       "survived" is <code>INJ_SEV</code> does not equal "fatal" and<br />
+       "died" is <code>INJ_SEV</code> equals "fatal"</p>
+<pre><code class="fragment r">
+new_fars <- my_fars %>% 
+  mutate(SURVIVAL = ifelse(INJ_SEV=="fatal", "died",
+                           "survived") )
+</code></pre>
+</section>
+
+<section>
+    <h2>Group your data</h2>
+    <p>Group the data by your new variable</p>
+<pre><code class="fragment r">
+new_fars <- new_fars %>% group_by(SURVIVAL)
+</code></pre>
+</section>
+
+<section>
+    <h2>Summarize your data</h2>
+    <p>Summarize by:</p>
+    <ul>
+        <li>total number</li>
+        <li>mean age</li>
+        <li>median age</li>
+        <li>number male and female</li>
+    </ul>
+<pre><code class="fragment r">
+new_fars <- new_fars %>% 
+  summarize(
+    total = n(),
+    age_mean = mean(AGE, na.rm=TRUE),
+    age_median = median(AGE, na.rm=TRUE),
+    males = sum(SEX == "male"),
+    females = sum(SEX == "female")
+  )
+</code></pre>
+</section>
+
+<section>
+    <h2>View your data</h2>
+    <p>View your summarized dataset.</p>
+<pre><code class="fragment r">
+new_data
+</code></pre>
+</section>
+
+<section>
+    <h2>Save your data</h2>
+    <p>Save your data in the folder <code>data</code>.</p>
+<pre><code class="fragment r">
+write.csv(new_fars, "data/fars2015nys_Albany_person_bysurvival.csv", 
+          row.names = FALSE)
+</code></pre>
+</section>
+
+
+
