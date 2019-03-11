@@ -153,6 +153,11 @@ my_fars <- my_fars %>% rename(case_num = ST_CASE,
             <li>unknown (999)</li>
         </ul>
     </ol>
+    <p>Code on the next slide</p>
+</section>
+
+<section>
+    <h2>Create new variables code</h2>
 <pre><code class="fragment r">
 my_fars <- my_fars %>% mutate(
   driver = (PER_TYP == 1),
@@ -195,18 +200,18 @@ my_fars <- my_fars %>% arrange(RACE, HISPANIC)
 <pre><code class="fragment r">
 fars <- read_csv("raw_data/fars2015nys_person.csv", 
                  col_types="ccccccnccccccccc")
-
 my_fars <- fars %>% filter(COUNTY == 1) %>%
-  select(-DOA, -SEAT_POS, -STATE, -X1) %>%
-  rename(case_num = ST_CASE, person_num = PER_NO, vehicle_num = VEH_NO) %>%
-  mutate(
-    driver = (PER_TYP == 1),
-    agegroup = ifelse(AGE == 999, NA,
-               ifelse(AGE < 13, "child",
-               ifelse(AGE < 20, "adolescent",
-               ifelse(AGE < 30, "young adult",
-               ifelse(AGE < 65, "middle-aged",
-               ifelse(AGE >= 65, "older adult", NA))))))
+  select(-DOA, -SEAT_POS, -STATE) %>%
+  rename(case_num = ST_CASE, person_num = PER_NO, 
+         vehicle_num = VEH_NO) %>%
+  mutate(driver = (PER_TYP == 1),
+         agegroup = ifelse(AGE == 999, NA,
+                    ifelse(AGE < 13, "child",
+                    ifelse(AGE < 20, "adolescent",
+                    ifelse(AGE < 30, "young adult",
+                    ifelse(AGE < 65, "middle-aged",
+                    ifelse(AGE >= 65, "older adult", 
+                    NA))))))
   ) %>% arrange(RACE, HISPANIC)
 </code></pre>
 </section>
