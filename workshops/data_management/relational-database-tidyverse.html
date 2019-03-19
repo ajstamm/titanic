@@ -1,0 +1,391 @@
+---
+layout: presentation
+title: "Relational Database Practice"
+---
+
+<section>
+    <h2>Relational Database Practice</h2>
+    <div class="left">
+        <p>Duration: ~60 Minutes</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b41fff31126373.56424229bf48e.jpg" 
+                 width="50%" alt="Clock made of Legos">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Merge datasets on a key</li>
+        <li>Summarize merged dataset</li>
+    </ul>
+    <aside class="notes">
+	  </aside>
+</section>
+
+<section>
+    <h2>Structure of FARS database</h2>
+    <img src="{{site.baseurl}}/public/img/FARSstructure.PNG">
+</section>
+
+<section>
+    <h2>Datasets we will use</h2>
+    <ul>
+        <li><a href="{{site.baseurl}}/public/data/fars2015nys_accident.csv">Accident</a></li>
+        <li><a href="{{site.baseurl}}/public/data/fars2015nys_vehicle.csv">Vehicle</a></li>
+        <li><a href="{{site.baseurl}}/public/data/fars2015nys_person.csv">Person</a></li>
+    </ul>
+    
+    <aside class="notes">
+        These datasets are simplified for the exercises today.
+	  </aside>
+
+    
+    
+</section>
+
+<section>
+    <h2>Load datasets</h2>
+    
+<pre><code class="r">
+accident <- read_csv("Data/fars2015nys_accident_rev.csv", 
+                     col_types="cnccnccnnnnnnncccccc") 
+vehicle <- read_csv("Data/fars2015nys_vehicle_rev.csv", 
+                    col_types="ccccncnnccnccc") 
+person <- read_csv("Data/fars2015nys_person_rev.csv", 
+                   col_types="cccncccccccccc") 
+
+</code></pre>
+
+</section>
+
+<section>
+    <h2>Reduce your variables</h2>
+    
+    <p>Remove the following extra variables before merging.</p>
+    
+    <ul>
+        <li><strong>Accident:</strong> latitude and longitude</li>
+        <li><strong>Vehicle:</strong> make, model, year, vehicle identification number, deformed, and travel speed</li>
+        <li><strong>Person:</strong> drinking, drugs, dead on arrival, and seat position</li>
+    </ul>
+    
+    <p></p>
+    
+    <aside class="notes">
+	  </aside>
+</section>
+
+
+<section>
+    <h2>Code for merging datasets</h2>
+    
+    <p>Hint: use <code>select()</code>.</p>
+    
+<pre><code class="r fragment">
+accident <- accident %>% 
+  select( -LATITUDE, -LONGITUD )
+
+</code></pre>
+
+    <p>The code below is a variation on what you've already learned.</p>
+
+<pre><code class="r fragment">
+vehicle <- vehicle %>% 
+  select( -(MAKE:VIN), -(TRAV_SP:DEFORMED) )
+
+</code></pre>
+
+
+<pre><code class="r fragment">
+person <- person %>% 
+  select( -(DRINKING:DOA), -SEAT_POS )
+
+</code></pre>
+
+</section>
+
+
+<section>
+    <h2>Join the datasets</h2>
+    <p>Hint: identify the keys. You can join on more than one variable at a time.</p>
+    <p>Code is on the next slide.</p>
+</section>
+
+<section>
+    <h2>Joining code</h2>
+
+<pre><code class="r fragment">
+my_fulldata <- accident %>% 
+  full_join(vehicle, by = "ST_CASE") %>%
+  full_join(person, by = c("ST_CASE", "VEH_NO", "ST_CO_FIPS"))
+
+</code></pre>
+
+    <aside class="notes">
+      Why use full join here?
+	  </aside>
+</section>
+
+<section>
+    <h2>Variation 1: Only people in cars</h2>
+    
+    <p>Suppose you only want vehicle occupants. How will you join or filter the datasets to exclude everyone else?</p>
+    
+    <p>One possible solution is below.</p>
+    
+<pre><code class="r fragment">
+my_peopleincars <- accident %>% 
+  full_join(vehicle, by = "ST_CASE") %>%
+  inner_join(person, by = c("ST_CASE", "VEH_NO", "ST_CO_FIPS"))
+
+</code></pre>
+
+</section>
+
+<section>
+    <h2>Variation 2: only pedestrians</h2>
+
+    <p>Multiple possible methods:</p>
+    <ol>
+        <li>Select people from the full dataset who were not in the vehicle dataset.</li>
+        <li>Select only non-drivers/non-passengers in person dataset, then left join to the accident dataset.</li>
+        <li>Or think of something else.</li>
+    </ol>
+    
+    <aside class="notes">
+      Pedestrians also refers to cyclists and other people not in cars.
+	  </aside>
+</section>
+
+<section>
+    <h2>Code to isolate pedestrians</h2>
+
+My suggested methods give different results. Why? What can I do about it? 
+
+<pre><code class="r fragment">
+## method 1
+my_pedestrians1 <- my_fulldata %>% 
+  filter( is.na(NUMOCCS) )  # I picked a random variable 
+                            # unique to the vehicle dataset.
+                            # Why might this not work?
+</code></pre>
+
+<pre><code class="r fragment">
+## method 2
+my_pedestrians2 <- person %>% 
+  filter( !PER_TYP %in% c("driver", "passenger") ) %>%
+  left_join(accident, by = c("ST_CASE", "ST_CO_FIPS"))
+
+</code></pre>
+
+    <aside class="notes">
+      Sometimes it's a good idea to look at data a couple different ways, since it can draw attention to possible errors in your code.
+	  </aside>
+</section>
+
+<section>
+    <h2>What's going on?</h2>
+
+    <p>What's up with the discrepancy? <br />
+       Let's learn another useful function.</p>
+
+<pre><code class="r fragment">
+pedestrian_test <- my_pedestrians2 %>% 
+  anti_join(my_pedestrians1, my_pedestrians2, by=c("ST_CASE", "PER_NO"))
+
+</code></pre>
+
+    <p><code>anti_join()</code> selects all cases that are in only one dataset.<br />
+    Type <code>?anti_join</code> to learn more.</p>
+
+</section>
+
+<section>
+    <h2>Check your data</h2>
+    
+    <p>Check if your dataset only contains pedestrians. Which variable could you use?</p>
+
+    <p>I will provide two solutions on the next slide, one with base R and one with tidyverse.</p>
+
+
+</section>
+
+<section>
+    <h2>Code to check your data</h2>
+    
+    <p>You could use base R,</p>
+
+<pre><code class="r fragment">
+table(my_pedestrians2$VEH_NO)
+
+</code></pre>
+
+    <p>... or you could use tidyverse.</p>
+
+<pre><code class="r fragment">
+my_pedestrians2 %>% group_by(VEH_NO) %>% summarize(total = n())
+
+</code></pre>
+
+    <aside class="notes">
+        Notice that I did not assign the resulting table to a value. When you do not assign an object, R assumes you want to print it.
+	  </aside>
+
+</section>
+
+<section>
+    <h2>Explore: why were pedestrians hit?</h2>
+    
+    <p>Some possible hypotheses to test:</p>
+    <ul>
+        <li>time of day</li>
+        <li>weather</li>
+        <li>location relative to road</li>
+        <li>type of intersection</li>
+    </ul>
+    
+    <p>Let's explore these.</p>
+
+
+> (add pic of pedestrian hit by car)
+
+
+    <aside class="notes">
+        Note: this is probably not an appropriate question to ask with this data since we have no baseline, so we're going to pretend. 
+        Also, we will not do any actual statistical testing today.
+	  </aside>
+</section>
+
+
+
+
+
+## time of day
+
+The dataset includes hour, but in NYS, daylight hours vary widely by season.
+
+LGT_COND provides a simple breakdown of daylight, darkness, or in between.
+
+Create a table like you did for vehicle number, but this time include a proportion.
+
+```{r}
+my_pedestrians3 %>% group_by(LGT_COND) %>% 
+  summarize(total = n(), percent = 100*total/nrow(.))
+
+```
+
+## What if we want to compare time of day and fatality?
+
+```{r}
+my_pedestrians3 %>% group_by(LGT_COND, died = INJ_SEV=="fatal") %>% 
+  summarize(total = n(), percent = 100*total/nrow(.))
+
+```
+
+Aside: these datasets are simplified for the exercises today.
+
+
+## test your own theory
+
+Suggestions:
+
+* weather
+* location relative to road
+* type of intersection
+* county
+* type of road
+
+Recode variables, for example:
+
+* was it an intersection? yes/no
+* was the weather clear? yes/no
+
+Combine variables, for example:
+
+* weather by time of day
+* intersection by whether cycling or walking
+
+Use mutate(), filter(), group_by(), and summarize()
+
+> what have you learned?
+
+## Chain your code
+
+```{r}
+my_pedestrians <- person %>% 
+  filter( VEH_NO == 0 ) %>% 
+  left_join(accident, by = c("ST_CASE", "ST_CO_FIPS")) %>%
+  mutate(DIED = INJ_SEV == "fatal",
+         INTERSEC = !TYP_INT == "Not intersection")
+
+my_pedestrians %>% group_by(INTERSEC, DIED) %>% 
+  summarize(total = n(), percent = 100*total/nrow(.))
+```
+
+
+## Test your knowledge 
+
+> (possibly break this into 2 slides - first create dataset, then answer questions)
+
+Create a dataset that includes: 
+* number of deaths per county
+* number of pedestrian deaths per county
+* number of accidents by county
+* average deaths per accident
+* average pedestrian deaths per accident
+
+Answer:
+Which county had the highest number of deaths per accident? (Ulster)
+
+Which county had the highest number of deaths? (Suffolk)
+
+Which counties had no fatal accidents in 2015? (Hamilton, Orleans)
+
+Hint: NYS fips codes https://library.columbia.edu/locations/dssc/data/nycounty_fips.html
+
+> what pattern do you notice? Using raw numbers, high counts correspond with urban counties and low or no counts correspond with rural counties.
+
+## Test results
+
+One possibly solution.
+
+```{r test}
+my_countydata <- my_fulldata %>% group_by(ST_CO_FIPS) %>% 
+  summarize(
+    Total_Deaths = sum(INJ_SEV == "fatal", na.rm=TRUE),
+    Pedestrian_Deaths = sum(INJ_SEV == "fatal" & VEH_NO == 0, na.rm=TRUE),
+    Total_Accidents = length(unique(ST_CASE)),
+    Avg_Death_Accident = Total_Deaths / Total_Accidents,
+    Avg_Ped_Death_Accident = Pedestrian_Deaths / Total_Accidents
+  ) 
+
+my_countydata %>% arrange(-Avg_Death_Accident) # highest avg deaths
+my_countydata %>% arrange(-Total_Deaths) # most pedestrian deaths
+
+# to check who is missing, first create a data frame of all county fips codes
+allfips <- data.frame(ST_CO_FIPS = seq(36001, 36123, by=2))
+# Then check if all fips codes are in our dataset
+allfips %>% filter(!ST_CO_FIPS %in% my_countydata$ST_CO_FIPS)
+```
+
+> stress that dplyr is designed for data frames, so it can be easier to convert a vector to a data frame than to manipulate the vector directly.
+
+# Bye
+
+
+
+
+
+
+
+
+
+<section>
+    <h1>And Now You Know!</h1>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+    <p>Enjoy R and please fill out our evaluation!</p>
+</section>
