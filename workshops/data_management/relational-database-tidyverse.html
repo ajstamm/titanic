@@ -260,100 +260,99 @@ my_pedestrians2 %>% group_by(VEH_NO) %>% summarize(total = n())
 	  </aside>
 </section>
 
+<section>
+    <h2>Let's explore time of day</h2>
+    
+    <p>The dataset includes hour and daylight. Your question would dictate which is more appropriate. My question is, <br /> 
+       "Are pedestrians most likely to be hit during the day, at night, or in between?"</p>
+       
+    <p>To answer this, evaluate the variable <code>LGT_COND</code>. Create a summary table with count and proportion of pedestrian deaths by time of day. </p>
+</section>
 
-
-
-
-## time of day
-
-The dataset includes hour, but in NYS, daylight hours vary widely by season.
-
-LGT_COND provides a simple breakdown of daylight, darkness, or in between.
-
-Create a table like you did for vehicle number, but this time include a proportion.
-
-```{r}
+<section>
+    <h2>Code for time of day</h2>
+    
+<pre><code class="r fragment">
 my_pedestrians3 %>% group_by(LGT_COND) %>% 
   summarize(total = n(), percent = 100*total/nrow(.))
 
-```
+</code></pre>
 
-## What if we want to compare time of day and fatality?
+    <p>How could we change the code to look at time of day by whether the pedestrian died?</p>
 
-```{r}
+<pre><code class="r fragment">
 my_pedestrians3 %>% group_by(LGT_COND, died = INJ_SEV=="fatal") %>% 
   summarize(total = n(), percent = 100*total/nrow(.))
 
-```
+</code></pre>
 
-Aside: these datasets are simplified for the exercises today.
+</section>
 
+<section>
+    <h2>Your turn!</h2>
+    
+    <p>Investigate one or more of these variables.</p>
+    <ul>
+        <li>county</li>
+        <li>location relative to the road</li>
+        <li>type of intersection by whether on foot</li>
+        <li>type of road</li>
+        <li>weather by time of day</li>
+    </ul>
+    
+    <p>Recode:</p>
+    <ul>
+        <li>Was it an intersection? yes/no</li>
+        <li>Was the weather clear? yes/no</li>
+    </ul>
+    
+    <p>Raise your hand if you have questions or need help.</p>
+</section>
 
-## test your own theory
+<section>
+    <section>
+        <h2>Test your knowledge</h2>
+        
+        <p>Create a dataset with the following:</p>
+        <ul>
+            <li>Number of deaths per county</li>
+            <li>Number of pedestrian deaths per county</li>
+            <li>Number of accidents per county</li>
+            <li>Average deaths per accident by county</li>
+            <li>Average vehicles per accident by county</li>
+        </ul>
+        
+        <p>Answer these questions using your dataset.</p>
+        <ol>
+            <li>Which county had the highest number of deaths per accident?</li>
+            <li>Which county had the highest number of deaths overall?</li>
+            <li>Which county had no fatal vehicle accidents in 2015?</li>
+        </ol>
+    </section>
+    <section>
+        <h2>Answers:</h2>
+        <ol>
+            <li>Ulster</li>
+            <li>Suffolk</li>
+            <li>Hamilton, Orleans</li>
+        </ol>
+        
+        <p>Hint for Question 3: NYS fips codes https://library.columbia.edu/locations/dssc/data/nycounty_fips.html</p>
+        
+        <aside class="notes">
+        What patterns do you notice? 
+        
+        Using raw numbers, high counts correspond with urban counties and low or no counts correspond with rural counties.
+	  </aside>
 
-Suggestions:
+    </section>
 
-* weather
-* location relative to road
-* type of intersection
-* county
-* type of road
+</section>
 
-Recode variables, for example:
-
-* was it an intersection? yes/no
-* was the weather clear? yes/no
-
-Combine variables, for example:
-
-* weather by time of day
-* intersection by whether cycling or walking
-
-Use mutate(), filter(), group_by(), and summarize()
-
-> what have you learned?
-
-## Chain your code
-
-```{r}
-my_pedestrians <- person %>% 
-  filter( VEH_NO == 0 ) %>% 
-  left_join(accident, by = c("ST_CASE", "ST_CO_FIPS")) %>%
-  mutate(DIED = INJ_SEV == "fatal",
-         INTERSEC = !TYP_INT == "Not intersection")
-
-my_pedestrians %>% group_by(INTERSEC, DIED) %>% 
-  summarize(total = n(), percent = 100*total/nrow(.))
-```
-
-
-## Test your knowledge 
-
-> (possibly break this into 2 slides - first create dataset, then answer questions)
-
-Create a dataset that includes: 
-* number of deaths per county
-* number of pedestrian deaths per county
-* number of accidents by county
-* average deaths per accident
-* average pedestrian deaths per accident
-
-Answer:
-Which county had the highest number of deaths per accident? (Ulster)
-
-Which county had the highest number of deaths? (Suffolk)
-
-Which counties had no fatal accidents in 2015? (Hamilton, Orleans)
-
-Hint: NYS fips codes https://library.columbia.edu/locations/dssc/data/nycounty_fips.html
-
-> what pattern do you notice? Using raw numbers, high counts correspond with urban counties and low or no counts correspond with rural counties.
-
-## Test results
-
-One possibly solution.
-
-```{r test}
+<section>
+    <h2>One possible solution</h2>
+    
+<pre><code class="r fragment">
 my_countydata <- my_fulldata %>% group_by(ST_CO_FIPS) %>% 
   summarize(
     Total_Deaths = sum(INJ_SEV == "fatal", na.rm=TRUE),
@@ -363,24 +362,18 @@ my_countydata <- my_fulldata %>% group_by(ST_CO_FIPS) %>%
     Avg_Ped_Death_Accident = Pedestrian_Deaths / Total_Accidents
   ) 
 
-my_countydata %>% arrange(-Avg_Death_Accident) # highest avg deaths
-my_countydata %>% arrange(-Total_Deaths) # most pedestrian deaths
+my_countydata %>% arrange(-Avg_Death_Accident) # highest avg deaths per accident
+my_countydata %>% arrange(-Total_Deaths) # most deaths
 
 # to check who is missing, first create a data frame of all county fips codes
 allfips <- data.frame(ST_CO_FIPS = seq(36001, 36123, by=2))
 # Then check if all fips codes are in our dataset
 allfips %>% filter(!ST_CO_FIPS %in% my_countydata$ST_CO_FIPS)
-```
 
-> stress that dplyr is designed for data frames, so it can be easier to convert a vector to a data frame than to manipulate the vector directly.
-
-# Bye
-
-
-
-
-
-
+</code></pre>
+    
+    
+</section>
 
 
 
