@@ -25,7 +25,7 @@ title: "Summarizing Data with Tidyverse"
 </section>
 
 <section>
-    <h2>Why learn Summarize()</h2>
+    <h2>Why learn <code>Summarize()</code></h2>
     
     <p>Base R has many ways to summarize data.</p>
     
@@ -46,10 +46,10 @@ title: "Summarizing Data with Tidyverse"
         <pre><code class="r">
 colMeans(iris[, 1:2])
 
-
-
-
-
+# or more explicitly,
+colMeans(
+  iris[, c("Sepal.Length",
+           "Sepal.Width")] )
 
 # Sepal.Length  Sepal.Width 
 #     5.843333     3.057333
