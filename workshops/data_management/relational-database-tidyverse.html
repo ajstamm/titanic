@@ -339,7 +339,7 @@ my_pedestrians3 %>% group_by(LGT_COND, died = INJ_SEV=="fatal") %>%
             <li>Hamilton, Orleans</li>
         </ol>
         
-        <p>Hint for Question 3: NYS fips codes https://library.columbia.edu/locations/dssc/data/nycounty_fips.html</p>
+        <p>Hint for Question 3: NYS fips codes <a href="https://library.columbia.edu/locations/dssc/data/nycounty_fips.html">here</a></p>
         
         <aside class="notes">
         What patterns do you notice? 
@@ -352,22 +352,35 @@ my_pedestrians3 %>% group_by(LGT_COND, died = INJ_SEV=="fatal") %>%
 </section>
 
 <section>
-    <h2>One possible solution</h2>
+  <section>
+    <h2>One possible solution:<br />
+        Create the dataset</h2>
     
 <pre><code class="r fragment">
 my_countydata <- my_fulldata %>% group_by(ST_CO_FIPS) %>% 
   summarize(
     Total_Deaths = sum(INJ_SEV == "fatal", na.rm=TRUE),
-    Pedestrian_Deaths = sum(INJ_SEV == "fatal" & VEH_NO == 0, na.rm=TRUE),
+    Pedestrian_Deaths = sum(INJ_SEV == "fatal" & VEH_NO == 0, 
+                            na.rm=TRUE),
     Total_Accidents = length(unique(ST_CASE)),
     Avg_Death_Accident = Total_Deaths / Total_Accidents,
     Avg_Ped_Death_Accident = Pedestrian_Deaths / Total_Accidents
   ) 
+</code></pre>
+    <p>Click down for answers.</p>
+  </section>
+  <section></section>
+    <h2>One possible solution:<br />
+        Answer the questions</h2>
 
-my_countydata %>% arrange(-Avg_Death_Accident) # highest avg deaths per accident
-my_countydata %>% arrange(-Total_Deaths) # most deaths
+<pre><code class="r fragment">
+# highest avg deaths per accident
+my_countydata %>% arrange(-Avg_Death_Accident) 
+# most deaths
+my_countydata %>% arrange(-Total_Deaths) 
 
-# to check who is missing, first create a data frame of all county fips codes
+# check who is missing
+# first create a data frame of all county fips codes
 allfips <- data.frame(ST_CO_FIPS = seq(36001, 36123, by=2))
 # Then check if all fips codes are in our dataset
 allfips %>% filter(!ST_CO_FIPS %in% my_countydata$ST_CO_FIPS)
