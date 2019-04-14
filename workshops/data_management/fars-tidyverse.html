@@ -38,8 +38,8 @@ title: "Tidyverse Practice"
     <h2>Copy the data</h2>
     <ol>
       <li>Navigate to your project folder</li>
-      <li>Create 2 folders: <code>raw_data</code> and <code>data</code></li>
-      <li>Copy your downloaded CSV to <code>raw_data</code></li>
+      <li>Create 2 folders: <code>data</code> and <code>R</code></li>
+      <li>Copy your downloaded CSV to <code>data</code></li>
     </ol>
     <p><img src="{{site.baseurl}}/public/img/newfoldercreation.png"></p>
 </section>
@@ -80,6 +80,7 @@ title: "Tidyverse Practice"
        It will auto-load <code>dplyr</code>.</p>
 <pre><code class="r">
 library(tidyverse)
+
 </code></pre>
 </section>
 
@@ -91,6 +92,7 @@ library(tidyverse)
 <pre><code class="fragment r">
 fars <- read_csv("raw_data/fars2015nys_person.csv", 
                  col_types="ccccccnccccccccc")
+                 
 </code></pre>
     <p>Options vary. To see them, query <code>?<command></code>.</p>
 </section>
@@ -98,9 +100,10 @@ fars <- read_csv("raw_data/fars2015nys_person.csv",
 <section>
     <h2>Subset data</h2>
     <p>Select only observations in Albany (where <code>COUNTY</code> = 1). 
-       FARS uses FIPS codes.</p>
+       <br />FARS uses FIPS codes.</p>
 <pre><code class="fragment r">
 my_fars <- fars %>% filter(COUNTY == 1)
+
 </code></pre>
 </section>
 
@@ -111,6 +114,7 @@ my_fars <- fars %>% filter(COUNTY == 1)
 <pre><code class="fragment r">
 my_fars <- my_fars %>%
   select(-DOA, -SEAT_POS, -STATE)
+  
 </code></pre>
 </section>
 
@@ -126,6 +130,7 @@ my_fars <- my_fars %>%
 my_fars <- my_fars %>% rename(case_num = ST_CASE,
                               person_num = PER_NO,
                               vehicle_num = VEH_NO)
+                              
 </code></pre>
 </section>
 
@@ -136,15 +141,22 @@ my_fars <- my_fars %>% rename(case_num = ST_CASE,
             the person was a driver (PER_TYPE = 1).</li>
         <li>Create a categorical `agegroup` variable to identify 
             if the person was:</li>
+    </ol>
+            
+    <div class="left">
         <ul>
             <li>child (12 and below)</li>
             <li>adolescent (13-19)</li>
             <li>young adult (20-29)</li>
+        </ul>
+    </div>
+    <div class="right">
+        <ul>
             <li>middle-aged (30-64)</li>
             <li>older adult (65 and up)</li>
             <li>unknown (999)</li>
         </ul>
-    </ol>
+    </div>
     <p>Code on the next slide</p>
 </section>
 
@@ -159,6 +171,7 @@ my_fars <- my_fars %>% mutate(
              ifelse(AGE < 30, "young adult",
              ifelse(AGE < 65, "middle-aged",
              ifelse(AGE >= 65, "older adult", NA)))))))
+             
 </code></pre>
 </section>
 
@@ -167,6 +180,7 @@ my_fars <- my_fars %>% mutate(
     <p>Arrange the data by <code>RACE</code> and <code>HISPANIC</code>.</p>
 <pre><code class="fragment r">
 my_fars <- my_fars %>% arrange(RACE, HISPANIC)
+
 </code></pre>
     <p>Check the first few rows. What do you notice?</p>
 </section>
@@ -205,6 +219,7 @@ my_fars <- fars %>% filter(COUNTY == 1) %>%
                     ifelse(AGE >= 65, "older adult", 
                     NA))))))
   ) %>% arrange(RACE, HISPANIC)
+  
 </code></pre>
 </section>
 
@@ -214,6 +229,7 @@ my_fars <- fars %>% filter(COUNTY == 1) %>%
 <pre><code class="fragment r">
 write.csv(my_fars, "data/fars2015nys_AlbanyCounty_person.csv", 
           row.names = FALSE)
+          
 </code></pre>
 </section>
 
@@ -234,6 +250,7 @@ write.csv(my_fars, "data/fars2015nys_AlbanyCounty_person.csv",
 new_fars <- my_fars %>% 
   mutate(SURVIVAL = ifelse(INJ_SEV=="fatal", "died",
                            "survived") )
+                           
 </code></pre>
 </section>
 
@@ -242,18 +259,26 @@ new_fars <- my_fars %>%
     <p>Group the data by your new variable</p>
 <pre><code class="fragment r">
 summary <- new_fars %>% group_by(SURVIVAL)
+
 </code></pre>
 </section>
 
 <section>
     <h2>Summarize your data</h2>
     <p>Summarize by:</p>
-    <ul>
-        <li>total number</li>
-        <li>mean age</li>
-        <li>median age</li>
-        <li>number male and female</li>
-    </ul>
+    
+    <div class="left">
+      <ul>
+          <li>total number</li>
+          <li>mean age</li>
+      </ul>
+    </div>
+    <div class="right">
+      <ul>
+          <li>median age</li>
+          <li>number male and female</li>
+      </ul>
+    </div>
 <pre><code class="fragment r">
 summary <- summary %>% 
   summarize(
@@ -263,6 +288,7 @@ summary <- summary %>%
     males = sum(SEX == "male"),
     females = sum(SEX == "female")
   )
+  
 </code></pre>
 </section>
 
@@ -273,7 +299,7 @@ summary <- summary %>%
         <li>group by <code>SURVIVAL</code> (use <code>new_fars</code>)</li>
         <li>summarize by total number, mean and median age, 
             and numbers of males and females</li>
-        <li><strong>ungroup</strong></li>
+        <li><strong>ungroup</strong> your variables</li>
     </ol>
 <pre><code class="fragment r">
 summary <- new_fars %>% group_by(SURVIVAL) %>%
@@ -284,6 +310,7 @@ summary <- new_fars %>% group_by(SURVIVAL) %>%
     males = sum(SEX == "male"),
     females = sum(SEX == "female")
   ) %>% ungroup()
+  
 </code></pre>
 </section>
 
@@ -293,6 +320,7 @@ summary <- new_fars %>% group_by(SURVIVAL) %>%
     <p>View your summarized dataset.</p>
 <pre><code class="fragment r">
 summary
+
 </code></pre>
 </section>
 
@@ -302,6 +330,7 @@ summary
 <pre><code class="fragment r">
 write.csv(summary, "data/fars2015nys_Albany_person_bysurvival.csv", 
           row.names = FALSE)
+          
 </code></pre>
 </section>
 
