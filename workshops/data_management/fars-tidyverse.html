@@ -243,9 +243,11 @@ write.csv(my_fars, "data/fars2015nys_AlbanyCounty_person.csv",
 
 <section>
     <h2>Create the survival variable</h2>
-    <p>Create a new variable <code>SURVIVAL</code> where<br />
-       "survived" is <code>INJ_SEV</code> does not equal "fatal" and<br />
-       "died" is <code>INJ_SEV</code> equals "fatal"</p>
+    <p>Create variable <code>SURVIVAL</code> where:</p>
+    <ul>
+      <li>"survived" means <code>INJ_SEV</code> does not equal "fatal"</li>
+      <li>"died" means <code>INJ_SEV</code> equals "fatal"</li>
+    </ul>
 <pre><code class="fragment r">
 new_fars <- my_fars %>% 
   mutate(SURVIVAL = ifelse(INJ_SEV=="fatal", "died",
@@ -279,6 +281,7 @@ summary <- new_fars %>% group_by(SURVIVAL)
           <li>number male and female</li>
       </ul>
     </div>
+    <p></p>
 <pre><code class="fragment r">
 summary <- summary %>% 
   summarize(
