@@ -81,7 +81,7 @@ person <- read_csv("Data/fars2015nys_person_rev.csv",
 
 
 <section>
-    <h2>Code for merging datasets</h2>
+    <h2>Code for removing variables</h2>
     
     <p>Hint: use <code>select()</code>.</p>
     
@@ -133,7 +133,8 @@ my_fulldata <- accident %>%
 <section>
     <h2>Variation 1: Only people in cars</h2>
     
-    <p>Suppose you only want vehicle occupants. How will you join or filter the datasets to exclude everyone else?</p>
+    <p>Suppose you only want vehicle occupants. How will you join or filter 
+       the datasets to exclude everyone else?</p>
     
     <p>One possible solution is below.</p>
     
@@ -152,7 +153,8 @@ my_peopleincars <- accident %>%
     <p>Multiple possible methods:</p>
     <ol>
         <li>Select people from the full dataset who were not in the vehicle dataset.</li>
-        <li>Select only non-drivers/non-passengers in person dataset, then left join to the accident dataset.</li>
+        <li>Select only non-drivers/non-passengers in person dataset, 
+            then left join to the accident dataset.</li>
         <li>Or think of something else.</li>
     </ol>
     
@@ -183,7 +185,8 @@ my_pedestrians2 <- person %>%
 </code></pre>
 
     <aside class="notes">
-      Sometimes it's a good idea to look at data a couple different ways, since it can draw attention to possible errors in your code.
+      Sometimes it's a good idea to look at data a couple different ways, 
+      since it can draw attention to possible errors in your code.
 	  </aside>
 </section>
 
@@ -257,7 +260,8 @@ my_pedestrians2 %>% group_by(VEH_NO) %>% summarize(total = n())
     </div>
 
     <aside class="notes">
-        Note: this is probably not an appropriate question to ask with this data since we have no baseline, so we're going to pretend. 
+        Note: this is probably not an appropriate question to ask with these data,
+        since we have no baseline, so we're going to pretend. 
         Also, we will not do any actual statistical testing today.
 	  </aside>
 </section>
@@ -265,10 +269,12 @@ my_pedestrians2 %>% group_by(VEH_NO) %>% summarize(total = n())
 <section>
     <h2>Let's explore time of day</h2>
     
-    <p>The dataset includes hour and daylight. Your question would dictate which is more appropriate. My question is, <br /> 
+    <p>The dataset includes hour and daylight. Your question would dictate 
+       which is more appropriate. My question is, <br /> 
        "Are pedestrians most likely to be hit during the day, at night, or in between?"</p>
        
-    <p>To answer this, evaluate the variable <code>LGT_COND</code>. Create a summary table with count and proportion of pedestrian deaths by time of day. </p>
+    <p>To answer this, evaluate the variable <code>LGT_COND</code>. 
+       Create a summary table with count and proportion of pedestrian deaths by time of day. </p>
 </section>
 
 <section>
@@ -366,6 +372,7 @@ my_countydata <- my_fulldata %>% group_by(ST_CO_FIPS) %>%
     Avg_Death_Accident = Total_Deaths / Total_Accidents,
     Avg_Ped_Death_Accident = Pedestrian_Deaths / Total_Accidents
   ) 
+  
 </code></pre>
     <p>Click down for answers.</p>
   </section>
