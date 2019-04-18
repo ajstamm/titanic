@@ -186,6 +186,34 @@ my_fars <- my_fars %>% arrange(RACE, HISPANIC)
 </section>
 
 <section>
+  <h2>Side Note: <code>ifelse()</code></h2>
+  <div class="left">
+    <p>Used to write conditional statements</p>
+    <ul>
+      <li>Can only handle 2 conditions at a time</li>
+      <li>Can chain pairs of conditions</li>
+    </ul>
+<pre><code>
+x <- 1:10
+y <- ifelse(x < 5, 1, 2)
+
+</code></pre>
+
+    <p>Try it yourself.</p>
+<pre><code class="fragment r">
+z <- ifelse(x < 4, 1, 
+            ifelse(x < 8, 2, 
+                   3))
+
+</code></pre>
+  </div>
+  <div class="right">
+    <img src="{{site.baseurl}}/public/img/taxonomicchart.png" 
+         width="50%" alt="Taxonomic chart">
+  </div>
+</section>
+
+<section>
     <h2>Put the code together</h2>
     <p>Combine all steps.</p>
     <ol>
