@@ -135,6 +135,34 @@ my_fars <- my_fars %>% rename(case_num = ST_CASE,
 </section>
 
 <section>
+  <h2>Side Note: <code>ifelse()</code></h2>
+  <div class="left">
+    <p>Used to write conditional statements</p>
+    <ul>
+      <li>Can only handle 2 conditions at a time</li>
+      <li>Can chain pairs of conditions</li>
+    </ul>
+<pre><code>
+x <- 1:10
+y <- ifelse(x < 5, 1, 2)
+
+</code></pre>
+
+    <p>Try it yourself.</p>
+<pre><code class="fragment r">
+z <- ifelse(x < 4, 1, 
+            ifelse(x < 8, 2, 
+                   3))
+
+</code></pre>
+  </div>
+  <div class="right">
+    <img src="{{site.baseurl}}/public/img/taxonomicchart.png" 
+         width="50%" alt="Taxonomic chart">
+  </div>
+</section>
+
+<section>
     <h2>Create new variables</h2>
     <ol>
         <li>Create a logical `driver` variable, where TRUE means 
@@ -183,34 +211,6 @@ my_fars <- my_fars %>% arrange(RACE, HISPANIC)
 
 </code></pre>
     <p>Check the first few rows. What do you notice?</p>
-</section>
-
-<section>
-  <h2>Side Note: <code>ifelse()</code></h2>
-  <div class="left">
-    <p>Used to write conditional statements</p>
-    <ul>
-      <li>Can only handle 2 conditions at a time</li>
-      <li>Can chain pairs of conditions</li>
-    </ul>
-<pre><code>
-x <- 1:10
-y <- ifelse(x < 5, 1, 2)
-
-</code></pre>
-
-    <p>Try it yourself.</p>
-<pre><code class="fragment r">
-z <- ifelse(x < 4, 1, 
-            ifelse(x < 8, 2, 
-                   3))
-
-</code></pre>
-  </div>
-  <div class="right">
-    <img src="{{site.baseurl}}/public/img/taxonomicchart.png" 
-         width="50%" alt="Taxonomic chart">
-  </div>
 </section>
 
 <section>
