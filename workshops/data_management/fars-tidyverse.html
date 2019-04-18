@@ -143,16 +143,17 @@ my_fars <- my_fars %>% rename(case_num = ST_CASE,
       <li>chain condition pairs</li>
     </ul>
 <pre><code>
-x <- 1:10
-y <- ifelse(x < 5, 1, 2)
+legs <- c(0,2,0,4,2,6,4,8,6,8)
+y <- ifelse(legs == 2, "bird", 
+            "not bird")
 
 </code></pre>
 
     <p>Try it yourself.</p>
 <pre><code class="fragment r">
-z <- ifelse(x < 4, 1, 
-            ifelse(x < 8, 2, 
-                   3))
+z <- ifelse(legs == 0, "snake", 
+            ifelse(legs == 2, "bird", 
+                   "other"))
 
 </code></pre>
   </div>
