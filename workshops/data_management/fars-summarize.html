@@ -1,0 +1,147 @@
+---
+layout: presentation
+title: "Tidyverse Practice"
+---
+
+<section>
+    <h2>Tidyverse Practice</h2>
+    <div class="left">
+        <p>Duration: ~30 Minutes</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b41fff31126373.56424229bf48e.jpg" 
+                 width="50%" alt="Clock made of Legos">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Manage a project</li>
+        <li>Create a summary dataset</li>
+        <li>Save your script as a record of your data prep</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Start your project</h2>
+    <ol>
+      <li>Create a new script file.</li>
+      <li>Add a descriptive header.</li>
+      <li>Load the <code>tidyverse</code> package.</li>
+      <li>Load the person-level data.</li>
+    </ol>
+    <p><i>If you need help, refer to the Tidyverse practice slides.</i></p>
+</section>
+
+<section>
+    <h2>Summarize your data</h2>
+    <p>In this section, you will create a second dataset that 
+       summarizes people based on their survival.</p>
+    <p>In a workflow, you might write a new script for this section
+       so that each new dataset has its own script file.</p>
+</section>
+
+<section>
+    <h2>Create the survival variable</h2>
+    <p>Create variable <code>SURVIVAL</code> where:</p>
+    <ul>
+      <li>"survived" means <code>INJ_SEV</code> does not equal "fatal"</li>
+      <li>"died" means <code>INJ_SEV</code> equals "fatal"</li>
+    </ul>
+<pre><code class="fragment r">
+new_fars <- my_fars %>% 
+  mutate(SURVIVAL = ifelse(INJ_SEV=="fatal", "died",
+                           "survived") )
+                           
+</code></pre>
+</section>
+
+<section>
+    <h2>Group your data</h2>
+    <p>Group the data by your new variable</p>
+<pre><code class="fragment r">
+summary <- new_fars %>% group_by(SURVIVAL)
+
+</code></pre>
+</section>
+
+<section>
+    <h2>Summarize your data</h2>
+    <p>Summarize by:</p>
+    
+    <div class="left">
+      <ul>
+          <li>total number</li>
+          <li>mean age</li>
+      </ul>
+    </div>
+    <div class="right">
+      <ul>
+          <li>median age</li>
+          <li>number male and female</li>
+      </ul>
+    </div>
+    <p><br /><br /><br /></p>
+<pre><code class="fragment r">
+summary <- summary %>% 
+  summarize(
+    total = n(),
+    age_mean = mean(AGE, na.rm=TRUE),
+    age_median = median(AGE, na.rm=TRUE),
+    males = sum(SEX == "male"),
+    females = sum(SEX == "female")
+  )
+  
+</code></pre>
+</section>
+
+<section>
+    <h2>Link your code</h2>
+    <p>Chain these steps together:</p>
+    <ol>
+        <li>group by <code>SURVIVAL</code> (use <code>new_fars</code>)</li>
+        <li>summarize by total number, mean and median age, 
+            and numbers of males and females</li>
+        <li><strong>ungroup</strong> your variables</li>
+    </ol>
+<pre><code class="fragment r">
+summary <- new_fars %>% group_by(SURVIVAL) %>%
+  summarize(
+    total = n(),
+    age_mean = mean(AGE, na.rm=TRUE),
+    age_median = median(AGE, na.rm=TRUE),
+    males = sum(SEX == "male"),
+    females = sum(SEX == "female")
+  ) %>% ungroup()
+  
+</code></pre>
+</section>
+
+
+<section>
+    <h2>View your data</h2>
+    <p>View your summarized dataset.</p>
+<pre><code class="fragment r">
+summary
+
+</code></pre>
+</section>
+
+<section>
+    <h2>Save your data</h2>
+    <p>Save your data in the folder <code>data</code>.</p>
+<pre><code class="fragment r">
+write.csv(summary, "data/fars2015nys_Albany_person_bysurvival.csv", 
+          row.names = FALSE)
+          
+</code></pre>
+</section>
+
+<section>
+    <h2>And Now You Know!</h2>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+</section>
+

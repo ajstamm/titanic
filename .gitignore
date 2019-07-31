@@ -5,6 +5,7 @@ _site
 Gemfile.lock
 .Rhistory
 notes.txt
+titanic.Rproj
 
 # Numerous always-ignore extensions
 *.diff
@@ -43,3 +44,4 @@ validation-report.json
 # Folders to ignore
 node_modules
 bower_components
+.Rproj.user
