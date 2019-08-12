@@ -40,10 +40,172 @@ title: "Tidying Data"
 </section>
 
 <section>
-    <h2>Gathering data</h2>
-    <p>Converting a table from wide to long.<br />
-       Function: <code>gather(key, value)</code></p>
+    <h2>Prepare your project</h2>
+    <p>
+      <li>Create a new R script file in your project folder</li>
+      <li>Add a heading</li>
+      <li>Load tidyverse</li>
+      <li>Download the <a href="{{site.baseurl}}/public/data/child-pet-data.csv">example dataset</a></li>
+    </p>
+<pre><code class="r">
+childpet <- read_csv("data/child-pet-data.csv")
+
+</code></pre>
 </section>
+
+<section>
+    <h2>spread()</h2>
+    <p>Convert a table from long to wide.<br />
+       Function: <code>spread(key, value)</code></p>
+       
+<pre><code class="r">
+# sample code
+myspread <- mydata %>% spread(key = myvars, value = mycells)
+
+</code></pre>
+    <p>In the code above, </p>
+    <ul>
+      <li><code>key</code>: variable whose values will become the new variable names</li>
+      <li><code>value</code>: variable whose values will become the new values for the new variables</li>
+    </ul>
+</section>
+
+<section>
+  <section>
+      <h2>spread() example: pets</h2>
+      <p>Turn each pet species into a new variable. Use the pet's name as the value.</p>
+<pre><code class="r">
+petwide <- childpet %>% spread(key = pet_species, value = pet_name)
+
+</code></pre>
+  </section>
+  <section>
+    <h2>Resulting table</h2>
+    
+<pre><code class="r">
+> head(petwide)
+
+# A tibble: 6 x 6
+#   child_name child_age child_sex bird   cat    dog   
+#   <chr>          <dbl> <chr>     <chr>  <chr>  <chr> 
+# 1 Amy                7 F         Connie Argyle Brutus
+# 2 Ben                8 M         NA     NA     Dufus 
+# 3 Cam                8 F         NA     Fannie Earl  
+# 4 Don                7 M         Gary   Hector NA    
+# 5 Eli                9 M         Ingrid Kimber Jolly 
+# 6 Fay                9 F         Norma  Laurel Morton
+</code></pre>
+  </section>
+</section>
+
+<section>
+<section>
+    <h2>spread() example: children</h2>
+    <p>Turn each child sex into a new variable. There is no appropriate variable already to serve as the value, so create one first.</p>
+<pre><code class="r">
+childwide <- childpet %>% mutate(value = 1) %>%
+  spread(key = child_sex, value = value)
+
+</code></pre>
+</section>
+<section>
+  <h2>Resulting table</h2>
+  
+<pre><code class="r">
+> head(childwide)
+
+# A tibble: 6 x 6
+#   child_name child_age pet_name pet_species     F     M
+#   <chr>          <dbl> <chr>    <chr>       <dbl> <dbl>
+# 1 Amy                7 Argyle   cat             1    NA
+# 2 Amy                7 Brutus   dog             1    NA
+# 3 Amy                7 Connie   bird            1    NA
+# 4 Ben                8 Dufus    dog            NA     1
+# 5 Cam                8 Earl     dog             1    NA
+# 6 Cam                8 Fannie   cat             1    NA
+</code></pre>
+  </section>
+  <section>
+    <h2>Creating dummy variables</h2>
+
+    <p>If you plan to use sex as dummy variables, for example for regression, you will want to convert the missings to 0.<br />
+       <i>Note: if any value is truly missing, the code below will need to be modified. We will not cover that today.</i></p>
+       
+<pre><code class="r">
+# warning: *all* NA values will be converted to 0 
+childwide[is.na(childwide)] <- 0
+
+</code></pre>
+
+  </section>
+</section>
+
+<section>
+    <h2>Your turn</h2>
+    <p>Create a table with one row for each child using the spread() commands on the previous slides.</p>
+</section>
+
+
+
+<section>
+    <h2>gather()</h2>
+    <p>Convert a table from wide to long.<br />
+       Function: <code>gather(key, value)</code></p>
+<pre><code class="r">
+# sample code
+mygather <- mydata %>% gather(key = myvars, value = mycells, 
+                              var1:varN)
+
+</code></pre>
+    <p>In the code above, </p>
+    <ul>
+      <li><code>var1:varN</code>: variables to be combined</li>
+      <li><code>key</code>: name for the variable that will list the variable names</li>
+      <li><code>value</code>: name for the variable that will list the variables' values</li>
+    </ul>
+</section>
+
+<section>
+  <section>
+      <h2>gather() example: pets</h2>
+      <p>Recreate the pet_species variable.</p>
+<pre><code class="r">
+petlong <- petwide %>% gather(key = pet_species, value = pet_name,
+                              bird:dog)
+
+</code></pre>
+  </section>
+  <section>
+    <h2>Resulting table</h2>
+    
+<pre><code class="r">
+> head(petlong)
+
+# A tibble: 6 x 5
+#   child_name child_age child_sex pet_species pet_name
+#   <chr>          <dbl> <chr>     <chr>       <chr>   
+# 1 Amy                7 F         bird        Connie  
+# 2 Ben                8 M         bird        NA      
+# 3 Cam                8 F         bird        NA      
+# 4 Don                7 M         bird        Gary    
+# 5 Eli                9 M         bird        Ingrid  
+# 6 Fay                9 F         bird        Norma   
+</code></pre>
+  </section>
+  <section>
+    <h2>Removing unnecessary rows</h2>
+    
+    <p>Whether the rows are truly unnecessary depends on your analysis. Here, we assume they are.</p>
+    
+<pre><code class="r">
+petlong <- petlong %>% filter(!is.na(pet_name))
+
+</code></pre>
+    
+  </section>
+</section>
+
+
 
 <!-- Pages 
   gather code
