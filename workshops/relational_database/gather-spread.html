@@ -87,7 +87,6 @@ petwide <- childpet %>% spread(key = pet_species, value = pet_name)
 
 # A tibble: 6 x 6
 #   child_name child_age child_sex bird   cat    dog   
-#   <chr>          <dbl> <chr>     <chr>  <chr>  <chr> 
 # 1 Amy                7 F         Connie Argyle Brutus
 # 2 Ben                8 M         NA     NA     Dufus 
 # 3 Cam                8 F         NA     Fannie Earl  
@@ -116,7 +115,6 @@ childwide <- childpet %>% mutate(value = 1) %>%
 
 # A tibble: 6 x 6
 #   child_name child_age pet_name pet_species     F     M
-#   <chr>          <dbl> <chr>    <chr>       <dbl> <dbl>
 # 1 Amy                7 Argyle   cat             1    NA
 # 2 Amy                7 Brutus   dog             1    NA
 # 3 Amy                7 Connie   bird            1    NA
@@ -141,8 +139,20 @@ childwide[is.na(childwide)] <- 0
 </section>
 
 <section>
+  <section>
     <h2>Your turn</h2>
-    <p>Create a table with one row for each child using the spread() commands on the previous slides.</p>
+    <p>Create a table with one column for each child age using the spread() 
+      commands on the previous slides. Fill the columns with sex.</p>
+  </section>
+  <section>
+    <h2>Answer</h2>
+<pre><code class="r">
+childagewide <- child %>%
+  spread(key = child_age, value = child_sex)
+
+</code></pre>
+
+  </section>
 </section>
 
 
@@ -183,7 +193,6 @@ petlong <- petwide %>% gather(key = pet_species, value = pet_name,
 
 # A tibble: 6 x 5
 #   child_name child_age child_sex pet_species pet_name
-#   <chr>          <dbl> <chr>     <chr>       <chr>   
 # 1 Amy                7 F         bird        Connie  
 # 2 Ben                8 M         bird        NA      
 # 3 Cam                8 F         bird        NA      
@@ -195,7 +204,8 @@ petlong <- petwide %>% gather(key = pet_species, value = pet_name,
   <section>
     <h2>Removing unnecessary rows</h2>
     
-    <p>Whether the rows are truly unnecessary depends on your analysis. Here, we assume they are.</p>
+    <p>Whether the rows are truly unnecessary depends on your analysis. 
+    Here, we assume they are.</p>
     
 <pre><code class="r">
 petlong <- petlong %>% filter(!is.na(pet_name))
@@ -226,7 +236,5 @@ petlong <- petlong %>% filter(!is.na(pet_name))
     <h2>And Now You Know!</h2>
     <a href="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg">
     <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%"></a>
-    <p>Next up: Relational database practice</p>
-    <p>But first: 5 minute break</p>
 </section>
 

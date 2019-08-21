@@ -1,0 +1,142 @@
+---
+layout: presentation
+title: Introducing Packages
+---
+
+<section>
+    <h2>Prepare your project</h2>
+    <div class="left">
+        <p>Duration: ~5 Minutes</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b41fff31126373.56424229bf48e.jpg" 
+                 width="50%" alt="Clock made of Legos">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ol>
+        <li>Create your project</li>
+        <li>Create your script</li>
+        <li>Load relevant package(s)</li>
+    </ol>
+</section>
+
+<section>
+    <h2>New RStudio Project</h2>
+    <div class="container">
+        <div class="left">
+          <p>File -> New Project -> New Directory</p>
+          <p>Create an empty project</p>
+          <p>Name your project</p>
+          
+        </div>
+        <div class="right">
+          <img src="{{site.baseurl}}/public/img/rstudio-new-project-1.png" 
+                 alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Our New Project</h2>
+    <pre><code>
+R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-redhat-linux-gnu (64-bit)
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> getwd()
+[1] "/home/abby/foo"
+    </code></pre>
+    <p>Locate your new folder.</p>
+    <p><code>foo.Rproj</code> is an RStudio file.</p>
+</section>
+
+
+<section>
+    <h2>Your Turn! Create a script.</h2>
+    <pre><code class="r">
+# Author: 'your name'
+# Date: 'today'
+# Purpose: example template
+
+## Load some data
+data(cars)
+
+## Look at it
+str(cars)
+
+## Play with it 
+colMeans(cars)
+    </code></pre>
+    <p>Save as <code>my_cars.R</code>. What happens?</p>
+</section>
+
+<section>
+    <h2>Folder Structure</h2>
+    <p style="text-align:left">Root Project Folder (foo):</p>
+    <ul>
+        <li>data/
+            <ul><small>
+                <li>README.md</li>
+                <li>something_awesome.R</li>
+                <li>something_awesome.Rda</li>
+            </small></ul>
+        </li>
+        <li>R/
+            <ul><small>
+                <li>README.md</li>
+                <li>awesome_function.R</li>
+            </small></ul>
+        </li>
+        <li>README.md</li>
+        <li>explore.R</li>
+        <li>some_awesome_analysis.R</li>
+    </ul>
+    <aside class="notes">
+      Today's example is modeled on R packages.
+      Separate data management from analysis.
+      Emphasize documentation and reproducibity.
+      Compatible with version control sites.
+    </aside>
+</section>
+
+<section>
+    <h2>Documentation</h2>
+    <p>Document everything.</p>
+    <ul>
+        <li><code>README.md</code> is a naming convention.</li>
+        <li>*.md are text files written in Markdown.</li>
+    </ul>
+    <p>We will cover Markdown in a future workshop.<br>
+       For now, use plain text.</p>
+</section>
+
+
+<section>
+    <h2>Packages</h2>
+    <p>... simplify your life</p><br>
+    <p>Install and load with</p>
+    <pre><code class="r">
+# plural; package name in quotes
+install.packages("tidyverse")
+# singular; quotes not needed
+library(tidyverse)
+    </code></pre>
+
+    <h4>Example</h4>
+    <p><a href="https://github.com/tidyverse" target="_blank">
+                tidyverse </a>: Data management</p>
+</section>
+
+<section>
+    <h2>And Now You Know!</h2>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+</section>
