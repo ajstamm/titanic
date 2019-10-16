@@ -6,7 +6,7 @@ title: "Summarizing Data with Tidyverse"
 <section>
     <h2>Summarizing data</h2>
     <div class="left">
-        <p>Duration: ~10 Minutes</p>
+        <p>Duration: ~20 Minutes</p>
     </div>
     <div class="right">
         <div class="center" style="text-align:center;">
@@ -147,7 +147,8 @@ my_iris <- iris %>% group_by(Species) %>%
 </section>
 
 <section>
-    <h2>Bonus: <code>rowwise()</code></h2>
+  <section>
+    <h2>Summarize rows</h2>
     
     <p>Summarize across rows instead of columns.</p>  
     
@@ -166,6 +167,21 @@ rowMeans(iris[, 1:4])
     <div class="right">
         <p>Tidyverse</p>
         <pre><code class="r">
+iris %>% 
+  select(Sepal.Length, Sepal.Width, 
+         Petal.Length, Petal.Width) %>%
+  rowMeans()         
+
+        </code></pre>
+    </div>
+    <p>But what if we are calculating something more complex than means?</p>
+  </section>
+  <section>
+    <h2>Bonus: <code>rowwise()</code></h2>
+    <p>In the code below, replace <code>mean</code> with your function 
+       of choice.</p>
+
+        <pre><code class="r">
 iris %>% rowwise() %>%
   mutate(
     mean = mean(c(Sepal.Length, 
@@ -174,8 +190,9 @@ iris %>% rowwise() %>%
                   Petal.Width))
   )
         </code></pre>
-    </div>
+        
     <p>What happens if you leave out <code>rowwise()</code>?</p>
+  </section>
 </section>
 
 <section>
@@ -209,8 +226,8 @@ cars %>%
   )
         </code></pre>
         <pre><code class="fragment r" data-fragment-index="1">  
-n_rows      speed      dist
-1   50       15.4     42.98
+  n_rows  speed   dist
+1     50   15.4  42.98
         </code></pre>        
     </div>    
 </section>
@@ -218,6 +235,6 @@ n_rows      speed      dist
 <section>
     <h2>And Now You Know!</h2>
     <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
-    <p>Next up: Tidyverse practice</p>
+    <p>Next up: Summarize practice</p>
 </section>
 
