@@ -51,11 +51,11 @@ title: "Relational Database Practice"
     <h2>Load datasets</h2>
     
 <pre><code class="r">
-accident <- read_csv("Data/fars2015nys_accident_rev.csv", 
+accident <- read_csv("Data/fars2015nys_accident.csv", 
                      col_types="cnccnccnnnnnnncccccc") 
-vehicle <- read_csv("Data/fars2015nys_vehicle_rev.csv", 
+vehicle <- read_csv("Data/fars2015nys_vehicle.csv", 
                     col_types="ccccncnnccnccc") 
-person <- read_csv("Data/fars2015nys_person_rev.csv", 
+person <- read_csv("Data/fars2015nys_person.csv", 
                    col_types="cccncccccccccc") 
 
 </code></pre>
@@ -108,15 +108,15 @@ person <- person %>%
 
 </section>
 
-
 <section>
-    <h2>Join the datasets</h2>
-    <p>Hint: identify the keys. You can join on more than one variable at a time.</p>
-    <p>Code is on the next slide.</p>
-</section>
+  <section>
+      <h2>Join the datasets</h2>
+      <p>Hint: identify the keys. You can join on more than one variable at a time.</p>
+      <p>Click the down arrow for code.</p>
+  </section>
 
-<section>
-    <h2>Joining code</h2>
+  <section>
+      <h2>Joining code</h2>
 
 <pre><code class="r fragment">
 my_fulldata <- accident %>% 
@@ -128,6 +128,7 @@ my_fulldata <- accident %>%
     <aside class="notes">
       Why use full join here?
 	  </aside>
+  </section>
 </section>
 
 <section>
@@ -400,8 +401,5 @@ allfips %>% filter(!ST_CO_FIPS %in% my_countydata$ST_CO_FIPS)
 <section>
     <h2>And Now You Know!</h2>
     <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
-    <p>Enjoy R and please fill out our 
-       <a href="https://apps.health.ny.gov/pubpal/builder/survey/ebcop-r-post-workshop-survey"
-          target="_blank">evaluation</a>.</p>
 </section>
 

@@ -93,7 +93,10 @@ petwide <- childpet %>% spread(key = pet_species, value = pet_name)
 # 4 Don                7 M         Gary   Hector NA    
 # 5 Eli                9 M         Ingrid Kimber Jolly 
 # 6 Fay                9 F         Norma  Laurel Morton
+
 </code></pre>
+    <br />
+    <p>What does <code>NA</code> mean?</p>
   </section>
 </section>
 
@@ -121,13 +124,16 @@ childwide <- childpet %>% mutate(value = 1) %>%
 # 4 Ben                8 Dufus    dog            NA     1
 # 5 Cam                8 Earl     dog             1    NA
 # 6 Cam                8 Fannie   cat             1    NA
+
 </code></pre>
   </section>
   <section>
     <h2>Creating dummy variables</h2>
 
-    <p>If you plan to use sex as dummy variables, for example for regression, you will want to convert the missings to 0.<br />
-       <i>Note: if any value is truly missing, the code below will need to be modified. We will not cover that today.</i></p>
+    <p>If you plan to use sex as dummy variables, for example for regression,
+       you will want to convert the missings to 0.<br />
+       <i>Note: if any value is truly missing, the code below will need to be
+          modified. We will not cover that today.</i></p>
        
 <pre><code class="r">
 # warning: *all* NA values will be converted to 0 
@@ -141,8 +147,9 @@ childwide[is.na(childwide)] <- 0
 <section>
   <section>
     <h2>Your turn</h2>
-    <p>Create a table with one column for each child age using the spread() 
-      commands on the previous slides. Fill the columns with sex.</p>
+    <p>Create a table with one column for each child age using the 
+       <code>spread()</code> commands on the previous slides.</p> 
+    <p>Use child sex for the value.</p>
   </section>
   <section>
     <h2>Answer</h2>
@@ -199,6 +206,7 @@ petlong <- petwide %>% gather(key = pet_species, value = pet_name,
 # 4 Don                7 M         bird        Gary    
 # 5 Eli                9 M         bird        Ingrid  
 # 6 Fay                9 F         bird        Norma   
+
 </code></pre>
   </section>
   <section>
