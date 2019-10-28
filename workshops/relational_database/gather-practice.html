@@ -1,0 +1,257 @@
+---
+layout: presentation
+title: "Summarizing Data with Tidyverse"
+---
+
+<section>
+    <h2>Data Transformation Practice</h2>
+    <div class="left">
+        <p>Duration: ~30 Minutes</p>
+    </div>
+    <div class="right">
+        <div class="center" style="text-align:center;">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b41fff31126373.56424229bf48e.jpg" 
+                 width="50%" alt="Clock made of Legos">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Summarize data</li>
+        <li>Transform your results</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Prepare your project</h2>
+    <ol>
+      <li>Create a new R script file in your project folder</li>
+      <li>Add a heading</li>
+      <li>Load tidyverse</li>
+      <li>Download the <a href="{{site.baseurl}}/public/data/fars2015nys_accident.csv">accident dataset</a> 
+          and lace it in your data folder</li>
+    </ol>
+    <br>
+<pre><code class="r">
+accident <- read_csv("Data/fars2015nys_accident.csv", 
+                     col_types="cnccnccnnnnnnncccccc") 
+
+</code></pre>
+
+    <aside class="notes">
+        This dataset is simplified for the exercises today.
+	  </aside>
+</section>
+
+
+
+
+<section>
+    <h2>Practice spread()</h2>
+    
+    <p>For this exercise, create two tables.</p>
+    
+    <ol>
+        <li>Total fatalities by county by month</li>
+        <li>Average vehicles per accident by county by month</li>
+    </ol>
+    
+    <p>For these examples, county will be the rows and month will be the columns</p>
+</section>
+
+<section>
+    <h2>Variables you will need</h2>
+    <ul>
+      <li>FATALS: number of deaths per accident</li>
+      <li>VE_TOTAL: number of vehicles per accident</li>
+      <li>MONTH: three-letter month abbreviation</li>
+      <li>ST_CO_FIPS: county FIPS code</li>
+    </ul>
+
+</section>
+
+<section>
+  <section>
+    <h2>What should you do first?</h2>
+    
+    <p>This is a complex exercise that will use several things you have learned so far.</p>
+    
+    <p>Click the down arrow if you need a hint or two.</p>
+  </section>
+  <section>
+    <h2>Hint 1</h2>
+    <p>Create a summary dataset. Remember to group variables first.</p>
+  </section>
+  <section>
+    <h2>Hint 2</h2>
+    <p>Identify your <code>key</code> and <code>value</code> variables.</p>
+  </section>
+</section>
+
+
+
+
+<section>
+    <h2>Create the summary dataset</h2>
+
+    <pre><code class="fragment r">
+summarized_accident <- accident %>%
+  group_by(ST_CO_FIPS, MONTH) %>%
+  summarize(
+    total_deaths = sum(FATALS),
+    avg_vehicles = mean(VE_TOTAL)
+  ) %>% 
+  ungroup()
+  
+    </code></pre>
+</section>
+
+<section>
+  <section>
+    <h2>Table 1</h2>
+    
+    <p>Create total vehicular fatalities by county by month.</p> 
+    
+    <pre><code class="fragment r">
+spread_deaths <- summarized_accident %>%
+  select(-avg_vehicles) %>%
+  spread(key = MONTH, value = total_deaths)
+
+    </code></pre>
+    
+    <p>Note: in this case, missings mean there were no deaths. 
+       To replace missings with 0, use this code.</p>
+       
+    <pre><code class="fragment r">
+spread_deaths[is.na(spread_deaths)] <- 0
+
+    </code></pre>
+    
+    <p>Click the down arrow if you need help with the code for vehicles.</p>
+  </section>
+  <section>
+    <h2>Table 2</h2>
+    
+    <p>Create average vehicles per accident by county by month.</p> 
+    
+    <pre><code class="fragment r">
+spread_vehicles <- summarized_accident %>%
+  select(-total_deaths) %>%
+  spread(key = MONTH, value = avg_vehicles)
+
+    </code></pre>
+    
+    <p>Which month had the highest average vehicles per crash in Albany in 2015?</p>
+  </section>
+</section>
+
+
+<section>
+    <h2>Practice gather()</h2>
+    
+    <p>For this exercise, combine your two spread tables to recreate 
+       <code>summarized_accident.</code></p>
+    
+</section>
+
+
+
+<section>
+  <section>
+    <h2>What should you do first?</h2>
+    
+    <p>This is a complex exercise that will use several things you have learned so far.</p>
+    
+    <p>Click the down arrow if you need a hint or three.</p>
+  </section>
+  <section>
+    <h2>Hint 1</h2>
+    <p>Convert each spread table from long to wide.</p>
+  </section>
+  <section>
+    <h2>Hint 2</h2>
+    <p>Merge the two tables by county and month.</p>
+  </section>
+  <section>
+    <h2>Hint 3</h2>
+    <p>Remove all rows for which both total fatalities and average vehicles equal 0.</p>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Gather each dataset</h2>
+
+<p>Create a long table for the deaths.</p>
+
+    <pre><code class="fragment r">
+gathered_deaths <- spread_deaths %>%
+  gather(key = MONTH, value = total_deaths, -ST_CO_FIPS)
+
+    </code></pre>
+    
+    <p>Click the down arrow in you need help with the code for vehicles.</p>
+  </section>
+  <section>
+<p>Create a long table for the vehicles.</p>
+
+    <pre><code class="fragment r">
+gathered_vehicles <- spread_vehicles %>%
+  gather(key = MONTH, value = avg_vehicles, -ST_CO_FIPS)
+
+    </code></pre>
+  </section>
+</section>
+
+<section>
+    <h2>Merge the tables</h2>
+
+    <pre><code class="fragment r">
+gathered_accident <- gathered_deaths %>%
+  left_join(gathered_vehicles, by = c("ST_CO_FIPS", "MONTH"))
+
+    </code></pre>
+    <p>For this exercise, <code>full_join</code> and <code>right_join</code> 
+       would also work. Why?</p>
+</section>
+
+<section>
+  <h2>Bonus content</h2>
+  <p>To test if the tables are equivalent, try these:</p>
+  
+  <pre><code class="fragment r">
+nrow(gathered_accident) == nrow(summarized_accident) 
+
+# this function will give either TRUE 
+# or at least one way the tables are not equivalent
+all.equal(gathered_accident, summarized_accident)
+
+  </code></pre>
+  <p>Why are they not eqivalent? What can we do to fix that?</p>
+
+</section>
+
+<section>
+  <h2>Make tables equivalent</h2>
+  <p>Remove extra rows from <code>gathered_accident</code>.</p>
+  
+  <pre><code class="fragment r">
+gathered_accident <- gathered_accident %>% 
+  filter(avg_vehicles != 0 | total_deaths != 0)
+
+  </code></pre>
+  <p>To make the tables identical, you will also need to sort row order.</p>
+
+</section>
+
+
+<section>
+    <h2>And Now You Know!</h2>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+    <p>Enjoy R and please fill out our 
+       <a href="https://apps.health.ny.gov/pubpal/builder/survey/ebcop-r-post-workshop-survey-fall2019"
+          target="_blank">evaluation</a>.</p>
+</section>
+
