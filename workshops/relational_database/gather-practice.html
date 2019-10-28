@@ -30,10 +30,10 @@ title: "Summarizing Data with Tidyverse"
       <li>Create a new R script file in your project folder</li>
       <li>Add a heading</li>
       <li>Load tidyverse</li>
-      <li>Download the <a href="{{site.baseurl}}/public/data/fars2015nys_accident.csv">accident dataset</a> 
-          and lace it in your data folder</li>
+      <li>Download the <a href="{{site.baseurl}}/public/data/fars2015nys_accident.csv">accident dataset</a></li>
+      <li>Place the dataset in your data folder</li>
     </ol>
-    <br>
+    <br />
 <pre><code class="r">
 accident <- read_csv("Data/fars2015nys_accident.csv", 
                      col_types="cnccnccnnnnnnncccccc") 
@@ -141,9 +141,11 @@ spread_vehicles <- summarized_accident %>%
   select(-total_deaths) %>%
   spread(key = MONTH, value = avg_vehicles)
 
+spread_vehicles[is.na(spread_vehicles)] <- 0
+
     </code></pre>
     
-    <p>Which month had the highest average vehicles per crash in Albany in 2015?</p>
+    <!-- <p>Which month had the highest average vehicles per crash in Albany in 2015?</p> -->
   </section>
 </section>
 
@@ -242,7 +244,8 @@ gathered_accident <- gathered_accident %>%
   filter(avg_vehicles != 0 | total_deaths != 0)
 
   </code></pre>
-  <p>To make the tables identical, you will also need to sort row order.</p>
+  <br />
+  <p>To make the tables identical, you would also need to sort row order.</p>
 
 </section>
 
