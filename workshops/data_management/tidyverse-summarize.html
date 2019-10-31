@@ -168,8 +168,10 @@ rowMeans(iris[, 1:4])
         <p>Tidyverse</p>
         <pre><code class="r">
 iris %>% 
-  select(Sepal.Length, Sepal.Width, 
-         Petal.Length, Petal.Width) %>%
+  select(Sepal.Length, 
+         Sepal.Width, 
+         Petal.Length, 
+         Petal.Width) %>%
   rowMeans()         
 
         </code></pre>

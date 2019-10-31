@@ -108,7 +108,7 @@ summary <- summary %>%
         <li><strong>ungroup</strong> your variables</li>
     </ol>
 <pre><code class="fragment r">
-summary <- new_fars %>% group_by(SURVIVAL) %>%
+fars_summary <- new_fars %>% group_by(SURVIVAL) %>%
   summarize(
     total = n(),
     age_mean = mean(AGE, na.rm=TRUE),
@@ -125,7 +125,9 @@ summary <- new_fars %>% group_by(SURVIVAL) %>%
     <h2>View your data</h2>
     <p>View your summarized dataset.</p>
 <pre><code class="fragment r">
-summary
+fars_summary
+
+head(fars_summary)
 
 </code></pre>
 </section>
@@ -134,7 +136,7 @@ summary
     <h2>Save your data</h2>
     <p>Save your data in the folder <code>data</code>.</p>
 <pre><code class="fragment r">
-write.csv(summary, "data/fars2015nys_Albany_person_bysurvival.csv", 
+write.csv(fars_summary, "data/fars2015nys_Albany_person_bysurvival.csv", 
           row.names = FALSE)
           
 </code></pre>
