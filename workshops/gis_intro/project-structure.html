@@ -1,0 +1,153 @@
+---
+layout: presentation
+title: "Project Structure"
+---
+
+<section>
+    <h2>Project Structure</h2>
+    <div class="container">
+        <div class="left">
+            <p>~5 Minutes</p>
+        </div>
+        <div class="right">
+            <div class="center" style="text-align:center;">
+                <img src="" 
+                     width="90%" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    
+    <ol>
+        <li>Set up a project</li>
+        <li>Add necessary files</li>
+        <li>Prepare the workspace</li>
+    </ol>
+</section>
+
+<section>
+    <h2>New RStudio Project</h2>
+    <div class="container">
+        <div class="left">
+            <p>Let's make a new project!</p>
+            <p>File -> New Project</p>
+            <p>Select "New Directory".
+                <br /><span style="color:red"><small>
+                    We won't cover Version Control today.
+                </small></span>
+            </p>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-new-project-1.png" 
+                 alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>RStudio Project Type</h2>
+    <div class="container">
+        <div class="left">
+            <p>Create an Empty Project</p>
+            <p>I promise, you don't want to do 
+               either of the others.</p>                
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-new-project-2.png" 
+                 alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>RStudio Project Name</h2>
+    <div class="container">
+        <div class="left">
+            <p>Directory Name: <code>foo</code></p>
+            <p><code>~</code> is your home directory</p>
+            <p>Don't start a repository.<br />
+               RStudio creates a git repo at the project root.</p>
+        </div>
+        <div class="right">
+            <img src="{{site.baseurl}}/public/img/rstudio-new-project-3.png" alt="RStudio: New Project" width="100%">
+        </div>
+    </div>
+    <p style="color:white">Spacer</p>
+    <p style="color:white">Spacer</p>
+    <p>"Open in new session" opens a new window.</p>
+</section>
+
+<section>
+    <h2>Our New Project</h2>
+    <pre><code>
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+...
+
+> getwd()
+[1] "/home/abby/foo"
+    </code></pre>
+    <p>Locate your new folder.</p>
+    <p><code>foo.Rproj</code> is an RStudio file.</p>
+</section>
+
+<section>
+    <h2>Folder Structure</h2>
+    <p>Create your own structure.<br>
+       Today's example is modeled on R packages.</p>
+    <p>Goals:</p>
+    <ul>
+        <li>Separate data management from analysis.</li>
+        <li>Emphasize documentation and reproducibity.</li>
+        <li>Compatible with version control sites.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Folder Structure Example</h2>
+    <p style="text-align:left">Root Project Folder (foo):</p>
+    <ul>
+        <li>data/
+            <ul><small>
+                <li>README.md</li>
+            </small></ul>
+        </li>
+        <li>R/
+            <ul><small>
+                <li>README.md</li>
+            </small></ul>
+        </li>
+        <li>Shapefiles/
+            <ul><small>
+                <li>README.md</li>
+            </small></ul>
+        </li>
+        <li>README.md</li>
+        <li>explore.R</li>
+        <li>some_awesome_analysis.R</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Documentation</h2>
+    <p>Start your R journey with documentation!</p>
+    <ul>
+        <li>Document everything.</li>
+        <li><code>README.md</code> is a naming convention.</li>
+        <li>.md are text files written in Markdown.</li>
+    </ul>
+    <p>We will cover Markdown language in a future workshop.<br>
+       For now, use plain text.</p>
+</section>
+
+<section>
+    <h2>And Now You Know!</h2>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+    <p>Next up: Packages</p>
+</section>
+

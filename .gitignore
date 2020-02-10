@@ -6,6 +6,7 @@ Gemfile.lock
 .Rhistory
 notes.txt
 titanic.Rproj
+gis.txt
 
 # Numerous always-ignore extensions
 *.diff
