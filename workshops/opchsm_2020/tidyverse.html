@@ -84,8 +84,8 @@ foo_foo <- little_bunny() %>%
 little_setosa <- iris %>% 
   filter(Petal.Width < 0.5, Petal.length < 1)
     </code></pre>
-    <p><i>Note: Commas (,) are treated as "and". For "or", 
-       use a vertical pipe (|).</i></p>
+    <small><p><i>Note: Commas (,) are treated as "and". For "or", 
+       use a vertical pipe (|).</i></p></small>
     <p><b>Practice</b></p>
     <p>Filter the pets dataset to only show female cats. 
        Click down for the solution.</p>
@@ -98,7 +98,7 @@ female_cats <- pets %>%
   filter(pet_type == "cat", pet_sex = "female")
     </code></pre>
     <p>Bonus: Keep if a cat and over 2 years old or any female.</p>
-    <pre><code class="r">
+    <pre><code class="fragment r">
 female_cats <- pets %>% 
   filter((pet_type == "cat" & pet_age > 2) | pet_sex = "female")
     </code></pre>
@@ -112,7 +112,7 @@ female_cats <- pets %>%
        <code>select()</code>.<br \>
        To choose all columns except <code>x</code>,
        use <code>select(-x)</code>.</p>
-    <p>Example</p>
+    <p><b>Example</b></p>
     <pre><code class="r">
 iris_sepals <- iris %>% 
   select(Species, Sepal.Length,Sepal.Width)
@@ -123,12 +123,13 @@ iris_sepals <- iris %>%
   </section>
   <section>
     <h2>Practice: variable selection</h2>
+    <p>Keep pet names, types, and talents.</p>
     <pre><code class="r">
 pet_skills <- pets %>% 
   select(pet_name, pet_type, pet_talent)
     </code></pre>
-    <p>Bonus: keep all variables except the joining key.</p>
-    <pre><code class="r">
+    <p>Bonus: Keep all variables except the joining key.</p>
+    <pre><code class="fragment r">
 # option 1: select what to remove
 pet_skills <- pets %>% select(-child_key)
 # option 2: select similarly named variables
@@ -141,7 +142,7 @@ pet_skills <- pets %>% select(starts_with("pet_"))
   <section>
     <h2>Renaming variables</h2>
     <p>To rename a column, use <code>rename()</code>.</p>
-    <p>Example</p>
+    <p><b>Example</b></p>
     <pre><code class="r">
 my_iris <- iris %>% 
   rename(sepal_width = Sepal.Width)
@@ -152,12 +153,13 @@ my_iris <- iris %>%
   </section>
   <section>
     <h2>Practice: renaming variables</h2>
+    <p>Rename pet talent to hobby.</p>
     <pre><code class="r">
 pet_activities <- iris %>% 
   rename(hobbies = pet_talent)
     </code></pre>
-    <p>Bonus: rename multiple variables.</p>
-    <pre><code class="r">
+    <p>Bonus: Rename multiple variables.</p>
+    <pre><code class="fragment r">
 pet_activities <- pets %>% 
   rename(hobby = pet_talent, years = pet_age)
     </code></pre>
@@ -168,7 +170,7 @@ pet_activities <- pets %>%
   <section>
     <h2>Creating variables</h2>
     <p>To create a new variable, use <code>mutate()</code>.</p>
-    <p>Example</p>
+    <p><b>Example</b></p>
     <pre><code class="r">
 my_iris <- iris %>% 
   mutate(is_setosa = ifelse(Species == "setosa", "Yes", "No"))
@@ -180,18 +182,19 @@ my_iris <- iris %>%
   </section>
   <section>
     <h2>Practice: creating variables</h2>
+    <p>Create age groups.</p>
     <pre><code class="r">
 pet_ages <- pets %>% 
   mutate(age_group = ifelse(pet_age <= 2, "Baby", "Adult"))
     </code></pre>
     <p>Bonus 1: Fish are adults at 2 years, everyone else at 3 years.</p>
-    <pre><code class="r">
+    <pre><code class="fragment r">
 pet_ages <- pets %>% 
   mutate(age_group = ifelse(pet_type == "fish" & pet_age >= 2, "Adult", 
                     ifelse(pet_age <= 2, "Baby", "Adult")))
     </code></pre>
     <p>Bonus 2: Calculate age in months.</p>
-    <pre><code class="r">
+    <pre><code class="fragment r">
 pet_ages <- pets %>% 
   mutate(months = pet_age * 12)
     </code></pre>
@@ -202,7 +205,7 @@ pet_ages <- pets %>%
 <section>
   <section>
     <h2>Chaining pipes</h2>
-    <p>Now chain together the steps in the previous slides:</p> 
+    <p>Chain together the steps in the previous slides:</p> 
     <ol>
         <li>Filter <code>Sepal.Width</code> under 2.</li>
         <li>Select only species and sepal variables.</li>
@@ -216,7 +219,10 @@ my_iris <- iris %>%
   rename(sepal_length = Sepal.Length) %>%
   mutate(is_setosa = ifelse(Species == "setosa", "Yes", "No"))
     </code></pre>
-    <p><b>Practice</b></p>
+    <p>Click down for the practice problem.</p>
+  </section>
+  <section>
+    <h2>Practice: chaining</h2>
     <p>Create the following dataset:</p>
     <ol>
       <li>Filter cats.</li>
@@ -224,11 +230,7 @@ my_iris <- iris %>%
       <li>Rename talent to hobby.</li>
       <li>Calculate age in months and whether a baby (age 0-2) or adult (age 3 and above).</li>
     </ol>
-    <p>Click down for the solution.</p>
-  </section>
-  <section>
-    <h2>Practice: chaining</h2>
-    <pre><code class="r">
+    <pre><code class="fragment r">
 cat_pets <- pets %>% 
   filter(pet_type == "cat") %>%
   select(pet_type, pet_age, pet_talent) %>%
