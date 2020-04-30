@@ -1,0 +1,246 @@
+---
+layout: presentation
+title: "Tidyverse Introduction"
+---
+
+<section>
+    <h2>Tidyverse Introduction</h2>
+    <p>May 2020</p>
+    <p>This presentation was tailored to meet the needs of the Office of Primary Care and Health Systems Management and does not cover all aspects of Tidyverse.</p>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Learn piping syntax</li>
+        <li>Subset datasets</li>
+        <li>Manipulate variables</li>
+    </ul>
+</section>
+
+<section>
+    <h2>What is tidyverse?</h2>
+    <p>Set of packages that restructure how R code works.</p>
+    
+    <p>Includes:</p>
+    <ul>
+        <li>magittr's piping: <code>%>%</code></li>
+        <li>dplyr: most functions we will use today</li>
+    </ul>
+</section>
+<section>
+  <h2>Prepare your data</h2>
+    <p>We will use two datasets:</p>
+    <ul>
+      <li>Iris, a pre-installed dataset, for examples</li>
+      <li>Pets, a dataset designed for this workshop, for practice</li>
+    </ul>
+    <p>Unzip the R project and open "pets.Rproj" on RStudio. Copy the following code to the console:</p>
+        <pre><code class="r">
+library(tidyverse)
+library(openxlsx)
+data(iris)
+pets <- read.xlsx("pets_full.xlsx", startRow = 1, sheet = "pets", 
+                  colNames = TRUE, rowNames = FALSE, sep.names = "_")
+        </code></pre>
+    
+</section>
+<section>
+    <h2>Piping</h2>
+     <div class="left">
+        <p>Base R</p>
+        <pre><code class="r">
+foo_foo <- little_bunny()
+foo_foo <- hop(foo_foo, 
+           through = forest)
+foo_foo <- scoop(foo_foo, 
+           up = field_mice)
+foo_foo <- bop(foo_foo, 
+           on = head)
+        </code></pre>
+    </div>
+    <div class="right">
+        <p>Tidyverse</p>
+        <pre><code class="r">
+foo_foo <- little_bunny() %>%
+  hop(through = forest) %>%
+  scoop(up = field_mice) %>%
+  bop(on = head)
+  
+  
+  
+        </code></pre>
+    </div>
+    <p>Example from <a href="https://r4ds.had.co.nz/pipes.html">R for Data Science</a></p>
+</section>
+
+<section>
+  <section>
+    <h2>Conditional selection</h2>
+    <p>To select rows based on some condition, 
+       use <code>filter()</code>.</p>
+    <p><b>Example</b></p>
+    <pre><code class="r">
+little_setosa <- iris %>% 
+  filter(Petal.Width < 0.5, Petal.length < 1)
+    </code></pre>
+    <p><i>Note: Commas (,) are treated as "and". For "or", 
+       use a vertical pipe (|).</i></p>
+    <p><b>Practice</b></p>
+    <p>Filter the pets dataset to only show female cats. 
+       Click down for the solution.</p>
+  </section>
+  <section>
+    <h2>Practice: conditionals</h2>
+    <p>Keep only if female and a cat.</p>
+    <pre><code class="r">
+female_cats <- pets %>% 
+  filter(pet_type == "cat", pet_sex = "female")
+    </code></pre>
+    <p>Bonus: Keep if a cat and over 2 years old or any female.</p>
+    <pre><code class="r">
+female_cats <- pets %>% 
+  filter((pet_type == "cat" & pet_age > 2) | pet_sex = "female")
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Variable selection</h2>
+    <p>To choose specific columns, use 
+       <code>select()</code>.<br \>
+       To choose all columns except <code>x</code>,
+       use <code>select(-x)</code>.</p>
+    <p>Example</p>
+    <pre><code class="r">
+iris_sepals <- iris %>% 
+  select(Species, Sepal.Length,Sepal.Width)
+    </code></pre>
+    <p><b>Practice</b></p>
+    <p>Select pet names, types, and talents. 
+       Click down for the solution.</p>
+  </section>
+  <section>
+    <h2>Practice: variable selection</h2>
+    <pre><code class="r">
+pet_skills <- pets %>% 
+  select(pet_name, pet_type, pet_talent)
+    </code></pre>
+    <p>Bonus: keep all variables except the joining key.</p>
+    <pre><code class="r">
+# option 1: select what to remove
+pet_skills <- pets %>% select(-child_key)
+# option 2: select similarly named variables
+pet_skills <- pets %>% select(starts_with("pet_"))
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Renaming variables</h2>
+    <p>To rename a column, use <code>rename()</code>.</p>
+    <p>Example</p>
+    <pre><code class="r">
+my_iris <- iris %>% 
+  rename(sepal_width = Sepal.Width)
+    </code></pre>
+    <p><b>Practice</b></p>
+    <p>Rename pet talent to hobby. 
+       Click down for the solution.</p>
+  </section>
+  <section>
+    <h2>Practice: renaming variables</h2>
+    <pre><code class="r">
+pet_activities <- iris %>% 
+  rename(hobbies = pet_talent)
+    </code></pre>
+    <p>Bonus: rename multiple variables.</p>
+    <pre><code class="r">
+pet_activities <- pets %>% 
+  rename(hobby = pet_talent, years = pet_age)
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Creating variables</h2>
+    <p>To create a new variable, use <code>mutate()</code>.</p>
+    <p>Example</p>
+    <pre><code class="r">
+my_iris <- iris %>% 
+  mutate(is_setosa = ifelse(Species == "setosa", "Yes", "No"))
+    </code></pre>
+    <p><b>Practice</b></p>
+    <p>Create a new variable identifying if the pet is a baby 
+       (age 0-2) or adult (age 3 and above). 
+       Click down for the solution.</p>
+  </section>
+  <section>
+    <h2>Practice: creating variables</h2>
+    <pre><code class="r">
+pet_ages <- pets %>% 
+  mutate(age_group = ifelse(pet_age <= 2, "Baby", "Adult"))
+    </code></pre>
+    <p>Bonus 1: Fish are adults at 2 years, everyone else at 3 years.</p>
+    <pre><code class="r">
+pet_ages <- pets %>% 
+  mutate(age_group = ifelse(pet_type == "fish" & pet_age >= 2, "Adult", 
+                    ifelse(pet_age <= 2, "Baby", "Adult")))
+    </code></pre>
+    <p>Bonus 2: Calculate age in months.</p>
+    <pre><code class="r">
+pet_ages <- pets %>% 
+  mutate(months = pet_age * 12)
+    </code></pre>
+  </section>
+</section>
+
+
+<section>
+  <section>
+    <h2>Chaining pipes</h2>
+    <p>Now chain together the steps in the previous slides:</p> 
+    <ol>
+        <li>Filter <code>Sepal.Width</code> under 2.</li>
+        <li>Select only species and sepal variables.</li>
+        <li>Rename <code>Sepal.Length</code> to <code>sepal_length</code>.</li>
+        <li>Create the variable <code>is_setosa</code>.</li>
+    </ol>
+    <pre><code class="r">
+my_iris <- iris %>% 
+  filter(Sepal.Width < 2) %>%
+  select(Species, Sepal.Length, Sepal.Width) %>%
+  rename(sepal_length = Sepal.Length) %>%
+  mutate(is_setosa = ifelse(Species == "setosa", "Yes", "No"))
+    </code></pre>
+    <p><b>Practice</b></p>
+    <p>Create the following dataset:</p>
+    <ol>
+      <li>Filter cats.</li>
+      <li>Select pet name, age, and talent.</li>
+      <li>Rename talent to hobby.</li>
+      <li>Calculate age in months and whether a baby (age 0-2) or adult (age 3 and above).</li>
+    </ol>
+    <p>Click down for the solution.</p>
+  </section>
+  <section>
+    <h2>Practice: chaining</h2>
+    <pre><code class="r">
+cat_pets <- pets %>% 
+  filter(pet_type == "cat") %>%
+  select(pet_type, pet_age, pet_talent) %>%
+  rename(hobby = pet_talent) %>%
+  mutate(months = pet_age * 12, 
+         age_group = ifelse(age < 3, "Baby", "Adult"))
+    </code></pre>
+  </section>
+</section>
+
+<section>
+    <h2>Questions?</h2>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+</section>
+
