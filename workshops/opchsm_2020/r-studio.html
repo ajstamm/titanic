@@ -16,16 +16,16 @@ title: "RStudio"
     <ul>
         <li>Navigate RStudio</li>
         <li>Open a project</li>
-        <li>Install Packages</li>
+        <li>Install packages</li>
     </ul>
 </section>
 
 
 <section>
-    <h2>Start RStudio</h2>
+    <h2>About RStudio</h2>
     <ul>
-        <li>RStudio is available on Linux, Mac, and Windows
-            <i>after</i> installing R - it requires R to run</li>
+        <li>Available on Linux, Mac, and Windows</li>
+        <li>Requires R to run; install R <i>first</i></li>
         <li>Cost == $0 (<a href="https://www.gnu.org/licenses/agpl-3.0.html"
                            target="_blank">AGPL3</a>)</li>
         <li><a href="https://www.rstudio.com/products/rstudio/" 
@@ -78,12 +78,10 @@ title: "RStudio"
   <h2>Using an RStudio project</h2>
   <p>Save <a href = "{{site.baseurl}}/public/Rprojects/ocphsm_2020.zip">this 
      ZIP file</a> to your desktop and unzip it. Click on the file 
-     "ocphsm.Rproj". This will open your project in RStudio.</p>
-  <p>Projects use relative paths, so they are an easy way to share data 
-     and code. To access a file in the project's root folder, just call the
-     filename without a folder. If you prefer to place your data in a "data"
-     folder, use "/" to separate folder and file names (NOT "\" used in
-     Windows).</p>
+     "ocphsm.Rproj".</p>
+  <p>Projects use relative paths. To access a file in the project's root
+     folder, call the filename without a folder. If you use a "data" folder, 
+     separate folder and file names with "/" (<b>not</b> "\").</p>
      <pre><code class="r">
 # example filename only
 my_filename <- "my_file.csv"
@@ -99,15 +97,14 @@ my_filename <- "data/my_file.csv"
     <li>tidyverse: a consellation of data management packages</li>
     <li>openxlsx: an interpreter to import Excel files into R</li>
   </ul>
-  <p>To import a file, click "Tools" > "Install packages ..." and type the 
-     package names above into the text box under "Packages". Keep "Install
-     dependencies" checked and click "Install", then wait a couple minutes
-     while several packages install.</p>
-  <p>After the packages are installed, try loading them:</p>
-  <pre><code class="r">
-library(tidyverse)
-library(openxlsx)
-  </code></pre>
+  <p>To import a file: </p>
+  <ol>
+    <li>Click "Tools" > "Install packages ..." </li>
+    <li>Type package names into the text box under "Packages"</li>
+    <li>Keep "Install dependencies" checked</li>
+    <li>Click "Install" and wait</li>
+  </ol>
+  <p>Load packages using <code>libaray()</code>.</p>
 </section>
 
 <section>
