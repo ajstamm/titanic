@@ -6,7 +6,9 @@ title: "Tidyverse Introduction"
 <section>
     <h2>Tidyverse Introduction</h2>
     <p>May 2020</p>
-    <p>This presentation was tailored to meet the needs of the Office of Primary Care and Health Systems Management and does not cover all aspects of Tidyverse.</p>
+    <small><p>This presentation was tailored to meet the needs of the 
+              Office of Primary Care and Health Systems Management 
+              and does not cover all aspects of Tidyverse.</p></small>
 </section>
 
 <section>
@@ -36,14 +38,13 @@ title: "Tidyverse Introduction"
       <li>Pets, a dataset designed for this workshop, for practice</li>
     </ul>
     <p>Unzip the R project and open "pets.Rproj" on RStudio. Copy the following code to the console:</p>
-        <pre><code class="r">
+    <pre><code class="r">
 library(tidyverse)
 library(openxlsx)
 data(iris)
 pets <- read.xlsx("pets_full.xlsx", startRow = 1, sheet = "pets", 
                   colNames = TRUE, rowNames = FALSE, sep.names = "_")
-        </code></pre>
-    
+    </code></pre>
 </section>
 <section>
     <h2>Piping</h2>

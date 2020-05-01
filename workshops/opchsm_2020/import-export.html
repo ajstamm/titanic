@@ -32,22 +32,21 @@ my_data <- read.csv("my_file.csv")
        can address this.</p>
     <p>Click the down arrow to learn about this option.</p>
   </section><section>
-    <h2>Importing CSV files with tidyverse</h2>
+    <h2>Importing with tidyverse</h2>
+    <p>With <code>col_types</code>, pre-define variable types 
+       (like $ in SAS). List the letters in variable order with 
+       one letter per variable.</p>
     <pre><code class="r">
 library(tidyverse) # if it is not still loaded
 my_data <- read_csv("my_file.csv", col_types = "ccnlc")
     </code></pre>
-    <p>The option <code>col_types</code> allows you to pre-define variable 
-       types the way you would using $ in SAS. The letters must be listed 
-       in variable order with one letter for each variable.</p>
     <p>Letter definitions:</p>
     <ul>
       <li>c = character or string variable</li>
       <li>n = numeric variable, including double, float, and integer</li>
       <li>l = logical or boolean variable</li>
     </ul>
-    <p>To see additional variable type options, enter 
-       <code>?read_csv</code> in the console window.</p>
+    <p>For additional variable type options, run <code>?read_csv</code>.</p>
   </section>
 </section>
 
@@ -70,14 +69,13 @@ my_data <- read_csv("train.csv", col_types = "cccccncccccc")
   <pre><code class="r">
 write.csv(my_data, "my_new_file.csv")
   </code></pre>
-  <p>The default settings write row and column names, add quotes for strings,
-     and enter "NA" for missings. I prefer to leave off row names and use 
-     blank ("") for missings, so I use this code:</p>
+  <p>The defaults write row names and enter "NA" for missings. 
+     I prefer to drop row names and use blank ("") for missings, 
+     so I use this code:</p>
   <pre><code class="r">
 write.csv(my_data, "my_new_file.csv", row.names = FALSE, na = "")
   </code></pre>
-  <p>To see additional write options, enter <code>?write.csv</code> 
-     in the console window.</p>
+  <p>For additional write options, run <code>?write.csv</code>.</p>
 </section>
 
 <section>
@@ -93,15 +91,15 @@ write.csv(my_data, "titanic_new.csv", row.names = FALSE, na = "")
 
 <section>
   <h2>Import an Excel file</h2>
-  <p>There are several R packages that can import Excel files. 
-     The one we will use today is openxlsx.</p>
+  <p>Several R packages can import Excel files. Today we will use 
+     <code>openxlsx</code>.</p>
   <pre><code class="r">
 library(openxlsx) # you will get an error if it is not installed
 my_data <- read.xlsx("my_file.xlsx", sheet = 1, sep.names = "_")
   </code></pre>
   <p>The option <code>sheet</code> can also take a string (e.g. "my data").
-     The option <code>sep.names</code> allows you to specify how to 
-     handle spaces in variable names when the table is imported.</p>
+     With the option <code>sep.names</code>, define how to replace spaces 
+     in variable names.</p>
 </section>
 
 <section>
@@ -117,9 +115,8 @@ my_kids <- read.xlsx("pets.xlsx", sheet = 2, sep.names = "_")
 
 <section>
   <h2>Exporting Excel files</h2>
-  <p>Different packages handle Excel export differently. The package
-     <code>openxlsx</code> requires all tables that will be written to 
-     the Excel file to be placed in a list first.</p>
+  <p>The package <code>openxlsx</code> requires all tables that will be 
+     written to the Excel file to be placed in a list first.</p>
   <pre><code class="r">
 my_list <- list()
 my_list$sheet1 <- my_data1
