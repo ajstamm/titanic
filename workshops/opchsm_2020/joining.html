@@ -1,0 +1,679 @@
+---
+layout: presentation
+title: "Relational Database Intro"
+---
+
+<section>
+    <h2>Relational Database Intro</h2>
+  <p>Note: This is a temporary placeholder. Slides are very incomplete.</p>
+    <div class="left">
+    </div>
+    <div class="right">
+    </div>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Merge two databases using a key</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Relational database definition</h2>
+    <p>Collection of datasets that are combined using keys.<br />
+       This structure reduces the need for duplication.</p>
+</section>
+
+<section>
+    <h2>Relational database structure</h2>
+    
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
+           border="1">
+        <caption>Pet-level data</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Tea</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Urn</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">1</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
+           border="1">
+        <caption>Child-level data</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Merged dataset structure</h2>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
+           border="1">
+        <caption>Child and pet-level data</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Tea</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Urn</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <aside class="notes">
+You may need to rename or select variables pre-emptively to avoid confusion. 
+I will not cover these in detail today, but you should know they are possible.
+	  </aside>
+</section>
+
+
+<section>
+    <h2>Code for merging datasets</h2>
+    <div class="left">
+        <p>These functions merge on a key.</p>
+        
+        <ul>
+            <li>left_join()</li>
+            <li>right_join()</li>
+            <li>full_join()</li>
+            <li>inner_join()</li>
+        </ul>
+    </div>
+    <div class="right">
+         <img src="{{site.baseurl}}/public/img/joinexamples.png" 
+              width="80%" alt="Join illustrations">
+    </div>
+</section>
+
+
+<section>
+    <h2>Download datasets</h2>
+        <p>Download and load example 
+           <a href="{{site.baseurl}}/public/data/petdata.csv">pet</a> and 
+           <a href="{{site.baseurl}}/public/data/childdata.csv">child</a> data</p>
+<pre><code class="r">
+pet <- read_csv("[myfolder]/petdata.csv")
+child <- read_csv("[myfolder]/childdata.csv")
+
+</code></pre>
+</section>
+
+<section>
+  <section>
+    <h2>Left joining</h2>
+    
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
+       border="1">
+        <caption>Pets</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">4</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
+           border="1">
+        <caption>Children</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+
+<pre><code class="r">
+leftjoin <- pet %>% left_join(child, by = "child_key")
+
+</code></pre>
+  </section>
+  <section>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+       style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
+       border="1">
+        <caption>Left joined table</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">4</td>
+                <td style="text-align:center;">NA</td>
+                <td style="text-align:center;">NA</td>
+            </tr>
+        </tbody>
+    </table>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Right joining</h2>
+    
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
+       border="1">
+        <caption>Pets</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">4</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
+           border="1">
+        <caption>Children</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+
+<pre><code class="r">
+rightjoin <- pet %>% right_join(child, by = "child_key")
+
+</code></pre>
+  </section>
+  <section>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
+           border="1">
+        <caption>Right joined table</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">NA</td>
+                <td style="text-align:center;">NA</td>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Full joining</h2>
+    
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
+       border="1">
+        <caption>Pets</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">4</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
+           border="1">
+        <caption>Children</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+
+<pre><code class="r">
+fulljoin <- pet %>% full_join(child, by = "child_key")
+
+</code></pre>
+  </section>
+  <section>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
+           border="1">
+        <caption>Fully joined table</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">4</td>
+                <td style="text-align:center;">NA</td>
+                <td style="text-align:center;">NA</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">NA</td>
+                <td style="text-align:center;">NA</td>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+        </tbody>
+    </table>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Inner joining</h2>
+    
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+       style="width: auto !important; float: left; margin-right: 10px; font-size:75%;"
+       border="1">
+        <caption>Pets</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Sam</td>
+                <td style="text-align:center;">dog</td>
+                <td style="text-align:center;">4</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-right: 0; margin-left: auto; font-size:75%;"
+           border="1">
+        <caption>Children</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">1</td>
+                <td style="text-align:center;">Amy</td>
+                <td style="text-align:center;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+
+<pre><code class="r">
+innerjoin <- pet %>% inner_join(child, by = "child_key")
+
+</code></pre>
+  </section>
+  <section>
+    <table class="table table-striped table-hover table-condensed table-responsive" 
+           style="width: auto !important; margin-left: auto; margin-right: auto; font-size:75%;"
+           border="1">
+        <caption>Inner joined table</caption>
+        <thead>
+            <tr>
+                <th style="text-align:center;">pet_name</th>
+                <th style="text-align:center;">pet_type</th>
+                <th style="text-align:center;">child_key</th>
+                <th style="text-align:center;">child_name</th>
+                <th style="text-align:center;">child_age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:center;">Qua</td>
+                <td style="text-align:center;">cat</td>
+                <td style="text-align:center;">2</td>
+                <td style="text-align:center;">Ben</td>
+                <td style="text-align:center;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">Ray</td>
+                <td style="text-align:center;">iguana</td>
+                <td style="text-align:center;">3</td>
+                <td style="text-align:center;">Cam</td>
+                <td style="text-align:center;">7</td>
+            </tr>
+        </tbody>
+    </table>
+  </section>
+</section>
+
+
+<section>
+    <h2>Code for binding data</h2>
+    <div class="left">
+        <p>These functions bind data to a dataset.</p>
+        
+        <ul>
+            <li>bind_rows()</li>
+            <li>bind_cols()</li>
+        </ul>
+    </div>
+    <div class="right">
+         <img src="{{site.baseurl}}/public/img/bind_rows.png" 
+              width="80%" alt="Bind illustrations">
+    </div>
+</section>
+
+
+<section>
+  <section>
+    <h2>bind_rows()</h2>
+    
+    <p>Rows with the same name <b>must</b> be the same type!</p>
+    <p>Columns do <b>not</b> all need to match</p>
+    <pre><code class="r">
+bindrows <- innerjoin %>% bind_rows(pet)
+
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>bind_cols()</h2>
+    
+    <p>Columns <b>must</b> have the same number of rows!</p>
+    <p>Columns <b>must</b> be in a dataframe, but can be any type.</p>
+    <pre><code class="r">
+IDs <- data.frame(IDs = 1:nrow(innerjoin))
+bindcols <- IDs %>% bind_cols(innerjoin)
+
+    </code></pre>
+  </section>
+</section>
+
+<section>
+    <h2>And Now You Know!</h2>
+    <a href="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg">
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%"></a>
+</section>
+
