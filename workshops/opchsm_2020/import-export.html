@@ -1,0 +1,149 @@
+---
+layout: presentation
+title: "Import and export data"
+---
+
+<section>
+    <h2>Importing and exporting data</h2>
+    <p>May 2020</p>
+    <small><p>This presentation was tailored to meet the needs of the Office 
+              of Primary Care and Health Systems Management and does not 
+              cover all aspects of data import and export.</p></small>
+</section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+      <li>Use an RStudio project</li>
+      <li>Import and export CSV files</li>
+      <li>Import and export Excel files</li>
+    </ul>
+</section>
+
+<section>
+  <section>
+    <h2>Importing CSV files</h2>
+    <p>There are multiple ways to import CSV files. The easiest is:</p>
+    <pre><code class="r">
+my_data <- read.csv("my_file.csv")
+    </code></pre>
+    <p>However, this method may incorrectly interpret variable types.
+       The tidyverse constellation of packages has a CSV reader that 
+       can address this.</p>
+    <p>Click the down arrow to learn about this option.</p>
+  </section><section>
+    <h2>Importing CSV files with tidyverse</h2>
+    <pre><code class="r">
+library(tidyverse) # if it is not still loaded
+my_data <- read_csv("my_file.csv", col_types = "ccnlc")
+    </code></pre>
+    <p>The option <code>col_types</code> allows you to pre-define variable 
+       types the way you would using $ in SAS. The letters must be listed 
+       in variable order with one letter for each variable.</p>
+    <p>Letter definitions:</p>
+    <ul>
+      <li>c = character or string variable</li>
+      <li>n = numeric variable, including double, float, and integer</li>
+      <li>l = logical or boolean variable</li>
+    </ul>
+    <p>To see additional variable type options, enter 
+       <code>?read_csv</code> in the console window.</p>
+  </section>
+</section>
+
+<section>
+  <h2>Practice: Importing CSVs</h2>
+  <p>Save <a href = "{{site.baseurl}}/public/data/train.csv">this CSV</a> 
+     from the Titanic dataset to the root folder of your project. 
+     Import it into R.</p>
+  <p>There are 12 variables. The sixth variable is numeric; the rest are 
+     characters.</p>
+  <pre><code class="fragment r">
+library(tidyverse)
+my_data <- read_csv("train.csv", col_types = "cccccncccccc")
+  </code></pre>
+</section>
+
+<section>
+  <h2>Exporting CSV files</h2>
+  <p>To export CSV files, use this code:</p>
+  <pre><code class="r">
+write.csv(my_data, "my_new_file.csv")
+  </code></pre>
+  <p>The default settings write row and column names, add quotes for strings,
+     and enter "NA" for missings. I prefer to leave off row names and use 
+     blank ("") for missings, so I use this code:</p>
+  <pre><code class="r">
+write.csv(my_data, "my_new_file.csv", row.names = FALSE, na = "")
+  </code></pre>
+  <p>To see additional write options, enter <code>?write.csv</code> 
+     in the console window.</p>
+</section>
+
+<section>
+  <h2>Practice: Exporting CSVs</h2>
+  <p>Export your dataset as a CSV file. Save it to the root folder of your
+     project. Try using some of the write options.</p>
+  <pre><code class="fragment r">
+library(tidyverse)
+write.csv(my_data, "titanic_new.csv", row.names = FALSE, na = "")
+  </code></pre>
+</section>
+
+
+<section>
+  <h2>Import an Excel file</h2>
+  <p>There are several R packages that can import Excel files. 
+     The one we will use today is openxlsx.</p>
+  <pre><code class="r">
+library(openxlsx) # you will get an error if it is not installed
+my_data <- read.xlsx("my_file.xlsx", sheet = 1, sep.names = "_")
+  </code></pre>
+  <p>The option <code>sheet</code> can also take a string (e.g. "my data").
+     The option <code>sep.names</code> allows you to specify how to 
+     handle spaces in variable names when the table is imported.</p>
+</section>
+
+<section>
+  <h2>Practice: Importing Excel files</h2>
+  <p>Import both sheets in the "pets_full.xlsx" file in the project's root
+     directory.</p>
+  <pre><code class="fragment r">
+library(openxlsx)
+my_pets <- read.xlsx("pets.xlsx", sheet = 1, sep.names = "_")
+my_kids <- read.xlsx("pets.xlsx", sheet = 2, sep.names = "_")
+  </code></pre>
+</section>
+
+<section>
+  <h2>Exporting Excel files</h2>
+  <p>Different packages handle Excel export differently. The package
+     <code>openxlsx</code> requires all tables that will be written to 
+     the Excel file to be placed in a list first.</p>
+  <pre><code class="r">
+my_list <- list()
+my_list$sheet1 <- my_data1
+my_list$sheet2 <- my_data2
+  </code></pre>
+  <p>The export code looks like this:</p>
+  <pre><code class="r">
+write.xlsx(my_list, "my_new_data.xlsx")
+  </code></pre>
+</section>
+  
+<section>
+  <h2>Practice: Exporting Excel files</h2>
+  <p>Export your two pets and kids tables to an Excel file.</p>
+  <pre><code class="fragment r">
+my_list <- list()
+my_list$pets <- my_pets
+my_list$kids <- my_kids 
+write.xlsx(my_list, "pets_new.xlsx")
+  </code></pre>
+</section>
+
+<section>
+    <h2>Questions?</h2>
+    <img src="http://3.bp.blogspot.com/-3neBa4Df2jg/VKDESZ4svdI/AAAAAAAAGYQ/ulXSX172Pts/s1600/jangbricks-q-a.jpg" alt="Q & A" width="30%">
+</section>
+

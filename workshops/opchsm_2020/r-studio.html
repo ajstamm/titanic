@@ -4,38 +4,55 @@ title: "RStudio"
 ---
 
 <section>
-    <h2>R Studio Introduction</h2>
+    <h2>RStudio Introduction</h2>
     <div class="center" style="text-align:center;">
-        <img src="{{site.baseurl}}/public/img/rstudio-ball.png" width="50%" alt="Photo of the Titanic">
+        <img src="{{site.baseurl}}/public/img/rstudio-ball.png" 
+             width="50%" alt="Photo of the Titanic">
     </div>
 </section>
+
+<section>
+    <h2>Learning Objectives</h2>
+    <ul>
+        <li>Navigate RStudio</li>
+        <li>Open a project</li>
+        <li>Install Packages</li>
+    </ul>
+</section>
+
 
 <section>
     <h2>Start RStudio</h2>
     <ul>
         <li>RStudio is available on Linux, Mac, and Windows
             <i>after</i> installing R - it requires R to run</li>
-        <li>Cost == $0 (<a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">AGPL3</a>)</li>
-        <li><a href="https://www.rstudio.com/products/rstudio/" target="_blank">https://www.rstudio.com/products/rstudio/</a></li>
+        <li>Cost == $0 (<a href="https://www.gnu.org/licenses/agpl-3.0.html"
+                           target="_blank">AGPL3</a>)</li>
+        <li><a href="https://www.rstudio.com/products/rstudio/" 
+               target="_blank">https://www.rstudio.com/products/rstudio/
+               </a></li>
     </ul>
 </section>
 
 <section>
     <h2>RStudio IDE</h2>
-    <img src="{{site.baseurl}}/public/img/Rstudio-ide.PNG" alt="First Screenshot of RStudio" width="90%">
+    <img src="{{site.baseurl}}/public/img/Rstudio-ide.PNG" 
+         alt="First Screenshot of RStudio" width="90%">
 </section>
 
 <section>
     <h2>RStudio windows</h2>
-    <img src="{{site.baseurl}}/public/img/Rstudio-script-repl.PNG" alt="Second Screenshot of RStudio" width="90%">
+    <img src="{{site.baseurl}}/public/img/Rstudio-script-repl.PNG" 
+         alt="Second Screenshot of RStudio" width="90%">
 </section>
 
 <section>
-    <h2>2 Ways To Run</h2>
+    <h2>Ways to run code</h2>
     <div class="container">
         <div class="left">
             <h5>REPL Window</h5>
-            <img src="{{site.baseurl}}/public/img/Rstudio-repl-window.PNG" alt="Zoomed In Image of RStudio REPL" width="100%" >
+            <img src="{{site.baseurl}}/public/img/Rstudio-repl-window.PNG"
+                 alt="Zoomed In Image of RStudio REPL" width="100%" >
             <ul>
                 <li>Press Enter</li>
                 <li>Highly interactive</li>
@@ -45,7 +62,8 @@ title: "RStudio"
         </div>
         <div class="right">
             <h5>Editor Window</h5>
-            <img src="{{site.baseurl}}/public/img/Rstudio-editor-window.PNG" alt="Zoomed In Image of RStudio Code Pane" width="100%" >
+            <img src="{{site.baseurl}}/public/img/Rstudio-editor-window.PNG"
+                 alt="Zoomed In Image of RStudio Code Pane" width="100%" >
             <ul>
                 <li>Press Control+Enter</li>
                 <li>Less interactive</li>
@@ -57,13 +75,49 @@ title: "RStudio"
 </section>
 
 <section>
+  <h2>Using an RStudio project</h2>
+  <p>Save <a href = "{{site.baseurl}}/public/Rprojects/ocphsm_2020.zip">this 
+     ZIP file</a> to your desktop and unzip it. Click on the file 
+     "ocphsm.Rproj". This will open your project in RStudio.</p>
+  <p>Projects use relative paths, so they are an easy way to share data 
+     and code. To access a file in the project's root folder, just call the
+     filename without a folder. If you prefer to place your data in a "data"
+     folder, use "/" to separate folder and file names (NOT "\" used in
+     Windows).</p>
+     <pre><code class="r">
+# example filename only
+my_filename <- "my_file.csv"
+# example filepath and filename
+my_filename <- "data/my_file.csv"
+    </code></pre>
+</section>
+
+<section>
+  <h2>Installing packages</h2>
+  <p>You will need two packages today:</p>
+  <ul>
+    <li>tidyverse: a consellation of data management packages</li>
+    <li>openxlsx: an interpreter to import Excel files into R</li>
+  </ul>
+  <p>To import a file, click "Tools" > "Install packages ..." and type the 
+     package names above into the text box under "Packages". Keep "Install
+     dependencies" checked and click "Install", then wait a couple minutes
+     while several packages install.</p>
+  <p>After the packages are installed, try loading them:</p>
+  <pre><code class="r">
+library(tidyverse)
+library(openxlsx)
+  </code></pre>
+</section>
+
+<section>
     <h2>Other Features</h2>
     <ul>
-        <li>Data objects and functions</li>
-        <li>Help information</li>
-        <li>Plots & Graphs</li>
-        <li>File lists - click to open file</li>
-        <li>Convert reports from Markdown to HTML, PDF, Word</li>
+        <li>Lists files - click to open</li>
+        <li>Lists data objects and functions</li>
+        <li>Provides help information look-up</li>
+        <li>Organizes plots & Graphs</li>
+        <li>Converts reports from Markdown to HTML, PDF, Word</li>
     </ul>
 
     <p>RStudio is the most popular IDE for R, but not the only one. 
