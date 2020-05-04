@@ -143,8 +143,7 @@ my_pets %>% summarize(min = min(pet_age), median = median(pet_age),
 
 <section>
   <h2>Summarizing grouped data</h2>
-  <p>To run group summaries, group the data, then run 
-     <code>summarize()</code>.</p>
+  <p>Group the data, then run <code>summarize()</code>.</p>
   <pre><code class="r">
 iris %>% group_by(Species) %>%
          summarize(min = min(Sepal.Width), 
