@@ -94,7 +94,7 @@ title: "Summarizing Data"
   <p>Grouping defines which variables will be included in your summarized dataset.</p>
   <p>To alter or delete grouping variables, ungroup them first.</p>
   <p>Here's the code:</p>
-  <pre><code class="fragment r">
+  <pre><code class="r">
 data(iris)
 my_iris <- iris %>% group_by(Species) %>% ungroup()
   </code></pre>
@@ -104,59 +104,101 @@ my_iris <- iris %>% group_by(Species) %>% ungroup()
 
 <section>
   <h2>Practice: Grouping</h2>
-  <p>Note: This is a temporary placeholder. From here onward, slides are very incomplete.</p>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
+  <p>Group by pet type.</p>
   <pre><code class="fragment r">
+# load "pets" from your project (see import-export slides)
+my_pets <- pets %>% group_by(pet_type) %>% ungroup()
   </code></pre>
 </section>
 
 
 <section>
   <h2>Summarizing ungrouped data</h2>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
-  <pre><code class="fragment r">
+  <p>This option will give you similar results to running the command 
+     <code>summary()</code>.</p>
+  <pre><code class="r">
+# with summary()
+summary(iris$Sepal.Width)
+# with summarize()
+iris %>% summarize(min = min(Sepal.Width), 
+                   Q1 = quantile(Sepal.Width, probs = 0.25), 
+                   median = median(Sepal.Width), 
+                   mean = mean(Sepal.Width), 
+                   Q3 = quantile(Sepal.Width, probs = 0.75), 
+                   max = max(Sepal.Width))
   </code></pre>
+  <p>What differences do you notice between the methods?</p>
 </section>
 
 <section>
   <h2>Practice: Summarizing ungrouped data</h2>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
+  <p>Summarize pets' ages by mean, median, minimum, and maximum.</p>
   <pre><code class="fragment r">
+# with summary()
+summary(my_pets$pet_age)
+# with summarize()
+my_pets %>% summarize(min = min(pet_age), median = median(pet_age), 
+                      mean = mean(pet_age), max = max(pet_age))
   </code></pre>
 </section>
 
 <section>
   <h2>Summarizing grouped data</h2>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
-  <pre><code class="fragment r">
+  <p>To summarize group data, group the data first, then run 
+     <code>summarize()</code> before ungrouping.</p>
+  <pre><code class="r">
+iris %>% group_by(Species) %>%
+         summarize(min = min(Sepal.Width), 
+                   Q1 = quantile(Sepal.Width, probs = 0.25), 
+                   median = median(Sepal.Width), 
+                   mean = mean(Sepal.Width), 
+                   Q3 = quantile(Sepal.Width, probs = 0.75), 
+                   max = max(Sepal.Width)) %>%
+         ungroup()
   </code></pre>
 </section>
 
 <section>
   <h2>Practice: Summarizing grouped data</h2>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
+  <p>Group your dataset by pet type, then summarize pets' ages by mean, 
+     median, minimum, and maximum.Remember to ungroup at the end.</p>
   <pre><code class="fragment r">
+my_pets %>% group_by(pet_type) %>%
+            summarize(min = min(pet_age), median = median(pet_age), 
+                      mean = mean(pet_age), max = max(pet_age)) %>%
+            ungroup()
+  </code></pre>
+  <p>Bonus: Create a frequency table of pet types.</p>
+  <pre><code class="fragment r">
+my_pets %>% group_by(pet_type) %>%
+            summarize(count = n()) %>%
+            ungroup()
   </code></pre>
 </section>
 
 <section>
   <h2>Summarizing across rows</h2>
-  <p>introduce rowwise()</p>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
-  <pre><code class="fragment r">
+  <p>To summarize across rows, use <code>rowwise()</code>.</p>
+  <pre><code class="r">
+iris %>% rowwise() %>% 
+         mutate(mean_widths = mean(c(Sepal.Width, Petal.Width)))
   </code></pre>
+  <p>Two notes:</p>
+  <ol>
+    <li>If all values for your new variable are the same, you probably 
+        forgot <code>rowwise()</code>.</li>
+    <li>If you have missing values, include <code>na.rm = TRUE</code>.</li>
+  </ol>
 </section>
 
 <section>
   <h2>Practice: Summarizing across rows</h2>
-  <p>Placeholder: add an example from the pets or titanic data.</p>
+  <p>For practice, add the pet age to the child key.</p>
   <pre><code class="fragment r">
+pets %>% rowwise() %>%
+         mutate(sums = sum(c(pet_age, child_key)))
   </code></pre>
 </section>
-
-
-
-
 
 <section>
   <h2>Questions?</h2>
