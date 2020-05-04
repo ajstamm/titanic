@@ -114,8 +114,7 @@ my_pets <- pets %>% group_by(pet_type) %>% ungroup()
 
 <section>
   <h2>Summarizing ungrouped data</h2>
-  <p>This option will give you similar results to running the command 
-     <code>summary()</code>.</p>
+  <p>This is like running the command <code>summary()</code>.</p>
   <pre><code class="r">
 # with summary()
 summary(iris$Sepal.Width)
@@ -144,8 +143,8 @@ my_pets %>% summarize(min = min(pet_age), median = median(pet_age),
 
 <section>
   <h2>Summarizing grouped data</h2>
-  <p>To summarize group data, group the data first, then run 
-     <code>summarize()</code> before ungrouping.</p>
+  <p>To run group summaries, group the data, then run 
+     <code>summarize()</code>.</p>
   <pre><code class="r">
 iris %>% group_by(Species) %>%
          summarize(min = min(Sepal.Width), 
@@ -159,9 +158,9 @@ iris %>% group_by(Species) %>%
 </section>
 
 <section>
-  <h2>Practice: Summarizing grouped data</h2>
-  <p>Group your dataset by pet type, then summarize pets' ages by mean, 
-     median, minimum, and maximum.Remember to ungroup at the end.</p>
+  <h2>Practice: Run group summaries</h2>
+  <p>Group data by pet type, then summarize pets' ages by mean, 
+     median, minimum, and maximum. Remember to ungroup at the end.</p>
   <pre><code class="fragment r">
 my_pets %>% group_by(pet_type) %>%
             summarize(min = min(pet_age), median = median(pet_age), 
