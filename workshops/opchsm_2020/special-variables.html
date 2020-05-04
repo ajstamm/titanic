@@ -85,13 +85,33 @@ as.Date(dates)
 </section>
 
 <section>
+  <h2>Manipulating dates</h2>
+  <p>To see more possible codes for dates, click 
+     <a href="https://www.r-bloggers.com/date-formats-in-r/">here</a>.</p>
   <pre><code class="r">
-as.Date("2010-10-01") # is the month 01 or 10?
-months(as.Date("2010-10-01"))
+as.Date("2010-10-01") # R default order: year, month, date
+months(as.Date("2010-10-01")) # we want to switch month and date
+as.Date("2010-10-01", format = "%Y-%d-%m")
+
+  </code></pre>
+  <p>What if my date has the standard slashes?</p>
+  <pre><code class="r">
+as.Date("10/01/2010", format = "%m/%d/%Y") 
 
   </code></pre>
 </section>
 
+<section>
+  <h2>Extracting weekdays</h2>
+  <p>Sometimes, you need to know if an event occurred on a weekend or 
+     in the first quarter of the year.</p>
+  <pre><code class="r">
+x <- as.Date("2010-10-01", format = "%Y-%d-%m")
+weekdays(x)
+months(x)
+quarters(x)
+  </code></pre>
+</section>
 
 <section>
   <h2>Questions?</h2>
