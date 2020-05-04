@@ -8,7 +8,7 @@ title: "Special variable types"
   <p>May 2020</p>
   <small><p>This presentation was tailored to meet the needs of the 
             Office of Primary Care and Health Systems Management 
-            and does not cover all aspects of Tidyverse.</p></small>
+            and does not cover all aspects of dates and factors.</p></small>
 </section>
 
 <section>
@@ -63,10 +63,9 @@ mean(as.numeric(passengers$class_label))
 
 <section>
   <h2>Dates</h2>
-  <p>Dates are a nightmare in R, especially if your data are dirty.</p>
-  <p>We will use base R here, but if you work a lot with dates, 
-     check out the <code>lubridate</code> package, which makes date
-     manipulation much easier.</p>
+  <p>Dates are not fun. If you work a lot with dates, 
+     try the <code>lubridate</code> package.<br />
+     Here, we will use base R.</p>
   <pre><code class="r">
 dates <- c("10-01-2010", "01/10/10", "Oct 1, 2010")
   </code></pre>
@@ -74,176 +73,25 @@ dates <- c("10-01-2010", "01/10/10", "Oct 1, 2010")
 
 <section>
   <h2>Exploring dates</h2>
-  <p>Start here ....</p>
-  <hr>
+  <p>Usually, you read in dates as strings and need to convert them.</p>
+  <p>Then you define their format. With luck, they are all formatted 
+     the same way.</p>
+  <pre><code class="r">
+dates <- c("10-01-2010", "01/10/10", "Oct 1, 2010")
+as.Date(dates)
+
+  </code></pre>
+  <p>Were any dates displayed correctly?</p>
 </section>
 
 <section>
-  <section>
-    <h2>Conditional selection</h2>
-    <p>To select rows based on some condition, 
-       use <code>filter()</code>.</p>
-    <p><b>Example</b></p>
-    <pre><code class="r">
-little_setosa <- iris %>% 
-  filter(Petal.Width < 0.5, Petal.length < 1)
-    </code></pre>
-    <small><p><i>Note: Commas (,) are treated as "and". For "or", 
-       use a vertical pipe (|).</i></p></small>
-    <p><b>Practice</b></p>
-    <p>Filter the pets dataset to only show female cats. 
-       Click down for the solution.</p>
-  </section>
-  <section>
-    <h2>Practice: conditionals</h2>
-    <p>Keep only if female and a cat.</p>
-    <pre><code class="r">
-female_cats <- pets %>% 
-  filter(pet_type == "cat", pet_sex = "female")
-    </code></pre>
-    <p>Bonus: Keep if a cat and over 2 years old or any female.</p>
-    <pre><code class="fragment r">
-female_cats <- pets %>% 
-  filter((pet_type == "cat" & pet_age > 2) | pet_sex = "female")
-    </code></pre>
-  </section>
+  <pre><code class="r">
+as.Date("2010-10-01") # is the month 01 or 10?
+months(as.Date("2010-10-01"))
+
+  </code></pre>
 </section>
 
-<section>
-  <section>
-    <h2>Variable selection</h2>
-    <p>To choose specific columns, use 
-       <code>select()</code>.<br \>
-       To choose all columns except <code>x</code>,
-       use <code>select(-x)</code>.</p>
-    <p><b>Example</b></p>
-    <pre><code class="r">
-iris_sepals <- iris %>% 
-  select(Species, Sepal.Length,Sepal.Width)
-    </code></pre>
-    <p><b>Practice</b></p>
-    <p>Select pet names, types, and talents. 
-       Click down for the solution.</p>
-  </section>
-  <section>
-    <h2>Practice: variable selection</h2>
-    <p>Keep pet names, types, and talents.</p>
-    <pre><code class="r">
-pet_skills <- pets %>% 
-  select(pet_name, pet_type, pet_talent)
-    </code></pre>
-    <p>Bonus: Keep all variables except the joining key.</p>
-    <pre><code class="fragment r">
-# option 1: select what to remove
-pet_skills <- pets %>% select(-child_key)
-# option 2: select similarly named variables
-pet_skills <- pets %>% select(starts_with("pet_"))
-    </code></pre>
-  </section>
-</section>
-
-<section>
-  <section>
-    <h2>Renaming variables</h2>
-    <p>To rename a column, use <code>rename()</code>.</p>
-    <p><b>Example</b></p>
-    <pre><code class="r">
-my_iris <- iris %>% 
-  rename(sepal_width = Sepal.Width)
-    </code></pre>
-    <p><b>Practice</b></p>
-    <p>Rename pet talent to hobby. 
-       Click down for the solution.</p>
-  </section>
-  <section>
-    <h2>Practice: renaming variables</h2>
-    <p>Rename pet talent to hobby.</p>
-    <pre><code class="r">
-pet_activities <- iris %>% 
-  rename(hobbies = pet_talent)
-    </code></pre>
-    <p>Bonus: Rename multiple variables.</p>
-    <pre><code class="fragment r">
-pet_activities <- pets %>% 
-  rename(hobby = pet_talent, years = pet_age)
-    </code></pre>
-  </section>
-</section>
-
-<section>
-  <section>
-    <h2>Creating variables</h2>
-    <p>To create a new variable, use <code>mutate()</code>.</p>
-    <p><b>Example</b></p>
-    <pre><code class="r">
-my_iris <- iris %>% 
-  mutate(is_setosa = ifelse(Species == "setosa", "Yes", "No"))
-    </code></pre>
-    <p><b>Practice</b></p>
-    <p>Create a new variable identifying if the pet is a baby 
-       (age 0-2) or adult (age 3 and above). 
-       Click down for the solution.</p>
-  </section>
-  <section>
-    <h2>Practice: creating variables</h2>
-    <p>Create age groups.</p>
-    <pre><code class="r">
-pet_ages <- pets %>% 
-  mutate(age_group = ifelse(pet_age <= 2, "Baby", "Adult"))
-    </code></pre>
-    <p>Bonus 1: Fish are adults at 2 years, everyone else at 3 years.</p>
-    <pre><code class="fragment r">
-pet_ages <- pets %>% 
-  mutate(age_group = ifelse(pet_type == "fish" & pet_age >= 2, "Adult", 
-                    ifelse(pet_age <= 2, "Baby", "Adult")))
-    </code></pre>
-    <p>Bonus 2: Calculate age in months.</p>
-    <pre><code class="fragment r">
-pet_ages <- pets %>% 
-  mutate(months = pet_age * 12)
-    </code></pre>
-  </section>
-</section>
-
-
-<section>
-  <section>
-    <h2>Chaining pipes</h2>
-    <p>Chain together the steps in the previous slides:</p> 
-    <ol>
-        <li>Filter <code>Sepal.Width</code> under 2.</li>
-        <li>Select only species and sepal variables.</li>
-        <li>Rename <code>Sepal.Length</code> to <code>sepal_length</code>.</li>
-        <li>Create the variable <code>is_setosa</code>.</li>
-    </ol>
-    <pre><code class="r">
-my_iris <- iris %>% 
-  filter(Sepal.Width < 2) %>%
-  select(Species, Sepal.Length, Sepal.Width) %>%
-  rename(sepal_length = Sepal.Length) %>%
-  mutate(is_setosa = ifelse(Species == "setosa", "Yes", "No"))
-    </code></pre>
-    <p>Click down for the practice problem.</p>
-  </section>
-  <section>
-    <h2>Practice: chaining</h2>
-    <p>Create the following dataset:</p>
-    <ol>
-      <li>Filter cats.</li>
-      <li>Select pet name, age, and talent.</li>
-      <li>Rename talent to hobby.</li>
-      <li>Calculate age in months and whether a baby (age 0-2) or adult (age 3 and above).</li>
-    </ol>
-    <pre><code class="fragment r">
-cat_pets <- pets %>% 
-  filter(pet_type == "cat") %>%
-  select(pet_type, pet_age, pet_talent) %>%
-  rename(hobby = pet_talent) %>%
-  mutate(months = pet_age * 12, 
-         age_group = ifelse(age < 3, "Baby", "Adult"))
-    </code></pre>
-  </section>
-</section>
 
 <section>
   <h2>Questions?</h2>
