@@ -77,11 +77,10 @@ dates <- c("10-01-2010", "01/10/10", "Oct 1, 2010")
   <p>Then you define their format. With luck, they are all formatted 
      the same way.</p>
   <pre><code class="r">
-dates <- c("10-01-2010", "01/10/10", "Oct 1, 2010")
 as.Date(dates)
 
   </code></pre>
-  <p>Were any dates displayed correctly?</p>
+  <p>How many dates were displayed correctly?</p>
 </section>
 
 <section>
@@ -90,19 +89,20 @@ as.Date(dates)
      <a href="https://www.r-bloggers.com/date-formats-in-r/">here</a>.</p>
   <pre><code class="r">
 as.Date("2010-10-01") # R default order: year, month, date
-months(as.Date("2010-10-01")) # we want to switch month and date
+months(as.Date("2010-10-01")) # what if month should be January?
 as.Date("2010-10-01", format = "%Y-%d-%m")
 
   </code></pre>
-  <p>What if my date has the standard slashes?</p>
+  <p>Date format can read slashes, commas, abbreviations, and spaces.</p>
   <pre><code class="r">
-as.Date("10/01/2010", format = "%m/%d/%Y") 
+as.Date("10/01/10", format = "%m/%d/%y") 
+as.Date("Oct 1, 2010", format = "%b %d, %Y") 
 
   </code></pre>
 </section>
 
 <section>
-  <h2>Extracting weekdays</h2>
+  <h2>Extracting time periods</h2>
   <p>Sometimes, you need to know if an event occurred on a weekend or 
      in the first quarter of the year.</p>
   <pre><code class="r">
