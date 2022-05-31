@@ -9,6 +9,12 @@ updates:
     schedule:
       interval: "daily"
 
+  # Maintain dependencies for GitHub Pages
+  - package-ecosystem: "github-pages"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
   # Maintain dependencies for nokogiri
   - package-ecosystem: "nokogiri"
     directory: "/"
@@ -17,6 +23,12 @@ updates:
 
   # Maintain dependencies for kramdown
   - package-ecosystem: "kramdown"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
