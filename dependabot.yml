@@ -1,0 +1,22 @@
+# Basic set up for three package managers
+
+version: 1
+updates:
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # Maintain dependencies for nokogiri
+  - package-ecosystem: "nokogiri"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # Maintain dependencies for kramdown
+  - package-ecosystem: "kramdown"
+    directory: "/"
+    schedule:
+      interval: "daily"
